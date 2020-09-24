@@ -4,10 +4,14 @@
 import '~/assets/scss/style.scss'
 
 import DefaultLayout from '~/layouts/Default.vue'
+
 import Page from '~/components/Page.vue'
-import Button from '~/components/Button.vue'
-import Feature from '~/components/Feature.vue'
-import Grid from '~/components/Grid.vue'
+
+import BaseSection1Col from '~/components/BaseSection1Col.vue'
+import BaseSection2Col from '~/components/BaseSection2Col.vue'
+import BaseSection3Col from '~/components/BaseSection3Col.vue'
+import VButton from '~/components/VButton.vue'
+
 
 export default function (Vue, { router, head, isClient }) {
   // Set default layout as a global component
@@ -15,7 +19,9 @@ export default function (Vue, { router, head, isClient }) {
 
   // register components
   Vue.component('Page', Page)
-  Vue.component('Button', Button)
-  Vue.component('Feature', Feature)
-  Vue.component('Grid', Grid)
+
+  Vue.component('BaseSection1Col', BaseSection1Col)
+  Vue.component('BaseSection2Col', BaseSection2Col)
+  Vue.component('BaseSection3Col', BaseSection3Col)
+  Vue.component('VButton', VButton)
 }

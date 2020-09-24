@@ -1,17 +1,19 @@
 <template>
   <section class="xy-section section-beta">
       <div class="section-column">
-          <div class="section-container"> (option: no container)
+        <div class="section-container" v-editable="blok"> 
+          <component :key="blok._uid" v-for="blok in blok.Col1" :blok="blok" :is="blok.component"></component>
+        </div>
+            <!-- (option: no container)
               // section ID
               // FOR EACH COLUMN:
                 // background image + drop-down select options
                 // optional no container
-                // choice of nested blocks
-          </div>
+                // choice of nested blocks -->
       </div>
       <div class="section-column">
           <div class="section-container">
-            //
+            <component :key="blok._uid" v-for="blok in blok.Col2" :blok="blok" :is="blok.component"></component>
           </div>
       </div>
   </section>
