@@ -1,16 +1,16 @@
 <template>
-  <div class="layout">
-    <header class="header">
+  <div>
+    <header>
       <strong>
         <g-link to="/">{{ $static.metadata.siteName }}</g-link>
       </strong>
-      <nav class="nav">
-        <g-link class="nav__link" to="/">Home</g-link>
-        <g-link class="nav__link" to="/en/home">English</g-link>
-        <g-link class="nav__link" to="/about/">About</g-link>
-      </nav>
+      <na>
+        <g-link to="/">Home</g-link>
+        <g-link to="/en/home">English</g-link>
+        <g-link to="/about/">About</g-link>
+      </na>
     </header>
-    <slot/>
+    <slot />
   </div>
 </template>
 
@@ -23,30 +23,60 @@ query {
 </static-query>
 
 <style lang="scss">
-@import '~/assets/styles.scss';
+@import "~/assets/styles.scss";
+
+/* Resets */
+
+html {
+  height: 100%;
+  max-width: 100%;
+}
+
+html {
+  font-size: $baseSize;
+  font-feature-settings: "liga" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  box-sizing: border-box;
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+}
+
 body {
-  font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  margin:0;
-  padding:0;
+  height: 100%;
+  max-width: 100%;
+  font-family: $baseFont;
+  font-weight: 400;
   line-height: 1.5;
+  color: $black;
+  background-color: $trueWhite;
+  margin: 0;
+  font-size: 1rem;
 }
 
-.layout {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-left: 20px;
-  padding-right: 20px;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  height: 80px;
+button, [role="button"] {
+  cursor: pointer;
 }
 
-.nav__link {
-  margin-left: 20px;
+a {
+  color: inherit;
+  text-decoration: underline;
 }
+
+a, button, [role="button"] {
+  position: relative;
+  cursor: pointer;
+}
+
 </style>
