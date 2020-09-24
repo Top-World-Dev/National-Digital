@@ -1,26 +1,10 @@
 <template>
   <div>
-    <header>
-      <strong>
-        <g-link to="/">{{ $static.metadata.siteName }}</g-link>
-      </strong>
-      <na>
-        <g-link to="/">Home</g-link>
-        <g-link to="/en/home">English</g-link>
-        <g-link to="/about/">About</g-link>
-      </na>
-    </header>
+    <TheHeader />
     <slot />
+    <TheFooter />
   </div>
 </template>
-
-<static-query>
-query {
-  metadata {
-    siteName
-  }
-}
-</static-query>
 
 <style lang="scss">
 @import "~/assets/styles.scss";
@@ -63,10 +47,6 @@ body {
 img {
   max-width: 100%;
   height: auto;
-}
-
-button, [role="button"] {
-  cursor: pointer;
 }
 
 a {
