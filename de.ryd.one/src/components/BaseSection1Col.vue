@@ -1,0 +1,30 @@
+<template>
+  <section class="xy-section section-alpha">
+      <div class="section-container">
+          // section ID
+          // background image + drop-down select options 
+          // code: style="linear-gradient(to ##TOP/RIGHT/BOTTOM/LEFT##, rgba(##COLOR SELECT##, ##TRANSPARENCY##), rgba(##COLOR SELECT##, ##TRANSPARENCY##)), url('## IMG SELECT ##');
+          // choice of nested blocks
+      </div>
+  </section>
+</template>
+
+<script>
+  export default {
+    props: ['blok']
+  }
+</script>
+
+<style lang="scss" scoped>
+.xy-section {
+  >div:nth-of-type(1) {
+    background-color: red;
+  }
+  >div:nth-of-type(2) {
+    background-color: blue;
+  }
+  >div:nth-of-type(3) {
+    background-color: green;
+  }
+}
+</style>
