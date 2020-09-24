@@ -5,40 +5,26 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 const path = require('path')
 
-function addStyleResource (rule) {
-  rule.use('style-resource')
-    .loader('style-resources-loader')
-    .options({
-      patterns: [
-        path.resolve(__dirname, './src/assets/scss/*.scss'),
-      ],
-    })
-}
-
 module.exports = {
   siteName: 'de.ryd.one',
-    plugins: [{
-      use: 'gridsome-source-storyblok',
-      options: {
-        client: {
-          accessToken: 'xBrVBUizNcw9o7tmRIQclAtt' // you must be replace with your token
+  plugins: [{
+    use: 'gridsome-source-storyblok',
+    options: {
+      client: {
+        accessToken: 'xBrVBUizNcw9o7tmRIQclAtt' // you must be replace with your token
+      },
+      types: {
+        story: {
+          name: 'StoryblokEntry', // The name of Story template and type (default StoryblokEntry)
+          params: {
+            resolve_relations: 'global_reference.reference'
+          }
         },
-        types: {
-          story: {
-            name: 'StoryblokEntry', // The name of Story template and type (default StoryblokEntry)
-            params: {
-              resolve_relations: 'global_reference.reference'
-            }
-          },
-        }
       }
-    }],
-    chainWebpack (config) {
-      // Load variables for all vue-files
-      const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
-
-      types.forEach(type => {
-        addStyleResource(config.module.rule('scss').oneOf(type))
-      })
     }
+  }],
+  chainWebpack(config) {
+    // Load variables for all vue-files
+    const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
   }
+}

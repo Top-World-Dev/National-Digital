@@ -8,6 +8,6 @@
     props: ['blok']
   }
 </script>
-<style lang="scss" scoped>
-
+<style lang="scss">
+@import '~/assets/styles.scss';
 </style>

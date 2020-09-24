@@ -1,0 +1,134 @@
+/*********************
+** GLOBAL VARIABLES **
+*********************/
+
+/* Colors */
+
+$trueBlack          : #000000;
+$black              : $trueBlack;
+$trueWhite          : #ffffff;
+$white              : $trueWhite;
+$veryLightGrey		: #f4f4f4;
+$lightGrey			: #dadce0;
+$grey				: #bcc2d4;
+$darkGrey			: #787c87;
+$veryDarkGrey 		: #404147;
+$lightBlue			: #dee5fa;
+$blue				: #3a93bf;
+$darkBlue 			: #0d0f36;
+$purple				: #2e3283;
+$green				: #00e9b9;
+$darkGreen			: #009c7c;
+$pink				: #ff1766;
+$brown				: #cc4727;
+$orange				: #ff8917;
+$yellow				: #fabc0a;
+
+/* Fonts */
+
+$systemSansSerif    : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$systemSerif        : "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", "Droid Serif", Times, "Source Serif Pro", serif;
+$systemMono         : Menlo, Consolas, Monaco, "Liberation Mono", "Lucida Console", monospace;
+$baseFont           : "FireSans", $systemSansSerif;
+
+/* Measurements */
+
+$container          : 1280px;
+$containerOuter     : 1920px;
+$gutter             : 10px;
+$baseBody           : 16px;
+
+/* Breakpoints */
+
+$breakXS            : 426px;
+$breakSM            : 768px;
+$breakMD            : 848px;
+$breakLG            : 1024px;
+$breakXL            : $container + ($gutter * 2);
+
+
+/******************
+** GLOBAL MIXINS **
+*******************/
+
+/* Container */
+
+@mixin container ($width) {
+	max-width: $width;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: $gutter;
+	padding-right: $gutter;
+
+	@media (min-width: ceil($width + ceil($gutter * 2))) {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+/* Reset list style */
+
+@mixin no-list {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+/* Row nav */
+
+@mixin nav-row ($margin) {
+	@include no-list;
+
+	>li {
+		display: inline-block;
+		margin-top: 0.5em;
+		margin-bottom: 0.5em;
+		margin-left: $margin;
+		margin-right: $margin;
+
+		&:first-of-type {
+			margin-left: 0;
+		}
+
+		&:last-of-type {
+			margin-right: 0;
+		}
+	}
+}
+
+/* Column nav */
+
+@mixin nav-col ($margin) {
+	@include no-list;
+
+	>li {
+		display: block;
+		margin-top: ceil($margin / 2);
+		margin-bottom: ceil($margin / 2);
+
+		&:first-of-type {
+			margin-top: 0;
+		}
+
+		&:last-of-type {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/* Horizontal rule */
+
+@mixin hr ($color, $width) {
+	position: relative;
+	height: $width;
+	border-radius: 1rem;
+	background-color: $color;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+/* Gradient */
+
+@mixin gradient ($degree, $from, $to) {
+	background-image: linear-gradient($degree, $from 0%, $to 100%);
+}

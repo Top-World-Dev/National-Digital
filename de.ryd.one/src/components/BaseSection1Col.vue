@@ -16,16 +16,16 @@
   }
 </script>
 
-<style lang="scss" scoped>
-.xy-section {
-  >div:nth-of-type(1) {
-    background-color: red;
-  }
-  >div:nth-of-type(2) {
-    background-color: blue;
-  }
-  >div:nth-of-type(3) {
-    background-color: green;
+<style lang="scss">
+@import '~/assets/styles.scss';
+.xy-section.section-alpha {
+  .section-container {
+    @include container($container);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 }
 </style>
