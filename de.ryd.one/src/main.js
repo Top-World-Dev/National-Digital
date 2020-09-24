@@ -3,7 +3,7 @@
 
 import DefaultLayout from '~/layouts/Default.vue'
 import Page from '~/components/Page.vue'
-import Teaser from '~/components/Teaser.vue'
+import Button from '~/components/Button.vue'
 import Feature from '~/components/Feature.vue'
 import Grid from '~/components/Grid.vue'
 
@@ -13,7 +13,7 @@ export default function (Vue, { router, head, isClient }) {
 
   // register components
   Vue.component('Page', Page)
-  Vue.component('Teaser', Teaser)
+  Vue.component('Button', Button)
   Vue.component('Feature', Feature)
   Vue.component('Grid', Grid)
 }
