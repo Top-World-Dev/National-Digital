@@ -33,15 +33,12 @@ html {
 }
 
 body {
-  height: 100%;
-  max-width: 100%;
+  font-size: 1rem;
   font-family: $baseFont;
-  font-weight: 400;
-  line-height: 1.5;
   color: $black;
   background-color: $trueWhite;
-  margin: 0;
-  font-size: 1rem;
+  max-width: 100%;
+  height: 100%;
 }
 
 img {
@@ -49,14 +46,56 @@ img {
   height: auto;
 }
 
-a {
-  color: inherit;
-  text-decoration: underline;
-}
-
 a, button, [role="button"] {
   position: relative;
   cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+/* Font sizes */
+
+body {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+h1 {
+  font-size: 3.25rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+h5 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+h6 {
+  font-size: 1.25rem;
+  font-weight: 400;
 }
 
 </style>
