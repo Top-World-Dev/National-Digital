@@ -1,0 +1,121 @@
+<!-- NESTABLE BLOCK // BUTTON -->
+<div class="xy-button">
+    <a href="## LINK ##" class="## multi-option ##"{% if button.external %} target="_blank" rel="noopener nofollow"{% endif %}>## text input ##</a>
+</div>
+
+<!-- NESTABLE BLOCK // BRAND LINE -->
+<div class="xy-brandline">
+    [SVG OF LINE]
+</div>
+
+<!-- NESTABLE BLOCK // TEXT  -->
+<div class="xy-text">
+    <div class="text-content">## rich text input ##</a></div>
+</div>
+
+<!-- NESTABLE BLOCK / HEADING  -->
+<div class="xy-heading">
+    <div class="heading-content ## multi-option (color/size)##">
+        ## text input ##
+    </div>
+</div>
+
+<!-- NESTABLE BLOCK // LINKICON -->
+<div class="xy-linkicon">
+    <a href="## LINK ##" {% if link.external %} target="_blank" rel="noopener nofollow"{% endif %} class="linkicon-wrapper ## multi-option (color/size) ##">
+        <div class="linkicon-icon">[[ # select inline font awesome # ]]</div>
+        <div class="linkicon-content"># text input</div>
+    </a>
+</div>
+
+<!-- NESTABLE BLOCK // IMAGE  -->
+<div class="xy-image">
+    <div class="image-wrapper ## multi-option (OVERLAY/inline/block) ##" style="linear-gradient(to ##TOP/RIGHT/BOTTOM/LEFT##, rgba(##COLOR SELECT##, ##TRANSPARENCY##), rgba(##COLOR SELECT##, ##TRANSPARENCY##))">
+        <g-image src="## select ##" width="##" height="##">
+        [ if overlay ]
+        <div class="image-overlay">## ANY REPEATABLE BLOCK ##</div>
+        [ end if]
+    </div>
+</div>
+
+<!-- NESTABLE BLOCK / FORM  -->
+<div class="xy-form">
+    [[ select form ]]
+</div>
+
+<!-- NESTABLE BLOCK / LIST -->
+<div class="xy-list">
+    <ul class="list-checklist">
+        <li class="list-item">
+            <div class="list-item-title">## text input ##</div>
+            <div class="list-item-content">## OPTIONAL text input ##</div>
+        </li>
+    </ul>
+</div>
+
+<!-- NESTABLE BLOCK / BLURBICON -->
+<div class="xy-blurbicon">
+    <div class="blurbicon-wrapper">
+        <div class="blurbicon-icon"><g-image src="## SELECT ##" width="##" height="##"></div>
+        <div class="blurbicon-title">## text input ##</div>
+        <div class="blurbicon-content">## text input ##</div>
+        <div class="blurbicon-link"><a href="## LINK ##" {% if link.external %} target="_blank" rel="noopener nofollow"{% endif %}>## text input ##</a></div>
+    </div>
+</div>
+
+<!-- NESTABLE BLOCK / QUOTE  -->
+<div class="xy-quote">
+    <div class="quote-wrapper">
+        <div class="quote-logo"><g-image src="## SELECT ##" width="##" height="##"></div>
+        <div class="quote-name">## text input ##</div>
+        <div class="quote-role">## text input ##</div>
+        <div class="quote-profile"><g-image src="## SELECT ##" width="##" height="##"></div>
+        <div class="quote-content">## text input ##</div>
+    </div>
+</div>
+
+
+
+=================== PARENT SECTION
+
+<!-- PARENT SECTIONS -->
+[[ 1x column ]]
+(options: background image / background gradient)
+<section class="xy-section section-alpha" style="linear-gradient(to ##TOP/RIGHT/BOTTOM/LEFT##, rgba(##COLOR SELECT##, ##TRANSPARENCY##), rgba(##COLOR SELECT##, ##TRANSPARENCY##)), url('## IMG SELECT ##');">
+    <div class="section-container">
+        [ choice of nested blocks]
+    </div>
+</section>
+
+[[ 2x colums ]]
+<section class="xy-section section-beta">
+    <div class="section-column" style="linear-gradient(to ##TOP/RIGHT/BOTTOM/LEFT##, rgba(##COLOR SELECT##, ##TRANSPARENCY##), rgba(##COLOR SELECT##, ##TRANSPARENCY##)), url('## IMG SELECT ##');">
+        <div class="section-container"> (option: no container)
+            [ choice of nested blocks]
+        </div>
+    </div>
+    <div class="section-column" style="linear-gradient(to ##TOP/RIGHT/BOTTOM/LEFT##, rgba(##COLOR SELECT##, ##TRANSPARENCY##), rgba(##COLOR SELECT##, ##TRANSPARENCY##)), url('## IMG SELECT ##');">
+        <div class="section-container"> (option: no container)
+            [ choice of nested blocks]
+        </div>
+    </div>
+</section>
+
+[[ 3x colums ]]
+<section class="xy-section section-gamma">
+    <div class="section-column" style="linear-gradient(to ##TOP/RIGHT/BOTTOM/LEFT##, rgba(##COLOR SELECT##, ##TRANSPARENCY##), rgba(##COLOR SELECT##, ##TRANSPARENCY##)), url('## IMG SELECT ##');">
+        <div class="section-container">
+            [ choice of nested blocks]
+        </div>
+    </div>
+    <div class="section-column" style="linear-gradient(to ##TOP/RIGHT/BOTTOM/LEFT##, rgba(##COLOR SELECT##, ##TRANSPARENCY##), rgba(##COLOR SELECT##, ##TRANSPARENCY##)), url('## IMG SELECT ##');">
+        <div class="section-container">
+            [ choice of nested blocks]
+        </div>
+    </div>
+    <div class="section-column" style="linear-gradient(to ##TOP/RIGHT/BOTTOM/LEFT##, rgba(##COLOR SELECT##, ##TRANSPARENCY##), rgba(##COLOR SELECT##, ##TRANSPARENCY##)), url('## IMG SELECT ##');">
+        <div class="section-container">
+            [ choice of nested blocks]
+        </div>
+    </div>
+</section>
