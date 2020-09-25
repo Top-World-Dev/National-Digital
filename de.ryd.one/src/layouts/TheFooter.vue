@@ -1,1 +1,1 @@
-// global footer
+<template></template>

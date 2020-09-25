@@ -1,1 +1,1 @@
-// global header
+<template></template>

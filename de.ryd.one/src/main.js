@@ -5,6 +5,7 @@ import 'normalize.css/normalize.css'
 
 import DefaultLayout from '~/layouts/Default.vue'
 
+
 import Page from '~/components/Page.vue'
 
 import BaseSection1Col from '~/components/BaseSection1Col.vue'
@@ -16,6 +17,7 @@ import VButton from '~/components/VButton.vue'
 export default function (Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
+
 
   // register components
   Vue.component('Page', Page)

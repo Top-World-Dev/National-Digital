@@ -1,6 +1,7 @@
 <template>
   <section class="xy-section section-gamma">
     <div class="section-column">
+
         <div class="section-container">
           <component :key="blok._uid" v-for="blok in blok.Col1" :blok="blok" :is="blok.component"></component>
             <!-- // section ID
