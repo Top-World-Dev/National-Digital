@@ -1,5 +1,5 @@
 <template>
-  <div class="v-button" v-editable="blok" :class="blok.class" >
+  <div class="v-button" v-editable="blok" :class="blok.style" >
     <a :href="blok.link.url" :target="blok.linktype != 'url' ? '_blank' : '_self'" :rel="blok.linktype != 'url' ? 'noopener noreferrer' : ''">{{ blok.text }}</a>
   </div>
 </template>
@@ -20,9 +20,10 @@
   margin-bottom: 0.5rem;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  padding-left: 1em;
-  padding-right: 1em;
-  min-height: 3rem;
+  padding-left: 2.5em;
+  padding-right: 2.5em;
+  min-height: 3.5rem;
+  min-width: 21.5rem;
   // style
   cursor: pointer;
   border-style: solid;
@@ -47,6 +48,21 @@
           color: $white;
           border-color: $brand;
           background-color: darken($brand,5%);
+      }
+  }
+  &.button-accent {
+      color: $white;
+      border-color: $accent;
+      background-color: $accent;
+      &:hover {
+          color: $white;
+          border-color: $accent;
+          background-color: lighten($accent,10%);
+      }
+      &:active {
+          color: $white;
+          border-color: $accent;
+          background-color: darken($accent,5%);
       }
   }
 }
