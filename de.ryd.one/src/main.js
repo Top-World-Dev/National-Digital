@@ -16,6 +16,7 @@ import BaseColumnX3 from '~/components/BaseColumnX3.vue'
 import VButton from '~/components/VButton.vue'
 import VBlurbicon from '~/components/VBlurbicon.vue'
 import VHeading from '~/components/VHeading.vue'
+import VLinks from '~/components/VLinks.vue'
 import VList from '~/components/VList.vue'
 import VRule from '~/components/VRule.vue'
 
@@ -37,6 +38,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VButton', VButton)
   Vue.component('VBlurbicon', VBlurbicon)
   Vue.component('VHeading', VHeading)
+  Vue.component('VLinks', VLinks)
   Vue.component('VList', VList)
   Vue.component('VRule', VRule)
 }
