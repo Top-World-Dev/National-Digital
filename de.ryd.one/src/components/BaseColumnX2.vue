@@ -20,7 +20,9 @@
 </template>
 
 <script>
+  import backgroundImage from '../mixins/shared'
   export default {
+    mixins: [backgroundImage],
     props: ['blok']
   }
 </script>
