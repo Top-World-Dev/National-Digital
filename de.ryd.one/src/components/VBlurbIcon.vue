@@ -5,7 +5,7 @@
       <h5 v-if="item.title">{{ item.title }}</h5>
       <div v-if="item.content">{{ item.content }}</div>
     </div>
-  </div>
+</div>
 </template>
 <script>
   export default {
@@ -15,5 +15,13 @@
 <style lang="scss">
 @import '~/assets/styles.scss';
 .v-blurbicon {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  .blurbicon-item {
+    flex: 0 0 320px;
+    margin: 1rem;
+  }
 }
 </style>

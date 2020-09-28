@@ -111,6 +111,11 @@ h6 {
     padding-top: 6em;
     padding-bottom: 6em;
   }
+  .section-fullwidth {
+    @include container($containerOuter);
+    padding-top: 6em;
+    padding-bottom: 6em;
+  }
 }
 
 </style>
