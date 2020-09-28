@@ -10,17 +10,3 @@ export default {
 }
 </script>
 
-
-<style lang="scss">
-@import '~/assets/styles.scss';
-.xy-section {
-  &.section-white {
-    color: $white;
-  }
-  .section-container {
-    @include container($container);
-    padding-top: 6em;
-    padding-bottom: 6em;
-  }
-}
-</style>

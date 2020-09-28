@@ -97,4 +97,20 @@ h6 {
   font-weight: 400;
 }
 
+/* Layout styles */
+
+.xy-section {
+  &.section-background {
+    color: $white;
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  .section-container {
+    @include container($container);
+    padding-top: 6em;
+    padding-bottom: 6em;
+  }
+}
+
 </style>
