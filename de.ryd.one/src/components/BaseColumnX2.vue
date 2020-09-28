@@ -15,9 +15,8 @@
 
 <script>
   import backgroundImage from '../mixins/backgroundImage'
-  import getImage from '../mixins/getImage'
   export default {
-    mixins: [backgroundImage, getImage],
+    mixins: [backgroundImage],
     props: ['blok']
   }
 </script>

@@ -1,15 +1,18 @@
 <template>
   <div class="v-blurbicon" v-editable="blok">
     <div class="blurbicon-item" v-for="item in blok.item">
-      <g-image :src="getFile(item.icon, '100', '100', item.title)"></g-image>
+      <g-image :src="getImage(item.icon, '100', '100', item.title)"></g-image>
       <h5 v-if="item.title">{{ item.title }}</h5>
       <div v-if="item.content">{{ item.content }}</div>
     </div>
 </div>
 </template>
 <script>
+  import getImage from '../mixins/getImage'
+
   export default {
-    props: ['blok']
+    props: ['blok'],
+    mixins: [getImage]
   }
 </script>
 <style lang="scss">
