@@ -24,7 +24,6 @@
 @import '~/assets/styles.scss';
 .xy-section.section-alpha {
   .section-container {
-    @include container($container);
     display: flex;
     flex-direction: column;
     align-items: center;

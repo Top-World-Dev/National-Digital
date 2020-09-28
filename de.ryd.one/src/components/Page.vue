@@ -14,8 +14,11 @@ export default {
 <style lang="scss">
 @import '~/assets/styles.scss';
 .xy-section {
-  .section-white {
+  &.section-white {
     color: $white;
+  }
+  .section-container {
+    @include container($container);
   }
 }
 </style>
