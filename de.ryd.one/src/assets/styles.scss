@@ -118,17 +118,6 @@ $breakXL            : $container + ($gutter * 2);
 	}
 }
 
-/* Horizontal rule */
-
-@mixin hr ($color, $width) {
-	position: relative;
-	height: $width;
-	border-radius: 1rem;
-	background-color: $color;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-}
-
 /* Gradient */
 
 @mixin gradient ($degree, $from, $to) {
