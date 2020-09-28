@@ -13,7 +13,7 @@ import BaseColumnX2 from '~/components/BaseColumnX2.vue'
 import BaseColumnX3 from '~/components/BaseColumnX3.vue'
 import VButton from '~/components/VButton.vue'
 import VHeading from '~/components/VHeading.vue'
-import VHeading from '~/components/VList.vue'
+import VList from '~/components/VList.vue'
 import VRule from '~/components/VRule.vue'
 
 
