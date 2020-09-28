@@ -13,10 +13,6 @@
   export default {
     mixins: [backgroundImage],
     props: ['blok'],
-    data() {
-      return {
-      }
-    },
   }
 </script>
 
