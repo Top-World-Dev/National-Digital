@@ -1,7 +1,7 @@
 <template>
-  <h2 class="v-heading" v-editable="blok">
-    {{ blok.content }}
-  </h2>
+  <tag :is="tag" class="v-heading" v-editable="blok">
+    {{ blok.Content }}
+  </tag>
 </template>
 <script>
   export default {
