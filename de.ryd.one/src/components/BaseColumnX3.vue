@@ -1,23 +1,17 @@
 <template>
-  <section class="xy-section section-gamma">
+  <section :id="blok.anchor" class="xy-section section-gamma" :style="{backgroundImage: backgroundStyle}" :class="(blok.backgroundStyle == 'is-null' ? '' : 'section-white')">
     <div class="section-column">
-
-        <div class="section-container">
+        <div :class="blok.container" v-editable="blok">
           <component :key="blok._uid" v-for="blok in blok.col1" :blok="blok" :is="blok.component"></component>
-            <!-- // section ID
-            // background image + drop-down select options
-            // optional no container
-            FOR EACH COLUMN:
-              // choice of nested blocks -->
         </div>
     </div>
     <div class="section-column">
-        <div class="section-container">
+        <div :class="blok.container" v-editable="blok">
           <component :key="blok._uid" v-for="blok in blok.col2" :blok="blok" :is="blok.component"></component>
         </div>
     </div>
     <div class="section-column">
-        <div class="section-container">
+        <div :class="blok.container" v-editable="blok">
           <component :key="blok._uid" v-for="blok in blok.col3" :blok="blok" :is="blok.component"></component> 
         </div>
     </div>
