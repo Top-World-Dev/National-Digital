@@ -21,7 +21,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~/assets/styles.scss";
 .xy-section.section-beta {
   display: flex;
@@ -36,9 +36,6 @@
       margin-right: 1rem;
       flex: 0 1 49%;
     }
-  }
-  .section-column {
-    @include container($container);
   }
 }
 </style>

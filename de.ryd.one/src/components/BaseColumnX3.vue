@@ -26,7 +26,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "~/assets/styles.scss";
 .xy-section.section-gamma {
   display: flex;
@@ -39,9 +39,6 @@
     .section-column {
       flex: 0 0 33.33333%;
     }
-  }
-  .section-column {
-    @include container($container);
   }
 }
 </style>
