@@ -1,8 +1,8 @@
 <template>
   <ul class="v-list" v-editable="blok">
-    <li v-for="item in blok.item" v-bind:key="item">
-      <h5 v-if="item.title">{{ item.title }}</h5>
-      <span v-if="item.content" :style="(item.title ? '' : 'display:block') ">{{ item.content }}</span>
+    <li v-for="item in blok.item" :class="blok.style">
+      <g-link v-if="blok.link.linktype == 'story'" :to="blok.link.url">{{ blok.text }}</g-link>
+      <a v-else :href="blok.link.url" target="_blank" rel="noopener noreferrer">{{ blok.text }}</a>
     </li>
   </ul>
 </template>
