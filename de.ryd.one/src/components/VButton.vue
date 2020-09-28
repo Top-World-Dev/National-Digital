@@ -65,5 +65,8 @@
           background-color: darken($accent,5%);
       }
   }
+  a {
+    text-decoration: none;
+  }
 }
 </style>
