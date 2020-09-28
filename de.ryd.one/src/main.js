@@ -8,9 +8,9 @@ import DefaultLayout from '~/layouts/Default.vue'
 
 import Page from '~/components/Page.vue'
 
-import BaseSectionColX1 from '~/components/BaseSectionColX1.vue'
-import BaseSectionColX2 from '~/components/BaseSectionColX2.vue'
-import BaseSectionColX3 from '~/components/BaseSectionColX3.vue'
+import BaseColumnX1 from '~/components/BaseColumnX1.vue'
+import BaseColumnX2 from '~/components/BaseColumnX2.vue'
+import BaseColumnX3 from '~/components/BaseColumnX3.vue'
 import VButton from '~/components/VButton.vue'
 
 
@@ -22,8 +22,8 @@ export default function (Vue, { router, head, isClient }) {
   // register components
   Vue.component('Page', Page)
 
-  Vue.component('BaseSectionColX1', BaseSectionColX1)
-  Vue.component('BaseSectionColX2', BaseSectionColX2)
-  Vue.component('BaseSectionColX3', BaseSectionColX3)
+  Vue.component('BaseColumnX1', BaseColumnX1)
+  Vue.component('BaseColumnX2', BaseColumnX2)
+  Vue.component('BaseColumnX3', BaseColumnX3)
   Vue.component('VButton', VButton)
 }
