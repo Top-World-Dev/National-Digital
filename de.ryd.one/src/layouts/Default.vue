@@ -102,8 +102,8 @@ h6 {
 .xy-section {
   &.section-background {
     color: $white;
-    background-position: 50% 50%;
-    background-size: contain;
+    background-position: bottom center;
+    background-size: cover;
     background-repeat: no-repeat;
   }
   .section-container {
