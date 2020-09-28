@@ -19,6 +19,8 @@ export default {
   }
   .section-container {
     @include container($container);
+    padding-top: 6em;
+    padding-bottom: 6em;
   }
 }
 </style>
