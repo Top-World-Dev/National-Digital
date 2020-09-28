@@ -8,6 +8,8 @@ import DefaultLayout from '~/layouts/Default.vue'
 
 import Page from '~/components/Page.vue'
 
+import TheFooter from '~/components/TheFooter.vue'
+
 import BaseColumnX1 from '~/components/BaseColumnX1.vue'
 import BaseColumnX2 from '~/components/BaseColumnX2.vue'
 import BaseColumnX3 from '~/components/BaseColumnX3.vue'
@@ -25,6 +27,9 @@ export default function (Vue, { router, head, isClient }) {
 
   // register components
   Vue.component('Page', Page)
+
+
+  Vue.component('TheFooter', TheFooter)
 
   Vue.component('BaseColumnX1', BaseColumnX1)
   Vue.component('BaseColumnX2', BaseColumnX2)
