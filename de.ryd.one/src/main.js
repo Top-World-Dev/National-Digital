@@ -13,6 +13,7 @@ import BaseColumnX2 from '~/components/BaseColumnX2.vue'
 import BaseColumnX3 from '~/components/BaseColumnX3.vue'
 import VButton from '~/components/VButton.vue'
 import VHeading from '~/components/VHeading.vue'
+import VRule from '~/components/VRule.vue'
 
 
 export default function (Vue, { router, head, isClient }) {
@@ -28,4 +29,5 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('BaseColumnX3', BaseColumnX3)
   Vue.component('VButton', VButton)
   Vue.component('VHeading', VHeading)
+  Vue.component('VRule', VRule)
 }
