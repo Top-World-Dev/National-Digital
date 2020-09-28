@@ -1,6 +1,6 @@
 <template>
-  <tag :is="tag" class="v-heading" v-editable="blok">
-    {{ blok.Content }}
+  <tag :is="blok.style" class="v-heading" v-editable="blok">
+    {{ blok.content }}
   </tag>
 </template>
 <script>

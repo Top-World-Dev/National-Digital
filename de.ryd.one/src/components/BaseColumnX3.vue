@@ -3,7 +3,7 @@
     <div class="section-column">
 
         <div class="section-container">
-          <component :key="blok._uid" v-for="blok in blok.Col1" :blok="blok" :is="blok.component"></component>
+          <component :key="blok._uid" v-for="blok in blok.col1" :blok="blok" :is="blok.component"></component>
             <!-- // section ID
             // background image + drop-down select options
             // optional no container
@@ -13,12 +13,12 @@
     </div>
     <div class="section-column">
         <div class="section-container">
-          <component :key="blok._uid" v-for="blok in blok.Col2" :blok="blok" :is="blok.component"></component>
+          <component :key="blok._uid" v-for="blok in blok.col2" :blok="blok" :is="blok.component"></component>
         </div>
     </div>
     <div class="section-column">
         <div class="section-container">
-          <component :key="blok._uid" v-for="blok in blok.Col3" :blok="blok" :is="blok.component"></component> 
+          <component :key="blok._uid" v-for="blok in blok.col3" :blok="blok" :is="blok.component"></component> 
         </div>
     </div>
   </section>

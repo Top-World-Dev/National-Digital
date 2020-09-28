@@ -2,7 +2,7 @@
   <section class="xy-section section-beta">
       <div class="section-column">
         <div class="section-container" v-editable="blok"> 
-          <component :key="blok._uid" v-for="blok in blok.Col1" :blok="blok" :is="blok.component"></component>
+          <component :key="blok._uid" v-for="blok in blok.col1" :blok="blok" :is="blok.component"></component>
         </div>
             <!-- (option: no container)
               // section ID
@@ -13,7 +13,7 @@
       </div>
       <div class="section-column">
           <div class="section-container">
-            <component :key="blok._uid" v-for="blok in blok.Col2" :blok="blok" :is="blok.component"></component>
+            <component :key="blok._uid" v-for="blok in blok.col2" :blok="blok" :is="blok.component"></component>
           </div>
       </div>
   </section>
