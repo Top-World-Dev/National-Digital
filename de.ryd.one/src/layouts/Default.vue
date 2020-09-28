@@ -62,8 +62,9 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 1em;
-  margin-bottom: 1em;
+  margin-top: unset;
+  margin-bottom: unset;
+  line-height: 1.6em;
 }
 
 h1 {
