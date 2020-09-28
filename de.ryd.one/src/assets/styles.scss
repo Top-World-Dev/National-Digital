@@ -28,10 +28,10 @@ $accent				: $green;
 
 /* Fonts */
 
-$systemSansSerif    : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-$systemSerif        : "Iowan Old Style", "Apple Garamond", Baskerville, "Times New Roman", "Droid Serif", Times, "Source Serif Pro", serif;
-$systemMono         : Menlo, Consolas, Monaco, "Liberation Mono", "Lucida Console", monospace;
-$baseFont           : "FireSans", $systemSansSerif;
+$systemSansSerif    : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+$systemSerif        : 'Iowan Old Style', 'Apple Garamond', Baskerville, 'Times New Roman', 'Droid Serif', Times, 'Source Serif Pro', serif;
+$systemMono         : Menlo, Consolas, Monaco, 'Liberation Mono', 'Lucida Console', monospace;
+$baseFont           : 'Fira Sans', $systemSansSerif;
 
 /* Measurements */
 
