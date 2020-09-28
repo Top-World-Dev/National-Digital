@@ -20,7 +20,7 @@ export default {
   computed: {
     backgroundStyle() {
       let color = this.assignColors(this.blok.backgroundColor);
-      return (!this.blok.backgroundImage.filename) ? `${color}` : `${color}, url(${this.blok.backgroundImage.filename})`;
+      return (!this.blok.backgroundImage.filename) ? `${color}` : `${color}`;
     }
   }
 };
