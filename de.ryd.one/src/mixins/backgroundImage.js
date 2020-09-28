@@ -11,9 +11,6 @@ export default {
         case 'is-primary-vertical':
           return `linear-gradient(to bottom, rgba(46, 50, 131, 0) 47%, #0d0e36 91%)`
           break;
-        case 'is-null':
-          return `linear-gradient(to bottom, rgba(46, 50, 131, 0) 47%, #0d0e36 91%)`
-          break;
         default:
           return `linear-gradient(to bottom, rgba(46, 50, 131, 0) 47%, #0d0e36 91%)`
       } 
@@ -21,12 +18,9 @@ export default {
   },
   computed: {
     backgroundStyle() {
+      console.log(this.blok)
       let color = this.assignColors(this.blok.backgroundColor);
-      if(this.blok.backgroundImage.filename) {
-        return `${color}, url(${this.blok.backgroundImage.filename})`;
-      } else {
-        return `${color}`;
-      }
+      (!this.blok.backgroundImage.filename) ? `${color}` : `${color}, url(${this.blok.backgroundImage.filename})`;
     }
   }
 };

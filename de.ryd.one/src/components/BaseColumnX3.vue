@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import backgroundImage from '../mixins/shared'
+  import backgroundImage from '../mixins/backgroundImage'
   export default {
     mixins: [backgroundImage],
     props: ['blok']
