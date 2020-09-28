@@ -1,3 +1,4 @@
+import getImage from '../mixins/getImage'
 export default {
   methods: {
     assignColors(color) {
