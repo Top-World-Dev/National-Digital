@@ -1,6 +1,6 @@
 <template>
-  <div class="v-button" v-editable="blok">
-    <a :href="blok.link.url" :class="blok.style" :target="(blok.external ? '_blank' : '_self')" :rel="blok.external ? 'noopener noreferrer' : ''">{{ blok.text }}</a>
+  <div class="v-button" v-editable="blok" :class="blok.class" >
+    <a :href="blok.link.url" :target="blok.linktype != 'url' ? '_blank' : '_self'" :rel="blok.linktype != 'url' ? 'noopener noreferrer' : ''">{{ blok.text }}</a>
   </div>
 </template>
 <script>
@@ -22,7 +22,7 @@
   padding-bottom: 0.5em;
   padding-left: 1em;
   padding-right: 1em;
-  min-height: 2.4rem;
+  min-height: 3rem;
   // style
   cursor: pointer;
   border-style: solid;
