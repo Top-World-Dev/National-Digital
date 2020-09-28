@@ -31,8 +31,11 @@
           case 'is-primary-vertical':
             return `linear-gradient(to bottom, rgba(46, 50, 131, 0) 47%, #0d0e36 91%)`
             break;
+          case 'is-null':
+            return `linear-gradient(to bottom, rgba(46, 50, 131, 0) 47%, #0d0e36 91%)`
+            break;
           default:
-            return `linear-gradient(180deg,rgba(255,255,255,1),rgba(255,255,255,1))`
+            return `linear-gradient(to bottom, rgba(46, 50, 131, 0) 47%, #0d0e36 91%)`
         } 
       }
     },
