@@ -20,6 +20,7 @@ import VImageblock from '~/components/VImageblock.vue'
 import VLinklist from '~/components/VLinklist.vue'
 import VList from '~/components/VList.vue'
 import VRule from '~/components/VRule.vue'
+import VText from '~/components/VText.vue'
 
 
 export default function (Vue, { router, head, isClient }) {
@@ -43,4 +44,5 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VLinklist', VLinklist)
   Vue.component('VList', VList)
   Vue.component('VRule', VRule)
+  Vue.component('VText', VText)
 }
