@@ -14,6 +14,7 @@ import BaseSectionColumn from '~/components/BaseSectionColumn.vue'
 
 import VButton from '~/components/VButton.vue'
 import VBlurbicon from '~/components/VBlurbicon.vue'
+import VGap from '~/components/VGap.vue'
 import VHeading from '~/components/VHeading.vue'
 import VImageblock from '~/components/VImageblock.vue'
 import VLinklist from '~/components/VLinklist.vue'
@@ -41,6 +42,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VButton', VButton)
   Vue.component('VBlurbicon', VBlurbicon)
   Vue.component('VHeading', VHeading)
+  Vue.component('VGap', VGap)
   Vue.component('VImageblock', VImageblock)
   Vue.component('VLinklist', VLinklist)
   Vue.component('VList', VList)
