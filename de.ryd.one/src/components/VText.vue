@@ -1,6 +1,6 @@
 <template>
   <tag :is="blok.style" class="v-text" v-editable="blok">
-    <div v-html="blok.content"></div>
+    <richtext v-html="richtext"></richtext>
   </tag>
 </template>
 <script>

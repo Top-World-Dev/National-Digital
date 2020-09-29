@@ -1,8 +1,8 @@
 <template>
   <ul class="v-list" v-editable="blok">
-    <li v-for="item in blok.item" v-bind:key="item.title">
+    <li v-for="item in blok.item" :key="item.title">
       <h5 v-if="item.title">{{ item.title }}</h5>
-      <span v-if="item.content" :style="(item.title ? '' : 'display:block')" v-html="item.content"></span>
+      <span v-if="item.content" :style="(item.title ? '' : 'display:block')" v-html="item._uid"></span>
     </li>
   </ul>
 </template>
