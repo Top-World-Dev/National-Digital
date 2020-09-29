@@ -2,7 +2,7 @@
   <ul class="v-list" v-editable="blok">
     <li v-for="item in blok.item" :key="item._uid">
       <h5 v-if="item.title">{{ item.title }}</h5>
-      <richtext v-if="item.content" :style="(item.title ? '' : 'display:block')" :text="item.content"></richtext>
+      <v-richtext v-if="item.content" :style="(item.title ? '' : 'display:block')" :text="item.content"></v-richtext>
     </li>
   </ul>
 </template>

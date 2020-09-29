@@ -1,30 +1,15 @@
 <template>
   <div class="v-blurbicon" v-editable="blok">
-    <div class="blurbicon-item" v-for="item in getImage" :key="item._uid">
-      <g-image :src="item.imageUrl"></g-image>
+    <div class="blurbicon-item" v-for="item in blok.item" :key="item._uid">
+      <v-image :source="item"></v-image>
       <h6 v-if="item.title">{{ item.title }}</h6>
-      <richtext v-if="item.content" :text="item.content"></richtext>
+      <v-richtext v-if="item.content" :text="item.content"></v-richtext>
     </div>
   </div>
 </template>
 <script>
   export default {
-    props: ['blok'],
-    computed: {
-      getImage () {
-        return this.blok.item.map(item => {
-          if(item.icon) {
-            if(typeof item.icon == 'object') {
-              item.imageUrl = require(`!!assets-loader?width=100&height=100!@media/${item.icon.filename.filename}`);
-            } else {
-              let image = item.icon.split("/").pop(); 
-              item.imageUrl = require(`!!assets-loader?width=100&height=100!@media/${file}`)
-            }
-          }
-          return item
-        });
-      }
-    }
+    props: ['blok']
   }
 </script>
 <style lang="scss">
