@@ -3,7 +3,7 @@
     <div class="blurbicon-item" v-for="item in getImage" :key="item._uid">
       <g-image :src="item.imageUrl"></g-image>
       <h6 v-if="item.title">{{ item.title }}</h6>
-      <div v-if="item.content" v-html="item.content"></div>
+      <richtext v-if="item.content" :text="item.content"></richtext>
     </div>
   </div>
 </template>

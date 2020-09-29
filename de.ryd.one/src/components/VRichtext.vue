@@ -9,7 +9,6 @@
     props: ['text'],
     computed: {
       richtext() {
-        console.log('hello')
         return this.text ? this.$storyapi.richTextResolver.render(this.text) : ''
       }
     }
