@@ -45,6 +45,7 @@
       }
       a {
         color: $white;
+        text-decoration: none;
       }
   }
   &.button-accent {
@@ -60,10 +61,8 @@
       }
       a {
         color: $brand;
+        text-decoration: none;
       }
-  }
-  a {
-    text-decoration: none;
   }
 }
 </style>
