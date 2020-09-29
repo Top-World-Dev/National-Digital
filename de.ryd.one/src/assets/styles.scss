@@ -105,8 +105,8 @@ $breakXL            : $container + ($gutter * 2);
 
 	>li {
 		display: block;
-		margin-top: ceil($margin / 2);
-		margin-bottom: ceil($margin / 2);
+		margin-top: $margin;
+		margin-bottom: $margin;
 
 		&:first-of-type {
 			margin-top: 0;
