@@ -1,18 +1,28 @@
 <template>
   <div class="v-blurbicon" v-editable="blok">
-    <div class="blurbicon-item" v-for="item in blok.item">
-      <g-image :src="getImage(item.icon, '100', '100', item.title)"></g-image>
+    <div class="blurbicon-item" v-for="item in getImage">
+      <g-image :src="item.imageUrl"></g-image>
       <h5 v-if="item.title">{{ item.title }}</h5>
       <div v-if="item.content">{{ item.content }}</div>
     </div>
 </div>
 </template>
 <script>
-  import getImage from '../mixins/getImage'
-
   export default {
     props: ['blok'],
-    mixins: [getImage]
+    computed: {
+      getImage () {
+        return this.blok.item.map(item => {
+          if(typeof item.icon == 'object') {
+            item.imageUrl = require(`!!assets-loader?width=100&height=100!@media/${item.icon.filename.filename}`);
+          } else {
+            let image = item.icon.split("/").pop(); 
+            item.imageUrl = require(`!!assets-loader?width=100&height=100!@media/${file}`)
+          }
+          return item
+        });
+      }
+    }
   }
 </script>
 <style lang="scss">

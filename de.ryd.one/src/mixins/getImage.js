@@ -1,17 +1,15 @@
 export default {
-  methods: {
-    getFile (image) {
-      console.log('hello')
-      if(typeof image == 'object') {
-        console.log(image)
-        // // check to see if its been cached
-        // return (image.filename) ? require(`!!assets-loader?width=${width}&height=${height}&alt=${alt}!@media/${image.filename}`) : image;
-      }
-      if(typeof image == 'string') {
-        console.log(image)
-        // var file = image.split("/").pop(); 
-        // return require(`!!assets-loader?width=${width}&height=${height}&alt=${alt}!@media/${file}`)
-      }
+  computed: {
+    getImage () {
+      return this.blok.item.map(item => {
+        if(typeof item.icon == 'object') {
+          item.imageUrl = require(`!!assets-loader?width=100&height=100!@media/${item.icon.filename.filename}`);
+        } else {
+          let image = item.icon.split("/").pop(); 
+          item.imageUrl = require(`!!assets-loader?width=100&height=100!@media/${file}`)
+        }
+        return item
+      });
     }
   }
 };
