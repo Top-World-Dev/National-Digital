@@ -14,6 +14,14 @@ module.exports = {
         client: {
           accessToken: 'xBrVBUizNcw9o7tmRIQclAtt' // you must be replace with your token
         },
+        types: {
+          story: {
+            name: 'StoryblokEntry', // The name of Story template and type (default StoryblokEntry)
+            params: {
+              resolve_relations: 'TheFooter.section'
+            } // Additional query parameters
+          }
+        },
         downloadImages: true, // Optional. default false,
         imageDirectory: 'storyblok_images', // Optional. Folder to put the downloaded images
       }
