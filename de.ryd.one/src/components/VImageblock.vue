@@ -1,5 +1,5 @@
 <template>
-  <div class="v-imageblock" v-editable="blok">
+  <div class="v-imageblock" :class="blok.style" v-editable="blok">
     <div class="imageblock-item" v-for="item in blok.item" :key="item._uid">
       <template v-if="item.link.url == ''">
         <v-image :source="item"></v-image>
@@ -21,6 +21,17 @@
 <style lang="scss">
 @import '~/assets/styles.scss';
 .v-imageblock {
-
+  display: flex;
+  &.imageblock-column {
+    flex-direction: column;
+  }
+  &.imageblock-row {
+    flex-direction: row;
+    justify-content: center;
+    .imageblock-item {
+      margin-left: 0.375rem;
+      margin-right: 0.375rem;
+    }
+  }
 }
 </style>

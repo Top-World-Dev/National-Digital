@@ -32,9 +32,9 @@
       color: $accent;
     }
   }
-  &.section-background-accentblock {
+  &.section-background-brandblock {
     color: $white;
-    background-color: $accent;
+    background-color: $brand;
     background-position: bottom center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -49,24 +49,18 @@
   }
   .section-container-large {
     @include container($containerOuter);
-    padding-top: 8em;
-    padding-bottom: 8em;
     > * {
       margin: 1rem;
     }
   }
   .section-container-normal {
     @include container($container);
-    padding-top: 6em;
-    padding-bottom: 6em;
     > * {
       margin: 1rem;
     }
   }
   .section-container-small {
     @include container($containerInner);
-    padding-top: 4em;
-    padding-bottom: 4em;
     > * {
       margin: 1rem;
     }
