@@ -11,7 +11,7 @@
 <style lang="scss">
 @import '~/assets/styles.scss';
 .v-rule hr {
-  display: block;
+  display: inline-block;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin-left: auto;
