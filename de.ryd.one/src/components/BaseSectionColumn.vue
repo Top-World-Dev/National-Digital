@@ -1,5 +1,5 @@
 <template>
-  <section :id="blok.anchor" class="xy-column" :style="{backgroundImage: backgroundStyle}" :class="blok.backgroundColor">
+  <section :id="blok.name" class="xy-column" :style="{backgroundImage: backgroundStyle}" :class="blok.backgroundColor">
       <div class="column-inner" :class="[blok.container,blok.align]">
         <component :key="blok._uid" v-for="blok in blok.block" :blok="blok" :is="blok.component"></component>
       </div>
