@@ -40,11 +40,6 @@
 <style lang="scss">
 @import '~/assets/styles.scss';
 .v-imageblock {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  .imageblock-item {
-    border: 0.5rem solid transparent;
-  }
+
 }
 </style>

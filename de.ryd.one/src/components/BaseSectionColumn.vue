@@ -27,6 +27,12 @@
     width: 100%;
     height: auto;
   }
+  .column-container-mleft {
+    margin-left: 40%;
+  }
+  .column-container-mright {
+    margin-right: 40%;
+  }
   /* Text alignment */
   .column-align-left {
     text-align: left;

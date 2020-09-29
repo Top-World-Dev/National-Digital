@@ -5,7 +5,7 @@
       <h6 v-if="item.title">{{ item.title }}</h6>
       <div v-if="item.content" v-html="item.content"></div>
     </div>
-</div>
+  </div>
 </template>
 <script>
   export default {

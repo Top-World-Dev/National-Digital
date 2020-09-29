@@ -2,7 +2,7 @@
   <ul class="v-list" v-editable="blok">
     <li v-for="item in blok.item" v-bind:key="item.title">
       <h5 v-if="item.title">{{ item.title }}</h5>
-      <span v-if="item.content" :style="(item.title ? '' : 'display:block') ">{{ item.content }}</span>
+      <span v-if="item.content" :style="(item.title ? '' : 'display:block')" v-html="item.content"></span>
     </li>
   </ul>
 </template>
@@ -18,13 +18,9 @@
   @include no-list;
   text-align: left;
   h5 {
-    display: inline;
     margin-left: 1.5rem;
-    margin-top: unset;
-    margin-bottom: unset;
   }
   span {
-    display: block;
     margin-left: 1.5rem;
   }
   li {
