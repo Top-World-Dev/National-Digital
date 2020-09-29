@@ -1,6 +1,6 @@
 <template>
   <div class="v-imageblock" v-editable="blok">
-    <div class="imageblock-item" v-for="item in getImage" v-bind:key="item.title">
+    <div class="imageblock-item" v-for="item in getImage" :key="item._uid">
       <template v-if="item.link.url == ''">
         <g-image :src="item.imageUrl"></g-image>
       </template>
@@ -20,10 +20,16 @@
       getImage () {
         return this.blok.item.map(item => {
           if(typeof item.image == 'object') {
-            item.imageUrl = require(`!!assets-loader?width=${item.width}&height=${item.height}!@media/${item.image.filename.filename}`);
+            let image = require(`!!assets-loader!@media/${item.image.filename.filename}`);
+            image.size.height = parseInt(item.height);
+            image.size.width = parseInt(item.width);
+            item.imageUrl = image;
           } else {
-            let image = item.image.split("/").pop(); 
-            item.imageUrl = require(`!!assets-loader?width=${item.width}&height=${item.height}!@media/${file}`)
+            let imageName = item.image.split("/").pop(); 
+            let image = require(`!!assets-loader!@media/${imageName}`);
+            image.size.height = parseInt(item.height);
+            image.size.width = parseInt(item.width);
+            item.imageUrl = image;
           }
           return item
         });
