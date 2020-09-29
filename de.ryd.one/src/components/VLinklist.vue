@@ -18,14 +18,17 @@
   @include no-list;
   text-align: left;
   &.linklist-inline {
-    @include nav-row(0.75rem);
+    @include nav-row(0.25rem);
+    li::before {
+      content: "• ";
+    }
   }
   &.linklist-block {
     @include nav-col(0.25rem);
   }
   .linklist-icon {
     display: inline;
-    margin-right: 0.5rem;
+    margin-right: 0.25rem;
   }
   a {
     text-decoration: none;
