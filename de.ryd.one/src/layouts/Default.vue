@@ -105,6 +105,9 @@ h6 {
     background-position: bottom center;
     background-size: cover;
     background-repeat: no-repeat;
+    a {
+      color: $accent;
+    }
   }
   .section-container {
     @include container($container);
