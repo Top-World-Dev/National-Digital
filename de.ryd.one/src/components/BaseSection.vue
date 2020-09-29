@@ -32,9 +32,9 @@
       color: $accent;
     }
   }
-  &.section-background-accentblock {
+  &.section-background-brandblock {
     color: $white;
-    background-color: $accent;
+    background-color: $brand;
     background-position: bottom center;
     background-size: cover;
     background-repeat: no-repeat;
