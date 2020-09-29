@@ -1,5 +1,4 @@
 <template>
-<template>
   <div class="v-testiomonial" v-editable="blok">
     <div class="testimonial-profile">
       <div class="testimonial-profile-logo">logo: {{ blok.logo.filename }}</div>
