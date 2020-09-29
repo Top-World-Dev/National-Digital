@@ -18,7 +18,7 @@ module.exports = {
           story: {
             name: 'StoryblokEntry', // The name of Story template and type (default StoryblokEntry)
             params: {
-              resolve_relations: 'TheFooter.section'
+              resolve_relations: 'TheFooter.section,TheHeader.section'
             } // Additional query parameters
           }
         },
