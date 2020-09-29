@@ -1,5 +1,5 @@
 <template>
-  <section :id="blok.name" class="xy-column" :style="{backgroundImage: backgroundStyle}" :class="blok.backgroundColor">
+  <section :id="blok.name" class="xy-column" :class="blok.valign">
       <div class="column-inner" :class="[blok.container,blok.align]">
         <component :key="blok._uid" v-for="blok in blok.block" :blok="blok" :is="blok.component"></component>
       </div>
@@ -17,10 +17,15 @@
 <style lang="scss">
 @import '~/assets/styles.scss';
 .xy-column {
-  /* Background and Text Colors  */
-  &.column-background-transparent {
-    color: inherit;
-    background-color: transparent;
+  /* Vertical alignment */
+  &.column-valign-top {
+    justify-self: flex-start;
+  }
+  &.column-valign-middle {
+    justify-self: center;
+  }
+  &.column-valign-bottom {
+    justify-self: flex-end;
   }
   /* Container Options */
   .column-container-none {
