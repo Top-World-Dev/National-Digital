@@ -2,8 +2,8 @@
   <div class="v-blurbicon" v-editable="blok">
     <div class="blurbicon-item" v-for="item in getImage" :key="item._uid">
       <g-image :src="item.imageUrl"></g-image>
-      <h5 v-if="item.title">{{ item.title }}</h5>
-      <div v-if="item.content">{{ item.content }}</div>
+      <h6 v-if="item.title">{{ item.title }}</h6>
+      <div v-if="item.content" v-html="item.content"></div>
     </div>
 </div>
 </template>
