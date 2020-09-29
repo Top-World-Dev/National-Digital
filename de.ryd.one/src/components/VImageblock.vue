@@ -20,10 +20,10 @@
       getImage () {
         return this.blok.item.map(item => {
           if(typeof item.image == 'object') {
-            item.imageUrl = require(`!!assets-loader?width=${item.image.width}&height=${item.image.height}!@media/${item.image.filename.filename}`);
+            item.imageUrl = require(`!!assets-loader?width=${item.width}&height=${item.height}!@media/${item.image.filename.filename}`);
           } else {
             let image = item.image.split("/").pop(); 
-            item.imageUrl = require(`!!assets-loader?width=${item.image.width}&height=${item.image.height}!@media/${file}`)
+            item.imageUrl = require(`!!assets-loader?width=${item.width}&height=${item.height}!@media/${file}`)
           }
           return item
         });
