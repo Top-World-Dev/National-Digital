@@ -19,13 +19,13 @@
 .xy-column {
   /* Vertical alignment */
   &.column-valign-top {
-    justify-self: flex-start;
+    align-self: flex-start;
   }
   &.column-valign-middle {
-    justify-self: center;
+    align-self: center;
   }
   &.column-valign-bottom {
-    justify-self: flex-end;
+    align-self: flex-end;
   }
   /* Container Options */
   .column-container-none {
