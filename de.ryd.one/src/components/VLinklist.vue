@@ -18,10 +18,10 @@
   @include no-list;
   text-align: left;
   &.linklist-inline {
-    @include nav-row(0.5rem);
+    @include nav-row(0.75rem);
   }
   &.linklist-block {
-    @include nav-col(0.5rem);
+    @include nav-col(0.25rem);
   }
   .linklist-icon {
     display: inline;
