@@ -33,33 +33,33 @@
   border-radius: 2rem;
   transition: all 0.2s;
   &.button-primary {
-      color: $white;
       border-color: $brand;
       background-color: $brand;
       &:hover {
-          color: $white;
           border-color: $brand;
           background-color: lighten($brand,10%);
       }
       &:active {
-          color: $white;
           border-color: $brand;
           background-color: darken($brand,5%);
       }
+      a {
+        color: $white;
+      }
   }
   &.button-accent {
-      color: $brand;
       border-color: $accent;
       background-color: $accent;
       &:hover {
-          color: $brand;
           border-color: $accent;
           background-color: lighten($accent,10%);
       }
       &:active {
-          color: $brand;
           border-color: $accent;
           background-color: darken($accent,5%);
+      }
+      a {
+        color: $brand;
       }
   }
   a {
