@@ -8,7 +8,7 @@
         <g-link :to="item.link.url"><g-image :src="item.imageUrl"></g-image></g-link>
       </template>
       <template v-else-if="item.link.linktype == 'url'">
-        <a :href="item.link.url" target="_blank" rel="noopener noreferrer"><g-image :src="item.imageUrl"></g-image></a>
+        <a :href="item.link.url" rel="noopener noreferrer"><g-image :src="item.imageUrl"></g-image></a>
       </template>
     </div>
   </div>

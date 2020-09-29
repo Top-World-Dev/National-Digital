@@ -1,7 +1,7 @@
 <template>
   <div class="v-button" v-editable="blok" :class="blok.style">
     <g-link v-if="blok.link.linktype == 'story'" :to="blok.link.url">{{ blok.text }}</g-link>
-    <a v-else :href="blok.link.url" target="_blank" rel="noopener noreferrer">{{ blok.text }}</a>
+    <a v-else :href="blok.link.url" rel="noopener noreferrer">{{ blok.text }}</a>
   </div>
 </template>
 <script>
