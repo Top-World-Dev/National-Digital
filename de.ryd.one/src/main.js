@@ -5,14 +5,13 @@ import 'normalize.css/normalize.css'
 
 import DefaultLayout from '~/layouts/Default.vue'
 
-
 import Page from '~/components/Page.vue'
 
 import TheFooter from '~/components/TheFooter.vue'
 
-import BaseColumnX1 from '~/components/BaseColumnX1.vue'
-import BaseColumnX2 from '~/components/BaseColumnX2.vue'
-import BaseColumnX3 from '~/components/BaseColumnX3.vue'
+import BaseSection from '~/components/BaseSection.vue'
+import BaseSectionColumn from '~/components/BaseSectionColumn.vue'
+
 import VButton from '~/components/VButton.vue'
 import VBlurbicon from '~/components/VBlurbicon.vue'
 import VHeading from '~/components/VHeading.vue'
@@ -27,16 +26,17 @@ export default function (Vue, { router, head, isClient }) {
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
 
-
   // register components
   Vue.component('Page', Page)
 
-
+  // global elements
   Vue.component('TheFooter', TheFooter)
 
-  Vue.component('BaseColumnX1', BaseColumnX1)
-  Vue.component('BaseColumnX2', BaseColumnX2)
-  Vue.component('BaseColumnX3', BaseColumnX3)
+  // base layouts
+  Vue.component('BaseSection', BaseSection)
+  Vue.component('BaseSectionColumn', BaseSectionColumn)
+
+  // block modules
   Vue.component('VButton', VButton)
   Vue.component('VBlurbicon', VBlurbicon)
   Vue.component('VHeading', VHeading)

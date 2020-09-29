@@ -2,24 +2,28 @@ export default {
   methods: {
     assignColors(color) {
       switch (color) {
-        case 'is-primary-horizontal':
-          return `linear-gradient(to right, #2e3283 38%, rgba(34, 107, 172, 0.67) 89%)`
+        case 'section-background-brandgradient':
+          return `linear-gradient(90deg, rgba(46, 50, 131, 1) 45%, rgba(58, 147, 191, 0.67) 90%)`
           break;
-        case 'is-secondary-horizontal':
-          return `linear-gradient(to left, #226bac, #2e3283 0%)`
+        case 'section-background-accentblock':
+          return `linear-gradient(0deg, rgba(46, 50, 131, 1) 0%, 0deg, rgba(46, 50, 131, 1) 100%)`
           break;
-        case 'is-primary-vertical':
-          return `linear-gradient(to bottom, rgba(46, 50, 131, 0) 47%, #0d0e36 91%)`
+        case 'section-background-white':
+          return `linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%)`
+          break;
+        case 'section-background-transparent':
+          return `linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 100%)`
           break;
         default:
-          return `linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%)`
-      } 
+          return `linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 100%)`
+      }
     }
   },
   computed: {
     backgroundStyle() {
       let color = this.assignColors(this.blok.backgroundColor);
-      return (!this.blok.backgroundImage.filename) ? `${color}` : `${color}`;
+      //       return (!this.blok.backgroundImage.filename) ? `${color}` : `${color}`;
+      return color;
     }
   }
 };
