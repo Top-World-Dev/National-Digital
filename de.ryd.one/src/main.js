@@ -21,6 +21,7 @@ import VLinklist from '~/components/VLinklist.vue'
 import VList from '~/components/VList.vue'
 import VRichtext from '~/components/VRichtext.vue'
 import VRule from '~/components/VRule.vue'
+import VTestimonial from '~/components/VTestimonial.vue'
 import VText from '~/components/VText.vue'
 
 
@@ -47,6 +48,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VLinklist', VLinklist)
   Vue.component('VList', VList)
   Vue.component('VRule', VRule)
+  Vue.component('VTestimonial', VTestimonial)
   Vue.component('VText', VText)
 
   // global components
