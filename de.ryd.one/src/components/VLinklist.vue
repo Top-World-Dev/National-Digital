@@ -1,8 +1,8 @@
 <template>
   <ul class="v-linklist" v-editable="blok" :class="[blok.style,blok.align]">
     <li v-for="item in blok.item" :key="item._uid">
-      <g-link v-if="item.link.linktype == 'story'" :to="item.link.url"><v-image v-if="item.image.id" :source="item" class="linklist-icon"></v-image> <span>{{ item.title }}</span></g-link>
-      <a v-else :href="item.link.url" rel="noopener noreferrer"><v-image v-if="item.image.id" :source="item" class="linklist-icon"></v-image><span>{{ item.title }}</span></a>
+      <g-link v-if="item.link.linktype == 'story'" :to="item.link.url"><v-image v-if="item.image.id" :source="item.image" class="linklist-icon"></v-image> <span>{{ item.title }}</span></g-link>
+      <a v-else :href="item.link.url" rel="noopener noreferrer"><v-image v-if="item.image.id" :source="item.image" class="linklist-icon"></v-image><span>{{ item.title }}</span></a>
     </li>
   </ul>
 </template>
