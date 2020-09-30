@@ -18,15 +18,15 @@
     <div class="header-tabnav-tablinks-wrapper">
       <div class="header-tabnav-tablinks-container">
         <ul class="header-tabnav-tablinks-links">
-          <li v-for="tab in blok.nav" :class="{ 'is-active': isActive == tab._uid }"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
+          <li v-for="tab in blok.nav" :class="{ 'is-active': isActive == tab._uid }" :key="tab._uid"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
         </ul>
       </div>
       <div class="header-tabnav-tabcontent-wrapper">
         <div class="header-tabnav-tabcontent-container">
           <div class="header-tabnav-logo"><v-image :source="blok.image['0']"></v-image></div>
-          <ul class="header-tabnav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav">
-            <li v-for="item in nav.item">{{ item.title }}</li>
-          </ul>
+            <ul class="header-tabnav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav" :key="nav._uid">
+              <li v-for="item in nav.item" :key="item._uid">{{ item.title }}</li>
+            </ul>
         </div>
       </div>
     </div>
