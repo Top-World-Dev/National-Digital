@@ -25,7 +25,10 @@
         <div class="header-tabnav-tabcontent-container">
           <div class="header-tabnav-logo"><v-image :source="blok.image['0']"></v-image></div>
             <ul class="header-tabnav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav" :key="nav._uid">
-              <li v-for="item in nav.item" :key="item._uid">{{ item.title }}</li>
+              <li v-for="item in nav.item" :key="item._uid">
+                <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
+                <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+              </li>
             </ul>
         </div>
       </div>
@@ -143,7 +146,7 @@ export default {
       grid-template-columns: 1fr 240px 1fr;
       grid-template-rows: 32px;
       grid-template-areas: "tablinks . .";
-      align-items: center;
+      align-items: end;
     }
 
     .header-tabnav-tabcontent-container {
@@ -161,12 +164,40 @@ export default {
 
     .header-tabnav-tablinks-links {
       grid-area: tablinks;
-      @include nav-row(0.5em);
+      @include nav-row(0em);
     }
 
     .header-tabnav-tabcontent-links {
       grid-area: tabcontent;
-      @include nav-row(0.5em);
+      @include nav-row(1em);
+    }
+
+    // styles
+
+    .header-tabnav-tablinks-links li {
+      font-size: 0.875rem;
+      margin-bottom: 0;
+      a {
+        color: $brand;
+        padding: 0.5em 1.25em 0.5em 1.25em;
+        border-top-left-radius: 0.25em;
+        border-top-right-radius: 0.25em;
+      }
+      &.is-active {
+        a {
+          background-color: $brand;
+          color: $white;
+        }
+      }
+    }
+
+    .header-tabnav-tabcontent-links li {
+      font-size: 1rem;
+      margin-bottom: 0;
+      a {
+        color: $white;
+        text-decoration: none;
+      }
     }
   }
 }
