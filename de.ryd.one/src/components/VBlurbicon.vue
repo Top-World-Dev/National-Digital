@@ -1,7 +1,7 @@
 <template>
   <div class="v-blurbicon" v-editable="blok">
     <div class="blurbicon-item" v-for="item in blok.item" :key="item._uid">
-      <v-image :source="item.image"></v-image>
+      <v-image :source="item.image['0']"></v-image>
       <h6 v-if="item.title">{{ item.title }}</h6>
       <v-richtext v-if="item.content" :text="item.content"></v-richtext>
     </div>

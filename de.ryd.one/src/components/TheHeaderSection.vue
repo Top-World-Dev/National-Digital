@@ -1,9 +1,10 @@
 <template>
+
   <div class="xy-header">
-    <div class="header-sidenav-logo">LOGO</div>
+    <div class="header-sidenav-logo"><v-image :source="blok.image['0']"></v-image></div>
     <div class="header-sidenav-toggle">TOGGLE</div>
     <div class="header-sidenav-overlay">
-      <div class="header-sidenav-overlay-logo">LOGO</div>
+      <div class="header-sidenav-overlay-logo"><v-image :source="blok.image['0']"></v-image></div>
       <div class="header-sidenav-overlay-toggle">TOGGLE</div>
       <div class="header-sidenav-overlay-menu">
         <ul>
