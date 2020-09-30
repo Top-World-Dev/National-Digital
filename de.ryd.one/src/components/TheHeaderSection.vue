@@ -186,7 +186,6 @@ export default {
       }
       &:hover {
         position: relative;
-        background-color: $accent;
         .header-tabnav-tabcontent-sublinks {
           // logic
           display: block;
@@ -235,6 +234,9 @@ export default {
       a {
         color: $white;
         text-decoration: none;
+      }
+      &:hover {
+        background-color: $accent;
       }
     }
 
