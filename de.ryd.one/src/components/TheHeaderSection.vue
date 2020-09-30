@@ -1,7 +1,7 @@
 <template>
-  <header>
-    <component :key="blok._uid" v-for="blok in blok.section.content.section" :blok="blok" :is="blok.component"></component> 
-  </header>
+  <section>
+    {{ blok }}
+  </section>
 </template>
 
 <script>

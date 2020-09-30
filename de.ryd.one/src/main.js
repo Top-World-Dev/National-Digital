@@ -9,6 +9,7 @@ import Page from '~/components/Page.vue'
 
 import TheFooter from '~/components/TheFooter.vue'
 import TheHeader from '~/components/TheHeader.vue'
+import TheHeaderSection from '~/components/TheHeaderSection.vue'
 
 import BaseSection from '~/components/BaseSection.vue'
 import BaseSectionColumn from '~/components/BaseSectionColumn.vue'
@@ -39,6 +40,7 @@ export default function (Vue, { router, head, isClient }) {
   // global elements
   Vue.component('TheFooter', TheFooter)
   Vue.component('TheHeader', TheHeader)
+  Vue.component('TheHeaderSection', TheHeaderSection)
 
   // base layouts
   Vue.component('BaseSection', BaseSection)
