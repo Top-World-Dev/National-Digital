@@ -28,6 +28,12 @@
               <li v-for="item in nav.item" :key="item._uid">
                 <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
                 <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+                <ul v-if="item.subitem.length > 0" class="header-tabnav-tabcontent-sublinks">
+                  <li v-for="subitem in item.subitem" :key="item._uid">
+                    <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.url">{{ subitem.title }}</g-link>
+                    <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
+                  </li>
+                </ul>
               </li>
             </ul>
         </div>
@@ -41,7 +47,7 @@ export default {
   props: ["blok"],
   data() {
     return {
-      isActive: '7bf1391b-faf3-4647-b7ce-2f631781f55c'
+      isActive: '7432fc6d-7637-4628-9978-9c90b4abe6b0'
     }
   },
   methods: {
@@ -169,16 +175,45 @@ export default {
 
     .header-tabnav-tabcontent-links {
       grid-area: tabcontent;
-      @include nav-row(1em);
+      @include nav-row(0em);
+    }
+
+    // subnav
+
+    .header-tabnav-tabcontent-links > li {
+      .header-tabnav-tabcontent-sublinks {
+        display: none;
+      }
+      &:hover {
+        position: relative;
+        background-color: $accent;
+        .header-tabnav-tabcontent-sublinks {
+          // logic
+          display: block;
+          position: absolute;
+          top: 2.4rem;
+          left: 0rem;
+          // format
+          @include nav-col(0.5rem);
+          width: 220px;
+          a {
+            display: block;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 1.5em;
+          }
+        }
+      }
     }
 
     // styles
 
-    .header-tabnav-tablinks-links li {
+    .header-tabnav-tablinks-links > li {
       font-size: 0.875rem;
       margin-bottom: 0;
       a {
         color: $brand;
+        text-decoration: none;
         padding: 0.5em 1.25em 0.5em 1.25em;
         border-top-left-radius: 0.25em;
         border-top-right-radius: 0.25em;
@@ -191,12 +226,32 @@ export default {
       }
     }
 
-    .header-tabnav-tabcontent-links li {
+    .header-tabnav-tabcontent-links > li {
       font-size: 1rem;
       margin-bottom: 0;
+      padding: 0.5em 1.25em 0.5em 1.25em;
+      border-top-left-radius: 0.25em;
+      border-top-right-radius: 0.25em;
       a {
         color: $white;
         text-decoration: none;
+      }
+    }
+
+    .header-tabnav-tabcontent-sublinks {
+      font-size: 0.875rem;
+      background-color: $white;
+      border-top: 0.5em solid $accent;
+      border-bottom: 0.25em solid $white;
+      border-top-right-radius: 0.25em;
+      border-bottom-right-radius: 0.25em;
+      border-bottom-left-radius: 0.25em;
+      li a {
+        color: $black;
+        text-decoration: none;
+      }
+      li:hover {
+        background-color: $lightGrey;
       }
     }
   }
