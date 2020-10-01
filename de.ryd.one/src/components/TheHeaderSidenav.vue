@@ -7,12 +7,12 @@
     </div>
     <div class="sidenav-menu">
       <ul class="sidenav-menu-alpha" v-for="tab in content" :key="tab._uid" :class="{'is-expanded' : active.includes(tab._uid)}">
-        <li @click="accordion(tab)"><a :class="tab.title">{{ tab.title }}</a>
+        <li><a @click="accordion(tab)" :class="tab.title">{{ tab.title }}</a>
           <ul class="sidenav-menu-beta">
             <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(tab._uid)}"></span></span>
-            <li v-for="item in tab.item">
-              <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
-              <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+            <li v-for="item in tab.item" :class="{'is-expanded' : active.includes(item._uid)}">
+              <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url"><span @click="accordion(item)">{{ item.title }}</span></g-link>
+              <a @click="accordion(item)" v-else :href="item.link.url" rel="noopener noreferrer"><span @click="accordion(item)">{{ item.title }}</span></a>
               <ul v-if="item.subitem.length > 0" class="sidenav-menu-gamma" >
                 <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(tab._uid)}"></span></span>
                 <li v-for="subitem in item.subitem">
@@ -44,6 +44,7 @@ export default {
       this.showNavigation = action;
     },
     accordion(tab) {
+      console.log(tab);
       (this.active.includes(tab._uid)) ? this.active = this.active.filter(item => item !== tab._uid) : this.active.push(tab._uid);
     }
   }
