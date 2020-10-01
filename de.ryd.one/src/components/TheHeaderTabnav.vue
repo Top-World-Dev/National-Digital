@@ -10,11 +10,11 @@
         <div class="header-tabnav-logo"><v-image :source="logo"></v-image></div>
           <ul class="header-tabnav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in content">
             <li v-for="item in nav.item">
-              <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
+              <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
               <ul v-if="item.subitem.length > 0" class="header-tabnav-tabcontent-sublinks">
                 <li v-for="subitem in item.subitem">
-                  <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.url">{{ subitem.title }}</g-link>
+                  <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.cached_url">{{ subitem.title }}</g-link>
                   <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
                 </li>
               </ul>
@@ -29,7 +29,7 @@ export default {
   props: ['content', 'logo'],
   data() {
     return {
-      isActive: '7bf1391b-faf3-4647-b7ce-2f631781f55c'
+      isActive: '7432fc6d-7637-4628-9978-9c90b4abe6b0'
     }
   },
   methods: {
