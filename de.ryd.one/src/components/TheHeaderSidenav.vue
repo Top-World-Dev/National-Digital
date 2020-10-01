@@ -6,15 +6,15 @@
       <div class="sidenav-toggle-close"><span class="sidenav-toggle" @click="toggleNav(false)" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></span></div>
     </div>
     <div class="sidenav-menu">
-      <ul class="sidenav-menu-alpha" v-for="tab in content" :class="{ 'is-active': isActive == tab._uid }">
-        <li><a @click="selectTab(tab)">{{ tab.title }}</a>
+      <ul class="sidenav-menu-alpha" v-for="tab in content" :key="tab._uid" :class="{'is-expanded' : active.includes(tab._uid)}">
+        <li @click="accordion(tab)"><a :class="tab.title">{{ tab.title }}</a>
           <ul class="sidenav-menu-beta">
-            <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="is-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" width="12" height="8"><g fill="none" fill-rule="evenodd"><path d="M-6-8h24v24H-6z"/><path fill="#fff" fill-rule="nonzero" d="M1.41 0L6 4.59 10.59 0 12 1.42l-6 6-6-6z"/></g></svg></span><span class="is-closed"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" width="12" height="8"><g fill="none" fill-rule="evenodd"><path d="M-6-8h24v24H-6z"/><path fill="#fff" fill-rule="nonzero" d="M10.59 7.42L6 2.83 1.41 7.42 0 6l6-6 6 6z"/></g></svg></span></span>
+            <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(tab._uid)}"></span></span>
             <li v-for="item in tab.item">
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
               <ul v-if="item.subitem.length > 0" class="sidenav-menu-gamma" >
-                <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="is-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" width="12" height="8"><g fill="none" fill-rule="evenodd"><path d="M-6-8h24v24H-6z"/><path fill="#2e3283" fill-rule="nonzero" d="M1.41 0L6 4.59 10.59 0 12 1.42l-6 6-6-6z"/></g></svg></span><span class="is-closed"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" width="12" height="8"><g fill="none" fill-rule="evenodd"><path d="M-6-8h24v24H-6z"/><path fill="#2e3283" fill-rule="nonzero" d="M10.59 7.42L6 2.83 1.41 7.42 0 6l6-6 6 6z"/></g></svg></span></span>
+                <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(tab._uid)}"></span></span>
                 <li v-for="subitem in item.subitem">
                   <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.cached_url">{{ subitem.title }}</g-link>
                   <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
@@ -32,8 +32,8 @@ export default {
   props: ['content', 'logo'],
   data() {
     return {
-      isActive: '7bf1391b-faf3-4647-b7ce-2f631781f55c',
-      showNavigation: false
+      showNavigation: false,
+      active: []
     }
   },
   methods: {
@@ -42,6 +42,9 @@ export default {
     },
     toggleNav(action) {
       this.showNavigation = action;
+    },
+    accordion(tab) {
+      (this.active.includes(tab._uid)) ? this.active = this.active.filter(item => item !== tab._uid) : this.active.push(tab._uid);
     }
   }
 };
@@ -70,11 +73,11 @@ export default {
   }
 
   .sidenav-toggle-close {
-    display: none;
+    display:none;
   }
   
   .sidenav-menu {
-    display: none;
+    display:none;
   }
 
 }
@@ -107,7 +110,7 @@ export default {
   }
 
   .sidenav-toggle-open {
-    display: none;
+    display:none;
   }
 
   .sidenav-toggle-close {
@@ -153,9 +156,15 @@ export default {
     position: absolute;
     right: 1.5rem;
     top: 0.5rem;
-    svg {
-      height: 0.875em;
-      width: auto;
+    .sidenav-menu-arrow {
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+      transform: rotate(45deg);
+      &.is-expanded {
+        transform: rotate(-135deg);
+      }
     }
   }
 
