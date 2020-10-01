@@ -9,12 +9,8 @@
     <div class="form-row">
       <input class="form-field" type="tel" name="phone" :placeholder="blok.phone" autocomplete="tel" :aria-label="blok.phone" />
     </div>
-
     <div class="form-row">
       <textarea class="form-field" name="message" rows="20" maxlength="65535" :placeholder="blok.message" :aria-label="blok.message"></textarea>
-    </div>
-    <div class="v-padding">
-      <div class="padding-x1"></div>
     </div>
     <div class="form-row">
       <div class="form-submit v-button button-primary"><input type="submit" :value="blok.submit" role="button" /></div>
@@ -62,10 +58,11 @@
     line-height: 2.5em;
     background-color: rgba($lightGrey, 0.5);
     border: 0.05em solid transparent;
+    border-radius: 2rem;
     color: $darkGrey;
     height: 60px;
     line-height: 2em;
-    padding: 0.5em 1em 1em 0.5em;
+    padding: 1em;
     width: 100%;
     &:focus {
       border-color: $brand;
