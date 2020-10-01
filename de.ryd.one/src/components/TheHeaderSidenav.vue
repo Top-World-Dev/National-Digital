@@ -124,19 +124,19 @@ export default {
   /* Submenu logic */
 
   .sidenav-menu-alpha {
-    > li > ul {
+    > li > ul > li {
       display: none;
     }
-    &.is-expanded > li > ul {
+    &.is-expanded > li > ul > li {
       display: block;
     }
   }
 
   .sidenav-menu-beta {
-    > li > ul {
+    > li > ul > li {
       display: none;
     }
-    &.is-expanded > li > ul {
+    &.is-expanded > li > ul > li {
       display: block;
     }
   }
@@ -179,7 +179,9 @@ export default {
     right: 1.5rem;
     top: 0.5rem;
   }
-  .sidenav-menu-beta .sidenav-menu-arrow {
+
+  .sidenav-menu-beta {
+    .sidenav-menu-arrow {
       border: solid white;
       border-width: 0 0.25em 0.25em 0;
       display: inline-block;
@@ -189,7 +191,10 @@ export default {
         transform: rotate(-135deg);
       }
     }
-    .sidenav-menu-gamma .sidenav-menu-arrow {
+  }
+
+  .sidenav-menu-gamma {
+    .sidenav-menu-arrow {
       border: solid $brand;
       border-width: 0 0.25em 0.25em 0;
       display: inline-block;
@@ -199,6 +204,7 @@ export default {
         transform: rotate(-135deg);
       }
     }
+  }
 
   .sidenav-menu-alpha > li {
     > a {
