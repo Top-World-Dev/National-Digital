@@ -1,8 +1,8 @@
 <template>
   <div class="v-testiomonial" v-editable="blok">
     <div class="testimonial-profile">
-      <div class="testimonial-profile-logo">logo: {{ blok.logo.filename }}</div>
-      <div class="testimonial-profile-avatar">profile: {{ blok.profile.filename }}</div>
+      <!-- <v-image class="testimonial-profile-logo" :source="blok.logo.image[0].filename"></v-image> -->
+      <!-- <v-image class="testimonial-profile-avatar" :source="blok.profile.image[0].filename"></v-image> -->
     </div>
     <div class="testimonial-quote">{{ blok.content }}</div>
     <div class="testimonial-byline"><span>{{ blok.author }}</span><span>{{ blok.role }}</span></div>

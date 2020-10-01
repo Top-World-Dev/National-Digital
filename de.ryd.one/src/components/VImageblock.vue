@@ -1,9 +1,7 @@
 <template>
   <div class="v-imageblock" :class="blok.style" v-editable="blok">
-    
     <div class="imageblock-item" v-for="item in blok.image" :key="item._uid">
        <v-image :source="item"></v-image>
-       
     </div>
   </div>
 </template>
