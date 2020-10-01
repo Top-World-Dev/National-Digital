@@ -17,14 +17,14 @@ export default {
     image() {
       // check if it's an svg 
       if(typeof this.source.image.filename == 'string') {
-        let filetype = this.source.image.filename.split('.').pop();
+        let filetype = this.source.image.filename.split('.').pop().toLowerCase();
         if(filetype == 'svg') {
           this.src = "img";
           return this.source.image.filename;
         }
       } else {
-        let imageName = this.source.image.filename.filename;
-        let image = require(`!!assets-loader!@media/${imageName}`);
+        let image = (typeof this.source.image.filename == 'object') ? require(`!!assets-loader!@media/${this.source.image.filename.filename}`) : require(`!!assets-loader!@media/${this.source.image.filename}`);
+
         image.alt = this.source.title;
         image.size.height = parseInt(this.source.height);
         image.size.width = parseInt(this.source.width);

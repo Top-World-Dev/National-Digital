@@ -239,6 +239,9 @@ export default {
       background-color: $white;
       font-size: 1rem;
       padding: 0.5em 0 0.5em 2em;
+      &.active {
+        background-color: $accent;
+      }
     }
   }
   .sidenav-menu-gamma > li {

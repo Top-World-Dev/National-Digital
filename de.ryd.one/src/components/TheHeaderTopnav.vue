@@ -120,6 +120,7 @@ export default {
   // tabs
   .topnav-tabs-links > li {
     font-size: 0.875rem;
+    font-weight:600;
     margin-bottom: 0;
     a {
       color: $brand;
