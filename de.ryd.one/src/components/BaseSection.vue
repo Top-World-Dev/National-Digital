@@ -20,7 +20,7 @@
   /* Background and Text Colors  */
   &.section-background-white {
     color: $black;
-    background-color: $white;
+    background-color: $white; 
   }
   &.section-background-brandgradient {
     color: $white;
