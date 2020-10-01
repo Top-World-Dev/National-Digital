@@ -147,7 +147,6 @@ export default {
     margin-right: 0.25rem;
     > a {
       color: $white;
-      background-color: transparent;
       border: 0 solid transparent;
       text-decoration: none;
       padding: 0.5em 1.25em 0.5em 1.25em;
@@ -158,7 +157,7 @@ export default {
         background-color: $accent;
         border-radius: 0.5rem;
         color: $brand;
-        transition: background-color 0.2s ease-out; 
+        // transition: background-color 0.2s ease-out; 
     }
   }
   .topnav-tabcontent-sublinks {
