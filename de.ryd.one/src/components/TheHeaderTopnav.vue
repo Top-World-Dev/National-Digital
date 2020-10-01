@@ -144,16 +144,13 @@ export default {
       padding: 0.5em 1.25em 0.5em 1.25em;
       color: $white;
       text-decoration: none;
-      &.active {
+      &.active, &:hover {
         background-color: $accent;
         border-radius: 0.5rem;
         color: $brand;
         font-weight: 500;
-        transition: background-color 2s ease-out; 
+        transition: background-color 0.2s ease-out; 
       }
-    }
-    &:hover {
-      background-color: $accent;
     }
   }
   .topnav-tabcontent-sublinks {
