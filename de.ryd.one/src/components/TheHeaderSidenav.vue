@@ -2,17 +2,19 @@
   <section class="xy-sidenav" :class="{ 'is-expanded': showNavigation}">
     <div class="sidenav-navbar">
       <div class="sidenav-logo"><v-image :source="logo"></v-image></div>
-      <div class="sidenav-toggle-open" @click="toggleNav(true)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12"><g fill="none" fill-rule="evenodd"><path d="M-3-6h24v24H-3z"/><path fill="#fff" fill-rule="nonzero" d="M0 0h18v2H0V0m0 5h18v2H0V5m0 5h18v2H0v-2z"/></g></svg></div>
-      <div class="sidenav-toggle-close" @click="toggleNav(false)" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></div>
+      <div class="sidenav-toggle-open"><span class="sidenav-toggle" @click="toggleNav(true)" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12"><g fill="none" fill-rule="evenodd"><path d="M-3-6h24v24H-3z"/><path fill="#fff" fill-rule="nonzero" d="M0 0h18v2H0V0m0 5h18v2H0V5m0 5h18v2H0v-2z"/></g></svg></span></div>
+      <div class="sidenav-toggle-close"><span class="sidenav-toggle" @click="toggleNav(false)" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></span></div>
     </div>
     <div class="sidenav-menu">
       <ul class="sidenav-menu-alpha" v-for="tab in content" :class="{ 'is-active': isActive == tab._uid }">
         <li><a @click="selectTab(tab)">{{ tab.title }}</a>
           <ul class="sidenav-menu-beta">
+            <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="is-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" width="12" height="8"><g fill="none" fill-rule="evenodd"><path d="M-6-8h24v24H-6z"/><path fill="#fff" fill-rule="nonzero" d="M1.41 0L6 4.59 10.59 0 12 1.42l-6 6-6-6z"/></g></svg></span><span class="is-closed"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" width="12" height="8"><g fill="none" fill-rule="evenodd"><path d="M-6-8h24v24H-6z"/><path fill="#fff" fill-rule="nonzero" d="M10.59 7.42L6 2.83 1.41 7.42 0 6l6-6 6 6z"/></g></svg></span></span>
             <li v-for="item in tab.item">
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
               <ul v-if="item.subitem.length > 0" class="sidenav-menu-gamma" >
+                <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="is-open"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" width="12" height="8"><g fill="none" fill-rule="evenodd"><path d="M-6-8h24v24H-6z"/><path fill="#2e3283" fill-rule="nonzero" d="M1.41 0L6 4.59 10.59 0 12 1.42l-6 6-6-6z"/></g></svg></span><span class="is-closed"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8" width="12" height="8"><g fill="none" fill-rule="evenodd"><path d="M-6-8h24v24H-6z"/><path fill="#2e3283" fill-rule="nonzero" d="M10.59 7.42L6 2.83 1.41 7.42 0 6l6-6 6 6z"/></g></svg></span></span>
                 <li v-for="subitem in item.subitem">
                   <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.cached_url">{{ subitem.title }}</g-link>
                   <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
@@ -127,7 +129,8 @@ export default {
     box-shadow: 0 0.05em 0.1em 0 rgba($darkBlue, 0.5);
   }
 
-  .sidenav-toggle-open, .sidenav-toggle-close {
+  .sidenav-toggle {
+    display: inline-block;
     margin: 0.5rem;
     svg {
       height: 1.375rem;
@@ -141,6 +144,19 @@ export default {
       display: block;
       text-decoration: none;
     }
+    li {
+      position: relative;
+    }
+  }
+
+  .sidenav-menu-toggle {
+    position: absolute;
+    right: 1.5rem;
+    top: 0.5rem;
+    svg {
+      height: 0.875em;
+      width: auto;
+    }
   }
 
   .sidenav-menu-alpha > li {
@@ -148,7 +164,7 @@ export default {
       color: $white;
       background-color: $brand;
       font-size: 1rem;
-      padding: 0.25em 0 0.25em 1em;
+      padding: .5em 0 .5em 1em;
     }
   }
   .sidenav-menu-beta > li {
@@ -159,7 +175,7 @@ export default {
       color: $brand;
       background-color: $white;
       font-size: 1rem;
-      padding: 0.25em 0 0.25em 2em;
+      padding: 0.5em 0 0.5em 2em;
     }
   }
   .sidenav-menu-gamma > li {
