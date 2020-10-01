@@ -3,7 +3,7 @@ export default {
     assignColors(color) {
       switch (color) {
         case 'section-background-brandgradient':
-          return `linear-gradient(90deg, rgba(46, 50, 131, 1) 45%, rgba(58, 147, 191, 0.67) 90%)`
+          return `linear-gradient(90deg, rgba(46, 50, 131, 1) 320px, rgba(58, 147, 191, 0.67) 200%)`
           break;
         case 'section-background-brandblock':
           return `linear-gradient(0deg, rgba(46, 50, 131, 1) 0%, 0deg, rgba(46, 50, 131, 1) 100%)`
