@@ -178,17 +178,27 @@ export default {
     position: absolute;
     right: 1.5rem;
     top: 0.5rem;
-    .sidenav-menu-arrow {
+  }
+  .sidenav-menu-beta .sidenav-menu-arrow {
       border: solid white;
-      border-width: 0 3px 3px 0;
+      border-width: 0 0.25em 0.25em 0;
       display: inline-block;
-      padding: 3px;
+      padding: 0.25em;
       transform: rotate(45deg);
       &.is-expanded {
         transform: rotate(-135deg);
       }
     }
-  }
+    .sidenav-menu-gamma .sidenav-menu-arrow {
+      border: solid $brand;
+      border-width: 0 0.25em 0.25em 0;
+      display: inline-block;
+      padding: 0.25em;
+      transform: rotate(45deg);
+      &.is-expanded {
+        transform: rotate(-135deg);
+      }
+    }
 
   .sidenav-menu-alpha > li {
     > a {
