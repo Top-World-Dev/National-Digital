@@ -68,7 +68,7 @@
     padding: 0.5em 1em 1em 0.5em;
     width: 100%;
     &:focus {
-      border-color: $accent;
+      border-color: $brand;
     }
   }
 
