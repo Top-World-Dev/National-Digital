@@ -121,7 +121,29 @@ export default {
     display: block;
   }
 
+  /* Submenu logic */
+
+  .sidenav-menu-alpha {
+    > li > ul {
+      display: none;
+    }
+    &.is-expanded > li > ul {
+      display: block;
+    }
+  }
+
+  .sidenav-menu-beta {
+    > li > ul {
+      display: none;
+    }
+    &.is-expanded > li > ul {
+      display: block;
+    }
+  }
+
 }
+
+
 
 /* Styles */
 
