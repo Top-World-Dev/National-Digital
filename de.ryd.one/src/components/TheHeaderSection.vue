@@ -1,69 +1,20 @@
 <template>
   <div class="xy-header">
-    <div class="header-sidenav-logo"><v-image :source="blok.image['0']"></v-image></div>
-    <div class="header-sidenav-toggle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12"><g fill="none" fill-rule="evenodd"><path d="M-3-6h24v24H-3z"/><path fill="#fff" fill-rule="nonzero" d="M0 0h18v2H0V0m0 5h18v2H0V5m0 5h18v2H0v-2z"/></g></svg></div>
-    <div class="header-sidenav-overlay">
-      <div class="header-sidenav-overlay-navbar">
-        <div class="header-sidenav-overlay-logo"><v-image :source="blok.image['0']"></v-image></div>
-        <div class="header-sidenav-overlay-toggle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></div>
-      </div>
-      <div class="header-sidenav-overlay-menu">
-        <div class="header-sidenav-tablinks-wrapper">
-          <div class="header-sidenav-tablinks-container">
-            <ul class="header-sidenav-tablinks-links">
-              <li v-for="tab in blok.nav" :class="{ 'is-active': isActive == tab._uid }" :key="tab._uid"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
-            </ul>
-          </div>
-          <div class="header-sidenav-tabcontent-wrapper">
-            <div class="header-sidenav-tabcontent-container">
-              <div class="header-sidenav-logo"><v-image :source="blok.image['0']"></v-image></div>
-                <ul class="header-sidenav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav" :key="nav._uid">
-                  <li v-for="item in nav.item" :key="item._uid">
-                    <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
-                    <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
-                    <ul v-if="item.subitem.length > 0" class="header-sidenav-tabcontent-sublinks">
-                      <li v-for="subitem in item.subitem" :key="item._uid">
-                        <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.url">{{ subitem.title }}</g-link>
-                        <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="header-tabnav-tablinks-wrapper">
-      <div class="header-tabnav-tablinks-container">
-        <ul class="header-tabnav-tablinks-links">
-          <li v-for="tab in blok.nav" :class="{ 'is-active': isActive == tab._uid }" :key="tab._uid"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
-        </ul>
-      </div>
-      <div class="header-tabnav-tabcontent-wrapper">
-        <div class="header-tabnav-tabcontent-container">
-          <div class="header-tabnav-logo"><v-image :source="blok.image['0']"></v-image></div>
-            <ul class="header-tabnav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav" :key="nav._uid">
-              <li v-for="item in nav.item" :key="item._uid">
-                <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
-                <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
-                <ul v-if="item.subitem.length > 0" class="header-tabnav-tabcontent-sublinks">
-                  <li v-for="subitem in item.subitem" :key="item._uid">
-                    <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.url">{{ subitem.title }}</g-link>
-                    <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-        </div>
-      </div>
-    </div>
+    <sidenav :content="blok.nav" :logo="blok.image['0']"></sidenav>
+    <tabnav :content="blok.nav" :logo="blok.image['0']"></tabnav>
   </div>
 </template>
 
 <script>
+import SideNav from "./TheHeaderSidenav"; 
+import TabNav from "./TheHeaderTabnav"; 
+
 export default {
   props: ["blok"],
+  components: {
+    "sidenav": SideNav,
+    "tabnav": TabNav
+  },
   data() {
     return {
       isActive: '7bf1391b-faf3-4647-b7ce-2f631781f55c'
