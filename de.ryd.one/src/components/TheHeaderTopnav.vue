@@ -136,12 +136,21 @@ export default {
   .topnav-menu-links > li {
     font-size: 1rem;
     margin-bottom: 0;
-    padding: 0.5em 1.25em 0.5em 1.25em;
     border-top-left-radius: 0.25em;
     border-top-right-radius: 0.25em;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
     a {
+      padding: 0.5em 1.25em 0.5em 1.25em;
       color: $white;
       text-decoration: none;
+      &.active {
+        background-color: $accent;
+        border-radius: 0.5rem;
+        color: $brand;
+        font-weight: 500;
+        transition: background-color 2s ease-out; 
+      }
     }
     &:hover {
       background-color: $accent;
