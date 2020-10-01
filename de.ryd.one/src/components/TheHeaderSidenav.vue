@@ -10,10 +10,10 @@
         <li><a @click="accordion(tab)" :class="tab.title">{{ tab.title }}</a>
           <ul class="sidenav-menu-beta">
             <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(tab._uid)}"></span></span>
-            <li v-for="item in tab.item" :class="{'is-expanded' : active.includes(item._uid)}">
+            <li v-for="item in tab.item">
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url"><span @click="accordion(item)">{{ item.title }}</span></g-link>
               <a @click="accordion(item)" v-else :href="item.link.url" rel="noopener noreferrer"><span @click="accordion(item)">{{ item.title }}</span></a>
-              <ul v-if="item.subitem.length > 0" class="sidenav-menu-gamma" >
+              <ul v-if="item.subitem.length > 0" class="sidenav-menu-gamma" :class="{'is-expanded' : active.includes(item._uid)}">
                 <span class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(tab._uid)}"></span></span>
                 <li v-for="subitem in item.subitem">
                   <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.cached_url">{{ subitem.title }}</g-link>
