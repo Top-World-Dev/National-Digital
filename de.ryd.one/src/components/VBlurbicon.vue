@@ -3,7 +3,7 @@
     <div class="blurbicon-item" v-for="item in blok.item" :key="item._uid">
       <v-image :source="item.image['0']"></v-image>
       <div class="blurbicon-content">
-        <h6 v-if="item.title">{{ item.title }}</h6>
+        <h5 v-if="item.title">{{ item.title }}</h5>
         <v-richtext v-if="item.content" :text="item.content"></v-richtext>
       </div>
     </div>

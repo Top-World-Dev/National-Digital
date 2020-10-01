@@ -10,9 +10,6 @@
       <input class="form-field" type="tel" name="phone" :placeholder="blok.phone" autocomplete="tel" :aria-label="blok.phone" />
     </div>
     <div class="form-row">
-      <textarea class="form-field" name="message" rows="20" maxlength="65535" :placeholder="blok.message" :aria-label="blok.message"></textarea>
-    </div>
-    <div class="form-row">
       <div class="form-submit v-button button-primary"><input type="submit" :value="blok.submit" role="button" /></div>
     </div>
     <div class="form-row">
@@ -32,9 +29,10 @@
 @import '~/assets/styles.scss';
 .v-form {
 
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 
   .form-row {
     flex: 0 1 auto;
@@ -54,13 +52,13 @@
   }
 
   .form-field {
-    font-size: 1.25rem;
+    font-size: 0.9rem;
     line-height: 2.5em;
     background-color: transparent;
     border: 0.05em solid $lightGrey;
     border-radius: 2rem;
     color: $darkGrey;
-    height: 60px;
+    height: 50px;
     line-height: 2em;
     padding: 1em;
     width: 100%;
@@ -71,6 +69,7 @@
 
   ::placeholder {
     color: $darkGrey;
+    padding-left: 0.5em;
   }
 
 

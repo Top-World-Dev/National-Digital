@@ -19,7 +19,7 @@
 .xy-section {
   /* Background and Text Colors  */
   &.section-background-white {
-    color: $black;
+    color: $veryDarkGrey;
     background-color: $white; 
   }
   &.section-background-brandgradient {

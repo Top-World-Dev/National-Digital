@@ -14,3 +14,11 @@
     }
   }
 </script>
+<style lang="scss">
+@import '~/assets/styles.scss';
+p {
+  letter-spacing: -0.15px;
+  color: $veryDarkGrey;
+  font-size: 0.85rem;
+}
+</style>
