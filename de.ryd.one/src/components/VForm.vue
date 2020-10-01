@@ -1,27 +1,27 @@
 <template>
-  <form class="v-form" method="post" action-xhr="#" target="_blank">
+  <form class="v-form" method="post" action-xhr="#" target="_blank" v-editable="blok">
     <div class="form-row">
-      <input class="form-field" type="text" name="name" placeholder="{{ terms.name }}" required autocomplete="name" aria-label="{{ terms.name }}" />
+      <input class="form-field" type="text" name="name" placeholder="{{ blok.name }}" required autocomplete="name" aria-label="{{ blok.name }}" />
     </div>
     <div class="form-row">
-      <input class="form-field" type="text" name="email" placeholder="{{ terms.email }}" required autocomplete="email" aria-label="{{ terms.email }}" />
+      <input class="form-field" type="text" name="email" placeholder="{{ blok.email }}" required autocomplete="email" aria-label="{{ blok.email }}" />
     </div>
     <div class="form-row">
-      <input class="form-field" type="tel" name="phone" placeholder="{{ terms.phone }}" autocomplete="tel" aria-label="{{ terms.phone }}" />
+      <input class="form-field" type="tel" name="phone" placeholder="{{ blok.phone }}" autocomplete="tel" aria-label="{{ blok.phone }}" />
     </div>
 
     <div class="form-row">
-      <textarea class="form-field" name="message" rows="20" maxlength="65535" placeholder="{{ terms.message }}" aria-label="{{ terms.message }}" required></textarea>
+      <textarea class="form-field" name="message" rows="20" maxlength="65535" placeholder="{{ blok.message }}" aria-label="{{ blok.message }}" required></textarea>
     </div>
     <div class="v-padding">
       <div class="padding-x1"></div>
     </div>
     <div class="form-row">
-      <div class="form-submit v-button button-primary"><input type="submit" value="{{ terms.submit }}" /></div>
+      <div class="form-submit v-button button-primary"><input type="submit" value="{{ blok.submit }}" /></div>
     </div>
     <div class="form-row">
-      <div submit-success>{{ terms.success }}</div>
-      <div submit-error>{{ terms.error }}</div>
+      <div submit-success>{{ blok.success }}</div>
+      <div submit-error>{{ blok.error }}</div>
     </div>
   </form>
 </template>
