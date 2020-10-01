@@ -25,6 +25,7 @@ import VList from '~/components/VList.vue'
 import VRule from '~/components/VRule.vue'
 import VTestimonial from '~/components/VTestimonial.vue'
 import VText from '~/components/VText.vue'
+import VForm from '~/components/VForm.vue'
 
 import VRichtext from '~/components/VRichtext.vue'
 import VImage from '~/components/VImage.vue'
@@ -59,6 +60,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VRule', VRule)
   Vue.component('VTestimonial', VTestimonial)
   Vue.component('VText', VText)
+  Vue.component('VForm', VForm)
 
   // global components
   Vue.component('v-image', VImage)

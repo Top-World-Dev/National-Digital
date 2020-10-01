@@ -53,6 +53,15 @@ a {
   color: inherit;
 }
 
+button, [type="button"], [type="reset"], [type="submit"] {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  color: inherit;
+}
+
+
 /* Font sizes */
 
 body {
