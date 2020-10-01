@@ -1,0 +1,3 @@
+[main 1bd9b69] slider-
+ 2 files changed, 2 insertions(+)
+ rename de.ryd.one/src/components/{VSlider.vue => VReviewslider.vue} (100%)
