@@ -1,27 +1,27 @@
 <template>
   <section class="xy-topnav">
-    <div class="topnav-tablinks-wrapper">
-      <div class="topnav-tablinks-container">
-        <ul class="topnav-tablinks-links">
+    <div class="topnav-tabs">
+      <div class="topnav-tabs-container">
+        <ul class="topnav-tabs-links">
           <li v-for="tab in content" :class="{ 'is-active': isActive == tab._uid }"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
         </ul>
       </div>
-      <div class="topnav-tabcontent-wrapper">
-        <div class="topnav-tabcontent-container">
-          <div class="topnav-logo"><v-image :source="logo"></v-image></div>
-            <ul class="topnav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in content">
-              <li v-for="item in nav.item">
-                <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
-                <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
-                <ul v-if="item.subitem.length > 0" class="topnav-tabcontent-sublinks">
-                  <li v-for="subitem in item.subitem">
-                    <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.cached_url">{{ subitem.title }}</g-link>
-                    <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-        </div>
+    </div>
+    <div class="topnav-menu">
+      <div class="topnav-menu-container">
+        <div class="topnav-logo"><v-image :source="logo"></v-image></div>
+          <ul class="topnav-menu-links" v-if="isActive == nav._uid" v-for="nav in content">
+            <li v-for="item in nav.item">
+              <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
+              <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+              <ul v-if="item.subitem.length > 0" class="topnav-tabcontent-sublinks">
+                <li v-for="subitem in item.subitem">
+                  <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.cached_url">{{ subitem.title }}</g-link>
+                  <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
       </div>
     </div>
   </section>
@@ -44,50 +44,42 @@ export default {
 <style lang="scss">
 @import "~/assets/styles.scss";
 .xy-topnav {
-  .topnav-tablinks-wrapper {
-    background-color: $white;
-  }
 
-  .topnav-tabcontent-wrapper {
-    background-color: $brand;
-    box-shadow: 0 0.025em 0.05em 0 rgba($darkBlue, 0.5);
-  }
-
-  .topnav-tablinks-container,
-  .topnav-tabcontent-container {
+  .topnav-tabs-container,
+  .topnav-menu-container {
     @include container($containerOuter);
   }
 
   // topnav layout
-  .topnav-tablinks-container {
+  .topnav-tabs-container {
     display: grid;
     grid-template-columns: 1fr 240px 1fr;
     grid-template-rows: 32px;
-    grid-template-areas: "tablinks . .";
+    grid-template-areas: "topnav_tabs . .";
     align-items: end;
   }
-  .topnav-tabcontent-container {
+  .topnav-menu-container {
     display: grid;
     grid-template-columns: 1fr 240px 1fr;
     grid-template-rows: 60px;
-    grid-template-areas: "tabcontent topnav_logo .";
+    grid-template-areas: "topnav_menu topnav_logo .";
     align-items: center;
   }
   .topnav-logo {
     grid-area: topnav_logo;
     text-align: center;
   }
-  .topnav-tablinks-links {
-    grid-area: tablinks;
+  .topnav-tabs-links {
+    grid-area: topnav_tabs;
     @include nav-row(0em);
   }
-  .topnav-tabcontent-links {
-    grid-area: tabcontent;
+  .topnav-menu-links {
+    grid-area: topnav_menu;
     @include nav-row(0em);
   }
 
   // subnav
-  .topnav-tabcontent-links > li {
+  .topnav-menu-links > li {
     .topnav-tabcontent-sublinks {
       display: none;
     }
@@ -114,7 +106,17 @@ export default {
   }
 
   // styles
-  .topnav-tablinks-links > li {
+
+  .topnav-tabs {
+    background-color: $white;
+  }
+
+  .topnav-menu {
+    background-color: $brand;
+    box-shadow: 0 0.025em 0.05em 0 rgba($darkBlue, 0.5);
+  }
+
+  .topnav-tabs-links > li {
     font-size: 0.875rem;
     margin-bottom: 0;
     a {
@@ -131,7 +133,7 @@ export default {
       }
     }
   }
-  .topnav-tabcontent-links > li {
+  .topnav-menu-links > li {
     font-size: 1rem;
     margin-bottom: 0;
     padding: 0.5em 1.25em 0.5em 1.25em;
