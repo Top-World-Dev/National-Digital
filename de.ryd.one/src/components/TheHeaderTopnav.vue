@@ -9,7 +9,7 @@
     </div>
     <div class="topnav-menu">
       <div class="topnav-menu-container">
-        <div class="topnav-logo"><v-image :source="logo"></v-image></div>
+        <div class="topnav-logo"><g-link to="/"><v-image :source="logo"></v-image></g-link></div>
           <ul class="topnav-menu-links" v-if="isActive == nav._uid" v-for="nav in content">
             <li v-for="item in nav.item">
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>

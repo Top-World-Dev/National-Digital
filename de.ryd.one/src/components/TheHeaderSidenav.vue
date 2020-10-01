@@ -1,7 +1,7 @@
 <template>
   <section class="xy-sidenav" :class="{ 'is-expanded': showNavigation}">
     <div class="sidenav-navbar">
-      <div class="sidenav-logo"><v-image :source="logo"></v-image></div>
+      <div class="sidenav-logo"><g-link to="/"><v-image :source="logo"></v-image></g-link></div>
       <div class="sidenav-toggle-open"><span class="sidenav-toggle" @click="toggleNav(true)" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12"><g fill="none" fill-rule="evenodd"><path d="M-3-6h24v24H-3z"/><path fill="#fff" fill-rule="nonzero" d="M0 0h18v2H0V0m0 5h18v2H0V5m0 5h18v2H0v-2z"/></g></svg></span></div>
       <div class="sidenav-toggle-close"><span class="sidenav-toggle" @click="toggleNav(false)" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></span></div>
     </div>
