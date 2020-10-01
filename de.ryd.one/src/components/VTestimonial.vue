@@ -4,8 +4,8 @@
       <v-image class="testimonial-profile-logo" :source="blok.logo[0]"></v-image>
       <v-image class="testimonial-profile-avatar" :source="blok.profile[0]"></v-image>
     </div>
-    <div class="testimonial-quote">{{ blok.content }}</div>
-    <div class="testimonial-byline"><span>{{ blok.author }}</span><span>{{ blok.role }}</span></div>
+    <div class="testimonial-quote">&quot;{{ blok.content }}&quot;</div>
+    <div class="testimonial-byline"><span>{{ blok.author }}</span><span>{{ blok.position }}</span></div>
   </div>
 </template>
 <script>
@@ -15,26 +15,39 @@
 </script>
 <style lang="scss">
 @import '~/assets/styles.scss';
-.v-testimonial {
+.v-testiomonial {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  @include container($containerInner);
   .testimonial-quote {
     font-size: 1.75rem;
-    font-weight: 400;
+    font-weight: 300;
     font-style: italic;
+    line-height: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
   }
   .testimonial-byline {
     span:nth-of-type(1) {
+      display: block;
       font-size: 1.25rem;
       font-weight: 700;
     }
     span:nth-of-type(2) {
+      display: block;
       font-size: 0.875rem;
     }
   }
   .testimonial-profile {
     display: flex;
+    align-items: center;
   }
-  .testimonial-profile-avatar {
+  .testimonial-profile-avatar img {
     border-radius: 50%;
+    margin: 1rem;
   }
 }
 </style>
