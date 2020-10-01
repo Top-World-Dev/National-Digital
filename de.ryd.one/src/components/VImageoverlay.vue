@@ -33,6 +33,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    align-items: center;
+    text-align: center;
     padding-bottom: 2rem;
     color: $white;
   }

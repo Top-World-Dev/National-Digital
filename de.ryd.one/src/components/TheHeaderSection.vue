@@ -177,6 +177,7 @@ export default {
       }
       &:hover {
         position: relative;
+        z-index: 999999999;
         .header-tabnav-tabcontent-sublinks {
           // logic
           display: block;
