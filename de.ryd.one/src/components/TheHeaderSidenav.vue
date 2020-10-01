@@ -6,13 +6,13 @@
       <div class="sidenav-toggle-close" @click="toggleNav(false)" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></div>
     </div>
     <div class="sidenav-menu">
-      <ul class="sidenav-menu-links" v-for="tab in content" :class="{ 'is-active': isActive == tab._uid }">
+      <ul class="sidenav-menu-alpha" v-for="tab in content" :class="{ 'is-active': isActive == tab._uid }">
         <li><a @click="selectTab(tab)">{{ tab.title }}</a>
-          <ul class="sidenav-tabcontent-sublinks" >
+          <ul class="sidenav-menu-beta">
             <li v-for="item in tab.item">
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
-              <ul v-if="item.subitem.length > 0">
+              <ul v-if="item.subitem.length > 0" class="sidenav-menu-gamma" >
                 <li v-for="subitem in item.subitem">
                   <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.cached_url">{{ subitem.title }}</g-link>
                   <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
@@ -127,7 +127,6 @@ export default {
     box-shadow: 0 0.05em 0.1em 0 rgba($darkBlue, 0.5);
   }
 
-  // styles
   .sidenav-toggle-open, .sidenav-toggle-close {
     margin: 0.5rem;
     svg {
@@ -135,6 +134,46 @@ export default {
       width: auto;
     }
   }
+
+  .sidenav-menu ul {
+    @include no-list;
+    a {
+      display: block;
+      text-decoration: none;
+    }
+  }
+
+  .sidenav-menu-alpha > li {
+    > a {
+      color: $white;
+      background-color: $brand;
+      font-size: 1rem;
+      padding: 0.25em 0 0.25em 1em;
+    }
+  }
+  .sidenav-menu-beta > li {
+    &.is-active a {
+      background-color: $accent;
+    }
+    > a {
+      color: $brand;
+      background-color: $white;
+      font-size: 1rem;
+      padding: 0.25em 0 0.25em 2em;
+    }
+  }
+  .sidenav-menu-gamma > li {
+    > a {
+      color: $brand;
+      background-color: $white;
+      font-size: 0.875rem;
+      padding: 0.25em 0 0.25em 3em;
+      // &.active {
+      //   background-color: $lightGrey;
+      // }
+    }
+  }
+
 
 }
 </style>
