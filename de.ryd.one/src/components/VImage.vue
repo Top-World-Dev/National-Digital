@@ -1,18 +1,25 @@
 <template>
   <div>
-    <g-image :src="image"></g-image>
+    <img v-if="src == 'img'" :src="image" :style="{width: source.width + 'px', height: source.height + 'px'}">
+    <g-image v-else :src="image"></g-image>
   </div>
 </template>
 
 <script>
 export default {
   props: ["source"],
+  data() {
+    return {
+      src: ''
+    }
+  },
   computed: {
     image() {
       // check if it's an svg 
       if(typeof this.source.image.filename == 'string') {
         let filetype = this.source.image.filename.split('.').pop();
         if(filetype == 'svg') {
+          this.src = "img";
           return this.source.image.filename;
         }
       } else {
