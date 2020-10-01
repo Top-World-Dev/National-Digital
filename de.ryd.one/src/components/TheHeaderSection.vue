@@ -1,5 +1,5 @@
 <template>
-  <div class="xy-header is-expanded">
+  <div class="xy-header">
     <div class="header-sidenav-logo"><v-image :source="blok.image['0']"></v-image></div>
     <div class="header-sidenav-toggle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12"><g fill="none" fill-rule="evenodd"><path d="M-3-6h24v24H-3z"/><path fill="#fff" fill-rule="nonzero" d="M0 0h18v2H0V0m0 5h18v2H0V5m0 5h18v2H0v-2z"/></g></svg></div>
     <div class="header-sidenav-overlay">
