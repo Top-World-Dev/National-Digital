@@ -1,7 +1,7 @@
 <template>
   <ul class="v-linklist" v-editable="blok" :class="[blok.style,blok.align]">
     <li class="linklist-item" v-for="item in blok.item" :key="item._uid">
-      <v-image class="linklist-icon" :source="item.image['0']"></v-image>
+      <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
       <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
       <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
     </li>
