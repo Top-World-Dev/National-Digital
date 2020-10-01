@@ -1,5 +1,5 @@
 <template>
-  <section :id="blok.name" class="xy-column" :class="blok.valign">
+  <section :id="blok.name" class="xy-column" :class="[blok.valign,(blok.recenter ? 'column-recenter' : '')]">
     <div
       class="column-inner column-container"
       :class="[blok.container, blok.align]"
@@ -28,6 +28,9 @@ export default {
   /* Layouts */
   // mobile defaults
   @media (max-width: $breakColumns - 1px) {
+    &.column-recenter {
+      // center on column
+    }
     .column-container {
       width: 100%;
       height: auto;

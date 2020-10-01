@@ -80,17 +80,18 @@ export default {
 
   // subnav
   .topnav-menu-links > li {
+    padding-bottom: 1em;
     .topnav-tabcontent-sublinks {
       display: none;
     }
     &:hover {
       position: relative;
-      z-index: 999999999;
+      z-index: 10;
       .topnav-tabcontent-sublinks {
         // logic
         display: block;
         position: absolute;
-        top: 2.4rem;
+        top: 1.3rem;
         left: 0rem;
         // format
         @include nav-col(0.5rem);
@@ -116,11 +117,14 @@ export default {
     box-shadow: 0 0.025em 0.05em 0 rgba($darkBlue, 0.5);
   }
 
+  // tabs
   .topnav-tabs-links > li {
     font-size: 0.875rem;
     margin-bottom: 0;
     a {
       color: $brand;
+      background-color: transparent;
+      border: 0 solid transparent;
       text-decoration: none;
       padding: 0.5em 1.25em 0.5em 1.25em;
       border-top-left-radius: 0.25em;
@@ -128,29 +132,33 @@ export default {
     }
     &.is-active {
       a {
-        background-color: $brand;
         color: $white;
+        background-color: $brand;
+        border-color: $brand;
+
       }
     }
   }
+  // main nav
   .topnav-menu-links > li {
     font-size: 1rem;
     margin-bottom: 0;
-    border-top-left-radius: 0.25em;
-    border-top-right-radius: 0.25em;
     margin-left: 0.25rem;
     margin-right: 0.25rem;
-    a {
-      padding: 0.5em 1.25em 0.5em 1.25em;
+    > a {
       color: $white;
+      background-color: transparent;
+      border: 0 solid transparent;
       text-decoration: none;
-      &.active, &:hover {
+      padding: 0.5em 1.25em 0.5em 1.25em;
+      border-top-left-radius: 0.25em;
+      border-top-right-radius: 0.25em;
+    }
+    > a.active, &:hover > a {
         background-color: $accent;
         border-radius: 0.5rem;
         color: $brand;
-        font-weight: 500;
         transition: background-color 0.2s ease-out; 
-      }
     }
   }
   .topnav-tabcontent-sublinks {
