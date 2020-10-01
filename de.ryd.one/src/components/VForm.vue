@@ -56,8 +56,8 @@
   .form-field {
     font-size: 1.25rem;
     line-height: 2.5em;
-    background-color: rgba($lightGrey, 0.5);
-    border: 0.05em solid transparent;
+    background-color: transparent;
+    border: 0.05em solid $lightGrey;
     border-radius: 2rem;
     color: $darkGrey;
     height: 60px;
@@ -70,7 +70,7 @@
   }
 
   ::placeholder {
-    color: rgba($darkGrey, 0.5);
+    color: $darkGrey;
   }
 
 
