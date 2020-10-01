@@ -94,7 +94,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: $white;
-  z-index: 999999999;
+  z-index: 10;
 
   // main layout
   .sidenav-navbar {
