@@ -26,7 +26,7 @@
     color: $white;
     background-color: $brand;
     background-position: bottom right;
-    background-size: 70%;
+    background-size: 66.67%;
     background-repeat: no-repeat;
     background-image: linear-gradient(90deg, rgba(46, 50, 131, 1) 70%, rgba(58, 147, 191, 0.67) 100%);
     a {
