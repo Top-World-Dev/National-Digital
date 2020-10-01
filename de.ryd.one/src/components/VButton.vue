@@ -43,7 +43,7 @@
           border-color: $brand;
           background-color: darken($brand,5%);
       }
-      a {
+      a, button, [role="button"] {
         color: $white;
         text-decoration: none;
       }
@@ -59,7 +59,7 @@
           border-color: $accent;
           background-color: darken($accent,5%);
       }
-      a {
+      a, button, [role="button"] {
         color: $brand;
         text-decoration: none;
       }
