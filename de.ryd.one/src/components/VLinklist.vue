@@ -16,7 +16,6 @@ export default {
 .v-linklist {
   font-size: 0.875rem;
   @include no-list;
-  text-align: left;
   // format
   &.linklist-inline {
     @include nav-row(0.25rem);

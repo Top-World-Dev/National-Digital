@@ -1,8 +1,11 @@
 <template>
-  <ul class="v-list" v-editable="blok">
+  <ul class="v-list" v-editable="blok" :class="blok.align">
     <li v-for="item in blok.item" :key="item._uid">
-      <h5 v-if="item.title">{{ item.title }}</h5>
-      <v-richtext v-if="item.content" :style="(item.title ? '' : 'display:block')" :text="item.content"></v-richtext>
+      <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 14"><g fill="none" fill-rule="evenodd"><path d="M-4-5h24v24H-4z"/><path fill="#00ebbc" fill-rule="nonzero" d="M17.5 1.41l-12 12L0 7.91 1.41 6.5l4.09 4.08L16.09 0z"/></g></svg></div>
+      <div class="list-content">
+        <h5 v-if="item.title">{{ item.title }}</h5>
+        <v-richtext v-if="item.content" :style="(item.title ? '' : 'display:block')" :text="item.content"></v-richtext>
+      </div>
     </li>
   </ul>
 </template>
@@ -16,27 +19,29 @@
 .v-list {
   font-size: 0.875rem;
   @include no-list;
-  text-align: left;
-  h5 {
-    margin-left: 1.5rem;
-  }
-  span {
-    margin-left: 1.5rem;
-  }
   li {
-    position: relative;
-    &:before {
-      position: absolute;
-      top: 0.2rem;
-      left: 0;
-      content: '';
-      display: inline-block;
-      height: 1rem;
-      width: 1rem;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%2300e9b9' d='M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
-    }
+    display: flex;
+    align-items: center;
+  }
+  .list-icon svg {
+    width: 1rem;
+    height: auto;
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .list-content {
+    display: flex;
+    flex-direction: column;
+  }
+  // align
+  &.list-align-left li {
+    justify-content: flex-start;
+  }
+  &.list-align-center li {
+    justify-content: center;
+  }
+  &.list-align-right li {
+    justify-content: flex-end;
   }
 }
 </style>
