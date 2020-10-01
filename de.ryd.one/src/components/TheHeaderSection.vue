@@ -8,44 +8,53 @@
         <div class="header-sidenav-overlay-toggle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></div>
       </div>
       <div class="header-sidenav-overlay-menu">
-      <div class="header-sidenav-tablinks-wrapper">
-        <div class="header-sidenav-tablinks-container">
-          <ul class="header-sidenav-tablinks-links">
-            <li v-for="tab in blok.nav" :class="{ 'is-active': isActive == tab._uid }" :key="tab._uid"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
-          </ul>
-        </div>
-        <div class="header-sidenav-tabcontent-wrapper">
-          <div class="header-sidenav-tabcontent-container">
-            <div class="header-sidenav-logo"><v-image :source="blok.image['0']"></v-image></div>
-              <ul class="header-sidenav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav" :key="nav._uid">
-                <li v-for="item in nav.item" :key="item._uid">
-                  <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
-                  <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
-                  <ul v-if="item.subitem.length > 0" class="header-sidenav-tabcontent-sublinks">
-                    <li v-for="subitem in item.subitem" :key="item._uid">
-                      <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.url">{{ subitem.title }}</g-link>
-                      <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
+        <div class="header-sidenav-tablinks-wrapper">
+          <div class="header-sidenav-tablinks-container">
+            <ul class="header-sidenav-tablinks-links">
+              <li v-for="tab in blok.nav" :class="{ 'is-active': isActive == tab._uid }" :key="tab._uid"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
+            </ul>
+          </div>
+          <div class="header-sidenav-tabcontent-wrapper">
+            <div class="header-sidenav-tabcontent-container">
+              <div class="header-sidenav-logo"><v-image :source="blok.image['0']"></v-image></div>
+                <ul class="header-sidenav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav" :key="nav._uid">
+                  <li v-for="item in nav.item" :key="item._uid">
+                    <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
+                    <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+                    <ul v-if="item.subitem.length > 0" class="header-sidenav-tabcontent-sublinks">
+                      <li v-for="subitem in item.subitem" :key="item._uid">
+                        <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.url">{{ subitem.title }}</g-link>
+                        <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
     <div class="header-tabnav-tablinks-wrapper">
       <div class="header-tabnav-tablinks-container">
         <ul class="header-tabnav-tablinks-links">
-          <li v-for="tab in blok.nav" :class="{ 'is-active': isActive == tab._uid }"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
+          <li v-for="tab in blok.nav" :class="{ 'is-active': isActive == tab._uid }" :key="tab._uid"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
         </ul>
       </div>
       <div class="header-tabnav-tabcontent-wrapper">
         <div class="header-tabnav-tabcontent-container">
           <div class="header-tabnav-logo"><v-image :source="blok.image['0']"></v-image></div>
-          <ul class="header-tabnav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav">
-            <li v-for="item in nav.item">{{ item.title }}</li>
-          </ul>
+            <ul class="header-tabnav-tabcontent-links" v-if="isActive == nav._uid" v-for="nav in blok.nav" :key="nav._uid">
+              <li v-for="item in nav.item" :key="item._uid">
+                <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
+                <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+                <ul v-if="item.subitem.length > 0" class="header-tabnav-tabcontent-sublinks">
+                  <li v-for="subitem in item.subitem" :key="item._uid">
+                    <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.url">{{ subitem.title }}</g-link>
+                    <a v-else :href="subitem.link.url" rel="noopener noreferrer">{{ subitem.title }}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
         </div>
       </div>
     </div>
@@ -70,6 +79,7 @@ export default {
 
 <style lang="scss">
 @import "~/assets/styles.scss";
+
 
 .xy-header {
   /* Sidebar Navigation */
@@ -140,7 +150,6 @@ export default {
       .header-sidenav-overlay-toggle {
         grid-area: toggle_close;
       }
-
     }
 
     .header-sidenav-overlay-navbar {
@@ -149,15 +158,14 @@ export default {
     }
 
     // styles
-    .header-sidenav-toggle, .header-sidenav-overlay-toggle {
+    .header-sidenav-toggle,
+    .header-sidenav-overlay-toggle {
       margin: 0.5rem;
       svg {
         height: 1.375rem;
         width: auto;
       }
     }
-
-
   }
 
   /* Tabnav Navigation */
@@ -189,9 +197,8 @@ export default {
       grid-template-columns: 1fr 240px 1fr;
       grid-template-rows: 32px;
       grid-template-areas: "tablinks . .";
-      align-items: center;
+      align-items: end;
     }
-
     .header-tabnav-tabcontent-container {
       display: grid;
       grid-template-columns: 1fr 240px 1fr;
@@ -199,20 +206,92 @@ export default {
       grid-template-areas: "tabcontent tabnav_logo .";
       align-items: center;
     }
-
     .header-tabnav-logo {
       grid-area: tabnav_logo;
       text-align: center;
     }
-
     .header-tabnav-tablinks-links {
       grid-area: tablinks;
-      @include nav-row(0.5em);
+      @include nav-row(0em);
     }
-
     .header-tabnav-tabcontent-links {
       grid-area: tabcontent;
-      @include nav-row(0.5em);
+      @include nav-row(0em);
+    }
+
+    // subnav
+    .header-tabnav-tabcontent-links > li {
+      .header-tabnav-tabcontent-sublinks {
+        display: none;
+      }
+      &:hover {
+        position: relative;
+        .header-tabnav-tabcontent-sublinks {
+          // logic
+          display: block;
+          position: absolute;
+          top: 2.4rem;
+          left: 0rem;
+          // format
+          @include nav-col(0.5rem);
+          width: 220px;
+          a {
+            display: block;
+            padding-top: 0.5em;
+            padding-bottom: 0.5em;
+            padding-left: 1.5em;
+          }
+        }
+      }
+    }
+
+    // styles
+    .header-tabnav-tablinks-links > li {
+      font-size: 0.875rem;
+      margin-bottom: 0;
+      a {
+        color: $brand;
+        text-decoration: none;
+        padding: 0.5em 1.25em 0.5em 1.25em;
+        border-top-left-radius: 0.25em;
+        border-top-right-radius: 0.25em;
+      }
+      &.is-active {
+        a {
+          background-color: $brand;
+          color: $white;
+        }
+      }
+    }
+    .header-tabnav-tabcontent-links > li {
+      font-size: 1rem;
+      margin-bottom: 0;
+      padding: 0.5em 1.25em 0.5em 1.25em;
+      border-top-left-radius: 0.25em;
+      border-top-right-radius: 0.25em;
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+      &:hover {
+        background-color: $accent;
+      }
+    }
+    .header-tabnav-tabcontent-sublinks {
+      font-size: 0.875rem;
+      background-color: $white;
+      border-top: 0.5em solid $accent;
+      border-bottom: 0.25em solid $white;
+      border-top-right-radius: 0.25em;
+      border-bottom-right-radius: 0.25em;
+      border-bottom-left-radius: 0.25em;
+      li a {
+        color: $black;
+        text-decoration: none;
+      }
+      li:hover {
+        background-color: $lightGrey;
+      }
     }
   }
 }
