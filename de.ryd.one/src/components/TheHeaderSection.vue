@@ -1,19 +1,19 @@
 <template>
   <div class="xy-header">
-    <sidenav :content="blok.nav" :logo="blok.image['0']"></sidenav>
-    <tabnav :content="blok.nav" :logo="blok.image['0']"></tabnav>
+    <sidenav class="header-sidenav" :content="blok.nav" :logo="blok.image['0']"></sidenav>
+    <topnav class="header-topnav" :content="blok.nav" :logo="blok.image['0']"></topnav>
   </div>
 </template>
 
 <script>
 import SideNav from "./TheHeaderSidenav"; 
-import TabNav from "./TheHeaderTabnav"; 
+import Topnav from "./TheHeaderTopnav"; 
 
 export default {
   props: ["blok"],
   components: {
     "sidenav": SideNav,
-    "tabnav": TabNav
+    "topnav": Topnav
   },
   data() {
     return {
@@ -31,4 +31,15 @@ export default {
 <style lang="scss">
 @import "~/assets/styles.scss";
 
+/* Nav display logic */
+@media (max-width: $breakMD - 1px) {
+  .header-topnav {
+    display: none !important;
+  }
+}
+@media (min-width: $breakMD) {
+  .header-sidenav {
+    display: none !important;
+  }
+}
 </style>
