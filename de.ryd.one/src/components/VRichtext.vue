@@ -9,6 +9,7 @@
     props: ['text'],
     computed: {
       richtext() {
+        console.log(this.$storyapi.richTextResolver.render(this.text));
         return this.text ? this.$storyapi.richTextResolver.render(this.text) : ''
       }
     }
@@ -16,9 +17,5 @@
 </script>
 <style lang="scss">
 @import '~/assets/styles.scss';
-p {
-  letter-spacing: -0.15px;
-  color: $veryDarkGrey;
-  font-size: 0.85rem;
-}
+
 </style>
