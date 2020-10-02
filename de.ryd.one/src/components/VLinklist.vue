@@ -26,12 +26,15 @@ export default {
   // format
   &.linklist-inline {
     @include nav-row(0.25rem);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     li::before {
       content: "• ";
     }
   }
   &.linklist-block {
     @include nav-col(0.25rem);
+    margin-bottom: 1rem;
   }
   // align
   &.linklist-align-left {

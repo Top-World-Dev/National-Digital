@@ -29,7 +29,10 @@ export default {
   // mobile defaults
   @media (max-width: $breakColumns - 1px) {
     &.column-recenter {
-      // center on column
+      text-align: center;
+      * {
+        text-align: unset !important;
+      }
     }
     .column-container {
       width: 100%;

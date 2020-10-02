@@ -21,7 +21,7 @@
   @include no-list;
   li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
   }
   .list-icon svg {
     width: 1rem;
