@@ -31,7 +31,7 @@ export default {
   }
   &.blurbicon-horizontal {
     .blurbicon-item {
-      flex: 0 0 460px;
+      flex: 0 0 480px;
       margin: 1.5rem;
       display: flex;
       flex-direction: row;
@@ -41,6 +41,7 @@ export default {
     .blurbicon-content {
       text-align: left;
       margin-left: 1.5rem;
+      flex-basis: 320px;
     }
   }
 }
