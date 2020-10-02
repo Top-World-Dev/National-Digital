@@ -30,13 +30,15 @@ export default {
     }
   }
   &.blurbicon-horizontal {
-    .blurbicon-item {
-      flex: 0 0 480px;
-      margin: 1.5rem;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
+    @media(min-width: $breakColumns) {
+      .blurbicon-item {
+        flex: 0 0 480px;
+        margin: 1.5rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
     }
     .blurbicon-content {
       text-align: left;

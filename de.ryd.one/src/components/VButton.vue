@@ -22,10 +22,11 @@
   margin-bottom: 0.5rem;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
-  padding-left: 2.5em;
-  padding-right: 2.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
   min-height: 3.5rem;
-  min-width: 21.5rem;
+  min-width: 10.5rem;
+  max-width: 100%;
   // style
   cursor: pointer;
   border-style: solid;

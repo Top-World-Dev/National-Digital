@@ -34,15 +34,32 @@
     data() {
       return {
         carouselSettings: {
-          "centerMode": true,
-          "centerPadding": "2rem",
-          "focusOnSelect": true,
-          "infinite": true,
-          "slidesToShow": 3,
-          "speed": 500,
-          "dots": true,
-          "dotsClass": "slick-dots reviewslider-content-dot",
-          "arrows": false
+          centerMode: true,
+          centerPadding: "2rem",
+          focusOnSelect: true,
+          infinite: true,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          speed: 500,
+          dots: true,
+          dotsClass: "slick-dots reviewslider-content-dot",
+          arrows: false,
+          responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 1440,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+              },
+            },
+          ],
         }
       }
     }
@@ -70,9 +87,11 @@
 
   /* Slick Slider styles */
   .slick-list {
-    width: 75vw!important;
     margin-left: auto;
     margin-right: auto;
+    @media (min-width: $breakMD ) {
+      width: 75vw!important;
+    }
   }
   .reviewslider-wrapper {
     color: $black;
