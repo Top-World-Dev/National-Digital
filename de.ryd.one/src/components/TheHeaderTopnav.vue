@@ -164,6 +164,7 @@ export default {
           background-color: $accent;
           border-radius: 0.5rem;
           color: $brand;
+          opacity: unset;
           // transition: background-color 0.2s ease-out; 
       }
     }
