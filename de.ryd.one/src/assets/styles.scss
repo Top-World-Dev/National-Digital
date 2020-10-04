@@ -43,11 +43,11 @@ $gutter             : 16px;
 
 /* Breakpoints */
 
-$breakXS            : 426px;
+$breakXS            : 640px;
 $breakSM            : 768px;
-$breakMD            : 848px;
-$breakLG            : 1024px;
-$breakXL            : $container + ($gutter * 2);
+$breakMD            : 1024px;
+$breakLG            : 1280px;
+$breakXL            : 1920px;
 $breakColumns		: $breakMD;
 
 
