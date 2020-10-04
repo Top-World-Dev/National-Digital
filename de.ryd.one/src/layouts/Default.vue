@@ -77,8 +77,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 3.25rem;
+  font-size: 2rem;
   font-weight: 700;
+  @media (min-width: $breakColumns) {
+    font-size: 3.25rem;
+  }
 }
 
 h2 {
@@ -105,4 +108,5 @@ h6 {
   font-size: 1.25rem;
   font-weight: 400;
 }
+
 </style>
