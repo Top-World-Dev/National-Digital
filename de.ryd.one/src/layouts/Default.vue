@@ -51,6 +51,9 @@ a, button, [role="button"] {
 
 a {
   color: inherit;
+  &:hover {
+    opacity: 0.85;
+  }
 }
 
 button, [type="button"], [type="reset"], [type="submit"] {
@@ -70,10 +73,15 @@ body {
   line-height: 1.6em;
 }
 
+p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin-top: unset;
   margin-bottom: unset;
-  line-height: 1.6em;
+  line-height: 1.4em;
 }
 
 h1 {
@@ -102,11 +110,17 @@ h4 {
 h5 {
   font-size: 1.25rem;
   font-weight: 700;
+  @media (min-width: $breakColumns) {
+    font-size: 1rem;
+  }
 }
 
 h6 {
   font-size: 1.25rem;
   font-weight: 400;
+  @media (min-width: $breakColumns) {
+    font-size: 1rem;
+  }
 }
 
 </style>
