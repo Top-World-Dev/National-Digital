@@ -35,7 +35,6 @@
       return {
         carouselSettings: {
           centerMode: true,
-          centerPadding: "2rem",
           focusOnSelect: true,
           infinite: true,
           slidesToShow: 3,

@@ -1,15 +1,7 @@
 <template>
   <section :id="blok.name" class="xy-column" :class="[blok.valign,(blok.recenter ? 'column-recenter' : '')]">
-    <div
-      class="column-inner column-container"
-      :class="[blok.container, blok.align]"
-    >
-      <component
-        :key="blok._uid"
-        v-for="blok in blok.block"
-        :blok="blok"
-        :is="blok.component"
-      ></component>
+    <div class="column-inner column-container" :class="[blok.container, blok.align]">
+      <component :key="blok._uid" v-for="blok in blok.block" :blok="blok" :is="blok.component"></component>
     </div>
   </section>
 </template>
