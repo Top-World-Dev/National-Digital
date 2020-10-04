@@ -226,7 +226,7 @@ export default {
     > a {
       color: $white;
       background-color: $brand;
-      font-size: 1rem;
+      font-size: 1.125rem;
       padding: .5em 0 .5em 1em;
     }
   }
