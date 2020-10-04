@@ -20,10 +20,16 @@
   /* Background and Text Colors  */
   &.section-background-white {
     color: $veryDarkGrey;
-    background-color: $white; 
+    border-color: $veryDarkGrey;
+    background-color: $white;
+    a {
+      color: $accent;
+      border-color: $accent;
+    }
   }
   &.section-background-brandgradient {
     color: $white;
+    border-color: $white;
     background-color: $brand;
     background-position: bottom right;
     background-size: 66.67%;
@@ -31,16 +37,19 @@
     background-image: linear-gradient(90deg, rgba(46, 50, 131, 1) 70%, rgba(58, 147, 191, 0.67) 100%);
     a {
       color: $accent;
+      border-color: $accent;
     }
   }
   &.section-background-brandblock {
     color: $white;
+    border-color: $white;
     background-color: $brand;
     background-position: bottom center;
     background-size: cover;
     background-repeat: no-repeat;
     a {
       color: $accent;
+      border-color: $accent;
     }
   }
   /* Container Options */

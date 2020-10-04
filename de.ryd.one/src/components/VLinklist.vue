@@ -53,6 +53,10 @@ export default {
   }
   a {
     text-decoration: none;
+    &:hover {
+      border-bottom-width: 0.05em;
+      border-bottom-style: solid;
+    }
   }
 }
 </style>
