@@ -2,8 +2,8 @@
   <ul class="v-list" v-editable="blok" :class="blok.align">
     <li v-for="item in blok.item" :key="item._uid">
       <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 14"><g fill="none" fill-rule="evenodd"><path d="M-4-5h24v24H-4z"/><path fill="#00ebbc" fill-rule="nonzero" d="M17.5 1.41l-12 12L0 7.91 1.41 6.5l4.09 4.08L16.09 0z"/></g></svg></div>
-      <div class="list-content">
-        <h5 v-if="item.title">{{ item.title }}</h5>
+      <div class="list-content" :class="blok.style">
+        <tag :is="blok.style" v-if="item.title">{{ item.title }}</tag>
         <v-richtext v-if="item.content" :style="(item.title ? '' : 'display:block')" :text="item.content"></v-richtext>
       </div>
     </li>
