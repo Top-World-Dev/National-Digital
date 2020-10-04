@@ -29,7 +29,7 @@
           slidesToScroll: 1,
           speed: 500,
           dots: false,
-          dotsClass: "",
+          dotsClass: "slick-dots",
           arrows: true,
           responsive: [
             {
