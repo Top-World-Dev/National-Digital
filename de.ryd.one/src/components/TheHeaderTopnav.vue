@@ -67,7 +67,11 @@ export default {
   }
   .topnav-logo {
     grid-area: topnav_logo;
-    text-align: center;
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .topnav-tabs-links {
     grid-area: topnav_tabs;
@@ -80,7 +84,7 @@ export default {
 
   // subnav
   .topnav-menu-links > li {
-    padding-bottom: 1em;
+    // padding-bottom: 1em;
     .topnav-tabcontent-sublinks {
       display: none;
     }
@@ -141,40 +145,43 @@ export default {
     }
   }
   // main nav
-  .topnav-menu-links > li {
-    font-size: 1rem;
-    margin-bottom: 0;
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
-    > a {
-      color: $white;
-      border: 0 solid transparent;
-      text-decoration: none;
-      padding: 0.5em 1.25em 0.5em 1.25em;
-      border-top-left-radius: 0.25em;
+  .topnav-menu-links {
+    > li {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      margin-left: 0.25rem;
+      margin-right: 0.25rem;
+      > a {
+        color: $white;
+        border: 0 solid transparent;
+        text-decoration: none;
+        padding: 0.5em 1.25em 0.5em 1.25em;
+        border-top-left-radius: 0.25em;
+        border-top-right-radius: 0.25em;
+      }
+      > a.active, &:hover > a {
+          background-color: $accent;
+          border-radius: 0.5rem;
+          color: $brand;
+          // transition: background-color 0.2s ease-out; 
+      }
+    }
+    .topnav-tabcontent-sublinks {
+      font-size: 0.875rem;
+      background-color: $white;
+      border-top: 0.5em solid $accent;
+      border-bottom: 0.25em solid $white;
       border-top-right-radius: 0.25em;
-    }
-    > a.active, &:hover > a {
-        background-color: $accent;
-        border-radius: 0.5rem;
-        color: $brand;
-        // transition: background-color 0.2s ease-out; 
-    }
-  }
-  .topnav-tabcontent-sublinks {
-    font-size: 0.875rem;
-    background-color: $white;
-    border-top: 0.5em solid $accent;
-    border-bottom: 0.25em solid $white;
-    border-top-right-radius: 0.25em;
-    border-bottom-right-radius: 0.25em;
-    border-bottom-left-radius: 0.25em;
-    li a {
-      color: $black;
-      text-decoration: none;
-    }
-    li:hover {
-      background-color: $lightGrey;
+      border-bottom-right-radius: 0.25em;
+      border-bottom-left-radius: 0.25em;
+      li a {
+        color: $black;
+        text-decoration: none;
+      }
+      li:hover {
+        background-color: $lightGrey;
+      }
     }
   }
 }
