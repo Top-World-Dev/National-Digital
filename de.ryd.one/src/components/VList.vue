@@ -27,7 +27,7 @@
     width: 1rem;
     height: auto;
     margin-right: 0.5rem;
-    margin-top: 0.5rem;
+    margin-top: 0.375rem;
   }
   .list-content {
     display: flex;
