@@ -13,7 +13,10 @@
 <script>
 export default {
   name: 'StoryblokEntryTemplate',
- data() {
+  metaInfo: {
+    title: 'About us',
+  },
+  data() {
     return {
       size: ''
     }
