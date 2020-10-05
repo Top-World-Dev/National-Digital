@@ -6,14 +6,14 @@
       <div class="sidenav-toggle-close"><span class="sidenav-toggle" @click="toggleNav(false)" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></span></div>
     </div>
     <div class="sidenav-menu">
-      <ul class="sidenav-menu-alpha" v-for="tab in content" :key="tab._uid" :class="{'is-expanded' : active.includes(tab._uid)}">
+      <ul class="sidenav-menu-alpha" v-for="tab in content" :key="tab._uid"  :class="{'is-expanded' : active.includes(tab._uid)}">
         <li><a @click="accordion(tab)" :class="tab.title">{{ tab.title }}</a>
-          <ul class="sidenav-menu-beta">
+          <ul class="sidenav-menu-beta" :data-name="tab._uid">
             <span @click="accordion(tab)" class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(tab._uid)}"></span></span>
             <li v-for="item in tab.item">
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url"><span @click="accordion(item)">{{ item.title }}</span></g-link>
               <a @click="accordion(item)" v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
-              <ul v-if="item.subitem.length > 0" class="sidenav-menu-gamma" :class="{'is-expanded' : active.includes(item._uid)}">
+              <ul v-if="item.subitem.length > 0" class="sidenav-menu-gamma" :data-name="tab._uid" :class="{'is-expanded' : active.includes(item._uid)}">
                 <span @click="accordion(item)" class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(item._uid)}"></span></span>
                 <li v-for="subitem in item.subitem">
                   <g-link v-if="subitem.link.linktype == 'story'" :to="subitem.link.cached_url">{{ subitem.title }}</g-link>
@@ -28,6 +28,8 @@
   </section>
 </template>
 <script>
+  
+
 export default {
   props: ['content', 'logo'],
   data() {
@@ -44,8 +46,13 @@ export default {
       this.showNavigation = action;
     },
     accordion(tab) {
-      console.log(tab);
       (this.active.includes(tab._uid)) ? this.active = this.active.filter(item => item !== tab._uid) : this.active.push(tab._uid);
+    }
+  },
+  watch: {
+    // whenever question changes, this function will run
+    showNavigation: function (newValue, oldValue) {
+      (newValue) ? this.active.push(document.querySelector('.active--exact.active').closest('ul').dataset.name) : this.active = [];
     }
   }
 };
