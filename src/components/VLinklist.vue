@@ -51,12 +51,5 @@ export default {
     display: inline;
     margin-right: 0.25rem;
   }
-  a {
-    text-decoration: none;
-    &:hover {
-      border-bottom-width: 0.05em;
-      border-bottom-style: solid;
-    }
-  }
 }
 </style>

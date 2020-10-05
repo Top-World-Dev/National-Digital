@@ -29,6 +29,7 @@
   max-width: 100%;
   // style
   cursor: pointer;
+  font-weight: 600;
   border-style: solid;
   border-width: 0.05em;    
   border-radius: 2rem;
@@ -39,6 +40,11 @@
       &:hover {
           border-color: $brand;
           background-color: lighten($brand,10%);
+          a {
+              border-color: $white;
+              border-bottom-width: 0.05em;
+              border-bottom-style: solid;
+          }
       }
       &:active {
           border-color: $brand;
@@ -55,6 +61,11 @@
       &:hover {
           border-color: $accent;
           background-color: lighten($accent,10%);
+          a {
+              border-color: $brand;
+              border-bottom-width: 0.05em;
+              border-bottom-style: solid;
+          }
       }
       &:active {
           border-color: $accent;

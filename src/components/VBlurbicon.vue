@@ -23,8 +23,8 @@ export default {
   width: 100%;
   &.blurbicon-vertical {
     .blurbicon-item {
-      flex: 0 0 320px;
-      margin: 1.5rem;
+      flex: 0 0 280px;
+      margin: 1rem;
       display: flex;
       flex-direction: column;
     }
@@ -32,7 +32,7 @@ export default {
   &.blurbicon-horizontal {
     @media(min-width: $breakColumns) {
       .blurbicon-item {
-        flex: 0 0 480px;
+        flex: 0 0 620px;
         margin: 1.5rem;
         display: flex;
         flex-direction: row;
@@ -43,7 +43,7 @@ export default {
     .blurbicon-content {
       text-align: left;
       margin-left: 1.5rem;
-      flex-basis: 320px;
+      flex-basis: 460px;
     }
   }
 }

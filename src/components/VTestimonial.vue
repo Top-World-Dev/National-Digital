@@ -23,8 +23,8 @@
   text-align: center;
   @include container($containerInner);
   .testimonial-quote {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 400;
     font-style: italic;
     line-height: 2.5rem;
     margin-top: 1rem;

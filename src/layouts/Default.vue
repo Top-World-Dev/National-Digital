@@ -50,9 +50,12 @@ a, button, [role="button"] {
 }
 
 a {
+  text-decoration: none;
   color: inherit;
   &:hover {
     opacity: 0.85;
+      border-bottom-width: 0.05em;
+      border-bottom-style: solid;
   }
 }
 
