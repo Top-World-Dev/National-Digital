@@ -12,42 +12,50 @@
 <script>
 export default {
   name: 'StoryblokEntryTemplate',
-  // metaInfo: {
-  //   title: 'About us',
-  // },
-  // data() {
-  //   return {
-  //     size: ''
-  //   }
-  // },
-  // created() {
-  //   window.addEventListener('resize', this.handleResize(window.innerWidth));
-  //   this.handleResize(window.innerWidth);
-  // },
-  // destroyed() {
-  //   window.removeEventListener('resize', this.handleResize(window.innerWidth));
-  // },
-  // methods: {
-  //   handleResize(width) {
-  //     switch(true) {
-  //       case (width < 640):
-  //       this.size = 'viewport-xs';
-  //       break;
-  //       case (width >= 640 && width < 768):
-  //       this.size = 'viewport-sm';
-  //       break;
-  //       case (width >= 768 && width < 1024):
-  //       this.size = 'viewport-md';
-  //       break;
-  //       case (width >= 1024 && width < 1280):
-  //       this.size = 'viewport-lg';
-  //       break;
-  //       case (width > 1280):
-  //       this.size = 'viewport-xl';
-  //       break;
-  //     }
-  //   }
-  // },
+ metaInfo() {
+    return {
+      title: this.story.content.meta_information.title,
+      meta: [
+        {
+          name: "description",
+          content: this.story.content.meta_information.description
+        }
+      ]
+    }
+  },
+  data() {
+    return {
+      size: ''
+    }
+  },
+  mounted() {
+    window.addEventListener('resize', this.handleResize(window.innerWidth));
+    this.handleResize(window.innerWidth);
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize(window.innerWidth));
+  },
+  methods: {
+    handleResize(width) {
+      switch(true) {
+        case (width < 640):
+        this.size = 'viewport-xs';
+        break;
+        case (width >= 640 && width < 768):
+        this.size = 'viewport-sm';
+        break;
+        case (width >= 768 && width < 1024):
+        this.size = 'viewport-md';
+        break;
+        case (width >= 1024 && width < 1280):
+        this.size = 'viewport-lg';
+        break;
+        case (width > 1280):
+        this.size = 'viewport-xl';
+        break;
+      }
+    }
+  },
   computed: {
     story () {
       return this.$page.storyblokEntry
