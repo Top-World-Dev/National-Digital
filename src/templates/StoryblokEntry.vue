@@ -5,7 +5,6 @@
       :key="story.content._uid"
       :blok="story.content"
       :is="story.content.component"
-      :class="size"
     />
   </Layout>
 </template>
