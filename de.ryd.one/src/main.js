@@ -36,6 +36,12 @@ import VImage from '~/components/VImage.vue'
 
 
 export default function (Vue, { router, head, isClient }) {
+  // Add a meta tag
+  head.meta.push({
+    name: 'keywords',
+    content: 'global from the main.js'
+  })
+
   // Set default layout as a global component
   Vue.component('Layout', DefaultLayout)
 
@@ -71,3 +77,4 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('v-image', VImage)
   Vue.component('v-richtext', VRichtext)
 }
+
