@@ -13,13 +13,13 @@
 <script>
 export default {
   name: 'StoryblokEntryTemplate',
-  metaInfo: {
-    title: 'About us',
-  },
-  data() {
-    return {
-      size: ''
-    }
+  // metaInfo: {
+  //   title: 'About us',
+  // },
+  // data() {
+  //   return {
+  //     size: ''
+  //   }
   // },
   // created() {
   //   window.addEventListener('resize', this.handleResize(window.innerWidth));
@@ -48,7 +48,7 @@ export default {
   //       break;
   //     }
   //   }
-  },
+  // },
   computed: {
     story () {
       return this.$page.storyblokEntry
