@@ -74,14 +74,14 @@ body {
 }
 
 p {
-  margin-top: 0.25em;
-  margin-bottom: 0.25em;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-top: unset;
-  margin-bottom: unset;
   line-height: 1.4em;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 h1 {
