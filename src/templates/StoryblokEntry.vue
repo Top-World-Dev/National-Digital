@@ -4,6 +4,7 @@
       v-if="story.content.component"
       :key="story.content._uid"
       :blok="story.content"
+      :size = "size"
       :is="story.content.component"
       :class="size"
     />

@@ -10,7 +10,7 @@
   import backgroundImage from '../mixins/backgroundImage'
   export default {
     mixins: [backgroundImage],
-    props: ['blok'],
+    props: ['blok', 'viewPort'],
   }
 </script>
 
