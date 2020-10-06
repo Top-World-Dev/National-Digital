@@ -94,6 +94,7 @@
   position: relative;
 
   .reviewslider-overlay {
+    pointer-events: none;
     background: transparent;
     z-index:10;
     @media (min-width: 1024px) {
