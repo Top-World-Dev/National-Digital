@@ -34,31 +34,61 @@
     data() {
       return {
         carouselSettings: {
+          accessibility: true,
+          adaptiveHeight: false,
+          arrows: false,
+          asNavFor: null,
+          autoplay: false,
+          autoplaySpeed: 5000,
           centerMode: true,
-          focusOnSelect: true,
-          infinite: true,
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          speed: 500,
+          centerPadding: "0px",
+          cssEase: "ease",
+          customPaging: undefined,
           dots: true,
           dotsClass: "slick-dots reviewslider-content-dot",
-          arrows: false,
+          draggable: true,
+          edgeFriction: 0.35,
+          fade: false,
+          focusOnSelect: false,
+          infinite: true,
+          initialSlide: 0,
+          lazyLoad: null,
+          pauseOnDotsHover: false,
+          pauseOnFocus: false,
+          pauseOnHover: true,
+          rows: 1,
+          rtl: false,
+          slidesPerRow: 1,
+          slidesToScroll: 1,
+          slidesToShow: 3,
+          speed: 500,
+          swipe: true,
+          swipeToSlide: false,
+          touchMove: true,
+          touchThreshold: 5,
+          useCSS: true,
+          useTransform: true,
+          variableWidth: false,
+          vertical: false,
+          waitForAnimate: true,
           responsive: [
             {
-              breakpoint: 1024,
+              breakpoint: 768,
               settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
               },
             },
             {
-              breakpoint: 1440,
+              breakpoint: 1024,
               settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
+                slidesToShow: 3,
+                slidesToScroll: 1,
               },
             },
           ],
+         
+          
         }
       }
     }
@@ -74,12 +104,20 @@
   position: relative;
 
   .reviewslider-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba($white,0) 28%, rgba($brand,1) 75%, rgba($brand,1) 86%);
+    background: transparent;
+    
+    @media (min-width: $breakSM ) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(219,220,230,0) 26%, rgba(46,50,131,0.6449930313922444) 45%, rgba(46,50,131,1) 80%);
+    }
+    @media (min-width: $breakMD ) {
+      
+      background: radial-gradient(circle, rgba(219,220,230,0) 15%, rgba(46,50,131,0.6449930313922444) 37%, rgba(46,50,131,1) 59%);
+    }
     z-index:10;
 
   }
@@ -91,18 +129,27 @@
     @media (min-width: $breakMD ) {
       width: 75vw!important;
     }
+    @media (min-width: $breakSM ) {
+      width: 100vw!important;
+
+    }
   }
   .reviewslider-wrapper {
     color: $black;
     background-color: $white;
     border-radius: .5rem .5rem 0.5rem 0;
     margin: 0 auto 3rem;
-    width: 20rem;
+    height: 100%;
     min-height: 200px;
+    max-width:80%;
     display: flex;
     flex-direction: column;
     position: relative;
     padding: 0.5em 1em 1em 1em;
+    @media (min-width: $breakSM ) {
+      margin: 0 2rem 3rem;
+
+    }
     &:after {
       content: '';
       position: absolute;
