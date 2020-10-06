@@ -10,10 +10,10 @@ export default {
     assignColors(color) {
       switch (true) {
         case (color == 'section-background-brandgradient' && this.isMobile):
-        return `linear-gradient(to right, #2e3283, rgba(34, 107, 172, 0.67))`
+        return `linear-gradient(90deg, rgba(46, 50, 131, 0.97) 0%, rgba(34, 107, 172, 0.67) 100%)`
         break;
         case (color == 'section-background-brandgradient' && !this.isMobile):
-        return `linear-gradient(to right, #2e3283 38%, rgba(34, 107, 172, 0.67) 89%)`
+        return `linear-gradient(90deg, rgba(46, 50, 131, 0.97) 38%, rgba(34, 107, 172, 0.67) 89%)`
         break;
         case (color = 'section-background-brandblock'):
           return `linear-gradient(0deg, rgba(46, 50, 131, 1) 0%, 0deg, rgba(46, 50, 131, 1) 100%)`

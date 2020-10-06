@@ -55,10 +55,8 @@ a, button, [role="button"] {
 }
 
 a {
+  text-decoration: none;
   color: inherit;
-  &:hover {
-    opacity: 0.85;
-  }
 }
 
 button, [type="button"], [type="reset"], [type="submit"] {
@@ -113,18 +111,18 @@ h4 {
 }
 
 h5 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 700;
   @media (min-width: $breakColumns) {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 }
 
 h6 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   font-weight: 400;
   @media (min-width: $breakColumns) {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 }
 
