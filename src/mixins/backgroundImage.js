@@ -1,10 +1,11 @@
 export default {
-  data() { return { windowWidth: window.innerWidth } },
+  data() { return { windowWidth: 1024 } },
   mounted() {
-    window.addEventListener('resize', () => {
-      this.windowWidth = window.innerWidth
-      console.log(this.isMobile)
-    })
+    window.addEventListener('resize', this.handleResize(window.innerWidth));
+    this.handleResize(window.innerWidth);
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize(window.innerWidth));
   },
   methods: {
     assignColors(color) {
@@ -32,6 +33,9 @@ export default {
       let image = require(`!!assets-loader!@media/${this.blok.backgroundImage.filename.filename}`);
       return image.src;
     },
+    handleResize(width) {
+      this.windowWidth = width;
+    }
 
   },
   computed: {
@@ -43,7 +47,7 @@ export default {
         let filename = this.blok.backgroundImage.filename.filename
       }
    
-      let color = this.assignColors(this.blok.backgroundColor, window.innerWidth);
+      let color = this.assignColors(this.blok.backgroundColor);
 
       return (typeof this.blok.backgroundImage.filename == 'object') ? `${color}, url('${this.getImage(this.blok.backgroundImage.filename.filename)}')` : `${color}`
     
