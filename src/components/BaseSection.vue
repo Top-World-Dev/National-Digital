@@ -18,6 +18,53 @@
 @import '~/assets/styles.scss';
 .xy-section {
   /* Background and Text Colors  */
+  &.section-background-brandblock {
+    color: $white;
+    border-color: $white;
+    background-color: $brand;
+    a {
+      color: $accent;
+      border-color: $accent;
+      &:hover {
+        transition: 0.1s all;
+        opacity: 0.85;
+        border-bottom-width: 0.05em;
+        border-bottom-style: solid;
+      }
+    }
+  }
+  &.section-background-brandgradient {
+    color: $white;
+    border-color: $white;
+    background-color: $brand;
+    background-position: center right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    a {
+      color: $accent;
+      border-color: $accent;
+      &:hover {
+        transition: 0.1s all;
+        opacity: 0.85;
+        border-bottom-width: 0.05em;
+        border-bottom-style: solid;
+      }
+    }
+  }
+  &.section-background-transparent {
+    color: $veryDarkGrey;
+    border-color: $veryDarkGrey;
+    background-color: transparent;
+    a {
+      color: $accent;
+      border-color: $accent;
+      &:hover {
+          transition: 0.1s all;
+          border-bottom-width: 0.05em;
+          border-bottom-style: solid;
+      }
+    }
+  }
   &.section-background-white {
     color: $veryDarkGrey;
     border-color: $veryDarkGrey;
@@ -25,31 +72,11 @@
     a {
       color: $accent;
       border-color: $accent;
-    }
-  }
-  &.section-background-brandgradient {
-    color: $white;
-    border-color: $white;
-    background-color: $brand;
-    background-position: bottom right;
-    background-size: 66.67%;
-    background-repeat: no-repeat;
-    background-image: linear-gradient(90deg, rgba(46, 50, 131, 1) 70%, rgba(58, 147, 191, 0.67) 100%);
-    a {
-      color: $accent;
-      border-color: $accent;
-    }
-  }
-  &.section-background-brandblock {
-    color: $white;
-    border-color: $white;
-    background-color: $brand;
-    background-position: bottom center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    a {
-      color: $accent;
-      border-color: $accent;
+      &:hover {
+          transition: 0.1s all;
+          border-bottom-width: 0.05em;
+          border-bottom-style: solid;
+      }
     }
   }
   /* Container Options */
