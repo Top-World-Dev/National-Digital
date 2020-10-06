@@ -24,12 +24,10 @@
     background-color: $brand;
     a {
       color: $accent;
-      border-color: $accent;
       &:hover {
         transition: 0.1s all;
         opacity: 0.85;
-        border-bottom-width: 0.05em;
-        border-bottom-style: solid;
+        border-color: $accent;
       }
     }
   }
@@ -42,12 +40,10 @@
     background-repeat: no-repeat;
     a {
       color: $accent;
-      border-color: $accent;
       &:hover {
         transition: 0.1s all;
         opacity: 0.85;
-        border-bottom-width: 0.05em;
-        border-bottom-style: solid;
+        border-color: $accent;
       }
     }
   }
@@ -57,11 +53,9 @@
     background-color: transparent;
     a {
       color: $accent;
-      border-color: $accent;
       &:hover {
           transition: 0.1s all;
-          border-bottom-width: 0.05em;
-          border-bottom-style: solid;
+          border-color: $accent;
       }
     }
   }
@@ -71,11 +65,9 @@
     background-color: $white;
     a {
       color: $accent;
-      border-color: $accent;
       &:hover {
           transition: 0.1s all;
-          border-bottom-width: 0.05em;
-          border-bottom-style: solid;
+          border-color: $accent;
       }
     }
   }
