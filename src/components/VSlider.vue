@@ -26,7 +26,7 @@ export default {
         adaptiveHeight: false,
         arrows: true,
         asNavFor: null,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 5000,
         centerMode: true,
         centerPadding: "0px",
