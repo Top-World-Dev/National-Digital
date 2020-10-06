@@ -55,8 +55,11 @@ a, button, [role="button"] {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  border-color: transparent;
+  border-bottom-width: 0.05em;
+  border-bottom-style: solid;
+  text-decoration: none;
 }
 
 button, [type="button"], [type="reset"], [type="submit"] {

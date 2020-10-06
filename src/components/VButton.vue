@@ -52,7 +52,6 @@
       }
       a, button, [role="button"] {
         color: $white;
-        text-decoration: none;
       }
   }
   &.button-accent {
@@ -63,8 +62,6 @@
           background-color: lighten($accent,10%);
           a {
               border-color: $brand;
-              border-bottom-width: 0.05em;
-              border-bottom-style: solid;
           }
       }
       &:active {
@@ -73,7 +70,6 @@
       }
       a, button, [role="button"] {
         color: $brand;
-        text-decoration: none;
       }
   }
 }
