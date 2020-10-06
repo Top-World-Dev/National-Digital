@@ -1,6 +1,6 @@
 <template>
-  <section :id="blok.name" class="xy-column" :class="[blok.valign,(blok.recenter ? 'column-recenter' : '')]">
-    <div class="column-inner column-container" :class="[blok.container, blok.align]">
+  <section :id="blok.name" class="xy-column" :class="[blok.valign]">
+    <div class="column-inner column-container" :class="[blok.container, blok.align_mobile, blok.align_desktop]">
       <component :key="blok._uid" v-for="blok in blok.block" :blok="blok" :is="blok.component"></component>
     </div>
   </section>
@@ -18,19 +18,6 @@ export default {
 @import "~/assets/styles.scss";
 .xy-column {
   /* Layouts */
-  // mobile defaults
-  @media (max-width: $breakColumns - 1px) {
-    &.column-recenter {
-      text-align: center;
-      * {
-        text-align: unset !important;
-      }
-    }
-    .column-container {
-      width: 100%;
-      height: auto;
-    }
-  }
   @media (min-width: $breakColumns) {
     /* Vertical alignment (desktop) */
     &.column-valign-top {
@@ -57,17 +44,34 @@ export default {
     }
   }
   /* Text alignment */
-  .column-align-left {
-    text-align: left;
+  @media (max-width: $breakColumns - 1px) {
+    .column-mobile-align-left {
+      text-align: left;
+    }
+    .column-mobile-align-center {
+      text-align: center;
+    }
+    .column-mobile-align-right {
+      text-align: right;
+    }
+    .column-mobile-align-justify {
+      text-align: justify;
+    }
   }
-  .column-align-center {
-    text-align: center;
+  @media (min-width: $breakColumns) {
+    .column-desktop-align-left {
+      text-align: left;
+    }
+    .column-desktop-align-center {
+      text-align: center;
+    }
+    .column-desktop-align-right {
+      text-align: right;
+    }
+    .column-desktop-align-justify {
+      text-align: justify;
+    }
   }
-  .column-align-right {
-    text-align: right;
-  }
-  .column-align-justify {
-    text-align: justify;
-  }
+  
 }
 </style>
