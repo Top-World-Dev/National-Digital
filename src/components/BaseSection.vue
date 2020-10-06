@@ -20,7 +20,7 @@
   /* Background and Text Colors  */
   &.section-background-brandblock {
     color: $white;
-    border-color: $white;
+    border-color: $brand;
     background-color: $brand;
     a {
       color: $accent;
@@ -35,7 +35,7 @@
   }
   &.section-background-brandgradient {
     color: $white;
-    border-color: $white;
+    border-color: $brand;
     background-color: $brand;
     background-position: center right;
     background-size: cover;
@@ -53,7 +53,7 @@
   }
   &.section-background-transparent {
     color: $veryDarkGrey;
-    border-color: $veryDarkGrey;
+    border-color: transparent;
     background-color: transparent;
     a {
       color: $accent;
@@ -67,7 +67,7 @@
   }
   &.section-background-white {
     color: $veryDarkGrey;
-    border-color: $veryDarkGrey;
+    border-color: $white;
     background-color: $white;
     a {
       color: $accent;
