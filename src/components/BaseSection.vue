@@ -1,6 +1,6 @@
 <template>
   <section :id="blok.name" class="xy-section" :style="{backgroundImage: backgroundStyle}" :class="blok.backgroundColor">
-      <div class="section-inner section-container" :class="[blok.container,blok.align,(blok.reverse ? 'column-reverse' : '' )]">
+      <div class="section-inner section-container" :class="[blok.container,blok.align,(blok.reverse ? 'column-reverse' : '' ),(blok.mobile_fullwidth ? 'column-fullmobile' : '')]">
         <component :key="blok._uid" v-for="blok in blok.columns" :blok="blok" :is="blok.component"></component>
       </div>
   </section>
@@ -74,7 +74,7 @@
   /* Container Options */
   // mobile default
   @media (max-width: $breakColumns - 1px) { 
-    .section-container { 
+    .section-container:not(.column-fullmobile) { 
       @include container($breakColumns);
     }
   }
