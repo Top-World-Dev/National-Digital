@@ -81,8 +81,8 @@
   // desktop options
   @media (min-width: $breakColumns) {
     .section-container-none {
-      width: 100%;
-      height: auto;
+      // width: 100%;
+      // height: auto;
     }
     .section-container-large {
       @include container($containerOuter);

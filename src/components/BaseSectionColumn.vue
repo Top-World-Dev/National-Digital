@@ -31,8 +31,8 @@ export default {
     }
     /* Container Options */
     .column-container-none {
-      width: 100%;
-      height: auto;
+      // width: 100%;
+      // height: auto;
     }
     .column-container-mleft {
       margin-left: 40%;

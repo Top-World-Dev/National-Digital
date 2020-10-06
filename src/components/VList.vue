@@ -2,7 +2,7 @@
   <ul class="v-list" v-editable="blok" :class="blok.align">
     <li v-for="item in blok.item" :key="item._uid">
       <div class="list-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 14"><g fill="none" fill-rule="evenodd"><path d="M-4-5h24v24H-4z"/><path fill="#349c7c" fill-rule="nonzero" d="M17.5 1.41l-12 12L0 7.91 1.41 6.5l4.09 4.08L16.09 0z"/></g></svg></div>
-      <div class="list-content" :class="blok.style">
+      <div class="list-content">
         <tag :is="blok.style" v-if="item.title">{{ item.title }}</tag>
         <v-richtext v-if="item.content" :style="(item.title ? '' : 'display:block')" :text="item.content"></v-richtext>
       </div>
@@ -24,10 +24,13 @@
     align-items: flex-start;
   }
   .list-icon svg {
+    margin-top: 0.55rem;
+    @media (min-width: $breakColumns) {
+      margin-top: 0.675rem;
+    }
     width: 1rem;
     height: auto;
     margin-right: 0.5rem;
-    margin-top: 0.5rem;
   }
   .list-content {
     display: flex;

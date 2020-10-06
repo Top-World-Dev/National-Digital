@@ -88,7 +88,6 @@
 <style lang="scss">
 @import '~/assets/styles.scss';
 .v-reviewslider {
-  padding: 2em;
   text-align: center;
   color: white;
   overflow: hidden;
@@ -100,10 +99,12 @@
     @media (min-width: 1024px) {
       position: absolute;
       top: 0;
+      bottom: 0;
+      right: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(46, 50, 131, 0) 33%, rgba(46, 50, 131,0.65) 33%, rgba(46, 50, 131, 1) 66%);
+      background: radial-gradient(circle, rgba(46, 50, 131, 0) 34%, rgba(46, 50, 131,0.65) 34%, rgba(46, 50, 131, 1) 66%);
     }
   }
 
@@ -111,19 +112,18 @@
   .slick-list {
     margin-left: auto;
     margin-right: auto;
-    @media (min-width: $breakMD ) {
-      width: 75vw!important;
+    @media (min-width: $breakColumns ) {
+      width: 75vw;
     }
-    @media (min-width: $breakSM ) {
-      width: 100vw!important;
-
+    @media (min-width: $breakColumns ) {
+      width: 98vw;
     }
   }
   .reviewslider-wrapper {
     color: $black;
     background-color: $white;
     border-radius: .5rem .5rem 0.5rem 0;
-    margin: 0 auto 3rem;
+    margin: 0 auto 3rem auto;
     height: 100%;
     min-height: 200px;
     max-width:80%;
@@ -131,8 +131,8 @@
     flex-direction: column;
     position: relative;
     padding: 0.5em 1em 1em 1em;
-    @media (min-width: $breakSM ) {
-      margin: 0 2rem 3rem;
+    @media (min-width: $breakColumns ) {
+      margin: 0 2rem 3rem 2rem;
 
     }
     &:after {
