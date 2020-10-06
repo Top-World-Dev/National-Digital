@@ -73,22 +73,13 @@
           waitForAnimate: true,
           responsive: [
             {
-              breakpoint: 768,
+              breakpoint: 1024,
               settings: {
                 slidesToShow: 1,
                 slidesToScroll: 1,
               },
             },
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-              },
-            },
-          ],
-         
-          
+          ],          
         }
       }
     }
@@ -105,21 +96,15 @@
 
   .reviewslider-overlay {
     background: transparent;
-    
-    @media (min-width: $breakSM ) {
+    z-index:10;
+    @media (min-width: 1024px) {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(219,220,230,0) 26%, rgba(46,50,131,0.6449930313922444) 45%, rgba(46,50,131,1) 80%);
+      background: radial-gradient(circle, rgba(46, 50, 131, 0) 33%, rgba(46, 50, 131,0.65) 33%, rgba(46, 50, 131, 1) 66%);
     }
-    @media (min-width: $breakMD ) {
-      
-      background: radial-gradient(circle, rgba(219,220,230,0) 15%, rgba(46,50,131,0.6449930313922444) 37%, rgba(46,50,131,1) 59%);
-    }
-    z-index:10;
-
   }
 
   /* Slick Slider styles */
