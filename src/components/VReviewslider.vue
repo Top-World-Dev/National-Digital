@@ -105,7 +105,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle, rgba(46, 50, 131, 0) 34%, rgba(46, 50, 131,0.65) 34%, rgba(46, 50, 131, 1) 66%);
+      background: radial-gradient(circle, rgba(46, 50, 131, 0) 34%, rgba(46, 50, 131,0.45) 44%, rgba(46, 50, 131, 1) 66%);
     }
   }
 
@@ -152,6 +152,19 @@
         transform: skewY(-20deg);
     }
   }
+
+  .slick-slide {
+    div {
+      outline: none;
+      border: 0;
+      border-color: transparent;
+      &::focus {
+        outline: none;
+        border: 0;
+        border-color: transparent;
+      }
+    }
+  }
   .reviewslider-source {
     display: flex;
     justify-content: space-between;
@@ -163,15 +176,18 @@
     color: $veryDarkGrey;
   }
 
-  .slick-dots.reviewslider-content-dot li {
-    z-index: 11;
-    &.slick-active {
-      button:before {
-        color: $accent;
+  .slick-dots {
+    bottom: 0!important;
+    &.reviewslider-content-dot li {
+      z-index: 11;
+      &.slick-active {
+        button:before {
+          color: $accent;
+        }
       }
-    }
-    button:before {
-      font-size: 0.5rem;
+      button:before {
+        font-size: 0.5rem;
+      }
     }
   }
 }

@@ -94,5 +94,17 @@ export default {
       right: -0.5rem;
     }
   }
+  .slick-slide {
+    div {
+      outline: none;
+      border: 0;
+      border-color: transparent;
+      &::focus {
+        outline: none;
+        border: 0;
+        border-color: transparent;
+      }
+    }
+  }
 }
 </style>

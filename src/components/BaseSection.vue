@@ -17,6 +17,8 @@
 <style lang="scss">
 @import '~/assets/styles.scss';
 .xy-section {
+  background-color: transparent;
+  border: none;
   /* Background and Text Colors  */
   &.section-background-brandblock {
     color: $white;
