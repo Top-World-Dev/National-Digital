@@ -111,6 +111,8 @@
 
   /* Slick Slider styles */
   .slick-list {
+    overflow-x: hidden;
+    width: auto;
     margin-left: auto;
     margin-right: auto;
     @media (min-width: $breakColumns ) {

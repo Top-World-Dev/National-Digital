@@ -83,15 +83,17 @@ export default {
 <style lang="scss">
 @import '~/assets/styles.scss';
 .v-slider {
+  overflow-x: hidden;
+  width: auto;
   .slick-arrow {
     &::before {
       color: $accent;
     }
     &.slick-prev {
-      left: -0.5rem;
+      left: 0rem;
     }
     &.slick-next {
-      right: -0.5rem;
+      right: 0rem;
     }
   }
   .slick-slide {
