@@ -42,6 +42,8 @@ body {
   background-color: $trueWhite;
   max-width: 100%;
   height: 100%;
+  width: auto; 
+  overflow-x: hidden;
 }
 
 img {
