@@ -16,17 +16,8 @@ export default {
         case (color == 'section-background-brandgradient' && !this.isMobile):
         return `linear-gradient(90deg, rgba(46, 50, 131, 0.97) 38%, rgba(34, 107, 172, 0.67) 89%)`
         break;
-        case (color = 'section-background-brandblock'):
-          return `linear-gradient(90deg, rgba(46, 50, 131, 1) 0%, 90deg, rgba(46, 50, 131, 1) 100%)`
-          break;
-        case (color = 'section-background-white'):
-          return `linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 100%)`
-          break;
-        case (color = 'section-background-transparent'):
-          return `linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 100%)`
-          break;
         default:
-          return `linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 100%)`
+          return false
       }
     },
     getImage(asset) {
