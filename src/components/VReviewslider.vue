@@ -6,7 +6,7 @@
       <VueSlickCarousel v-bind="carouselSettings">
         <div v-for="slide in blok.slide" :key="blok._uid">
           <div class="reviewslider-wrapper">
-            <div class="reviewslider-source"><div>Google Play Store</div><div>⭐⭐⭐⭐⭐</div></div>
+            <div class="reviewslider-source"><div>Google Play Store</div><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="20" height="20"><path fill="#F8D64E" d="m48,234 73-226 73,226-192-140h238z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="20" height="20"><path fill="#F8D64E" d="m48,234 73-226 73,226-192-140h238z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="20" height="20"><path fill="#F8D64E" d="m48,234 73-226 73,226-192-140h238z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="20" height="20"><path fill="#F8D64E" d="m48,234 73-226 73,226-192-140h238z"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="20" height="20"><path fill="#F8D64E" d="m48,234 73-226 73,226-192-140h238z"/></svg></div></div>
             <div class="reviewslider-content">
               <h5>{{ slide.author }}</h5>
               <div>&quot;{{ slide.content }}&quot;</div>
