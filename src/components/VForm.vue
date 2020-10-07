@@ -10,7 +10,7 @@
       <input class="form-field" type="tel" name="phone" :placeholder="blok.phone" autocomplete="tel" :aria-label="blok.phone" />
     </div>
     <div class="form-row">
-      <div class="form-submit v-button button-primary"><input type="submit" :value="blok.submit" role="button" /></div>
+      <div class="form-submit v-button button-primary"><a href="#">{{ blok.submit }}</a></div>
     </div>
     <div class="form-row">
       <!-- <div submit-success>{{ blok.success }}</div> -->

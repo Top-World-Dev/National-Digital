@@ -42,8 +42,6 @@
           background-color: lighten($brand,10%);
           a {
               border-color: $white;
-              border-bottom-width: 0.05em;
-              border-bottom-style: solid;
           }
       }
       &:active {
