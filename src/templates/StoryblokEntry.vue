@@ -14,17 +14,6 @@
 <script>
 export default {
   name: 'StoryblokEntryTemplate',
- metaInfo() {
-    return {
-      title: this.story.content.meta_information.title,
-      meta: [
-        {
-          name: "description",
-          content: this.story.content.meta_information.description
-        }
-      ]
-    }
-  },
   data() {
     return {
       size: ''
