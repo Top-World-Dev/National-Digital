@@ -12,5 +12,7 @@
 
 <style lang="scss">
 @import '~/assets/styles.scss';
-
+footer {
+	background-color: $brand;
+}
 </style>

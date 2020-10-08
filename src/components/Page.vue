@@ -6,7 +6,24 @@
 
 <script>
 export default {
-  props: ['blok']
+  props: ['blok'],
+  metaInfo() {
+      const data = this.blok.meta_information;
+      if(!data) {
+        return false
+      } 
+      else {
+        return {
+          title: data.title,
+          meta: [
+            { name: 'description', content: data.description }
+          ],
+          link: [
+            { rel: 'canonical', href: `${this.$route.fullPath}` },
+          ]
+        }
+      }
+    }
 }
 </script>
 
