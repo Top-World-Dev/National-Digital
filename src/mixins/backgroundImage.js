@@ -21,8 +21,7 @@ export default {
       }
     },
     getImage(asset) {
-      let image = require(`!!assets-loader!@media/${this.blok.backgroundImage.filename.filename}`);
-      return image.src;
+      return (typeof asset  == 'object') ? require(`!!assets-loader!@media/${asset.filename}`).src : asset;
     },
     handleResize(width) {
       this.windowWidth = width;
@@ -34,14 +33,8 @@ export default {
       return this.windowWidth <= 1024
     },
     backgroundStyle() {
-      if(typeof this.blok.backgroundImage.filename == 'object') {
-        let filename = this.blok.backgroundImage.filename.filename
-      }
-   
       let color = this.assignColors(this.blok.backgroundColor);
-
-      return (typeof this.blok.backgroundImage.filename == 'object') ? `${color}, url('${this.getImage(this.blok.backgroundImage.filename.filename)}')` : `${color}`
-    
+      return (!this.blok.backgroundImage.filename) ? `${color}` : `${color}, url('${this.getImage(this.blok.backgroundImage.filename)}')`;
     },
   },
   
