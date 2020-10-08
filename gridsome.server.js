@@ -18,13 +18,28 @@ module.exports = function (api) {
           node {
             id
             full_slug
+            name
+          }
+        }
+      },
+      header: allStoryblokEntry (
+        filter: { 
+          name: { eq: "Header" }
+        }
+      ){
+        edges {
+          node {
+            id
+            full_slug
+            name
           }
         }
       }
     }`)
-
+ 
     // for each content found create a page
     data.allStoryblokEntry.edges.forEach(({ node }) => {
+      
       if (node.full_slug === 'home') {
         createPage({
           path: '/',
