@@ -17,11 +17,8 @@ export default {
     image() {
       // check if it's an svg 
       if(typeof this.source.image.filename == 'string') {
-        let filetype = this.source.image.filename.split('.').pop().toLowerCase();
-        if(filetype == 'svg') {
-          this.src = "img";
-          return this.source.image.filename;
-        }
+        this.src = "img";
+        return this.source.image.filename;
       } else {
         let image = (typeof this.source.image.filename == 'object') ? require(`!!assets-loader!@media/${this.source.image.filename.filename}`) : require(`!!assets-loader!@media/${this.source.image.filename}`);
 
