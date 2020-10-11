@@ -23,6 +23,7 @@ import VImageblock from '~/components/VImageblock.vue'
 import VImageoverlay from '~/components/VImageoverlay.vue'
 import VLinklist from '~/components/VLinklist.vue'
 import VList from '~/components/VList.vue'
+import VMap from '~/components/VMap.vue'
 import VReviewslider from '~/components/VReviewslider.vue'
 import VRule from '~/components/VRule.vue'
 import VSlider from '~/components/VSlider.vue'
@@ -33,6 +34,10 @@ import VForm from '~/components/VForm.vue'
 import VRichtext from '~/components/VRichtext.vue'
 import VImage from '~/components/VImage.vue'
 
+// mapping
+import Vue from 'vue';
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 
 export default function (Vue, { router, head, isClient }) {
@@ -66,6 +71,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VImageoverlay', VImageoverlay)
   Vue.component('VLinklist', VLinklist)
   Vue.component('VList', VList)
+  Vue.component('VMap', VMap)
   Vue.component('VReviewslider', VReviewslider)
   Vue.component('VRule', VRule)
   Vue.component('VSlider', VSlider)
@@ -76,5 +82,10 @@ export default function (Vue, { router, head, isClient }) {
   // global components
   Vue.component('v-image', VImage)
   Vue.component('v-richtext', VRichtext)
+
+  // mapping components
+  Vue.component('l-map', LMap);
+  Vue.component('l-tile-layer', LTileLayer);
+  Vue.component('l-marker', LMarker);
 }
 
