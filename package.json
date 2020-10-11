@@ -4,9 +4,12 @@
   "scripts": {
     "build": "gridsome build",
     "develop": "gridsome develop",
-    "explore": "gridsome explore"
+    "explore": "gridsome explore",
+    "generate": "node csv_json.js"
   },
   "dependencies": {
+    "csvtojson": "^2.0.10",
+    "fs": "0.0.1-security",
     "gridsome": "^0.7.21",
     "gridsome-source-storyblok": "^1.0.2",
     "typeface-fira-sans": "0.0.75",
