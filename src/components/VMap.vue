@@ -3,8 +3,11 @@
 <div class="v-search">
     <div class="search-form">
       <div class="search-row">
-        <input type="text" name="search" placeholder="Search" class="search-input" v-model="searchValue" @keyup="search($event.target.value)" @keyup.enter="loadResults">
-        <a role="button" class="search-clear" tabindex="0" @click="searchValue = ''" ></a>
+        <input type="text" name="search" placeholder="Search" class="search-input form-field" aria-label="search" v-model="searchValue" @keyup="search($event.target.value)" @keyup.enter="loadResults">
+        <a v-if="searchValue.length > 0" role="button" class="search-clear" tabindex="0" @click="clear" ></a>
+        <span class="search-icon"  v-else>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.931 28.932" width="14" height="14"><path fill="#787c87" d="M28.344 25.518l-6.114-6.115a12.177 12.177 0 002.303-7.137c0-3.275-1.275-6.355-3.594-8.672A12.183 12.183 0 0012.266 0a12.176 12.176 0 00-8.673 3.594 12.183 12.183 0 00-3.592 8.672c0 3.276 1.275 6.356 3.592 8.674a12.187 12.187 0 008.673 3.594c2.599 0 5.067-.813 7.136-2.303l6.114 6.115c.392.391.902.586 1.414.586a2 2 0 001.414-3.414zM6.422 18.111c-1.562-1.562-2.421-3.639-2.421-5.846s.859-4.282 2.421-5.844c1.561-1.562 3.636-2.422 5.844-2.422s4.284.86 5.845 2.422c1.562 1.562 2.422 3.638 2.422 5.845s-.859 4.283-2.422 5.846c-1.562 1.562-3.636 2.42-5.845 2.42s-4.285-.86-5.844-2.421z"/></svg>
+        </span>
       </div>
       <div class="search-results" v-if="searchResults.length > 0">
         <div class="search-result" v-for="result in searchResults" @click="findResult(result)">
@@ -13,6 +16,7 @@
         </div>
       </div>
     </div>
+    <ClientOnly>
     <l-map
       v-if="showMap"
       ref="map"
@@ -29,38 +33,51 @@
         v-for="marker in markers"
         :key="marker.id"
         :lat-lng.sync="marker.position"
-        @click="goToMarker(marker.position)"
+        @click="goToMarker(marker)"
       >
         <l-tooltip :content="marker.tooltip" />
       </l-marker>
     </l-map>
+  </ClientOnly>
   </div>
 
 </template>
 
 <script>
-import { latLng } from "leaflet";
-import { LMap, LTileLayer, LMarker, LTooltip } from "vue2-leaflet";
+  import { LMap, LTileLayer, LMarker, LTooltip } from 'vue2-leaflet';
+  import 'leaflet/dist/leaflet.css';
 
-import { Icon } from 'leaflet';
 
-// icons are missing
-delete Icon.Default.prototype._getIconUrl;
-Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
-});
+var latLng, icon;
+if (process.isClient) {
+  icon = require('leaflet').Icon
+  delete icon.Default.prototype._getIconUrl;
+  icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+  })
+  latLng =  require('leaflet').latLng
+}
 
 export default {
   name: "ryd.de.one",
   components: {
-    LMap,
-    LTileLayer,
-    LMarker,
-    LTooltip
+    // mapping components
+    Lmap: () => import('vue2-leaflet')
+      .then((component) => component.LMap)
+      .catch(),
+    LTileLayer: () => import('vue2-leaflet')
+      .then((component) => component.LTileLayer)
+      .catch(),
+    LMarker: () => import('vue2-leaflet')
+      .then((component) => component.LMarker)
+      .catch(),
+     LTooltip: () => import('vue2-leaflet')
+      .then((component) => component.LTooltip)
+      .catch()
   },
-  async created() {
+  async mounted() {
     this.loading = true;
     const response = await fetch('./de.ryd.one-places.json');
     const data = await response.json();
@@ -80,7 +97,6 @@ export default {
     return {
       loading: false,
       zoom: 13,
-      center: latLng(52.520008, 13.404954),
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -107,34 +123,51 @@ export default {
       this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
     },
     loadResults() {
+      if(this.searchValue.length == 0) {
+        return false
+      }
       this.markers = [];
       this.searchResults.forEach(result => this.markers.push(result));
       this.searchResults = [];
       this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
     },
     goToMarker(marker) {
-      this.$refs.map.mapObject.flyTo(latLng(marker.lat, marker.lng), 14, { animate: true, duration: 0.5});
+      this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.5});
+    },
+    clear() {
+      this.searchValue = '';
+      this.searchResults = [];
+    }
+  },
+  computed: {
+    center() {
+      if (process.isClient) {
+        return latLng(52.520008, 13.404954)
+      }
     }
   }
 };
 </script>
 
 <style lang="scss">
+@import '~/assets/styles.scss';
 .search-results {
   background-color: white;
+  border: 0.25px solid $lightGrey;
 }
 
 .search-result {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid black;
-    p {
-      margin-left:12px;
-      
-    }
-
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 0.25px solid $lightGrey;
+  &:hover {
+    cursor: pointer;
+  }
+  p {
+    margin-left:12px;
+    
+  }
 }
 .search-form {
   position: absolute;
@@ -152,30 +185,53 @@ export default {
 .search-input {
   width: 100%;
 }
+.form-field {
+  font-size: 0.9rem;
+  line-height: 2.5em;
+  background-color: $white;
+  border: 0.05em solid $lightGrey;
+  border-radius: 0.25rem 0.25rem 0 0;
+  box-shadow: 0px 0px 34px -13px rgba(120,124,135,1);
+  color: $darkGrey;
+  height: 50px;
+  line-height: 2em;
+  padding: 1em;
+  width: 100%;
+  &:focus {
+    outline: none;
+  }
+}
+.search-clear, .search-icon {
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+  width: 0.15rem;
+  height: 0.15rem;
+}
 .search-clear {
-  position: absolute;
-  right: 1rem;
-  top: 0.2rem;
-  width: 15px;
-  height: 15px;
-  opacity: 0.8;
-}
-.search-clear:hover {
-  opacity: 1;
-}
-.search-clear:before, .search-clear:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 16px;
-  width: 2px;
-  background-color: #333;
-}
-.search-clear:before {
-  transform: rotate(45deg);
-}
-.search-clear:after {
-  transform: rotate(-45deg);
+  opacity: 0.7;
+  &:hover {
+    display: block;
+    opacity: 1;
+    border: none;
+  }
+  &:focus {
+    outline: none;
+  }
+  &:before, &:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 16px;
+    width: 2px;
+    background-color: $lightGrey;
+  }
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
 }
 
 </style>
