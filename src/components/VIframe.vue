@@ -1,9 +1,9 @@
 <template>
-  <iframe class="v-iframe" :src="blok.src"></iframe>
+  <iframe class="v-iframe" :id="blok.id" :src="blok.src"></iframe>
 </template>
 <script>
   export default {
-    props: ['blok']
+    props: ['blok'],
   }
 </script>
 <style lang="scss">
@@ -11,6 +11,6 @@
 .v-iframe {
   border: none;
   width: 100%;
-  height: 100vh;
+  height: 1080px;
 }
-</style>
+</style>  

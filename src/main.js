@@ -19,6 +19,7 @@ import VButton from '~/components/VButton.vue'
 import VBlurbicon from '~/components/VBlurbicon.vue'
 import VGap from '~/components/VGap.vue'
 import VHeading from '~/components/VHeading.vue'
+import VIframe from '~/components/VIframe.vue'
 import VImageblock from '~/components/VImageblock.vue'
 import VImageoverlay from '~/components/VImageoverlay.vue'
 import VLinklist from '~/components/VLinklist.vue'
@@ -62,6 +63,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VBlurbicon', VBlurbicon)
   Vue.component('VHeading', VHeading)
   Vue.component('VGap', VGap)
+  Vue.component('VIframe', VIframe)
   Vue.component('VImageblock', VImageblock)
   Vue.component('VImageoverlay', VImageoverlay)
   Vue.component('VLinklist', VLinklist)
