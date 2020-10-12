@@ -9,13 +9,16 @@ const csvToJson = async() => {
     colParser: {
       'map_id': 'number',
       'lat': 'number',
-      'lng': 'number'
+      'lng': 'number',
     }
   }).fromFile('./static/de.ryd.one-places.csv');
 }
 
 csvToJson()
 .then(places => {
+  places.forEach((item, index) =>{
+    item.id = index + 1;
+  })
   const filepath = `./static/de.ryd.one-places.json`;
 
   fs.writeFile(filepath, JSON.stringify(places), (err) => {

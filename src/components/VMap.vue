@@ -1,12 +1,9 @@
 <template>
 
 <div style="height: 500px; width: 100%">
+  
     <div style="height: 200px overflow: auto;">
-      <p>First marker is placed at {{ withPopup.lat }}, {{ withPopup.lng }}</p>
       <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>
-      <button @click="showLongText">
-        Toggle long popup
-      </button>
       <button @click="showMap = !showMap">
         Toggle map
       </button>
@@ -16,7 +13,7 @@
       :zoom="zoom"
       :center="center"
       :options="mapOptions"
-      style="height: 80%"
+      style="height: 500px; width: 100%"
       @update:center="centerUpdate"
       @update:zoom="zoomUpdate"
     >
@@ -24,29 +21,13 @@
         :url="url"
         :attribution="attribution"
       />
-      <l-marker :lat-lng="withPopup">
-        <l-popup>
-          <div @click="innerClick">
-            I am a popup
-            <p v-show="showParagraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-              Donec finibus semper metus id malesuada.
-            </p>
-          </div>
-        </l-popup>
-      </l-marker>
-      <l-marker :lat-lng="withTooltip">
-        <l-tooltip :options="{ permanent: true, interactive: true }">
-          <div @click="innerClick">
-            I am a tooltip
-            <p v-show="showParagraph">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-              sed pretium nisl, ut sagittis sapien. Sed vel sollicitudin nisi.
-              Donec finibus semper metus id malesuada.
-            </p>
-          </div>
-        </l-tooltip>
+      <l-marker
+        v-for="marker in markers"
+        :key="marker.id"
+        :lat-lng.sync="marker.position"
+        @click="alert(marker)"
+      >
+        <l-tooltip :content="marker.tooltip" />
       </l-marker>
     </l-map>
   </div>
@@ -55,33 +36,54 @@
 
 <script>
 import { latLng } from "leaflet";
-import { LMap, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
+import { LMap, LTileLayer, LMarker, LTooltip } from "vue2-leaflet";
+
+import { Icon } from 'leaflet';
+
+// icons are missing
+delete Icon.Default.prototype._getIconUrl;
+Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});
 
 export default {
-  name: "Example",
+  name: "ryd.de.one",
   components: {
     LMap,
     LTileLayer,
     LMarker,
-    LPopup,
     LTooltip
+  },
+  async created() {
+    this.loading = true;
+    const response = await fetch('./de.ryd.one-places.json');
+    const data = await response.json();
+    this.markers = data.map(location => {
+      return {
+        position: { lat: location.lat, lng: location.lng },
+        tooltip: location.description
+      }
+    });
+    this.loading = false;
   },
   data() {
     return {
+      loading: false,
       zoom: 13,
-      center: latLng(47.41322, -1.219482),
+      center: latLng(52.520008, 13.404954),
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      withPopup: latLng(47.41322, -1.219482),
-      withTooltip: latLng(47.41422, -1.250482),
       currentZoom: 11.5,
-      currentCenter: latLng(47.41322, -1.219482),
+      currentCenter: latLng(52.520008, 13.404954),
       showParagraph: false,
       mapOptions: {
         zoomSnap: 0.5
       },
-      showMap: true
+      showMap: true,
+      markers: []
     };
   },
   methods: {
