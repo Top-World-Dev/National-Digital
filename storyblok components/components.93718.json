@@ -1,0 +1,1478 @@
+{
+  "components": [
+    {
+      "name": "BaseSection",
+      "display_name": "Row",
+      "created_at": "2020-09-29T02:33:23.540Z",
+      "updated_at": "2020-10-07T23:48:39.903Z",
+      "id": 1120582,
+      "schema": {
+        "name": {
+          "type": "text",
+          "pos": 0,
+          "regex": "^[A-Za-z]+[\\w\\-\\:\\.]*$",
+          "max_length": "",
+          "description": "Alpha-numeric characters only",
+          "display_name": "",
+          "default_value": "",
+          "required": false
+        },
+        "columns": {
+          "type": "bloks",
+          "maximum": "",
+          "description": "",
+          "restrict_components": true,
+          "default_value": "",
+          "required": true,
+          "component_whitelist": [
+            "BaseSectionColumn"
+          ],
+          "pos": 1
+        },
+        "container": {
+          "type": "option",
+          "use_uuid": true,
+          "required": true,
+          "description": "",
+          "default_value": "section-container-normal",
+          "options": [
+            {
+              "value": "section-container-none",
+              "name": "None"
+            },
+            {
+              "value": "section-container-large",
+              "name": "Large"
+            },
+            {
+              "value": "section-container-normal",
+              "name": "Normal"
+            },
+            {
+              "value": "section-container-small",
+              "name": "Small"
+            }
+          ],
+          "pos": 2
+        },
+        "mobile_fullwidth": {
+          "type": "boolean",
+          "pos": 3,
+          "display_name": "Escape mobile container:",
+          "description": ""
+        },
+        "align": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "section-align-left",
+              "name": "Left"
+            },
+            {
+              "value": "section-align-center",
+              "name": "Center"
+            },
+            {
+              "value": "section-align-right",
+              "name": "Right"
+            },
+            {
+              "value": "section-align-justify",
+              "name": "Justify"
+            }
+          ],
+          "description": "",
+          "required": true,
+          "default_value": "section-align-center",
+          "pos": 4
+        },
+        "backgroundColor": {
+          "type": "option",
+          "pos": 5,
+          "required": true,
+          "use_uuid": true,
+          "description": "",
+          "default_value": "section-background-white",
+          "options": [
+            {
+              "value": "section-background-white",
+              "name": "White"
+            },
+            {
+              "value": "section-background-brandgradient",
+              "name": "Brand Gradient"
+            },
+            {
+              "value": "section-background-brandblock",
+              "name": "Brand Block"
+            }
+          ]
+        },
+        "backgroundImage": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "pos": 6
+        },
+        "reverse": {
+          "type": "boolean",
+          "description": "",
+          "display_name": "Reverse column order on mobile:",
+          "pos": 7
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": "{{ name }}",
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Row",
+      "component_group_uuid": null
+    },
+    {
+      "name": "BaseSectionColumn",
+      "display_name": "Column",
+      "created_at": "2020-09-29T02:45:17.992Z",
+      "updated_at": "2020-10-07T23:49:56.845Z",
+      "id": 1120614,
+      "schema": {
+        "name": {
+          "type": "text",
+          "pos": 0,
+          "max_length": "",
+          "required": false,
+          "regex": "^$|^[A-Za-z]+[\\w\\-\\:\\.]*$",
+          "description": ""
+        },
+        "block": {
+          "type": "bloks",
+          "description": "",
+          "default_value": "",
+          "restrict_components": true,
+          "restrict_type": "groups",
+          "component_group_whitelist": [
+            "4303505f-9a42-4930-8eb1-f75d7312bf02"
+          ],
+          "required": true,
+          "pos": 1
+        },
+        "container": {
+          "type": "option",
+          "pos": 2,
+          "use_uuid": true,
+          "default_value": "column-container-none",
+          "required": true,
+          "options": [
+            {
+              "value": "column-container-none",
+              "name": "Normal"
+            },
+            {
+              "value": "column-container-padding",
+              "name": "Extra Padding"
+            },
+            {
+              "value": "column-container-mright",
+              "name": "Confined to Left"
+            },
+            {
+              "value": "column-container-mleft",
+              "name": "Confined to Right"
+            },
+            {
+              "value": "column-container-reset",
+              "name": "Reset"
+            }
+          ],
+          "description": ""
+        },
+        "valign": {
+          "type": "option",
+          "display_name": "Vertical Align",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "column-valign-top",
+              "name": "Top"
+            },
+            {
+              "value": "column-valign-middle",
+              "name": "Middle"
+            },
+            {
+              "value": "column-valign-bottom",
+              "name": "Bottom"
+            }
+          ],
+          "default_value": "column-valign-top",
+          "pos": 3
+        },
+        "align_desktop": {
+          "type": "option",
+          "use_uuid": true,
+          "required": true,
+          "options": [
+            {
+              "value": "column-desktop-align-left",
+              "name": "Left"
+            },
+            {
+              "value": "column-desktop-align-center",
+              "name": "Center"
+            },
+            {
+              "value": "column-desktop-align-right",
+              "name": "Right"
+            },
+            {
+              "value": "column-desktop-align-justify",
+              "name": "Justify"
+            }
+          ],
+          "display_name": "Text Align Desktop",
+          "default_value": "column-desktop-align-center",
+          "pos": 4
+        },
+        "align_mobile": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "column-mobile-align-left",
+              "name": "Left"
+            },
+            {
+              "value": "column-mobile-align-center",
+              "name": "Center"
+            },
+            {
+              "value": "column-mobile-align-right",
+              "name": "Right"
+            },
+            {
+              "value": "column-mobile-align-justify",
+              "name": "Justify"
+            }
+          ],
+          "required": true,
+          "display_name": "Text Align Mobile",
+          "default_value": "column-desktop-align-center",
+          "pos": 5
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": "{{ name }}",
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Column",
+      "component_group_uuid": null
+    },
+    {
+      "name": "Global",
+      "display_name": null,
+      "created_at": "2020-09-28T22:59:40.344Z",
+      "updated_at": "2020-09-28T23:01:01.601Z",
+      "id": 1120534,
+      "schema": {
+        "section": {
+          "type": "bloks"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Global",
+      "component_group_uuid": null
+    },
+    {
+      "name": "Page",
+      "display_name": null,
+      "created_at": "2020-09-23T23:54:53.351Z",
+      "updated_at": "2020-10-12T10:26:19.169Z",
+      "id": 1114059,
+      "schema": {
+        "meta_information": {
+          "type": "custom",
+          "field_type": "meta-fields",
+          "options": [],
+          "pos": 0,
+          "translatable": true
+        },
+        "body": {
+          "type": "bloks",
+          "pos": 2,
+          "maximum": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "BaseSection",
+            "TheHeader",
+            "TheFooter"
+          ],
+          "description": ""
+        },
+        "noindex": {
+          "type": "boolean",
+          "display_name": "Exclude page from search index:",
+          "default_value": "",
+          "description": "",
+          "max_length": ""
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": true,
+      "preview_tmpl": null,
+      "is_nestable": false,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Page",
+      "component_group_uuid": null
+    },
+    {
+      "name": "TheFooter",
+      "display_name": "Footer",
+      "created_at": "2020-09-28T23:01:09.490Z",
+      "updated_at": "2020-10-05T02:32:47.068Z",
+      "id": 1120535,
+      "schema": {
+        "section": {
+          "type": "option",
+          "use_uuid": true,
+          "source": "internal_stories",
+          "folder_slug": "global/footer",
+          "display_name": "",
+          "default_value": "",
+          "description": "",
+          "required": true
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Footer",
+      "component_group_uuid": null
+    },
+    {
+      "name": "TheHeader",
+      "display_name": "Header",
+      "created_at": "2020-09-29T10:04:55.355Z",
+      "updated_at": "2020-10-05T02:32:30.457Z",
+      "id": 1121079,
+      "schema": {
+        "section": {
+          "type": "option",
+          "use_uuid": true,
+          "source": "internal_stories",
+          "folder_slug": "global/header",
+          "description": "",
+          "pos": 0,
+          "required": true
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Header",
+      "component_group_uuid": null
+    },
+    {
+      "name": "TheHeaderSection",
+      "display_name": "",
+      "created_at": "2020-09-30T00:09:44.607Z",
+      "updated_at": "2020-09-30T03:50:33.295Z",
+      "id": 1122268,
+      "schema": {
+        "image": {
+          "type": "bloks",
+          "pos": 0,
+          "restrict_components": true,
+          "component_whitelist": [
+            "VImage"
+          ],
+          "required": true
+        },
+        "nav": {
+          "type": "bloks",
+          "display_name": "Menu",
+          "restrict_components": true,
+          "component_whitelist": [
+            "TheNav"
+          ],
+          "pos": 1
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "TheHeaderSection",
+      "component_group_uuid": null
+    },
+    {
+      "name": "TheNav",
+      "display_name": "Parent Menu Item",
+      "created_at": "2020-09-30T02:12:27.472Z",
+      "updated_at": "2020-09-30T02:24:01.835Z",
+      "id": 1122284,
+      "schema": {
+        "title": {
+          "type": "text",
+          "translatable": true,
+          "required": true
+        },
+        "item": {
+          "type": "bloks",
+          "restrict_components": true,
+          "component_whitelist": [
+            "TheNavItem"
+          ],
+          "description": ""
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Parent Menu Item",
+      "component_group_uuid": null
+    },
+    {
+      "name": "TheNavItem",
+      "display_name": "Menu Item",
+      "created_at": "2020-09-30T02:17:45.807Z",
+      "updated_at": "2020-09-30T06:18:01.688Z",
+      "id": 1122285,
+      "schema": {
+        "title": {
+          "type": "text",
+          "required": true,
+          "translatable": true
+        },
+        "link": {
+          "type": "multilink",
+          "translatable": true,
+          "required": true
+        },
+        "subitem": {
+          "type": "bloks",
+          "restrict_components": true,
+          "component_whitelist": [
+            "TheNavItem"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "Menu Item",
+      "component_group_uuid": null
+    },
+    {
+      "name": "VBlurbicon",
+      "display_name": null,
+      "created_at": "2020-09-28T23:08:57.977Z",
+      "updated_at": "2020-10-01T01:58:38.892Z",
+      "id": 1120569,
+      "schema": {
+        "item": {
+          "type": "bloks",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VBlurbiconItem"
+          ]
+        },
+        "orientation": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "blurbicon-vertical",
+              "name": "Vertical"
+            },
+            {
+              "value": "blurbicon-horizontal",
+              "name": "Horizontal"
+            }
+          ],
+          "required": true,
+          "display_name": "",
+          "default_value": "blurbicon-vertical"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VBlurbicon",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VBlurbiconItem",
+      "display_name": null,
+      "created_at": "2020-09-29T04:58:34.542Z",
+      "updated_at": "2020-09-30T02:49:58.933Z",
+      "id": 1120660,
+      "schema": {
+        "title": {
+          "type": "text",
+          "translatable": true,
+          "pos": 1
+        },
+        "content": {
+          "type": "richtext",
+          "translatable": true,
+          "customize_toolbar": true,
+          "toolbar": [
+            "bold",
+            "italic",
+            "strike",
+            "underline",
+            "paragraph",
+            "list",
+            "olist",
+            "link"
+          ],
+          "pos": 2
+        },
+        "image": {
+          "type": "bloks",
+          "maximum": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VImage"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VBlurbiconItem",
+      "component_group_uuid": "d53ad682-00d1-4b37-a7e0-b76f998a3951",
+      "component_group_name": ""
+    },
+    {
+      "name": "VButton",
+      "display_name": null,
+      "created_at": "2020-09-24T03:33:55.037Z",
+      "updated_at": "2020-09-29T05:24:14.954Z",
+      "id": 1114130,
+      "schema": {
+        "link": {
+          "type": "multilink",
+          "restrict_content_types": false,
+          "email_link_type": false,
+          "translatable": true
+        },
+        "text": {
+          "type": "text",
+          "display_name": "Button text",
+          "translatable": true,
+          "description": "",
+          "default_value": "Click here"
+        },
+        "style": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "button-primary",
+              "name": "Primary"
+            },
+            {
+              "value": "button-accent",
+              "name": "Accent"
+            }
+          ],
+          "display_name": "",
+          "default_value": "button-accent"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VButton",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VForm",
+      "display_name": null,
+      "created_at": "2020-10-01T05:36:30.151Z",
+      "updated_at": "2020-10-12T02:44:55.959Z",
+      "id": 1125928,
+      "schema": {
+        "input": {
+          "type": "bloks",
+          "pos": 0,
+          "maximum": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VFormInput"
+          ]
+        },
+        "submit": {
+          "type": "text",
+          "translatable": true,
+          "description": "",
+          "default_value": "Submit",
+          "required": true,
+          "pos": 3
+        },
+        "endpoint": {
+          "type": "multilink",
+          "translatable": true,
+          "description": "",
+          "display_name": "",
+          "restrict_content_types": false,
+          "required": true,
+          "force_link_scope": false
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VForm",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VFormInput",
+      "display_name": null,
+      "created_at": "2020-10-12T00:32:11.525Z",
+      "updated_at": "2020-10-12T01:01:20.348Z",
+      "id": 1141256,
+      "schema": {
+        "label": {
+          "type": "text",
+          "pos": 0,
+          "default_value": "",
+          "description": "",
+          "regex": "",
+          "required": true,
+          "translatable": true
+        },
+        "type": {
+          "type": "option",
+          "pos": 1,
+          "max_length": "",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "email",
+              "name": "Email"
+            },
+            {
+              "value": "number",
+              "name": "Number"
+            },
+            {
+              "value": "password",
+              "name": "Password"
+            },
+            {
+              "value": "tel",
+              "name": "Telephone"
+            },
+            {
+              "value": "text",
+              "name": "Text"
+            },
+            {
+              "value": "url",
+              "name": "URL"
+            }
+          ],
+          "required": true,
+          "default_value": "text"
+        },
+        "autocomplete": {
+          "type": "text",
+          "description": "Please refer to https://www.w3.org/TR/WCAG21/#input-purposes",
+          "pos": 2,
+          "default_value": "off",
+          "required": true
+        },
+        "required": {
+          "type": "boolean",
+          "display_name": "Required:",
+          "description": ""
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VFormInput",
+      "component_group_uuid": null
+    },
+    {
+      "name": "VGap",
+      "display_name": null,
+      "created_at": "2020-09-29T09:17:18.827Z",
+      "updated_at": "2020-09-29T09:17:57.631Z",
+      "id": 1120966,
+      "schema": {
+        "size": {
+          "type": "number",
+          "required": true,
+          "description": "",
+          "default_value": "4"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VGap",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VHeading",
+      "display_name": "",
+      "created_at": "2020-09-28T01:06:39.663Z",
+      "updated_at": "2020-09-29T05:36:34.573Z",
+      "id": 1118701,
+      "schema": {
+        "content": {
+          "type": "text",
+          "translatable": true,
+          "required": true
+        },
+        "style": {
+          "type": "option",
+          "use_uuid": true,
+          "required": true,
+          "description": "",
+          "default_value": "h2",
+          "display_name": "",
+          "options": [
+            {
+              "value": "h1",
+              "name": "H1"
+            },
+            {
+              "value": "h2",
+              "name": "H2"
+            },
+            {
+              "value": "h3",
+              "name": "H3"
+            },
+            {
+              "value": "h4",
+              "name": "H4"
+            },
+            {
+              "value": "h5",
+              "name": "H5"
+            },
+            {
+              "value": "h6",
+              "name": "H6"
+            }
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": "{{ content }}",
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VHeading",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VIframe",
+      "display_name": null,
+      "created_at": "2020-10-12T03:13:39.865Z",
+      "updated_at": "2020-10-12T03:13:57.075Z",
+      "id": 1141317,
+      "schema": {
+        "src": {
+          "type": "text",
+          "display_name": "Source",
+          "required": true,
+          "translatable": true
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VIframe",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VImage",
+      "display_name": null,
+      "created_at": "2020-09-29T01:29:54.348Z",
+      "updated_at": "2020-10-01T10:33:36.751Z",
+      "id": 1120578,
+      "schema": {
+        "title": {
+          "type": "text",
+          "translatable": true,
+          "pos": 0,
+          "default_value": "",
+          "required": true,
+          "regex": "",
+          "max_length": ""
+        },
+        "image": {
+          "type": "asset",
+          "filetypes": [
+            "images"
+          ],
+          "translatable": true,
+          "required": true,
+          "pos": 1
+        },
+        "width": {
+          "type": "number",
+          "pos": 2,
+          "description": "",
+          "default_value": "100",
+          "display_name": "Width (px)",
+          "required": true,
+          "translatable": true
+        },
+        "height": {
+          "type": "number",
+          "pos": 3,
+          "display_name": "Height (px)",
+          "default_value": "100",
+          "required": true,
+          "translatable": true
+        },
+        "link": {
+          "type": "multilink",
+          "translatable": true,
+          "email_link_type": true,
+          "show_anchor": false,
+          "link_scope": "",
+          "description": "",
+          "display_name": "Link (optional)"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VImage",
+      "component_group_uuid": "d53ad682-00d1-4b37-a7e0-b76f998a3951",
+      "component_group_name": ""
+    },
+    {
+      "name": "VImageblock",
+      "display_name": null,
+      "created_at": "2020-09-29T01:31:56.532Z",
+      "updated_at": "2020-10-05T21:53:18.694Z",
+      "id": 1120580,
+      "schema": {
+        "image": {
+          "type": "bloks",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VImage"
+          ],
+          "required": true,
+          "pos": 0
+        },
+        "style": {
+          "type": "option",
+          "required": true,
+          "default_value": "imageblock-column",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "imageblock-row",
+              "name": "Row"
+            },
+            {
+              "value": "imageblock-column",
+              "name": "Column"
+            }
+          ],
+          "description": "",
+          "pos": 1
+        },
+        "effect": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "imageblock-default",
+              "name": "None"
+            },
+            {
+              "value": "imageblock-rounded",
+              "name": "Round Corners"
+            }
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VImageblock",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VImageoverlay",
+      "display_name": null,
+      "created_at": "2020-10-01T02:46:33.364Z",
+      "updated_at": "2020-10-01T03:18:14.373Z",
+      "id": 1125786,
+      "schema": {
+        "image": {
+          "type": "bloks",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VImage"
+          ],
+          "description": "",
+          "required": true
+        },
+        "overlay": {
+          "type": "bloks",
+          "description": "",
+          "required": true,
+          "default_value": "",
+          "restrict_components": true,
+          "restrict_type": "groups",
+          "component_group_whitelist": [
+            "4303505f-9a42-4930-8eb1-f75d7312bf02"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VImageoverlay",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VLinklist",
+      "display_name": null,
+      "created_at": "2020-09-28T23:40:30.886Z",
+      "updated_at": "2020-10-06T05:23:47.839Z",
+      "id": 1120575,
+      "schema": {
+        "item": {
+          "type": "bloks",
+          "required": true,
+          "restrict_components": true,
+          "component_whitelist": [
+            "VLinklistItem"
+          ],
+          "maximum": ""
+        },
+        "style": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "linklist-inline",
+              "name": "Row"
+            },
+            {
+              "value": "linklist-block",
+              "name": "Column"
+            }
+          ],
+          "description": "",
+          "default_value": "linklist-inline"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VLinklist",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VLinklistItem",
+      "display_name": null,
+      "created_at": "2020-09-29T04:56:59.305Z",
+      "updated_at": "2020-09-30T02:51:02.576Z",
+      "id": 1120657,
+      "schema": {
+        "link": {
+          "type": "multilink",
+          "translatable": true,
+          "restrict_content_types": false,
+          "email_link_type": true,
+          "required": true,
+          "pos": 1
+        },
+        "title": {
+          "type": "text",
+          "translatable": true,
+          "required": true,
+          "pos": 2
+        },
+        "image": {
+          "type": "bloks",
+          "maximum": "",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VImage"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VLinklistItem",
+      "component_group_uuid": "d53ad682-00d1-4b37-a7e0-b76f998a3951",
+      "component_group_name": ""
+    },
+    {
+      "name": "VList",
+      "display_name": null,
+      "created_at": "2020-09-28T02:09:08.966Z",
+      "updated_at": "2020-10-04T03:45:46.867Z",
+      "id": 1118736,
+      "schema": {
+        "item": {
+          "type": "bloks",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VListItem"
+          ],
+          "description": ""
+        },
+        "align": {
+          "type": "option",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "list-align-left",
+              "name": "Left"
+            },
+            {
+              "value": "list-align-center",
+              "name": "Center"
+            },
+            {
+              "value": "list-align-right",
+              "name": "Right"
+            }
+          ],
+          "default_value": "list-align-left"
+        },
+        "style": {
+          "type": "option",
+          "max_length": "",
+          "regex": "",
+          "use_uuid": true,
+          "options": [
+            {
+              "value": "h5",
+              "name": "H5"
+            },
+            {
+              "value": "h6",
+              "name": "H6"
+            }
+          ],
+          "default_value": "h5",
+          "display_name": "Title Style",
+          "required": true
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VList",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VListItem",
+      "display_name": null,
+      "created_at": "2020-09-28T02:18:36.132Z",
+      "updated_at": "2020-09-29T11:07:09.654Z",
+      "id": 1118737,
+      "schema": {
+        "title": {
+          "type": "text",
+          "translatable": true,
+          "required": true
+        },
+        "content": {
+          "type": "richtext",
+          "translatable": true,
+          "customize_toolbar": true,
+          "toolbar": [
+            "bold",
+            "italic",
+            "strike",
+            "underline",
+            "link"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VListItem",
+      "component_group_uuid": "d53ad682-00d1-4b37-a7e0-b76f998a3951",
+      "component_group_name": ""
+    },
+    {
+      "name": "VMap",
+      "display_name": null,
+      "created_at": "2020-10-11T22:59:18.643Z",
+      "updated_at": "2020-10-11T22:59:30.094Z",
+      "id": 1141254,
+      "schema": {
+        "map": {
+          "type": "text"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VMap",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VReviewslider",
+      "display_name": null,
+      "created_at": "2020-10-01T10:14:40.796Z",
+      "updated_at": "2020-10-01T10:28:56.432Z",
+      "id": 1126668,
+      "schema": {
+        "slide": {
+          "type": "bloks",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VReviewsliderItem"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VReviewslider",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VReviewsliderItem",
+      "display_name": null,
+      "created_at": "2020-10-01T10:27:46.185Z",
+      "updated_at": "2020-10-01T10:28:26.083Z",
+      "id": 1126702,
+      "schema": {
+        "author": {
+          "type": "text",
+          "required": true
+        },
+        "content": {
+          "type": "text",
+          "required": true,
+          "translatable": true
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VReviewsliderItem",
+      "component_group_uuid": null
+    },
+    {
+      "name": "VRule",
+      "display_name": null,
+      "created_at": "2020-09-28T01:53:53.631Z",
+      "updated_at": "2020-09-28T01:53:53.631Z",
+      "id": 1118730,
+      "schema": {},
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VRule",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VSlider",
+      "display_name": null,
+      "created_at": "2020-10-04T04:43:52.591Z",
+      "updated_at": "2020-10-04T04:51:25.186Z",
+      "id": 1129944,
+      "schema": {
+        "slide": {
+          "type": "bloks",
+          "display_name": "",
+          "required": true,
+          "restrict_components": true,
+          "restrict_type": "",
+          "component_group_whitelist": [],
+          "component_whitelist": [
+            "VSliderItem"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VSlider",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VSliderItem",
+      "display_name": null,
+      "created_at": "2020-10-04T04:50:09.425Z",
+      "updated_at": "2020-10-04T04:51:02.865Z",
+      "id": 1129952,
+      "schema": {
+        "block": {
+          "type": "bloks",
+          "maximum": "",
+          "restrict_components": true,
+          "restrict_type": "groups",
+          "component_group_whitelist": [
+            "4303505f-9a42-4930-8eb1-f75d7312bf02"
+          ]
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VSliderItem",
+      "component_group_uuid": null
+    },
+    {
+      "name": "VTestimonial",
+      "display_name": null,
+      "created_at": "2020-09-29T09:51:21.916Z",
+      "updated_at": "2020-10-01T09:33:23.420Z",
+      "id": 1120998,
+      "schema": {
+        "profile": {
+          "type": "bloks",
+          "restrict_components": true,
+          "component_whitelist": [
+            "VImage"
+          ],
+          "required": true,
+          "description": "",
+          "pos": 0,
+          "display_name": "Profile Picture"
+        },
+        "author": {
+          "type": "text",
+          "required": true,
+          "pos": 1,
+          "display_name": "Author Name"
+        },
+        "logo": {
+          "type": "bloks",
+          "maximum": "",
+          "required": true,
+          "restrict_components": true,
+          "component_whitelist": [
+            "VImage"
+          ],
+          "pos": 2,
+          "display_name": "Company Logo"
+        },
+        "position": {
+          "type": "text",
+          "required": true,
+          "pos": 3
+        },
+        "content": {
+          "type": "text",
+          "required": true,
+          "translatable": true,
+          "pos": 4
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": null,
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VTestimonial",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    },
+    {
+      "name": "VText",
+      "display_name": null,
+      "created_at": "2020-09-29T02:03:11.820Z",
+      "updated_at": "2020-10-02T03:48:53.860Z",
+      "id": 1120581,
+      "schema": {
+        "content": {
+          "type": "richtext",
+          "translatable": true,
+          "customize_toolbar": true,
+          "toolbar": [
+            "bold",
+            "italic",
+            "strike",
+            "underline",
+            "paragraph",
+            "list",
+            "olist",
+            "link"
+          ],
+          "style_options": []
+        },
+        "size": {
+          "type": "option",
+          "regex": "",
+          "default_value": "text-regular",
+          "use_uuid": true,
+          "description": "",
+          "options": [
+            {
+              "value": "text-small",
+              "name": "Small"
+            },
+            {
+              "value": "text-regular",
+              "name": "Regular"
+            },
+            {
+              "value": "text-large",
+              "name": "Large"
+            }
+          ],
+          "display_name": "Text size"
+        }
+      },
+      "image": null,
+      "preview_field": null,
+      "is_root": false,
+      "preview_tmpl": "",
+      "is_nestable": true,
+      "all_presets": [],
+      "preset_id": null,
+      "real_name": "VText",
+      "component_group_uuid": "4303505f-9a42-4930-8eb1-f75d7312bf02",
+      "component_group_name": "Module Blocks"
+    }
+  ]
+}

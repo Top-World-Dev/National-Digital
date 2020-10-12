@@ -22,6 +22,7 @@ export default {
   mounted() {
     window.addEventListener('resize', this.handleResize(window.innerWidth));
     this.handleResize(window.innerWidth);
+    localStorage.setItem('analyse', false);
   },
   destroyed() {
     window.removeEventListener('resize', this.handleResize(window.innerWidth));
