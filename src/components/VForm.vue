@@ -6,10 +6,6 @@
     <div class="form-row">
       <button type="submit" class="form-submit v-button button-primary"><a>{{ blok.submit }}</a></button>
     </div>
-    <div class="form-row">
-      <!-- <div submit-success>{{ blok.success }}</div> -->
-      <!-- <div submit-error>{{ blok.error }}</div> -->
-    </div>
   </form>
 </template>
 
