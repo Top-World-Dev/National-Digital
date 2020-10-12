@@ -24,6 +24,14 @@ module.exports = {
         },
         downloadImages: true, // Optional. default false,
         imageDirectory: 'storyblok_images', // Optional. Folder to put the downloaded images
+      },
+    },
+    {
+      use: 'gridsome-plugin-gtm',
+      options: {
+        id: 'GTM-MGRCNQP',
+        enabled: true,
+        debug: true
       }
     }
   ],

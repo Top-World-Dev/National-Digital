@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "gridsome": "^0.7.21",
+    "gridsome-plugin-gtm": "^0.1.1",
     "gridsome-source-storyblok": "^1.0.2",
     "typeface-fira-sans": "0.0.75",
     "vue-slick-carousel": "^1.0.6"
