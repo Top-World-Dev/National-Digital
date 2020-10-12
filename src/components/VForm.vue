@@ -1,13 +1,7 @@
 <template>
-  <form class="v-form" method="post" action-xhr="#" target="_blank" v-editable="blok">
-    <div class="form-row">
-      <input class="form-field" type="text" name="name" :placeholder="blok.name" required autocomplete="name" :aria-label="blok.name" />
-    </div>
-    <div class="form-row">
-      <input class="form-field" type="text" name="email" :placeholder="blok.email" required autocomplete="email" :aria-label="blok.email" />
-    </div>
-    <div class="form-row">
-      <input class="form-field" type="tel" name="phone" :placeholder="blok.phone" autocomplete="tel" :aria-label="blok.phone" />
+  <form class="v-form" method="post" :action="blok.endpoint.url" v-editable="blok">
+    <div v-for="input in blok.input" :key="blok._uid" class="form-row">
+      <input class="form-field" :type="input.type" :name="input.label" :placeholder="input.label" :aria-label="input.label" :autocomplete="input.autocomplete" :required="input.required" :aria-required="input.required" />
     </div>
     <div class="form-row">
       <div class="form-submit v-button button-primary"><a href="#">{{ blok.submit }}</a></div>
