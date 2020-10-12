@@ -4,7 +4,7 @@
       <input class="form-field" :type="input.type" :name="input.label" :placeholder="input.label" :aria-label="input.label" :autocomplete="input.autocomplete" :required="input.required" :aria-required="input.required" />
     </div>
     <div class="form-row">
-      <div class="form-submit v-button button-primary"><a href="#">{{ blok.submit }}</a></div>
+      <button type="submit" class="form-submit v-button button-primary"><a>{{ blok.submit }}</a></button>
     </div>
     <div class="form-row">
       <!-- <div submit-success>{{ blok.success }}</div> -->
