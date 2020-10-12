@@ -1,12 +1,12 @@
 <template>
 
 <div style="height: 500px; width: 100%">
-  
-    <div style="height: 200px overflow: auto;">
-      <p>Center is at {{ currentCenter }} and the zoom is: {{ currentZoom }}</p>
-      <button @click="showMap = !showMap">
-        Toggle map
-      </button>
+
+    <div class="search-form">
+      <div class="search-row">
+        <input type="search" name="search" placeholder="Search" class="search-input" @keyup="search($event.target.value)">
+        <a role="button" class="search-clear search-is-hidden" tabindex="0"></a>
+      </div>
     </div>
     <l-map
       v-if="showMap"
@@ -14,20 +14,18 @@
       :center="center"
       :options="mapOptions"
       style="height: 500px; width: 100%"
-      @update:center="centerUpdate"
-      @update:zoom="zoomUpdate"
     >
       <l-tile-layer
         :url="url"
         :attribution="attribution"
       />
       <l-marker
-        v-for="marker in markers"
-        :key="marker.id"
-        :lat-lng.sync="marker.position"
-        @click="alert(marker)"
+        v-for="location in locations"
+        :key="location.id"
+        :lat-lng.sync="location.position"
+        @click="alert(location)"
       >
-        <l-tooltip :content="marker.tooltip" />
+        <l-tooltip :content="location.tooltip" />
       </l-marker>
     </l-map>
   </div>
@@ -60,10 +58,12 @@ export default {
     this.loading = true;
     const response = await fetch('./de.ryd.one-places.json');
     const data = await response.json();
-    this.markers = data.map(location => {
+    this.locations = data.map(location => {
       return {
         position: { lat: location.lat, lng: location.lng },
-        tooltip: location.description
+        tooltip: location.description,
+        title: location.title,
+        address: location.address
       }
     });
     this.loading = false;
@@ -83,21 +83,15 @@ export default {
         zoomSnap: 0.5
       },
       showMap: true,
-      markers: []
+      locations: [],
     };
   },
   methods: {
-    zoomUpdate(zoom) {
-      this.currentZoom = zoom;
-    },
-    centerUpdate(center) {
-      this.currentCenter = center;
-    },
-    showLongText() {
-      this.showParagraph = !this.showParagraph;
-    },
-    innerClick() {
-      alert("Click!");
+    search(value) {
+      if(value.length > 2) {
+        console.log(this.locations.filter(item => item.title.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.tooltip.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.toLowerCase().indexOf(value.toLowerCase()) != -1));
+      }
+     
     }
   }
 };
