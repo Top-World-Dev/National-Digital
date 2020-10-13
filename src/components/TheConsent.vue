@@ -37,15 +37,19 @@
 <script>
 export default {
   props: ["content"],
-  mounted() {
-    localStorage.setItem('consentsToMinimum',true);
-    localStorage.setItem('consentsToMarketing',true);
-    localStorage.setItem('consentsToAnalytics',true);
-    localStorage.setItem('consentsToMedia',true);
+  created() {
+    if (process.isClient) {
+      localStorage.setItem('consentsToMinimum',true);
+      localStorage.setItem('consentsToMarketing',true);
+      localStorage.setItem('consentsToAnalytics',true);
+      localStorage.setItem('consentsToMedia',true);
+    }
   },
   methods: {
     addLocalStorage(event) {
-      localStorage.setItem(event.target.value,event.target.checked);
+      if (process.isClient) {
+        localStorage.setItem(event.target.value,event.target.checked);
+      }
     },
     consentAll() {
       let checkboxes = document.querySelectorAll('.xy-consent .consent-form input[type=checkbox]');
@@ -55,7 +59,9 @@ export default {
       this.closeConsent();
     },
     closeConsent() {
-      localStorage.setItem('consentGiven',true);
+      if (process.isClient) {
+        localStorage.setItem('consentGiven',true);
+      }
       this.$emit('askConsent',false);
     }
   }

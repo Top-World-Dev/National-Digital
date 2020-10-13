@@ -31,8 +31,10 @@ export default {
     }
   },
   created() {
-    if (!localStorage.getItem('consentGiven')) {
-      this.askConsent = true;
+    if (process.isClient) {
+      if (!localStorage.getItem('consentGiven')) {
+        this.askConsent = true;
+      }
     }
   },
   data() {
