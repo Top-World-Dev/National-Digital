@@ -30,7 +30,7 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
     if (!localStorage.getItem('consentGiven')) {
       this.askConsent = true;
     }
