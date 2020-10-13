@@ -5,20 +5,20 @@
       <p>{{ content.consent_notice }}</p>
       <form class="consent-form">
         <div>
-          <input type="checkbox" id="consent_required" name="consent_required" value="consent_required" disabled>
-          <label for="consent_required">{{ content.term_required }}</label>
+          <input type="checkbox" id="consentsToRequired" name="consentsToRequired" value="consentsToRequired" checked disabled>
+          <label for="consentsToRequired">{{ content.term_required }}</label>
         </div>
         <div>
-          <input type="checkbox" id="consent_marketing" name="consent_marketing" value="consent_marketing" disabled>
-          <label for="consent_marketing">{{ content.term_marketing }}</label>
-          <input type="checkbox" id="consent_analytics" name="consent_analytics" value="consent_analytics" disabled>
-          <label for="consent_analytics">{{ content.term_analytics }}</label>
-          <input type="checkbox" id="consent_media" name="consent_media" value="consent_media" disabled>
-          <label for="consent_media">{{ content.term_media }}</label>
+          <input type="checkbox" id="consentsToMarketing" name="consentsToMarketing" value="consentsToMarketing" @change="addLocalStorage($event)" checked>
+          <label for="consentsToMarketing">{{ content.term_marketing }}</label>
+          <input type="checkbox" id="consentsToAnalytics" name="consentsToAnalytics" value="consentsToAnalytics" @change="addLocalStorage($event)" checked>
+          <label for="consentsToAnalytics">{{ content.term_analytics }}</label>
+          <input type="checkbox" id="consentsToMedia" name="consentsToMedia" value="consentsToMedia" @change="addLocalStorage($event)" checked>
+          <label for="consentsToMedia">{{ content.term_media }}</label>
         </div>
         <div>
-          <button type="button" class="form-submit v-button button-primary"><a>{{ content.term_aceptall }}</a></button>
-          <button type="submit" class="form-submit v-button button-outline"><a>{{ content.term_aceptselect }}</a></button>
+          <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.term_acceptall }}</a></button>
+          <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.term_acceptselect }}</a></button>
         </div>
       </form>
       <ul class="v-linklist" :class="[content.style]">
@@ -35,6 +35,24 @@
 <script>
 export default {
   props: ["content"],
+  mounted() {
+    localStorage.setItem('consentsToRequired',true)
+  },
+  methods: {
+    addLocalStorage(event) {
+      localStorage.setItem(event.target.value,event.target.checked);
+    },
+    consentAll() {
+      let checkboxes = document.querySelectorAll('.xy-consent .consent-form input[type=checkbox]');
+      for (let checkbox of checkboxes) {
+        checkbox.checked = true;
+      }
+      this.closeConsent();
+    },
+    closeConsent() {
+      this.$emit('askConsent',false);
+    }
+  }
 };
 </script>
 

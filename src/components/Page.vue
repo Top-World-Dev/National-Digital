@@ -1,6 +1,6 @@
 <template>
   <div>
-    <theconsent v-for="blok in blok.body" v-if="blok.component == 'TheHeader'" :content="blok.section.content.section[0]"></theconsent>
+    <theconsent :key="blok._uid" v-for="blok in blok.body" v-if="blok.component == 'TheHeader' && askConsent" :content="blok.section.content.section[0]"></theconsent>
     <component :key="blok._uid" v-for="blok in blok.body" :blok="blok" :is="blok.component"></component>
   </div>
 </template>
@@ -14,22 +14,32 @@ export default {
     "theconsent": TheConsent,
   },
   metaInfo() {
-      const data = this.blok.meta_information;
-      if(!data) {
-        return false
-      } 
-      else {
-        return {
-          title: data.title,
-          meta: [
-            { name: 'description', content: data.description }
-          ],
-          link: [
-            { rel: 'canonical', href: `${this.$route.fullPath}` },
-          ]
-        }
+    const data = this.blok.meta_information;
+    if(!data) {
+      return false
+    } 
+    else {
+      return {
+        title: data.title,
+        meta: [
+          { name: 'description', content: data.description }
+        ],
+        link: [
+          { rel: 'canonical', href: `${this.$route.fullPath}` },
+        ]
       }
     }
+  },
+  created() {
+    if (!localStorage.getItem('consentsToRequired')) {
+      this.askConsent = true;
+    }
+  },
+  data() {
+    return {
+      askConsent: false
+    }
+  }
 }
 </script>
 
