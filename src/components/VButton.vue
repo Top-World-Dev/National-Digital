@@ -82,7 +82,7 @@
           }
       }
       &:active {
-          border-color: $accent;
+          border-color: $brand;
           background-color: rgba($brand,0.2);
       }
       a, button, [role="button"] {
