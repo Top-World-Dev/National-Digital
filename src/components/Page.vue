@@ -31,7 +31,7 @@ export default {
     }
   },
   created() {
-    if (!localStorage.getItem('consentsToRequired')) {
+    if (!localStorage.getItem('consentGiven')) {
       this.askConsent = true;
     }
   },

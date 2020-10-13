@@ -17,9 +17,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 1rem;
+  font-size: 1em;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+  margin-right: 0.25rem;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   padding-left: 1.5em;
@@ -75,14 +76,14 @@
       background-color: transparent;
       &:hover {
           border-color: $brand;
-          background-color: lighten($accent,10%);
+          background-color: rgba($brand,0.1);
           a {
               border-color: $brand;
           }
       }
       &:active {
           border-color: $accent;
-          background-color: darken($accent,5%);
+          background-color: rgba($brand,0.2);
       }
       a, button, [role="button"] {
         color: $brand;
