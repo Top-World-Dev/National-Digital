@@ -1,9 +1,24 @@
 <template>
-  <iframe class="v-iframe" :id="blok.id" :src="blok.src"></iframe>
+  <iframe class="v-iframe" :id="blok.id" :src="blok.src" :style="{height: height}"></iframe>
 </template>
 <script>
   export default {
     props: ['blok'],
+    data() {
+      return {
+        height: '0px'
+      }
+    },
+    mounted() {
+      window.addEventListener('message', (event) => {
+        this.height = `${event.data[1]}px`;
+      });
+    },
+    destroyed() {
+      window.removeEventListener('resize', (event) => {
+        console.log(`Received message: ${event.data}`);
+      });
+    },
   }
 </script>
 <style lang="scss">
@@ -11,6 +26,7 @@
 .v-iframe {
   border: none;
   width: 100%;
-  height: 1080px;
 }
 </style>  
+
+
