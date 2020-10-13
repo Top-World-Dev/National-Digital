@@ -70,5 +70,23 @@
         color: $brand;
       }
   }
+  &.button-outline {
+      border-color: $brand;
+      background-color: transparent;
+      &:hover {
+          border-color: $brand;
+          background-color: lighten($accent,10%);
+          a {
+              border-color: $brand;
+          }
+      }
+      &:active {
+          border-color: $accent;
+          background-color: darken($accent,5%);
+      }
+      a, button, [role="button"] {
+        color: $brand;
+      }
+  }
 }
 </style>
