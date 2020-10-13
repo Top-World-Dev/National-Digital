@@ -16,7 +16,6 @@
     },
     destroyed() {
       window.removeEventListener('resize', (event) => {
-        console.log(`Received message: ${event.data}`);
       });
     },
   }
