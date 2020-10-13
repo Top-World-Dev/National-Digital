@@ -22,8 +22,8 @@
             <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.term_acceptselect }}</a></button>
           </div>
         </form>
-        <ul class="v-linklist" :class="[content.style]">
-          <li class="linklist-item" v-for="item in content.item" :key="item._uid">
+        <ul class="consent-linklist v-linklist" :class="content.privacy_links[0].style">
+          <li class="linklist-item" v-for="item in content.privacy_links[0].item" :key="item._uid">
             <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
             <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
             <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
@@ -74,7 +74,7 @@ export default {
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba($black,0.89);
+  background-color: rgba($black,0.8);
   z-index: 100;
   .consent-container {
     margin-top: 1rem;
@@ -95,6 +95,15 @@ export default {
   }
   label {
     margin-right: 0.5rem;
+  }
+  .consent-linklist.v-linklist { // override defaults
+    font-size: 0.75rem;
+    // li::before {
+    //   content: "";
+    // }
+    // li:not(:last-of-type)::after {
+    //   content: "   | ";
+    // }
   }
 }
 </style>
