@@ -38,10 +38,10 @@
 export default {
   props: ["content"],
   mounted() {
-    localStorage.setItem('consentsToMinimum',true)
-    localStorage.setItem('consentsToMarketing',true)
-    localStorage.setItem('consentsToAnalytics',true)
-    localStorage.setItem('consentsToMedia',true)
+    localStorage.setItem('consentsToMinimum',true);
+    localStorage.setItem('consentsToMarketing',true);
+    localStorage.setItem('consentsToAnalytics',true);
+    localStorage.setItem('consentsToMedia',true);
   },
   methods: {
     addLocalStorage(event) {
