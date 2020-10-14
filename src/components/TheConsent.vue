@@ -7,7 +7,7 @@
           <v-richtext :text="content.main_blurb"></v-richtext>
           <form class="consent-form">
             <div :key="type._uid" v-for="type of content.types">
-              <label><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span></label>
+              <label><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" :disabled="type.variable == 'consentsToMinimum'" @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span></label>
             </div>
             <div class="consent-center">
               <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
