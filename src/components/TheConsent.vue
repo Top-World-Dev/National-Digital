@@ -2,7 +2,7 @@
   <aside class="xy-consent">
     <div class="consent-container">
       <div class="consent-wrapper">
-        <div id="consentOptions">
+        <div v-if="!consentSettings">
           <h5>{{ content.consent_title }}</h5>
           <v-richtext :text="content.consent_notice"></v-richtext>
           <form class="consent-form">
@@ -23,7 +23,7 @@
               <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.term_acceptselect }}</a></button>
             </div>
             <div>
-              <a role="button" tabindex="0" @click="toggleSettings">{{ content.term_settings }}</a>
+              <a role="button" tabindex="0" @click="consentSettings = true">{{ content.term_settings }}</a>
             </div>
           </form>
           <ul class="consent-linklist v-linklist" :class="content.privacy_links[0].style">
@@ -34,13 +34,10 @@
             </li>
           </ul>
         </div>
-        <div id="consentSettings" class="is-hidden">
-          <a class="consent-back" role="button" tabindex="0" @click="toggleSettings">←</a>
+        <div v-else>
+          <a class="consent-back" role="button" tabindex="0" @click="consentSettings = false">←</a>
           <h5>{{ content.term_settings }}</h5>
           <v-richtext :text="content.blurb_settings"></v-richtext>
-              <div class="consent-more">
-                <a>{{ content.term_information }}</a>
-              </div>
           <div>
             <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.term_acceptall }}</a></button>
             <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.term_acceptselect }}</a></button>
@@ -53,7 +50,11 @@
               </div>
               <v-richtext :text="content.blurb_minimum"></v-richtext>
               <div class="consent-more">
-                <a>{{ content.term_information }}</a>
+                <a role="button" tabindex="0" @click="tableMinimum = true">{{ content.term_information }}</a>
+                <table class="consent-table" v-if="tableMinimum">
+                  <th><td :key="item.uid" v-for="item in content.settings_minimum.thead">{{ item.value }}</td></th>
+                  <tr :key="row.uid" v-for="row in content.settings_minimum.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
+                </table>  
               </div>
             </div>
             <div class="consent-opt">
@@ -63,7 +64,11 @@
               </div>
               <v-richtext :text="content.blurb_marketing"></v-richtext>
               <div class="consent-more">
-                <a>{{ content.term_information }}</a>
+                <a role="button" tabindex="0" @click="tableMarketing = true">{{ content.term_information }}</a>
+                <table class="consent-table" v-if="tableMarketing">
+                  <th><td :key="item.uid" v-for="item in content.settings_marketing.thead">{{ item.value }}</td></th>
+                  <tr :key="row.uid" v-for="row in content.settings_marketing.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
+                </table>
               </div>
             </div>
             <div class="consent-opt">
@@ -73,7 +78,11 @@
               </div>
               <v-richtext :text="content.blurb_analytics"></v-richtext>
               <div class="consent-more">
-                <a>{{ content.term_information }}</a>
+                <a role="button" tabindex="0" @click="tableAnalytics = true">{{ content.term_information }}</a>
+                <table class="consent-table" v-if="tableAnalytics">
+                  <th><td :key="item.uid" v-for="item in content.settings_analytics.thead">{{ item.value }}</td></th>
+                  <tr :key="row.uid" v-for="row in content.settings_analytics.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
+                </table>
               </div>
             </div>
             <div class="consent-opt">
@@ -83,7 +92,11 @@
               </div>
               <v-richtext :text="content.blurb_media"></v-richtext>
               <div class="consent-more">
-                <a>{{ content.term_information }}</a>
+                <a role="button" tabindex="0" @click="tableMedia = true">{{ content.term_information }}</a>
+                <table class="consent-table" v-if="tableMedia">
+                  <th><td :key="item.uid" v-for="item in content.settings_media.thead">{{ item.value }}</td></th>
+                  <tr :key="row.uid" v-for="row in content.settings_media.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
+                </table>
               </div>
             </div>
           </div>
@@ -103,6 +116,15 @@
 <script>
 export default {
   props: ["content"],
+  data() {
+    return {
+      consentSettings: false,
+      tableMinimum: false,
+      tableMarketing: false,
+      tableAnalytics: false,
+      tableMedia: false,
+    }
+  },
   created() {
     if (process.isClient) {
       localStorage.setItem('consentsToMinimum',true);
@@ -127,10 +149,6 @@ export default {
     closeConsent() {
       localStorage.setItem('consentGiven',true);
       this.$emit('askConsent',false);
-    },
-    toggleSettings() {
-      document.getElementById('consentOptions').classList.toggle('is-hidden');
-      document.getElementById('consentSettings').classList.toggle('is-hidden');
     }
   }
 };
@@ -166,6 +184,8 @@ export default {
     background-color: $white;
     padding: 2rem 2rem;
     margin-bottom: 2rem;
+    max-height: 90vh;
+    overflow-y: auto;
   }
   .consent-back {
     font-size: 1.5rem;
@@ -191,6 +211,22 @@ export default {
       margin-top: 0.5rem;
       width: 100%;
     }
+  }
+  table.consent-table {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    tr, th {
+      width: 100%;
+      display: flex;
+    }
+    tr {
+      border-top: 0.05em solid $lightGrey;
+    }
+    td {
+      flex: 0 0 50%;
+      text-align: left;
+    }
+    
   }
   .consent-linklist.v-linklist { // override defaults
     font-size: 0.75rem;

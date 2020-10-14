@@ -25,6 +25,7 @@ import VImageoverlay from '~/components/VImageoverlay.vue'
 import VLinklist from '~/components/VLinklist.vue'
 import VList from '~/components/VList.vue'
 import VReviewslider from '~/components/VReviewslider.vue'
+import VReconsent from '~/components/VReconsent.vue'
 import VRule from '~/components/VRule.vue'
 import VSlider from '~/components/VSlider.vue'
 import VTestimonial from '~/components/VTestimonial.vue'
@@ -68,6 +69,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VImageoverlay', VImageoverlay)
   Vue.component('VLinklist', VLinklist)
   Vue.component('VList', VList)
+  Vue.component('VReconsent', VReconsent)
   Vue.component('VReviewslider', VReviewslider)
   Vue.component('VRule', VRule)
   Vue.component('VSlider', VSlider)
