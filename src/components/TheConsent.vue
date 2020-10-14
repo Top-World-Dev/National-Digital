@@ -7,7 +7,7 @@
           <v-richtext :text="content.main_blurb"></v-richtext>
           <form class="consent-form">
             <div :key="type._uid" v-for="type of content.types">
-              <input type="checkbox" :name="type.variable" v-model="checks.marketing" @change="addLocalStorage($event, 'marketing')">
+              <input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)">
               <label :for="type.variable">{{ type.title }}</label>
             </div>
             <!-- <div>
@@ -133,19 +133,19 @@ export default {
     if (process.isClient) {
       localStorage.setItem(`consentsToMinimum`,true);
       for (const key of Object.keys(this.checks)) {
-        localStorage.setItem(`consentsTo${key}`, false);
+        localStorage.setItem(key, false);
       }
     }
   },
   methods: {
     addLocalStorage(event, value) {
-      localStorage.setItem(`consentsTo${value}`, event.target.checked);
+      localStorage.setItem(value, event.target.checked);
     },
     consentAll() {
       if (process.isClient) {
         for (const key of Object.keys(this.checks)) {
           this.checks[key] = true;
-          localStorage.setItem(`consentsTo${key}`, true);
+          localStorage.setItem(key, true);
         }
         this.closeConsent();
       }
