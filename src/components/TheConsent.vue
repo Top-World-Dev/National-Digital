@@ -36,7 +36,7 @@
           <div class="consent-section" :key="type._uid" v-for="type of content.types">
             <div class="consent-opt">
               <div class="consent-optcheck">
-                <label><span>{{ type.title }}</span><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"></label>
+                <label><span>{{ type.title }}</span><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" :disabled="type.variable == 'consentsToMinimum'" @change="addLocalStorage($event, type.variable)"></label>
               </div>
               <v-richtext :text="type.blurb"></v-richtext>
               <div class="consent-more">
