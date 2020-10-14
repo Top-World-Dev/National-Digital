@@ -9,7 +9,7 @@ The site uses the [Storyblok](https://www.storyblok.com/) CMS.
 1. Download the node modules
    `npm install`
 2. Run the project
-   `gridsome develop`
+   `npm run develop`
 
 You can develop Storyblok components using their interface or the CLI. Please see the Storyblok docs for more info.
 
@@ -23,12 +23,18 @@ While we are actively working on this project, we will update the `master` branc
 
 To simplify the testing and approval process, new branches are automatically deployed with the branch name as the subdomain, e.g. the `docs` branch is deployed to https://docs.dlf3y81nu0i2t.amplifyapp.com/.
 
-Deployment can take up to 7 minutes. If the branch does not deploy, check that you can run the build command locally, i.e. `gridsome build`.
+Deployment can take up to 7 minutes. If the branch does not deploy, check that you can run the build command locally, i.e. `npm run build`.
 
 ## Methodlogies and styles
 
-Vue components that are used once per page should be prefixed with _The_, e.g. `TheHeader`. The parent style for these components should be prefixed with _xy-_, e.g. `xy-header`. All child styles adopt the parent prefix, so `header-container` etc. The parent class should wrap all children, but no further nesting is necessary.
+Vue components that are used once per page should be prefixed with _The_, e.g. `TheHeader`. Sub components take on the parent name, i.e. `TheHeaderSidenav`.
 
-Vue components that are reusable should be prefixed with _V_, e.g. `VButton`. The parent style for these components should be prefixed with _v-_, e.g. `v-button`. All child styles adopt the parent prefix, so `button-primary` etc. The parent class should wrap all children, but no further nesting is necessary.
+Styles for once-off components should be prefixed with _xy-_, e.g. `xy-header`. All child styles adopt the parent prefix, so `header-container` etc. The parent class should wrap all children, but no further nesting is necessary.
+
+Vue components that are reusable should be prefixed with _V_, e.g. `VButton`. Sub components adopt the parent name, i.e. `VButtonItem`.
+
+Styles for reusable components should be prefixed with _v-_, e.g. `v-button`. All child styles adopt the parent prefix, so `button-primary` etc. The parent class should wrap all children, but no further nesting is necessary.
+
+We use the same naming convention for Vue components in Storyblok.
 
 We use the scss language for stylesheets. Please include the global `styles.scss`. Top level base styles exist in the `Default.vue` and should target elements directly, i.e. `h1` or `a` etc.
