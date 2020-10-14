@@ -43,7 +43,7 @@
               <v-richtext :text="type.blurb"></v-richtext>
               <div class="consent-more">
                 <a role="button" tabindex="0" @click="showTable(type.variable)">{{ content.button_expand }}</a>
-                <table class="consent-table" v-if="type.variable">
+                <table class="consent-table" v-if="tables[`${type.variable}`]">
                   <th><td :key="item.uid" v-for="item in type.details">{{ item.value }}</td></th>
                   <tr :key="row.uid" v-for="row in type.details.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
                 </table>  
@@ -99,7 +99,7 @@ export default {
       }
     },
     showTable(value) {
-      this.tableItems[value] = !this.tableItems[value];
+      this.tables[value] = !this.tables[value];
     }
   },
   computed: {
