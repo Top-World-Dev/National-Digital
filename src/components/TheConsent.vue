@@ -7,7 +7,10 @@
           <v-richtext :text="content.main_blurb"></v-richtext>
           <form class="consent-form">
             <div :key="type._uid" v-for="type of content.types">
-              <label><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" :disabled="type.variable == 'consentsToMinimum'" @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span></label>
+              <label v-if="type.variable == 'consentsToMinimum'">
+                <input type="checkbox" :name="type.variable" v-model="checks[type.variable]" disabled checked @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span>
+              </label>
+              <label v-else><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" :disabled="type.variable == 'consentsToMinimum'" @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span></label>
             </div>
             <div class="consent-center">
               <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
@@ -36,7 +39,8 @@
           <div class="consent-section" :key="type._uid" v-for="type of content.types">
             <div class="consent-opt">
               <div class="consent-optcheck">
-                <label><span>{{ type.title }}</span><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"></label>
+                <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"></label>
+                <label v-else><span>{{ type.title }}</span><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"></label>
               </div>
               <v-richtext :text="type.blurb"></v-richtext>
               <div class="consent-more">
