@@ -10,11 +10,11 @@
             <label for="consentsToMinimum">{{ content.term_minimum }}</label>
           </div>
           <div>
-            <input type="checkbox" id="consentsToMarketing" name="consentsToMarketing" value="consentsToMarketing" @change="addLocalStorage($event)" checked>
+            <input type="checkbox" id="consentsToMarketing" name="consentsToMarketing" value="consentsToMarketing" @change="addLocalStorage($event)">
             <label for="consentsToMarketing">{{ content.term_marketing }}</label>
-            <input type="checkbox" id="consentsToAnalytics" name="consentsToAnalytics" value="consentsToAnalytics" @change="addLocalStorage($event)" checked>
+            <input type="checkbox" id="consentsToAnalytics" name="consentsToAnalytics" value="consentsToAnalytics" @change="addLocalStorage($event)">
             <label for="consentsToAnalytics">{{ content.term_analytics }}</label>
-            <input type="checkbox" id="consentsToMedia" name="consentsToMedia" value="consentsToMedia" @change="addLocalStorage($event)" checked>
+            <input type="checkbox" id="consentsToMedia" name="consentsToMedia" value="consentsToMedia" @change="addLocalStorage($event)">
             <label for="consentsToMedia">{{ content.term_media }}</label>
           </div>
           <div>
@@ -40,28 +40,26 @@ export default {
   created() {
     if (process.isClient) {
       localStorage.setItem('consentsToMinimum',true);
-      localStorage.setItem('consentsToMarketing',true);
-      localStorage.setItem('consentsToAnalytics',true);
-      localStorage.setItem('consentsToMedia',true);
+      localStorage.setItem('consentsToMarketing',false);
+      localStorage.setItem('consentsToAnalytics',false);
+      localStorage.setItem('consentsToMedia',false);
     }
   },
   methods: {
     addLocalStorage(event) {
-      if (process.isClient) {
-        localStorage.setItem(event.target.value,event.target.checked);
-      }
+      localStorage.setItem(event.target.value,event.target.checked);
     },
     consentAll() {
-      let checkboxes = document.querySelectorAll('.xy-consent .consent-form input[type=checkbox]');
-      for (let checkbox of checkboxes) {
-        checkbox.checked = true;
-      }
+      document.getElementById('consentsToMarketing').checked = true;
+      localStorage.setItem('consentsToMarketing',true);
+      document.getElementById('consentsToAnalytics').checked = true;
+      localStorage.setItem('consentsToAnalytics',true);
+      document.getElementById('consentsToMedia').checked = true;
+      localStorage.setItem('consentsToMedia',true);
       this.closeConsent();
     },
     closeConsent() {
-      if (process.isClient) {
-        localStorage.setItem('consentGiven',true);
-      }
+      localStorage.setItem('consentGiven',true);
       this.$emit('askConsent',false);
     }
   }
