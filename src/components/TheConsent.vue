@@ -11,11 +11,11 @@
               <label for="consentsToMinimum">{{ content.term_minimum }}</label>
             </div>
             <div>
-              <input type="checkbox" id="consentsToMarketing" name="consentsToMarketing" value="consentsToMarketing" @change="addLocalStorage($event)">
+              <input type="checkbox" id="consentsToMarketing" name="consentsToMarketing" v-model="checks.marketing" @change="addLocalStorage($event, 'marketing')">
               <label for="consentsToMarketing">{{ content.term_marketing }}</label>
-              <input type="checkbox" id="consentsToAnalytics" name="consentsToAnalytics" value="consentsToAnalytics" @change="addLocalStorage($event)">
+              <input type="checkbox" id="consentsToAnalytics" name="consentsToAnalytics" v-model="checks.analytics" @change="addLocalStorage($event, 'analytics')">
               <label for="consentsToAnalytics">{{ content.term_analytics }}</label>
-              <input type="checkbox" id="consentsToMedia" name="consentsToMedia" value="consentsToMedia" @change="addLocalStorage($event)">
+              <input type="checkbox" id="consentsToMedia" name="consentsToMedia" v-model="checks.media" @change="addLocalStorage($event, 'media')">
               <label for="consentsToMedia">{{ content.term_media }}</label>
             </div>
             <div>
@@ -60,7 +60,7 @@
             <div class="consent-opt">
               <div class="consent-optcheck">
                 <label for="consentsToMarketingOpt">{{ content.term_marketing }}</label>
-                <input type="checkbox" id="consentsToMarketingOpt" name="consentsToMarketingOpt" value="consentsToMarketing" @change="addLocalStorage($event)">
+                <input type="checkbox" id="consentsToMarketingOpt" name="consentsToMarketingOpt" v-model="checks.marketing" @change="addLocalStorage($event, 'marketing')">
               </div>
               <v-richtext :text="content.blurb_marketing"></v-richtext>
               <div class="consent-more">
@@ -74,7 +74,7 @@
             <div class="consent-opt">
               <div class="consent-optcheck">
                 <label for="consentsToAnalyticsOpt">{{ content.term_analytics }}</label>
-                <input type="checkbox" id="consentsToAnalyticsOpt" name="consentsToAnalyticsOpt" value="consentsToAnalytics" @change="addLocalStorage($event)">
+                <input type="checkbox" id="consentsToAnalyticsOpt" name="consentsToAnalyticsOpt" v-model="checks.analytics" @change="addLocalStorage($event, 'analytics')">
               </div>
               <v-richtext :text="content.blurb_analytics"></v-richtext>
               <div class="consent-more">
@@ -88,7 +88,7 @@
             <div class="consent-opt">
               <div class="consent-optcheck">
                 <label for="consentsToMediaOpt">{{ content.term_media }}</label>
-                <input type="checkbox" id="consentsToMediaOpt" name="consentsToMediaOpt" value="consentsToMedia" @change="addLocalStorage($event)">
+                <input type="checkbox" id="consentsToMediaOpt" name="consentsToMediaOpt" v-model="checks.media" @change="addLocalStorage($event, 'media')">
               </div>
               <v-richtext :text="content.blurb_media"></v-richtext>
               <div class="consent-more">
@@ -123,30 +123,31 @@ export default {
       tableMarketing: false,
       tableAnalytics: false,
       tableMedia: false,
+      checks: {
+        analytics: false,
+        marketing: false,
+        media: false
+      }
     }
   },
   created() {
     if (process.isClient) {
-      localStorage.setItem('consentsToMinimum',true);
-      localStorage.setItem('consentsToMarketing',false);
-      localStorage.setItem('consentsToAnalytics',false);
-      localStorage.setItem('consentsToMedia',false);
+      localStorage.setItem(`consentsToMinimum`,true);
+      for (const key of Object.keys(this.checks)) {
+        localStorage.setItem(`consentsTo${key}`, false);
+      }
     }
   },
   methods: {
-    addLocalStorage(event) {
-      if (process.isClient) {
-        localStorage.setItem(event.target.value,event.target.checked);
-        }
+    addLocalStorage(event, value) {
+      localStorage.setItem(`consentsTo${value}`, event.target.checked);
     },
     consentAll() {
       if (process.isClient) {
-        document.getElementById('consentsToMarketing').checked = true;
-        localStorage.setItem('consentsToMarketing',true);
-        document.getElementById('consentsToAnalytics').checked = true;
-        localStorage.setItem('consentsToAnalytics',true);
-        document.getElementById('consentsToMedia').checked = true;
-        localStorage.setItem('consentsToMedia',true);
+        for (const key of Object.keys(this.checks)) {
+          this.checks[key] = true;
+          localStorage.setItem(`consentsTo${key}`, true);
+        }
         this.closeConsent();
       }
     },
