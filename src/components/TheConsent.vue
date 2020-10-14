@@ -131,8 +131,7 @@ export default {
       localStorage.setItem(value, event.target.checked);
     },
     consentAll() {
-      console.log(this.checks);
-      for (const key of Object.keys(this.checks)) {
+      for (const key of Object.keys(this.checkedItems)) {
         this.checks[key] = true;
         localStorage.setItem(key, true);
       }
@@ -152,6 +151,7 @@ export default {
         (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
       });
       this.checks = obj;
+      return obj;
     }
   }
 };
