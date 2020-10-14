@@ -15,7 +15,7 @@
               <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
             </div>
             <div>
-              <a role="button" tabindex="0" @click="consentSettings = true">{{ content.term_settings }}</a>
+              <a role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
             </div>
           </form>
           <ul class="consent-linklist v-linklist" :class="content.links[0].style">
@@ -26,69 +26,27 @@
             </li>
           </ul>
         </div>
-        <!-- <!-- <div v-else>
-          <a class="consent-back" role="button" tabindex="0" @click="consentSettings = false">←</a>
-          <h5>{{ content.term_settings }}</h5>
-          <v-richtext :text="content.blurb_settings"></v-richtext>
+        <div v-else>
+          <a class="consent-back" role="button" tabindex="0" @click="consentSettings = !consentSettings">←</a>
+          <h5>{{ content.settings_title }}</h5>
+          <v-richtext :text="content.settings_blurb"></v-richtext>
           <div>
-            <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.term_acceptall }}</a></button>
-            <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.term_acceptselect }}</a></button>
+            <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
+            <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
           </div>
-          <div class="consent-section">
+          <div class="consent-section" :key="type._uid" v-for="type of content.types">
             <div class="consent-opt">
               <div class="consent-optcheck">
-                <label for="consentsToMinimumOpt">{{ content.term_minimum }}</label>
-                <input type="checkbox" id="consentsToMinimumOpt" name="consentsToMinimumOpt" value="consentsToMinimum" checked disabled>
+                <label :for="type.variable">{{ type.title }}</label>
+                <input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)">
               </div>
-              <v-richtext :text="content.blurb_minimum"></v-richtext>
+              <v-richtext :text="type.blurb"></v-richtext>
               <div class="consent-more">
-                <a role="button" tabindex="0" @click="tableMinimum = true">{{ content.term_information }}</a>
-                <table class="consent-table" v-if="tableMinimum">
-                  <th><td :key="item.uid" v-for="item in content.settings_minimum.thead">{{ item.value }}</td></th>
-                  <tr :key="row.uid" v-for="row in content.settings_minimum.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
+                <a role="button" tabindex="0" @click="showTable(type.variable)">{{ content.button_expand }}</a>
+                <table class="consent-table" v-if="type.variable">
+                  <th><td :key="item.uid" v-for="item in type.details">{{ item.value }}</td></th>
+                  <tr :key="row.uid" v-for="row in type.details.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
                 </table>  
-              </div>
-            </div>
-            <div class="consent-opt">
-              <div class="consent-optcheck">
-                <label for="consentsToMarketingOpt">{{ content.term_marketing }}</label>
-                <input type="checkbox" id="consentsToMarketingOpt" name="consentsToMarketingOpt" v-model="checks.marketing" @change="addLocalStorage($event, 'marketing')">
-              </div>
-              <v-richtext :text="content.blurb_marketing"></v-richtext>
-              <div class="consent-more">
-                <a role="button" tabindex="0" @click="tableMarketing = true">{{ content.term_information }}</a>
-                <table class="consent-table" v-if="tableMarketing">
-                  <th><td :key="item.uid" v-for="item in content.settings_marketing.thead">{{ item.value }}</td></th>
-                  <tr :key="row.uid" v-for="row in content.settings_marketing.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
-                </table>
-              </div>
-            </div>
-            <div class="consent-opt">
-              <div class="consent-optcheck">
-                <label for="consentsToAnalyticsOpt">{{ content.term_analytics }}</label>
-                <input type="checkbox" id="consentsToAnalyticsOpt" name="consentsToAnalyticsOpt" v-model="checks.analytics" @change="addLocalStorage($event, 'analytics')">
-              </div>
-              <v-richtext :text="content.blurb_analytics"></v-richtext>
-              <div class="consent-more">
-                <a role="button" tabindex="0" @click="tableAnalytics = true">{{ content.term_information }}</a>
-                <table class="consent-table" v-if="tableAnalytics">
-                  <th><td :key="item.uid" v-for="item in content.settings_analytics.thead">{{ item.value }}</td></th>
-                  <tr :key="row.uid" v-for="row in content.settings_analytics.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
-                </table>
-              </div>
-            </div>
-            <div class="consent-opt">
-              <div class="consent-optcheck">
-                <label for="consentsToMediaOpt">{{ content.term_media }}</label>
-                <input type="checkbox" id="consentsToMediaOpt" name="consentsToMediaOpt" v-model="checks.media" @change="addLocalStorage($event, 'media')">
-              </div>
-              <v-richtext :text="content.blurb_media"></v-richtext>
-              <div class="consent-more">
-                <a role="button" tabindex="0" @click="tableMedia = true">{{ content.term_information }}</a>
-                <table class="consent-table" v-if="tableMedia">
-                  <th><td :key="item.uid" v-for="item in content.settings_media.thead">{{ item.value }}</td></th>
-                  <tr :key="row.uid" v-for="row in content.settings_media.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
-                </table>
               </div>
             </div>
           </div>
@@ -111,10 +69,7 @@ export default {
   data() {
     return {
       consentSettings: false,
-      tableMinimum: false,
-      tableMarketing: false,
-      tableAnalytics: false,
-      tableMedia: false,
+      tables: {},
       checks: {},
     }
   },
@@ -142,6 +97,9 @@ export default {
         localStorage.setItem('consentGiven',true);
         this.$emit('askConsent',false);
       }
+    },
+    showTable(value) {
+      this.tableItems[value] = !this.tableItems[value];
     }
   },
   computed: {
@@ -151,6 +109,12 @@ export default {
         (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
       });
       this.checks = obj;
+      return obj;
+    },
+    tableItems() {
+      let obj = {};
+      this.content.types.forEach(item => obj[item.variable] = false );
+      this.tables = obj;
       return obj;
     }
   }
