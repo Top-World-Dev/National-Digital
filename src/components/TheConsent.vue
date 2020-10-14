@@ -1,5 +1,5 @@
 <template>
-  <aside class="xy-consent">
+<!--   <aside class="xy-consent">
     <div class="consent-container">
       <div class="consent-wrapper">
         <div v-if="!consentSettings">
@@ -62,12 +62,13 @@
         </div>
       </div> 
     </div>
-  </aside>
+  </aside> -->
 </template>
 
 <script>
+import EventBus from '../../eventbus';
 export default {
-  props: ["content"],
+  props: ["content"], 
   data() {
     return {
       consentSettings: false,
