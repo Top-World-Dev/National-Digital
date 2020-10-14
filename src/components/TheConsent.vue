@@ -10,21 +10,9 @@
               <input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)">
               <label :for="type.variable">{{ type.title }}</label>
             </div>
-            <!-- <div>
-              <input type="checkbox" id="consentsToMinimum" name="consentsToMinimum" value="consentsToMinimum" checked disabled>
-              <label for="consentsToMinimum">{{ content.term_minimum }}</label>
-            </div>
             <div>
-              <input type="checkbox" id="consentsToMarketing" name="consentsToMarketing" v-model="checks.marketing" @change="addLocalStorage($event, 'marketing')">
-              <label for="consentsToMarketing">{{ content.term_marketing }}</label>
-              <input type="checkbox" id="consentsToAnalytics" name="consentsToAnalytics" v-model="checks.analytics" @change="addLocalStorage($event, 'analytics')">
-              <label for="consentsToAnalytics">{{ content.term_analytics }}</label>
-              <input type="checkbox" id="consentsToMedia" name="consentsToMedia" v-model="checks.media" @change="addLocalStorage($event, 'media')">
-              <label for="consentsToMedia">{{ content.term_media }}</label>
-            </div> -->
-            <div>
-              <button type="submit" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.term_acceptall }}</a></button>
-              <button type="button" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.term_acceptselect }}</a></button>
+              <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
+              <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
             </div>
             <div>
               <a role="button" tabindex="0" @click="consentSettings = true">{{ content.term_settings }}</a>
@@ -143,13 +131,12 @@ export default {
       localStorage.setItem(value, event.target.checked);
     },
     consentAll() {
-      if (process.isClient) {
-        for (const key of Object.keys(this.checks)) {
-          this.checks[key] = true;
-          localStorage.setItem(key, true);
-        }
-        this.closeConsent();
+      console.log(this.checks);
+      for (const key of Object.keys(this.checks)) {
+        this.checks[key] = true;
+        localStorage.setItem(key, true);
       }
+      this.closeConsent();
     },
     closeConsent() {
       if (process.isClient) {
