@@ -7,18 +7,17 @@
           <v-richtext :text="content.main_blurb"></v-richtext>
           <form class="consent-form">
             <div :key="type._uid" v-for="type of content.types">
-              <input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)">
-              <label :for="type.variable">{{ type.title }}</label>
+              <label><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span></label>
             </div>
-            <div>
+            <div class="consent-center">
               <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
               <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
             </div>
-            <div>
-              <a role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
+            <div class="consent-center">
+              <a class="consent-next" role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
             </div>
           </form>
-          <ul class="consent-linklist v-linklist" :class="content.links[0].style">
+          <ul class="consent-center consent-linklist v-linklist" :class="content.links[0].style">
             <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
               <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
@@ -27,18 +26,17 @@
           </ul>
         </div>
         <div v-else>
-          <a class="consent-back" role="button" tabindex="0" @click="consentSettings = !consentSettings">←</a>
+          <a class="consent-prev" role="button" tabindex="0" @click="consentSettings = !consentSettings">←</a>
           <h5>{{ content.settings_title }}</h5>
           <v-richtext :text="content.settings_blurb"></v-richtext>
-          <div>
+          <div class="consent-center">
             <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
             <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
           </div>
           <div class="consent-section" :key="type._uid" v-for="type of content.types">
             <div class="consent-opt">
               <div class="consent-optcheck">
-                <label :for="type.variable">{{ type.title }}</label>
-                <input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)">
+                <label><span>{{ type.title }}</span><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"></label>
               </div>
               <v-richtext :text="type.blurb"></v-richtext>
               <div class="consent-more">
@@ -57,7 +55,7 @@
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
             </li>
           </ul>
-        </div> -->
+        </div>
       </div> 
     </div>
   </aside>
@@ -154,9 +152,15 @@ export default {
     max-height: 90vh;
     overflow-y: auto;
   }
-  .consent-back {
+  .consent-next {
+    color: $accent;
+  }
+  .consent-prev {
     font-size: 1.5rem;
     color: $accent;
+  }
+  .consent-center {
+    text-align: center;
   }
   .consent-form {
     input[type='checkbox'] {
@@ -171,10 +175,10 @@ export default {
   }
   .consent-optcheck {
     font-size: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-top: 0.5rem;
       width: 100%;
     }
