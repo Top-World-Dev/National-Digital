@@ -24,6 +24,7 @@
       :center="center"
       :options="mapOptions"
       style="height: 500px; width: 100%"
+      @click="enableZoom"
     >
       <l-tile-layer
         :url="url"
@@ -92,35 +93,49 @@ export default {
     // only load markers that are in view
     this.markers = this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position))
     this.loading = false;
+
+    // add markers when zooming
+    this.$refs.map.mapObject.on('zoomend', (e) => this.addMarkers() ) 
   },
   data() {
     return {
       loading: false,
       zoom: 13,
+      scroll: false,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       mapOptions: {
-        zoomSnap: 0.5
+        zoomSnap: 0.5,
+        scrollWheelZoom: false
       },
       showMap: true,
       locations: [],
       markers: [],
+      visibleMarkers: [],
       searchValue: '',
       searchResults: []
     };
   },
   methods: {
-    search(value) {
-      if(value.length > 2) {
-        this.searchResults = this.locations.filter(item => item.tooltip.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.toLowerCase().indexOf(value.toLowerCase()) != -1)
-      }
+    addMarkers() {
+      this.markers = (this.searchValue.length == 0) ? this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position)) : this.markers.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position));
+    },
+    clear() {
+      this.searchValue = '';
+      this.searchResults = [];
+    },
+    enableZoom() {
+      this.$refs.map.mapObject.scrollWheelZoom.enable();
     },
     findResult(result) {
       this.searchResults = [];
       this.markers = [];
       this.markers.push(result);
       this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
+    },
+    goToMarker(marker) {
+      this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.5});
     },
     loadResults() {
       if(this.searchValue.length == 0) {
@@ -131,13 +146,11 @@ export default {
       this.searchResults = [];
       this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
     },
-    goToMarker(marker) {
-      this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.5});
+    search(value) {
+      if(value.length > 2) {
+        this.searchResults = this.locations.filter(item => item.tooltip.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.toLowerCase().indexOf(value.toLowerCase()) != -1)
+      }
     },
-    clear() {
-      this.searchValue = '';
-      this.searchResults = [];
-    }
   },
   computed: {
     center() {
