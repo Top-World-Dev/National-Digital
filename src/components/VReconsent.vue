@@ -1,5 +1,5 @@
 <template>
-  <span><a class="v-reconsent" v-editable="blok" role="button" tabindex="0" @click="resetConsent">{{ blok.title }}</a></span>
+  <div><a class="v-reconsent" v-editable="blok" role="button" tabindex="0" @click="resetConsent">{{ blok.title }}</a></div>
 </template>
 <script>
 export default {
