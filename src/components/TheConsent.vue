@@ -78,13 +78,18 @@ export default {
         localStorage.setItem(key, false);
       }
     }
+
+    this.content.types.forEach(item => {
+      (item.variable == 'consentsToMinimum') ? this.checks[item.variable] = true : this.checks[item.variable] = false;
+      this.tables[item.variable] = false;
+    });
   },
   methods: {
     addLocalStorage(event, value) {
       localStorage.setItem(value, event.target.checked);
     },
     consentAll() {
-      for (const key of Object.keys(this.checkedItems)) {
+      for (const key of Object.keys(this.checks)) {
         this.checks[key] = true;
         localStorage.setItem(key, true);
       }
@@ -98,22 +103,6 @@ export default {
     },
     showTable(value) {
       this.tables[value] = !this.tables[value];
-    }
-  },
-  computed: {
-    checkedItems() {
-      let obj = {};
-      this.content.types.forEach(item => {
-        (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
-      });
-      this.checks = obj;
-      return obj;
-    },
-    tableItems() {
-      let obj = {};
-      this.content.types.forEach(item => obj[item.variable] = false );
-      this.tables = obj;
-      return obj;
     }
   }
 };
