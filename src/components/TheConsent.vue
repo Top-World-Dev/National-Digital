@@ -135,20 +135,26 @@ export default {
   },
   methods: {
     addLocalStorage(event) {
-      localStorage.setItem(event.target.value,event.target.checked);
+      if (process.isClient) {
+        localStorage.setItem(event.target.value,event.target.checked);
+        }
     },
     consentAll() {
-      document.getElementById('consentsToMarketing').checked = true;
-      localStorage.setItem('consentsToMarketing',true);
-      document.getElementById('consentsToAnalytics').checked = true;
-      localStorage.setItem('consentsToAnalytics',true);
-      document.getElementById('consentsToMedia').checked = true;
-      localStorage.setItem('consentsToMedia',true);
-      this.closeConsent();
+      if (process.isClient) {
+        document.getElementById('consentsToMarketing').checked = true;
+        localStorage.setItem('consentsToMarketing',true);
+        document.getElementById('consentsToAnalytics').checked = true;
+        localStorage.setItem('consentsToAnalytics',true);
+        document.getElementById('consentsToMedia').checked = true;
+        localStorage.setItem('consentsToMedia',true);
+        this.closeConsent();
+      }
     },
     closeConsent() {
-      localStorage.setItem('consentGiven',true);
-      this.$emit('askConsent',false);
+      if (process.isClient) {
+        localStorage.setItem('consentGiven',true);
+        this.$emit('askConsent',false);
+      }
     }
   }
 };

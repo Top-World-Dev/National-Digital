@@ -13,6 +13,11 @@ export default {
   components: {
     "theconsent": TheConsent,
   },
+  data() {
+    return {
+      askConsent: false
+    }
+  },
   metaInfo() {
     const data = this.blok.meta_information;
     if(!data) {
@@ -35,11 +40,6 @@ export default {
       if (!localStorage.getItem('consentGiven')) {
         this.askConsent = true;
       }
-    }
-  },
-  data() {
-    return {
-      askConsent: false
     }
   }
 }

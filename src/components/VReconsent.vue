@@ -6,8 +6,10 @@ export default {
   props: ['blok'],
   methods: {
     resetConsent() {
-      localStorage.setItem('consentGiven',false);
-      this.$emit('askConsent',true);
+      if (process.isClient) {
+        localStorage.setItem('consentGiven',false);
+        this.$emit('askConsent',true);
+      }
     }
   }
 };
