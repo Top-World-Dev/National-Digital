@@ -159,7 +159,11 @@ export default {
   },
   computed: {
     checks() {
-      return this.content.types.map(item => item.variable);
+      let obj = {};
+      this.content.types.forEach(item => {
+        (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
+      });
+      return obj;
     }
   }
 };
