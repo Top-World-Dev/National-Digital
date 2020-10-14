@@ -8,7 +8,6 @@ import DefaultLayout from '~/layouts/Default.vue'
 
 import Page from '~/components/Page.vue'
 
-// import TheConsent from '~/components/TheConsent.vue'
 import TheFooter from '~/components/TheFooter.vue'
 import TheHeader from '~/components/TheHeader.vue'
 import TheHeaderSection from '~/components/TheHeaderSection.vue'
@@ -51,7 +50,6 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('Page', Page)
 
   // global elements
-  // Vue.component('TheConsent', TheConsent)
   Vue.component('TheFooter', TheFooter)
   Vue.component('TheHeader', TheHeader)
   Vue.component('TheHeaderSection', TheHeaderSection)

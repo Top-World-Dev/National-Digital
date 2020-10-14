@@ -3,10 +3,14 @@
     <div class="consent-container">
       <div class="consent-wrapper">
         <div v-if="!consentSettings">
-          <h5>{{ content.consent_title }}</h5>
-          <v-richtext :text="content.consent_notice"></v-richtext>
+          <h5>{{ content.main_title }}</h5>
+          <v-richtext :text="content.main_blurb"></v-richtext>
           <form class="consent-form">
-            <div>
+            <div :key="type._uid" v-for="type of content.types">
+              <input type="checkbox" :name="type.variable" v-model="checks.marketing" @change="addLocalStorage($event, 'marketing')">
+              <label :for="type.variable">{{ type.title }}</label>
+            </div>
+            <!-- <div>
               <input type="checkbox" id="consentsToMinimum" name="consentsToMinimum" value="consentsToMinimum" checked disabled>
               <label for="consentsToMinimum">{{ content.term_minimum }}</label>
             </div>
@@ -17,24 +21,24 @@
               <label for="consentsToAnalytics">{{ content.term_analytics }}</label>
               <input type="checkbox" id="consentsToMedia" name="consentsToMedia" v-model="checks.media" @change="addLocalStorage($event, 'media')">
               <label for="consentsToMedia">{{ content.term_media }}</label>
-            </div>
+            </div> -->
             <div>
-              <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.term_acceptall }}</a></button>
-              <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.term_acceptselect }}</a></button>
+              <button type="submit" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.term_acceptall }}</a></button>
+              <button type="button" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.term_acceptselect }}</a></button>
             </div>
             <div>
               <a role="button" tabindex="0" @click="consentSettings = true">{{ content.term_settings }}</a>
             </div>
           </form>
-          <ul class="consent-linklist v-linklist" :class="content.privacy_links[0].style">
-            <li class="linklist-item" v-for="item in content.privacy_links[0].item" :key="item._uid">
+          <ul class="consent-linklist v-linklist" :class="content.links[0].style">
+            <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
               <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
             </li>
           </ul>
         </div>
-        <div v-else>
+        <!-- <!-- <div v-else>
           <a class="consent-back" role="button" tabindex="0" @click="consentSettings = false">←</a>
           <h5>{{ content.term_settings }}</h5>
           <v-richtext :text="content.blurb_settings"></v-richtext>
@@ -100,15 +104,15 @@
               </div>
             </div>
           </div>
-          <ul class="consent-linklist v-linklist" :class="content.privacy_links[0].style">
-            <li class="linklist-item" v-for="item in content.privacy_links[0].item" :key="item._uid">
+          <ul class="consent-linklist v-linklist" :class="content.links[0].style">
+            <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
               <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
             </li>
           </ul>
-        </div>
-      </div>
+        </div> -->
+      </div> 
     </div>
   </aside>
 </template>
@@ -123,11 +127,6 @@ export default {
       tableMarketing: false,
       tableAnalytics: false,
       tableMedia: false,
-      checks: {
-        analytics: false,
-        marketing: false,
-        media: false
-      }
     }
   },
   created() {
@@ -156,6 +155,11 @@ export default {
         localStorage.setItem('consentGiven',true);
         this.$emit('askConsent',false);
       }
+    }
+  },
+  computed: {
+    checks() {
+      return this.content.types.map(item => item.variable);
     }
   }
 };
