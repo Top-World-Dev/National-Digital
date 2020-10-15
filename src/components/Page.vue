@@ -17,7 +17,8 @@ export default {
         return {
           title: data.title,
           meta: [
-            { name: 'description', content: data.description }
+            { name: 'description', content: data.description },
+            // { name: 'robots', content: data.noindex }
           ],
           link: [
             { rel: 'canonical', href: `${this.$route.fullPath}` },
