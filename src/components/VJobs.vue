@@ -14,30 +14,33 @@
     </section>
 
     <table class="jobs-table">
-      <th> <!-- will define these terms in Storyblok -->
-        <td>Position</td>
-        <td>Location</td> <!-- sortable -->
-        <td>Expertise</td> <!-- sortable -->
-        <td>Type</td> <!-- sortable -->
-      </th>
-
-      <!-- for each -->
-      <tr>
-        <td>
-          <div class="jobs-table-title"><a href="#link-to-personio">Job title</a></div>
-          <div>Job description</div>
-        </td>
-        <td>
-          <div class="jobs-table-location">Location</div>
-        </td>
-        <td>
-          <div class="jobs-table-category">Area of expertise</div>
-        </td>
-        <td>
-          <div class="jobs-table-type">Job Type</div>
-        </td>
-      </tr>
-      <!-- end for each -->
+      <thead>
+        <tr> <!-- will define these terms in Storyblok -->
+          <th>Position</th>
+          <th>Location</th> <!-- sortable -->
+          <th>Expertise</th> <!-- sortable -->
+          <th>Type</th> <!-- sortable -->
+        </tr>
+      </thead>
+        <tbody>
+        <!-- for each -->
+        <tr>
+          <td>
+            <div class="jobs-table-title"><a href="#link-to-personio">Job title</a></div>
+            <div>Job description</div>
+          </td>
+          <td>
+            <div class="jobs-table-location">Location</div>
+          </td>
+          <td>
+            <div class="jobs-table-category">Area of expertise</div>
+          </td>
+          <td>
+            <div class="jobs-table-type">Job Type</div>
+          </td>
+        </tr>
+        <!-- end for each -->
+      </tbody>
     </table>
 
   </div>
