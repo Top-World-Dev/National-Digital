@@ -20,15 +20,15 @@
               <a class="consent-next" role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
             </div>
           </form>
-          <ul class="consent-center consent-linklist v-linklist" :class="content.links[0].style">
+          <!-- <ul class="consent-center consent-linklist v-linklist" :class="content.links[0].style">
             <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
               <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
               <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
             </li>
-          </ul>
+          </ul> -->
         </div>
-        <div v-else>
+        <!-- <div v-else>
           <a class="consent-prev" role="button" tabindex="0" @click="consentSettings = !consentSettings">←</a>
           <h5>{{ content.settings_title }}</h5>
           <v-richtext :text="content.settings_blurb"></v-richtext>
@@ -59,7 +59,7 @@
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div> 
     </div>
   </aside>
