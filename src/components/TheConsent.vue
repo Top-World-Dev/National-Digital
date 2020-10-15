@@ -81,10 +81,10 @@ export default {
         console.log('show')
         this.showModal = true;
       }
-      localStorage.setItem(`consentsToMinimum`,true);
-      for (const key of Object.keys(this.checks)) {
-        localStorage.setItem(key, false);
-      }
+      // localStorage.setItem(`consentsToMinimum`,true);
+      // for (const key of Object.keys(this.checks)) {
+      //   localStorage.setItem(key, false);
+      // }
     }
   },
   methods: {
