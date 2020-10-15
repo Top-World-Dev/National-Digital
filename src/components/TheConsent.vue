@@ -12,7 +12,7 @@
             </div>
             <div class="consent-center">
               <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
-              <button type="button" class="form-submit v-button button-outline" @click="showModal = !showModal"><a>{{ content.button_continue }}</a></button>
+              <button type="button" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
             </div>
             <div class="consent-center">
               <a class="consent-next" role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
@@ -32,7 +32,7 @@
           <v-richtext :text="content.settings_blurb"></v-richtext>
           <div class="consent-center">
             <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
-            <button type="button" class="form-submit v-button button-outline" @click="showModal = !showModal"><a>{{ content.button_continue }}</a></button>
+            <button type="button" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
           </div>
           <div class="consent-section" :key="type._uid" v-for="type of content.types">
             <div class="consent-opt">
@@ -98,7 +98,7 @@ export default {
     closeConsent() {
       if (process.isClient) {
         localStorage.setItem('consentGiven',true);
-        // document.querySelector('.xy-consent').classList.toggle("is-hidden");
+        this.showModal = !this.showModal
       }
     },
     showTable(value) {
