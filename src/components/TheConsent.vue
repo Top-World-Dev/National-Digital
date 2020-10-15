@@ -76,6 +76,7 @@ export default {
   },
   mounted() {
     if (process.isClient) {
+      console.log(localStorage.getItem('consentGiven'));
       // if (!localStorage.getItem('consentGiven')) {
       //   document.querySelector('.xy-consent').classList.toggle("is-hidden"); 
       // }
