@@ -11,8 +11,7 @@
       </div>
       <div class="map-search-results" v-if="searchResults.length > 0">
         <div class="map-search-result" v-for="result in searchResults" @click="findResult(result)">
-          <p><strong>{{ result.title }}</strong></p>
-          <p >{{ result.address }}</p>
+          <p><strong>{{ result.brand }}</strong> {{ result.address }}</p>
         </div>
       </div>
     </div>
@@ -34,14 +33,16 @@
         v-for="marker in markers"
         :key="marker.id"
         :lat-lng.sync="marker.position"
+        :icon="getIcon(marker)"
         @click="goToMarker(marker)"
       >
-        <l-icon
+       <!--  <l-icon
           :icon-size="dynamicSize"
           :icon-anchor="dynamicAnchor"
-          :icon-url= "getIcon(marker)"
-        />
-        <l-tooltip :content="marker.tooltip" />
+          icon-url="/mapping-icons/poi_default.png"
+        /> -->
+        <l-popup :content="marker.popup" />
+        
       </l-marker>
     </l-map>
   </ClientOnly>
@@ -50,11 +51,11 @@
 </template>
 
 <script>
-  import { LMap, LTileLayer, LMarker, LTooltip } from 'vue2-leaflet';
+  import { LMap, LTileLayer, LMarker, LPopup, LIcon, LIconDefault } from 'vue2-leaflet';
   import 'leaflet/dist/leaflet.css';
 
 
-  let latLng, icon;
+  let latLng,icon; 
   if (process.isClient) {
     icon = require('leaflet').Icon
     delete icon.Default.prototype._getIconUrl;
@@ -79,8 +80,14 @@ export default {
     LMarker: () => import('vue2-leaflet')
       .then((component) => component.LMarker)
       .catch(),
-     LTooltip: () => import('vue2-leaflet')
-      .then((component) => component.LTooltip)
+    LPopup: () => import('vue2-leaflet')
+      .then((component) => component.LPopup)
+      .catch(),
+    LIcon: () => import('vue2-leaflet')
+      .then((component) => component.LIcon)
+      .catch(),
+    LIconDefault: () => import('vue2-leaflet')
+      .then((component) => component.LIconDefault)
       .catch()
   },
   async mounted() {
@@ -89,10 +96,20 @@ export default {
     const data = await response.json();
     this.locations = data.map(location => {
       return {
-        position: { lat: location.lat, lng: location.lng },
-        tooltip: location.description,
-        title: location.title,
-        address: location.address
+        position: { lat: location.lat, lng: location.lon },
+        brand: location.brand,
+        address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
+        zip: location.zip,
+        city: location.city,
+        street: location.street,
+        popup: `
+        <div class="map-popup">
+          <div class="map-popup-content">
+            <h2 class="map-popup-brand">${ location.brand }</h2>
+            <p class="map-popup-address">${location.street} ${location.houseNumber}, ${location.zip} ${location.city}</p>
+          </div>
+        </div>
+        `
       }
     });
     // only load markers that are in view
@@ -119,7 +136,7 @@ export default {
       markers: [],
       visibleMarkers: [],
       searchValue: '',
-      searchResults: []
+      searchResults: [],
     };
   },
   methods: {
@@ -140,8 +157,16 @@ export default {
       this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
     },
     getIcon(marker) {
-      console.log(marker);
-      return `./mapping-icons/default.png`
+      let icon = new L.icon({
+        iconUrl: `/mapping-icons/poi_default.png`,
+        shadowUrl: `/mapping-icons/marker-shadow.png`,
+        iconSize: [32, 37],
+        iconAnchor: [16, 37],
+        popupAnchor: [0, -28],
+        shadowSize: [25, 41],
+        shadowAnchor: [7, 41]
+      })
+      return icon;
     },
     goToMarker(marker) {
       this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.5});
@@ -156,9 +181,7 @@ export default {
       this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
     },
     search(value) {
-      if(value.length > 2) {
-        this.searchResults = this.locations.filter(item => item.tooltip.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.toLowerCase().indexOf(value.toLowerCase()) != -1)
-      }
+      this.searchResults = (value.length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.indexOf(value) != -1);
     },
   },
   computed: {
@@ -181,7 +204,8 @@ export default {
 @import '~/assets/styles.scss';
 .v-map {
   position: relative;
-  width: 100%
+  width: 100%;
+  overflow: hidden;
 }
 
 .map-search-results {
