@@ -96,7 +96,7 @@ export default {
         this.checks[key] = true;
         localStorage.setItem(key, true);
       }
-      this.closeConsent();
+
     },
     closeConsent() {
       document.querySelector('.xy-consent').classList.toggle("is-hidden");
