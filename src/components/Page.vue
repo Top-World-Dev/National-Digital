@@ -1,6 +1,6 @@
 <template>
   <div>
-    <theconsent :key="blok.component" v-for="blok in blok.body" v-if="blok.component == 'TheHeader'" :content="blok.section.content.section[0].modal[0]"></theconsent>
+    <theconsent :key="blok.component" v-for="blok in blok.body" v-if="blok.component == 'TheHeader' && askConsent" :content="blok.section.content.section[0].modal[0]"></theconsent>
     <component :key="blok._uid" v-for="blok in blok.body" :blok="blok" :is="blok.component"></component>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
     "theconsent": TheConsent,
   },
   mounted() {
-    EventBus.$on('askConsent', bool => this.askConsent = bool)
+    EventBus.$on('askConsent', bool => this.askConsent = bool);
   },
   data() {
     return {
