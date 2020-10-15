@@ -77,10 +77,11 @@ export default {
   },
   created() {
     if (process.isClient) {
-      if (!localStorage.getItem('consentGiven')) {
-        console.log('show')
-        this.showModal = true;
-      }
+      this.showModal = true;
+      // if (!localStorage.getItem('consentGiven')) {
+      //   console.log('show')
+      //   this.showModal = true;
+      // }
       // localStorage.setItem(`consentsToMinimum`,true);
       // for (const key of Object.keys(this.checks)) {
       //   localStorage.setItem(key, false);
