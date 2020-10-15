@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      askConsent: false
+      askConsent: true
     }
   },
   metaInfo() {
