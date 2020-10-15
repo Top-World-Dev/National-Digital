@@ -76,6 +76,8 @@ export default {
     }
   },
   mounted() {
+    EventBus.$on('askConsent', bool => document.querySelector('.xy-consent').classList.toggle("is-hidden"));
+
     if (process.isClient) {
 
       if (!localStorage.getItem('consentGiven')) {
@@ -101,11 +103,10 @@ export default {
       this.closeConsent();
     },
     closeConsent() {
-      this.showModal = true;
-      // if (process.isClient) {
-      //   localStorage.setItem('consentGiven',true);
-      //   this.showModal = false;
-      // }
+      document.querySelector('.xy-consent').classList.toggle("is-hidden");
+      if (process.isClient) {
+        localStorage.setItem('consentGiven',true);
+      }
     },
     showTable(value) {
       this.tables[value] = !this.tables[value];
