@@ -83,13 +83,6 @@ export default {
         localStorage.setItem(key, false);
       }
     }
-    
-    document.querySelector('.form-close').addEventListener('click', () => {
-      if (process.isClient) {
-        localStorage.setItem('consentGiven',true);
-        document.querySelector('.xy-consent').classList.toggle("is-hidden");
-      }
-    });
   },
   methods: {
     addLocalStorage(event, value) {
