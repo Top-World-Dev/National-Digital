@@ -9,7 +9,7 @@
       resetConsent() {
         if (process.isClient) {
           localStorage.setItem('consentGiven',false);
-          this.$emit('askConsent',true);
+          EventBus.$emit('askConsent',true);
         }
       }
     }

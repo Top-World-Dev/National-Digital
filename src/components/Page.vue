@@ -7,15 +7,19 @@
 
 <script>
 import TheConsent from "./TheConsent"; 
+import EventBus from '../eventbus';
 
 export default {
   props: ['blok'],
   components: {
     "theconsent": TheConsent,
   },
+  mounted() {
+    EventBus.$on('askConsent', bool => this.askConsent = bool)
+  },
   data() {
     return {
-      askConsent: true
+      askConsent: false
     }
   },
   metaInfo() {

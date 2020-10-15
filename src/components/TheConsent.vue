@@ -1,11 +1,11 @@
 <template>
-<!--   <aside class="xy-consent">
+  <aside class="xy-consent">
     <div class="consent-container">
       <div class="consent-wrapper">
         <div v-if="!consentSettings">
           <h5>{{ content.main_title }}</h5>
           <v-richtext :text="content.main_blurb"></v-richtext>
-          <form class="consent-form">
+          <form class="consent-form" :submit.prevent="closeConsent">
             <div :key="type._uid" v-for="type of content.types">
               <label v-if="type.variable == 'consentsToMinimum'">
                 <input type="checkbox" :name="type.variable" v-model="checks[type.variable]" disabled checked @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span>
@@ -62,7 +62,7 @@
         </div>
       </div> 
     </div>
-  </aside> -->
+  </aside>
 </template>
 
 <script>
@@ -98,7 +98,7 @@ export default {
     closeConsent() {
       if (process.isClient) {
         localStorage.setItem('consentGiven',true);
-        this.$emit('askConsent',false);
+        EventBus.$emit('askConsent', false);
       }
     },
     showTable(value) {
