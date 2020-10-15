@@ -142,7 +142,7 @@ export default {
   height: 100%;
   background-color: rgba($black,0.8);
   z-index: 100;
-  .is-hidden {
+  &.is-hidden {
     display: none;
   }
   .consent-container {
