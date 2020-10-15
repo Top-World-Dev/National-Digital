@@ -72,12 +72,12 @@ export default {
       consentSettings: false,
       tables: {},
       checks: {},
-      showModal: false
+      showModal: true
     }
   },
   created() {
-    this.showModal = true;
-    console.log(this.showModal);
+    // this.showModal = true;
+    // console.log(this.showModal);
     
   },
   methods: {
