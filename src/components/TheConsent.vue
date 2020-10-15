@@ -2,7 +2,7 @@
   <aside class="xy-consent">
     <div class="consent-container">
       <div class="consent-wrapper">
-        <!-- <div v-if="!consentSettings">
+        <div v-if="!consentSettings">
           <h5>{{ content.main_title }}</h5>
           <v-richtext :text="content.main_blurb"></v-richtext>
           <form class="consent-form" :submit.prevent="closeConsent">
@@ -27,8 +27,8 @@
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
             </li>
           </ul>
-        </div> -->
-        <!-- <div v-else>
+        </div>
+        <div v-else>
           <a class="consent-prev" role="button" tabindex="0" @click="consentSettings = !consentSettings">←</a>
           <h5>{{ content.settings_title }}</h5>
           <v-richtext :text="content.settings_blurb"></v-richtext>
@@ -39,12 +39,12 @@
           <div class="consent-section" :key="type._uid" v-for="type of content.types">
             <div class="consent-opt">
               <div class="consent-optcheck">
-                <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"></label>
-                <label v-else><span>{{ type.title }}</span><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"></label>
+                <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+                <label v-else><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
               </div>
               <v-richtext :text="type.blurb"></v-richtext>
               <div class="consent-more">
-                <a role="button" tabindex="0" @click="showTable(type.variable)">{{ content.button_expand }}</a>
+                <a class="consent-expand" role="button" tabindex="0" @click="showTable(type.variable)">{{ content.button_expand }}</a>
                 <table class="consent-table" v-if="tables[`${type.variable}`]">
                   <th><td :key="item.uid" v-for="item in type.details">{{ item.value }}</td></th>
                   <tr :key="row.uid" v-for="row in type.details.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
@@ -59,7 +59,7 @@
               <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
             </li>
           </ul>
-        </div> -->
+        </div>
       </div> 
     </div>
   </aside>
@@ -69,58 +69,58 @@
 import EventBus from '../eventbus';
 export default {
   props: ["content"], 
-  // data() {
-  //   return {
-  //     consentSettings: false,
-  //     tables: {},
-  //     checks: {},
-  //   }
-  // },
-  // created() {
-  //   if (process.isClient) {
-  //     localStorage.setItem(`consentsToMinimum`,true);
-  //     for (const key of Object.keys(this.checks)) {
-  //       localStorage.setItem(key, false);
-  //     }
-  //   }
-  // },
-  // methods: {
-  //   addLocalStorage(event, value) {
-  //     localStorage.setItem(value, event.target.checked);
-  //   },
-  //   consentAll() {
-  //     for (const key of Object.keys(this.checkedItems)) {
-  //       this.checks[key] = true;
-  //       localStorage.setItem(key, true);
-  //     }
-  //     this.closeConsent();
-  //   },
-  //   closeConsent() {
-  //     if (process.isClient) {
-  //       localStorage.setItem('consentGiven',true);
-  //       EventBus.$emit('askConsent', false);
-  //     }
-  //   },
-  //   showTable(value) {
-  //     this.tables[value] = !this.tables[value];
-  //   }
-  // },
-  // computed: {
-  //   checkedItems() {
-  //     let obj = {};
-  //     this.content.types.forEach(item => {
-  //       (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
-  //     });
-  //     this.checks = obj;
-  //     return obj;
-  //   },
-  //   tableItems() {
-  //     let obj = {};
-  //     this.content.types.forEach(item => obj[item.variable] = false );
-  //     this.tables = obj;
-  //     return obj;
-  //   }
-  // }
+  data() {
+    return {
+      consentSettings: false,
+      tables: {},
+      checks: {},
+    }
+  },
+  created() {
+    if (process.isClient) {
+      localStorage.setItem(`consentsToMinimum`,true);
+      for (const key of Object.keys(this.checks)) {
+        localStorage.setItem(key, false);
+      }
+    }
+  },
+  methods: {
+    addLocalStorage(event, value) {
+      localStorage.setItem(value, event.target.checked);
+    },
+    consentAll() {
+      for (const key of Object.keys(this.checkedItems)) {
+        this.checks[key] = true;
+        localStorage.setItem(key, true);
+      }
+      this.closeConsent();
+    },
+    closeConsent() {
+      if (process.isClient) {
+        localStorage.setItem('consentGiven',true);
+        EventBus.$emit('askConsent', false);
+      }
+    },
+    showTable(value) {
+      this.tables[value] = !this.tables[value];
+    }
+  },
+  computed: {
+    checkedItems() {
+      let obj = {};
+      this.content.types.forEach(item => {
+        (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
+      });
+      this.checks = obj;
+      return obj;
+    },
+    tableItems() {
+      let obj = {};
+      this.content.types.forEach(item => obj[item.variable] = false );
+      this.tables = obj;
+      return obj;
+    }
+  }
 };
 </script>
 
@@ -164,6 +164,9 @@ export default {
     font-size: 1.5rem;
     color: $accent;
   }
+  .consent-expand {
+    color: $accent;
+  }
   .consent-center {
     text-align: center;
   }
@@ -188,7 +191,7 @@ export default {
       width: 100%;
     }
   }
-  table.consent-table {
+  .consent-table {
     width: 100%;
     margin-bottom: 0.5rem;
     tr, th {
@@ -201,9 +204,61 @@ export default {
     td {
       flex: 0 0 50%;
       text-align: left;
-    }
-    
+    }  
   }
+
+  .consent-toggle {
+    position: relative;
+    display: inline-block;
+    width: 3.5rem;
+    height: 2rem;
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+  }
+
+  .consent-switch:before {
+    position: absolute;
+    content: "";
+    height: 1.5rem;
+    width: 1.5rem;
+    left: 0.25rem;
+    bottom: 0.25rem;
+    background-color: $white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+
+  .consent-switch {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $lightGrey;
+    transition: .4s;
+    border-radius: 2em;
+  }
+
+  input:checked + .consent-switch {
+    background-color: $accent;
+  }
+
+  input:focus + .consent-switch {
+    box-shadow: 0 0 0.05em $accent;
+  }
+
+  input:disabled + .consent-switch {
+    background-color: rgba($accent,0.25);
+  }
+
+  input:checked + .consent-switch:before {
+    transform: translateX(26px);
+  }
+
   .consent-linklist.v-linklist { // override defaults
     font-size: 0.75rem;
     // li::before {
