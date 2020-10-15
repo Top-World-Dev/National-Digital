@@ -7,10 +7,8 @@
           <v-richtext :text="content.main_blurb"></v-richtext>
           <form class="consent-form" :submit.prevent="closeConsent">
             <div :key="type._uid" v-for="type of content.types">
-              <label v-if="type.variable == 'consentsToMinimum'">
-                <input type="checkbox" :name="type.variable" v-model="checks[type.variable]" disabled checked @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span>
-              </label>
-              <label v-else><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" :disabled="type.variable == 'consentsToMinimum'" @change="addLocalStorage($event, type.variable)"><span>{{ type.title }}</span></label>
+              <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+              <label v-else><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
             </div>
             <div class="consent-center">
               <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
@@ -171,19 +169,21 @@ export default {
     text-align: center;
   }
   .consent-form {
-    input[type='checkbox'] {
-      margin-right: 0.25rem;
-    }
     label {
-      margin-right: 0.5rem;
+      font-size: 0.875rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+      width: 100%;
     }
   }
   .consent-opt {
     border-bottom: 0.05em solid $grey;
   }
   .consent-optcheck {
-    font-size: 1rem;
     label {
+      font-size: 1rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -210,8 +210,8 @@ export default {
   .consent-toggle {
     position: relative;
     display: inline-block;
-    width: 3.5rem;
-    height: 2rem;
+    width: 3.5em;
+    height: 2em;
     input {
       opacity: 0;
       width: 0;
@@ -222,10 +222,10 @@ export default {
   .consent-switch:before {
     position: absolute;
     content: "";
-    height: 1.5rem;
-    width: 1.5rem;
-    left: 0.25rem;
-    bottom: 0.25rem;
+    height: 1.5em;
+    width: 1.5em;
+    left: 0.2em;
+    bottom: 0.25em;
     background-color: $white;
     transition: .4s;
     border-radius: 50%;
@@ -256,7 +256,7 @@ export default {
   }
 
   input:checked + .consent-switch:before {
-    transform: translateX(26px);
+    transform: translateX(1.6em);
   }
 
   .consent-linklist.v-linklist { // override defaults
