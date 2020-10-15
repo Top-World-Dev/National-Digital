@@ -76,17 +76,8 @@ export default {
     }
   },
   created() {
-    if (process.isClient) {
-      this.showModal = true;
-      // if (!localStorage.getItem('consentGiven')) {
-      //   console.log('show')
-      //   this.showModal = true;
-      // }
-      // localStorage.setItem(`consentsToMinimum`,true);
-      // for (const key of Object.keys(this.checks)) {
-      //   localStorage.setItem(key, false);
-      // }
-    }
+    this.showModal = true;
+    
   },
   methods: {
     addLocalStorage(event, value) {
