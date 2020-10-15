@@ -2,7 +2,7 @@
   <aside class="xy-consent">
     <div class="consent-container">
       <div class="consent-wrapper">
-        <div v-if="!consentSettings">
+        <div v-if="!consentSettings && showModal">
           <h5>{{ content.main_title }}</h5>
           <v-richtext :text="content.main_blurb"></v-richtext>
           <div class="consent-form">
@@ -26,7 +26,7 @@
             </li>
           </ul>
         </div>
-        <div v-else>
+        <div v-if="consentSettings && showModal">
           <a class="consent-prev" role="button" tabindex="0" @click="consentSettings = !consentSettings">←</a>
           <h5>{{ content.settings_title }}</h5>
           <v-richtext :text="content.settings_blurb"></v-richtext>
@@ -70,7 +70,8 @@ export default {
     return {
       consentSettings: false,
       tables: {},
-      checks: {},     
+      checks: {},  
+      showModal: true   
     }
   },
   mounted() {
