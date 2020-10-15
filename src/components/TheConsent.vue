@@ -71,15 +71,18 @@ export default {
       consentSettings: false,
       tables: {},
       checks: {},  
-      showModal: true   
+      showModal: false   
     }
   },
   mounted() {
     if (process.isClient) {
       console.log(localStorage.getItem('consentGiven'));
-      // if (!localStorage.getItem('consentGiven')) {
-      //   document.querySelector('.xy-consent').classList.toggle("is-hidden"); 
-      // }
+      setTimeout(() => {
+      if (!localStorage.getItem('consentGiven')) {
+        this.showModal = true;
+      };
+      }, 120);
+      
       localStorage.setItem(`consentsToMinimum`,true);
       for (const key of Object.keys(this.checks)) {
         localStorage.setItem(key, false);
