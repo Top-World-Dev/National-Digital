@@ -5,19 +5,17 @@
         <div v-if="!consentSettings">
           <h5>{{ content.main_title }}</h5>
           <v-richtext :text="content.main_blurb"></v-richtext>
-          <form class="consent-form" :submit.prevent="closeConsent">
-            <div :key="type._uid" v-for="type of content.types">
-              <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
-              <label v-else><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
-            </div>
-            <div class="consent-center">
-              <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
-              <button type="submit" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
-            </div>
-            <div class="consent-center">
-              <a class="consent-next" role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
-            </div>
-          </form>
+          <div :key="type._uid" v-for="type of content.types">
+            <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+            <label v-else><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+          </div>
+          <div class="consent-center">
+            <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
+            <button type="button" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
+          </div>
+          <div class="consent-center">
+            <a class="consent-next" role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
+          </div>
           <ul class="consent-center consent-linklist v-linklist" :class="content.links[0].style">
             <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
               <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
@@ -79,9 +77,7 @@ export default {
     EventBus.$on('askConsent', bool => document.querySelector('.xy-consent').classList.toggle("is-hidden"));
 
     if (process.isClient) {
-
       if (!localStorage.getItem('consentGiven')) {
-        console.log('show');
         document.querySelector('.xy-consent').classList.toggle("is-hidden"); 
         localStorage.setItem(`consentGiven`,true);
       }
