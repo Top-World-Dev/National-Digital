@@ -9,7 +9,7 @@ export default {
   props: ['blok'],
   metaInfo() {
       // const data = this.blok.body[0].section.content.section[0].meta[0];
-      const data = this.blok.meta[0];
+      const data = this.blok.meta;
       if(!data) {
         return false
       } 
