@@ -2,8 +2,8 @@
   <div class="v-jobs">
     <!-- needs to pull through en/de data based on language (look at this last if needed) -->
     <section class="jobs-filter">
-      <ul class="job-filter-location">
-        <li>{ job locations }</li>
+      <ul class="job-filter-location" v-for="location in locations">
+        <li @click>{{ locations }}</li>
       </ul>
       <ul class="job-filter-category">
         <li>{ job categories }</li>
@@ -13,36 +13,24 @@
       </ul>
     </section>
 
-    <table class="jobs-table">
+    <table class="jobs-table" v-if="rows.length > 0">
       <thead>
         <tr> <!-- will define these terms in Storyblok -->
-          <th>Position</th>
-          <th>Location</th> <!-- sortable -->
-          <th>Expertise</th> <!-- sortable -->
-          <th>Type</th> <!-- sortable -->
+          <th v-for="col in columns"  @click="sortTable(col)" :class="{'active': sortColumn == col}">
+              <span v-if="col != 'position'">{{ col }}</span>
+            </a>
+          </th>
         </tr>
       </thead>
-        <tbody>
-        <!-- for each -->
-        <tr>
-          <td>
-            <div class="jobs-table-title"><a href="#link-to-personio">Job title</a></div>
-            <div>Job description</div>
-          </td>
-          <td>
-            <div class="jobs-table-location">Location</div>
-          </td>
-          <td>
-            <div class="jobs-table-category">Area of expertise</div>
-          </td>
-          <td>
-            <div class="jobs-table-type">Job Type</div>
+      <tbody>
+        <tr v-for="row in rows">
+          <td v-for="col in columns">
+            <span v-if="col == 'title'" v-html="row[col]"></span>
+            <span v-else-if=" col != 'position'">{{ row[col] }}</span>
           </td>
         </tr>
-        <!-- end for each -->
       </tbody>
     </table>
-
   </div>
 </template>
 <script>
@@ -51,7 +39,10 @@
     data() {
       return {
         height: '0px',
-        jobData: [],
+        jobs: [],
+        rows: [],
+        sortColumn: '',
+        ascending: false,
       }
     },
     destroyed() {
@@ -67,9 +58,43 @@
 
       getJobData()
       .then(xml => this.xmlToJson(xml))
-      .then(positions => this.jobData = positions['workzag-jobs'].position) 
+      .then(positions => positions['workzag-jobs'].position)
+      .then(jobs => {
+          this.jobs = jobs.map(item => {
+            return {
+              position: item.name,
+              title: `<a href="https://thinxnet-jobs.personio.de/job/${item.id}">${item.name}</a>`,
+              location: item.office,
+              category: item.recruitingCategory,
+              type: item.schedule
+            }
+          })
+          // build initial table 
+          this.rows = this.jobs;
+      }) 
     },
     methods: {
+      sortTable(col) {
+        if(this.sortColumn == col) {
+          this.ascending = !this.ascending;
+        } 
+        else {
+          this.ascending = true;
+          this.sortColumn = col;
+        }
+
+        let ascending = this.ascending;
+
+        this.rows.sort((a, b) => {
+          if (a[col] > b[col]) {
+            return ascending ? 1 : -1
+          } else if (a[col] < b[col]) {
+            return ascending ? -1 : 1
+          }
+          
+          return 0;
+        })
+      },
       xmlToJson(xml) {
         // Create the return object
         var obj = {};
@@ -116,6 +141,21 @@
         }
         return obj;
       }
+    },
+    computed: {
+      columns() {
+        return Object.keys(this.rows[0])
+      },
+      locations() {
+        return [...new Set(this.jobs.map(item => item.location))];
+      },
+      categories() {
+        return [...new Set(this.jobs.map(item => item.category))]; 
+      },
+      types() {
+        return [...new Set(this.jobs.map(item => item.type))]; 
+      }
+
     }
   }
 </script>
