@@ -4,6 +4,7 @@
  * @param {string} xml XML DOM tree
  */
 function xmlToJson(xml) {
+  console.log(xml)
   // Create the return object
   var obj = {};
 
@@ -18,6 +19,7 @@ function xmlToJson(xml) {
       }
     }
   } else if (xml.nodeType == 3) {
+    console.log(xml)
     // text
     obj = xml.nodeValue;
   }

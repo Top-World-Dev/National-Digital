@@ -22,6 +22,7 @@ import VHeading from '~/components/VHeading.vue'
 import VIframe from '~/components/VIframe.vue'
 import VImageblock from '~/components/VImageblock.vue'
 import VImageoverlay from '~/components/VImageoverlay.vue'
+import VJobs from '~/components/VJobs.vue'
 import VLinklist from '~/components/VLinklist.vue'
 import VList from '~/components/VList.vue'
 import VReviewslider from '~/components/VReviewslider.vue'
@@ -66,6 +67,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VIframe', VIframe)
   Vue.component('VImageblock', VImageblock)
   Vue.component('VImageoverlay', VImageoverlay)
+  Vue.component('VJobs', VJobs)
   Vue.component('VLinklist', VLinklist)
   Vue.component('VList', VList)
   Vue.component('VReviewslider', VReviewslider)
