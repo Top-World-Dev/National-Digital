@@ -15,7 +15,7 @@ export default {
       } 
       else {
         return {
-          title: data.title,
+          title: data[0].title,
           meta: [
             { name: 'description', content: data.description },
             { name: 'robots', content: (data.noindex) ? 'noindex' : 'index' }
