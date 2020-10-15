@@ -1,5 +1,4 @@
 <template>
-
   <aside class="xy-consent" v-if="show">
     <div class="consent-container">
       <div class="consent-wrapper">
