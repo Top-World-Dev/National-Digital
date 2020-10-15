@@ -1,6 +1,6 @@
 <template>
-  <aside class="xy-consent">
-    <div v-if="showModal">
+  <aside>
+    <div v-if="showModal" class="xy-consent">
       <div class="consent-container">
         <div class="consent-wrapper">
           <div v-if="!consentSettings && showModal">
