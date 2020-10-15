@@ -69,58 +69,58 @@
 import EventBus from '../eventbus';
 export default {
   props: ["content"], 
-  data() {
-    return {
-      consentSettings: false,
-      tables: {},
-      checks: {},
-    }
-  },
-  created() {
-    if (process.isClient) {
-      localStorage.setItem(`consentsToMinimum`,true);
-      for (const key of Object.keys(this.checks)) {
-        localStorage.setItem(key, false);
-      }
-    }
-  },
-  methods: {
-    addLocalStorage(event, value) {
-      localStorage.setItem(value, event.target.checked);
-    },
-    consentAll() {
-      for (const key of Object.keys(this.checkedItems)) {
-        this.checks[key] = true;
-        localStorage.setItem(key, true);
-      }
-      this.closeConsent();
-    },
-    closeConsent() {
-      if (process.isClient) {
-        localStorage.setItem('consentGiven',true);
-        EventBus.$emit('askConsent', false);
-      }
-    },
-    showTable(value) {
-      this.tables[value] = !this.tables[value];
-    }
-  },
-  computed: {
-    checkedItems() {
-      let obj = {};
-      this.content.types.forEach(item => {
-        (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
-      });
-      this.checks = obj;
-      return obj;
-    },
-    tableItems() {
-      let obj = {};
-      this.content.types.forEach(item => obj[item.variable] = false );
-      this.tables = obj;
-      return obj;
-    }
-  }
+  // data() {
+  //   return {
+  //     consentSettings: false,
+  //     tables: {},
+  //     checks: {},
+  //   }
+  // },
+  // created() {
+  //   if (process.isClient) {
+  //     localStorage.setItem(`consentsToMinimum`,true);
+  //     for (const key of Object.keys(this.checks)) {
+  //       localStorage.setItem(key, false);
+  //     }
+  //   }
+  // },
+  // methods: {
+  //   addLocalStorage(event, value) {
+  //     localStorage.setItem(value, event.target.checked);
+  //   },
+  //   consentAll() {
+  //     for (const key of Object.keys(this.checkedItems)) {
+  //       this.checks[key] = true;
+  //       localStorage.setItem(key, true);
+  //     }
+  //     this.closeConsent();
+  //   },
+  //   closeConsent() {
+  //     if (process.isClient) {
+  //       localStorage.setItem('consentGiven',true);
+  //       EventBus.$emit('askConsent', false);
+  //     }
+  //   },
+  //   showTable(value) {
+  //     this.tables[value] = !this.tables[value];
+  //   }
+  // },
+  // computed: {
+  //   checkedItems() {
+  //     let obj = {};
+  //     this.content.types.forEach(item => {
+  //       (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
+  //     });
+  //     this.checks = obj;
+  //     return obj;
+  //   },
+  //   tableItems() {
+  //     let obj = {};
+  //     this.content.types.forEach(item => obj[item.variable] = false );
+  //     this.tables = obj;
+  //     return obj;
+  //   }
+  // }
 };
 </script>
 
