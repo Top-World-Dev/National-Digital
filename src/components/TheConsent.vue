@@ -82,7 +82,6 @@ export default {
       this.showModal = !this.showModal
     });
     if (process.isClient) {
-      console.log(localStorage.getItem('consentGiven'));
       setTimeout(() => {
       if (!localStorage.getItem('consentGiven')) {
         this.showModal = true;
