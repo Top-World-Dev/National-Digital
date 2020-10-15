@@ -1,5 +1,5 @@
 <template>
-  <aside class="xy-consent is-hidden">
+  <aside class="xy-consent">
     <div class="consent-container">
       <div class="consent-wrapper">
         <div v-if="!consentSettings">
@@ -75,9 +75,9 @@ export default {
   },
   mounted() {
     if (process.isClient) {
-      if (!localStorage.getItem('consentGiven')) {
-        document.querySelector('.xy-consent').classList.toggle("is-hidden"); 
-      }
+      // if (!localStorage.getItem('consentGiven')) {
+      //   document.querySelector('.xy-consent').classList.toggle("is-hidden"); 
+      // }
       localStorage.setItem(`consentsToMinimum`,true);
       for (const key of Object.keys(this.checks)) {
         localStorage.setItem(key, false);
@@ -97,7 +97,7 @@ export default {
     closeConsent() {
       if (process.isClient) {
         localStorage.setItem('consentGiven',true);
-        document.querySelector('.xy-consent').classList.toggle("is-hidden");
+        // document.querySelector('.xy-consent').classList.toggle("is-hidden");
       }
     },
     showTable(value) {
