@@ -1,5 +1,5 @@
 <template>
-  <aside class="xy-consent" v-if="showModal">
+  <aside class="xy-consent" :class="{'is-hidden': !showModal}">
     <div class="consent-container">
       <div class="consent-wrapper">
         <div v-if="!consentSettings">
@@ -99,10 +99,11 @@ export default {
       this.closeConsent();
     },
     closeConsent() {
-      if (process.isClient) {
-        localStorage.setItem('consentGiven',true);
-        this.showModal = false;
-      }
+      this.showModal = true;
+      // if (process.isClient) {
+      //   localStorage.setItem('consentGiven',true);
+      //   this.showModal = false;
+      // }
     },
     showTable(value) {
       this.tables[value] = !this.tables[value];
