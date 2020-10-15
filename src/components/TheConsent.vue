@@ -1,5 +1,6 @@
 <template>
-  <aside class="xy-consent">
+
+  <aside class="xy-consent" v-if="show">
     <div class="consent-container">
       <div class="consent-wrapper">
         <div v-if="!consentSettings">
@@ -66,7 +67,7 @@
 <script>
 import EventBus from '../eventbus';
 export default {
-  props: ["content"], 
+  props: ["content", "show"], 
   data() {
     return {
       consentSettings: false,
