@@ -7,18 +7,18 @@ const fs = require('fs');
 const csvToJson = async() => {
   return json = await csv({
     colParser: {
-      'map_id': 'number',
+      'id': 'number',
       'lat': 'number',
-      'lng': 'number',
+      'lon': 'number',
+      'houseNumber': 'number',
+      'zip': 'number'
     }
-  }).fromFile('./static/de.ryd.one-places.csv');
+  }).fromFile('./static/de.ryd.one-gas-stations.csv');
 }
 
 csvToJson()
 .then(places => {
-  places.forEach((item, index) =>{
-    item.id = index + 1;
-  })
+ 
   const filepath = `./static/de.ryd.one-places.json`;
 
   fs.writeFile(filepath, JSON.stringify(places), (err) => {
