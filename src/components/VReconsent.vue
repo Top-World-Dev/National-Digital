@@ -9,7 +9,7 @@
       resetConsent() {
         if (process.isClient) {
           localStorage.setItem('consentGiven',false);
-          EventBus.$emit('askConsent',true);
+          document.querySelector('.xy-consent').classList.toggle("is-hidden")
         }
       }
     }

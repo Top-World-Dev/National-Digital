@@ -7,20 +7,11 @@
 
 <script>
 import TheConsent from "./TheConsent"; 
-import EventBus from '../eventbus';
 
 export default {
   props: ['blok'],
   components: {
     "theconsent": TheConsent,
-  },
-  mounted() {
-    EventBus.$on('askConsent', bool => this.askConsent = bool);
-  },
-  data() {
-    return {
-      askConsent: false
-    }
   },
   metaInfo() {
     const data = this.blok.meta_information;
@@ -36,13 +27,6 @@ export default {
         link: [
           { rel: 'canonical', href: `${this.$route.fullPath}` },
         ]
-      }
-    }
-  },
-  created() {
-    if (process.isClient) {
-      if (!localStorage.getItem('consentGiven')) {
-        this.askConsent = true;
       }
     }
   }
