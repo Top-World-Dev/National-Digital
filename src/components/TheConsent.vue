@@ -1,5 +1,5 @@
 <template>
-  <aside class="xy-consent" :class="{'is-hidden': !showModal}">
+  <aside class="xy-consent is-hidden">
     <div class="consent-container">
       <div class="consent-wrapper">
         <div v-if="!consentSettings">
@@ -72,13 +72,22 @@ export default {
       consentSettings: false,
       tables: {},
       checks: {},
-      showModal: true
+      showModal: false
     }
   },
-  created() {
-    // this.showModal = true;
-    // console.log(this.showModal);
-    
+  mounted() {
+    if (process.isClient) {
+
+      if (!localStorage.getItem('consentGiven')) {
+        console.log('show');
+        document.querySelector('.xy-consent').classList.toggle("is-hidden"); 
+        localStorage.setItem(`consentGiven`,true);
+      }
+      localStorage.setItem(`consentsToMinimum`,true);
+      for (const key of Object.keys(this.checks)) {
+        localStorage.setItem(key, false);
+      }
+    }
   },
   methods: {
     addLocalStorage(event, value) {
@@ -92,9 +101,7 @@ export default {
       this.closeConsent();
     },
     closeConsent() {
-      this.showModal = false;
-      console.log(this.showModal)
-
+      this.showModal = true;
       // if (process.isClient) {
       //   localStorage.setItem('consentGiven',true);
       //   this.showModal = false;
