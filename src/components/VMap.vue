@@ -39,7 +39,7 @@
        <!--  <l-icon
           :icon-size="dynamicSize"
           :icon-anchor="dynamicAnchor"
-          icon-url="/mapping-icons/poi_default.png"
+          icon-url="/map-markers/poi_default.png"
         /> -->
         <l-popup :content="marker.popup" />
         
@@ -158,8 +158,8 @@ export default {
     },
     getIcon(marker) {
       let icon = new L.icon({
-        iconUrl: `/mapping-icons/poi_default.png`,
-        shadowUrl: `/mapping-icons/marker-shadow.png`,
+        iconUrl: `/map-markers/poi_default.png`,
+        shadowUrl: `/map-markers/marker-shadow.png`,
         iconSize: [32, 37],
         iconAnchor: [16, 37],
         popupAnchor: [0, -28],
