@@ -1,5 +1,5 @@
 <template>
-  <aside class="xy-consent" v-if="show">
+  <aside class="xy-consent" v-if="showModal">
     <div class="consent-container">
       <div class="consent-wrapper">
         <div v-if="!consentSettings">
@@ -66,16 +66,21 @@
 <script>
 import EventBus from '../eventbus';
 export default {
-  props: ["content", "show"], 
+  props: ["content"], 
   data() {
     return {
       consentSettings: false,
       tables: {},
       checks: {},
+      showModal: false
     }
   },
   created() {
     if (process.isClient) {
+      if (!localStorage.getItem('consentGiven')) {
+        console.log('show')
+        this.showModal = true;
+      }
       localStorage.setItem(`consentsToMinimum`,true);
       for (const key of Object.keys(this.checks)) {
         localStorage.setItem(key, false);
@@ -96,7 +101,7 @@ export default {
     closeConsent() {
       if (process.isClient) {
         localStorage.setItem('consentGiven',true);
-        EventBus.$emit('askConsent', false);
+        this.showModal = false;
       }
     },
     showTable(value) {
