@@ -1,6 +1,6 @@
 <template>
   <aside class="xy-consent">
-    <div class="consent-container">
+    <div class="consent-container" v-if="showModal">
       <div class="consent-wrapper">
         <div v-if="!consentSettings && showModal">
           <h5>{{ content.main_title }}</h5>
