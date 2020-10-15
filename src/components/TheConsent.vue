@@ -80,7 +80,7 @@ export default {
   mounted() {
     EventBus.$on('toggleModal', () => {
       this.showModal = !this.showModal
-    }
+    });
     if (process.isClient) {
       console.log(localStorage.getItem('consentGiven'));
       setTimeout(() => {
