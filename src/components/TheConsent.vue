@@ -1,64 +1,66 @@
 <template>
   <aside class="xy-consent">
-    <div class="consent-container" v-if="showModal">
-      <div class="consent-wrapper">
-        <div v-if="!consentSettings && showModal">
-          <h5>{{ content.main_title }}</h5>
-          <v-richtext :text="content.main_blurb"></v-richtext>
-          <div class="consent-form">
-            <div :key="type._uid" v-for="type of content.types">
-              <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
-              <label v-else><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+    <div v-if="showModal">
+      <div class="consent-container">
+        <div class="consent-wrapper">
+          <div v-if="!consentSettings && showModal">
+            <h5>{{ content.main_title }}</h5>
+            <v-richtext :text="content.main_blurb"></v-richtext>
+            <div class="consent-form">
+              <div :key="type._uid" v-for="type of content.types">
+                <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+                <label v-else><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+              </div>
+              <div class="consent-center">
+                <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
+                <button type="button" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
+              </div>
+              <div class="consent-center">
+                <a class="consent-next" role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
+              </div>
             </div>
+            <ul class="consent-center consent-linklist v-linklist" :class="content.links[0].style">
+              <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
+                <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
+                <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
+                <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+              </li>
+            </ul>
+          </div>
+          <div v-if="consentSettings && showModal">
+            <a class="consent-prev" role="button" tabindex="0" @click="consentSettings = !consentSettings">←</a>
+            <h5>{{ content.settings_title }}</h5>
+            <v-richtext :text="content.settings_blurb"></v-richtext>
             <div class="consent-center">
               <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
               <button type="button" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
             </div>
-            <div class="consent-center">
-              <a class="consent-next" role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
-            </div>
-          </div>
-          <ul class="consent-center consent-linklist v-linklist" :class="content.links[0].style">
-            <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
-              <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
-              <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
-              <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
-            </li>
-          </ul>
-        </div>
-        <div v-if="consentSettings && showModal">
-          <a class="consent-prev" role="button" tabindex="0" @click="consentSettings = !consentSettings">←</a>
-          <h5>{{ content.settings_title }}</h5>
-          <v-richtext :text="content.settings_blurb"></v-richtext>
-          <div class="consent-center">
-            <button type="button" class="form-submit v-button button-primary" @click="consentAll"><a>{{ content.button_selectall }}</a></button>
-            <button type="button" class="form-submit v-button button-outline" @click="closeConsent"><a>{{ content.button_continue }}</a></button>
-          </div>
-          <div class="consent-section" :key="type._uid" v-for="type of content.types">
-            <div class="consent-opt">
-              <div class="consent-optcheck">
-                <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
-                <label v-else><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
-              </div>
-              <v-richtext :text="type.blurb"></v-richtext>
-              <div class="consent-more">
-                <a class="consent-expand" role="button" tabindex="0" @click="showTable(type.variable)">{{ content.button_expand }}</a>
-                <table class="consent-table" v-if="tables[`${type.variable}`]">
-                  <th><td :key="item.uid" v-for="item in type.details">{{ item.value }}</td></th>
-                  <tr :key="row.uid" v-for="row in type.details.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
-                </table>  
+            <div class="consent-section" :key="type._uid" v-for="type of content.types">
+              <div class="consent-opt">
+                <div class="consent-optcheck">
+                  <label v-if="type.variable == 'consentsToMinimum'"><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" checked disabled :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+                  <label v-else><span>{{ type.title }}</span><span class="consent-toggle"><input type="checkbox" :name="type.variable" v-model="checks[type.variable]" @change="addLocalStorage($event, type.variable)"><span class="consent-switch"></span></span></label>
+                </div>
+                <v-richtext :text="type.blurb"></v-richtext>
+                <div class="consent-more">
+                  <a class="consent-expand" role="button" tabindex="0" @click="showTable(type.variable)">{{ content.button_expand }}</a>
+                  <table class="consent-table" v-if="tables[`${type.variable}`]">
+                    <th><td :key="item.uid" v-for="item in type.details">{{ item.value }}</td></th>
+                    <tr :key="row.uid" v-for="row in type.details.tbody"><td :key="cell.uid" v-for="cell in row.body">{{ cell.value }}</td></tr>
+                  </table>  
+                </div>
               </div>
             </div>
+            <ul class="consent-linklist v-linklist" :class="content.links[0].style">
+              <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
+                <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
+                <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
+                <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+              </li>
+            </ul>
           </div>
-          <ul class="consent-linklist v-linklist" :class="content.links[0].style">
-            <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
-              <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
-              <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
-              <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
-            </li>
-          </ul>
-        </div>
-      </div> 
+        </div> 
+      </div>
     </div>
   </aside>
 </template>
