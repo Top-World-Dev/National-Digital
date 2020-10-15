@@ -77,6 +77,7 @@ export default {
   },
   created() {
     this.showModal = true;
+    console.log(this.showModal);
     
   },
   methods: {
@@ -91,7 +92,9 @@ export default {
       this.closeConsent();
     },
     closeConsent() {
-      this.showModal = true;
+      this.showModal = false;
+      console.log(this.showModal)
+
       // if (process.isClient) {
       //   localStorage.setItem('consentGiven',true);
       //   this.showModal = false;
