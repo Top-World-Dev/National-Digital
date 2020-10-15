@@ -17,11 +17,6 @@ export default {
   mounted() {
     EventBus.$on('askConsent', bool => this.askConsent = bool);
   },
-  data() {
-    return {
-      askConsent: false
-    }
-  },
   metaInfo() {
     const data = this.blok.meta_information;
     if(!data) {
@@ -39,10 +34,12 @@ export default {
       }
     }
   },
-  created() {
-    if (process.isClient) {
-      if (!localStorage.getItem('consentGiven')) {
-        this.askConsent = true;
+  computed: {
+    askConsent: function() {
+      if (process.isClient) {
+        if (!localStorage.getItem('consentGiven')) {
+         return true;
+        }
       }
     }
   }
