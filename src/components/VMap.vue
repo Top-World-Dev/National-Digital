@@ -1,6 +1,6 @@
   <template>
   <div class="v-map">
-    <!-- <div class="map-search">
+    <div class="map-search">
       <div class="map-search-form">
         <div class="map-search-row">
           <input type="text" name="search" placeholder="Search" autocomplete="off" class="map-search-input" aria-label="search" v-model="searchValue" @keyup="search($event.target.value)" @keyup.enter="loadResults">
@@ -41,165 +41,165 @@
         </l-marker>
       </l-map>
     </ClientOnly>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
   // import { LMap, LTileLayer, LMarker, LPopup, LIcon, LIconDefault } from 'vue2-leaflet';
-  // import 'leaflet/dist/leaflet.css';
+  import 'leaflet/dist/leaflet.css';
 
 
-  // let latLng,icon; 
-  // if (process.isClient) {
-  //   icon = require('leaflet').Icon
-  //   delete icon.Default.prototype._getIconUrl;
-  //   icon.Default.mergeOptions({
-  //     iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  //     iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  //     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-  //   })
-  //   latLng =  require('leaflet').latLng
-  // }
+  let latLng,icon; 
+  if (process.isClient) {
+    icon = require('leaflet').Icon
+    delete icon.Default.prototype._getIconUrl;
+    icon.Default.mergeOptions({
+      iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+      iconUrl: require('leaflet/dist/images/marker-icon.png'),
+      shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+    })
+    latLng =  require('leaflet').latLng
+  }
 
 export default {
   name: "ryd.de.one",
   components: {
-    // // mapping components
-    // Lmap: () => import('vue2-leaflet')
-    //   .then((component) => component.LMap)
-    //   .catch(),
-    // LTileLayer: () => import('vue2-leaflet')
-    //   .then((component) => component.LTileLayer)
-    //   .catch(),
-    // LMarker: () => import('vue2-leaflet')
-    //   .then((component) => component.LMarker)
-    //   .catch(),
-    // LPopup: () => import('vue2-leaflet')
-    //   .then((component) => component.LPopup)
-    //   .catch(),
-    // LIcon: () => import('vue2-leaflet')
-    //   .then((component) => component.LIcon)
-    //   .catch(),
-    // LIconDefault: () => import('vue2-leaflet')
-    //   .then((component) => component.LIconDefault)
-    //   .catch()
+    // mapping components
+    Lmap: () => import('vue2-leaflet')
+      .then((component) => component.LMap)
+      .catch(),
+    LTileLayer: () => import('vue2-leaflet')
+      .then((component) => component.LTileLayer)
+      .catch(),
+    LMarker: () => import('vue2-leaflet')
+      .then((component) => component.LMarker)
+      .catch(),
+    LPopup: () => import('vue2-leaflet')
+      .then((component) => component.LPopup)
+      .catch(),
+    LIcon: () => import('vue2-leaflet')
+      .then((component) => component.LIcon)
+      .catch(),
+    LIconDefault: () => import('vue2-leaflet')
+      .then((component) => component.LIconDefault)
+      .catch()
   },
   async mounted() {
-    // this.loading = true;
-    // const response = await fetch('/de.ryd.one-places.json');
-    // const data = await response.json();
-    // this.locations = data.map(location => {
-    //   return {
-    //     position: { lat: location.lat, lng: location.lon },
-    //     brand: location.brand,
-    //     address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
-    //     zip: location.zip,
-    //     city: location.city,
-    //     street: location.street,
-    //     popup: `
-    //     <div class="map-popup">
-    //       <div class="map-popup-wrapper">
-    //         <div class="map-popup-brand">${location.brand}</div>
-    //         <div class="map-popup-address"><span>${location.street}</span> <span>${location.houseNumber}</span>, <span>${location.zip}</span> <span>${location.city}</span></div>
-    //       </div>
-    //     </div>
-    //     `
-    //   }
-    // });
-    // // only load markers that are in view
-    // this.markers = this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position))
-    // this.loading = false;
+    this.loading = true;
+    const response = await fetch('/de.ryd.one-places.json');
+    const data = await response.json();
+    this.locations = data.map(location => {
+      return {
+        position: { lat: location.lat, lng: location.lon },
+        brand: location.brand,
+        address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
+        zip: location.zip,
+        city: location.city,
+        street: location.street,
+        popup: `
+        <div class="map-popup">
+          <div class="map-popup-wrapper">
+            <div class="map-popup-brand">${location.brand}</div>
+            <div class="map-popup-address"><span>${location.street}</span> <span>${location.houseNumber}</span>, <span>${location.zip}</span> <span>${location.city}</span></div>
+          </div>
+        </div>
+        `
+      }
+    });
+    // only load markers that are in view
+    this.markers = this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position))
+    this.loading = false;
 
-    // // add markers when zooming
-    // this.$refs.map.mapObject.on('zoomend', (e) => this.addMarkers() ) 
+    // add markers when zooming
+    this.$refs.map.mapObject.on('zoomend', (e) => this.addMarkers() ) 
   },
   data() {
     return {
-      // loading: false,
-      // zoom: 6,
-      // scroll: false,
-      // url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      // attribution:
-      //   '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      // mapOptions: {
-      //   zoomSnap: 0.5,
-      //   scrollWheelZoom: false
-      // },
-      // showMap: true,
-      // locations: [],
-      // markers: [],
-      // visibleMarkers: [],
-      // searchValue: '',
-      // searchResults: [],
+      loading: false,
+      zoom: 6,
+      scroll: false,
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution:
+        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      mapOptions: {
+        zoomSnap: 0.5,
+        scrollWheelZoom: false
+      },
+      showMap: true,
+      locations: [],
+      markers: [],
+      visibleMarkers: [],
+      searchValue: '',
+      searchResults: [],
     };
   },
   methods: {
-    // addMarkers() {
-    //   this.markers = (this.searchValue.length == 0) ? this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position)) : this.markers.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position));
-    // },
-    // clear() {
-    //   this.searchValue = '';
-    //   this.searchResults = [];
-    // },
-    // enableZoom() {
-    //   this.$refs.map.mapObject.scrollWheelZoom.enable();
-    // },
-    // findResult(result) {
-    //   this.searchResults = [];
-    //   this.markers = [];
-    //   this.markers.push(result);
-    //   this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
-    // },
-    // getIcon(marker) {
-    //   let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
-    //   let imagePath = '';
+    addMarkers() {
+      this.markers = (this.searchValue.length == 0) ? this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position)) : this.markers.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position));
+    },
+    clear() {
+      this.searchValue = '';
+      this.searchResults = [];
+    },
+    enableZoom() {
+      this.$refs.map.mapObject.scrollWheelZoom.enable();
+    },
+    findResult(result) {
+      this.searchResults = [];
+      this.markers = [];
+      this.markers.push(result);
+      this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
+    },
+    getIcon(marker) {
+      let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
+      let imagePath = '';
 
-    //   try {
-    //     imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
-    //   } catch(err) {
-    //     imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
-    //   }
+      try {
+        imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
+      } catch(err) {
+        imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
+      }
 
-    //   let icon = new L.icon({
-    //     iconUrl: imagePath,
-    //     shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src, 
-    //     iconSize: [18, 22],
-    //     iconAnchor: [18, 22],
-    //     popupAnchor: [-6, -22],
-    //     shadowSize: [18, 22],
-    //     shadowAnchor: [18, 22]
-    //   })
-    //   return icon;
-    // },
-    // goToMarker(marker) {
-    //   this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.5});
-    // },
-    // loadResults() {
-    //   if(this.searchValue.length == 0) {
-    //     return false
-    //   }
-    //   this.markers = [];
-    //   this.searchResults.forEach(result => this.markers.push(result));
-    //   this.searchResults = [];
-    //   this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
-    // },
-    // search(value) {
-    //   this.searchResults = (value.length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.indexOf(value) != -1);
-    // },
+      let icon = new L.icon({
+        iconUrl: imagePath,
+        shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src, 
+        iconSize: [18, 22],
+        iconAnchor: [18, 22],
+        popupAnchor: [-6, -22],
+        shadowSize: [18, 22],
+        shadowAnchor: [18, 22]
+      })
+      return icon;
+    },
+    goToMarker(marker) {
+      this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.5});
+    },
+    loadResults() {
+      if(this.searchValue.length == 0) {
+        return false
+      }
+      this.markers = [];
+      this.searchResults.forEach(result => this.markers.push(result));
+      this.searchResults = [];
+      this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
+    },
+    search(value) {
+      this.searchResults = (value.length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.indexOf(value) != -1);
+    },
   },
   computed: {
-    // center() {
-    //   if (process.isClient) {
-    //     return latLng(51.1657, 10.4515)
-    //   }
-    // },
-    // dynamicSize() {
-    //   return [this.iconSize, this.iconSize * 1.15];
-    // },
-    // dynamicAnchor() {
-    //   return [this.iconSize / 2, this.iconSize * 1.15];
-    // }
+    center() {
+      if (process.isClient) {
+        return latLng(51.1657, 10.4515)
+      }
+    },
+    dynamicSize() {
+      return [this.iconSize, this.iconSize * 1.15];
+    },
+    dynamicAnchor() {
+      return [this.iconSize / 2, this.iconSize * 1.15];
+    }
   }
 };
 </script>
