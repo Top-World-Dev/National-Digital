@@ -150,11 +150,11 @@
         let icon = new L.icon({
           iconUrl: imagePath,
           shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src,
-          iconSize: [32, 37],
-          iconAnchor: [16, 37],
-          popupAnchor: [0, -28],
-          shadowSize: [25, 41],
-          shadowAnchor: [7, 41]
+          iconSize: [ 16, 18],
+          iconAnchor: [8, 18],
+          popupAnchor: [0, -14],
+          shadowSize: [12, 20],
+          shadowAnchor: [7, 20]
         })
         return icon;
       },
