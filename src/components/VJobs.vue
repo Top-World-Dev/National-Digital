@@ -1,6 +1,13 @@
 <template>
   <div class="v-jobs">
     <section class="jobs-filter">
+      <div class="job-filter-office">
+        <h6 v-for="item in blok.column"><span v-if="item.id == 'office'">{{ item.name }}</span></h6>
+        <div v-for="office in offices">
+          <input type="checkbox" :id="office" :value="office" v-model="filteredOffices" />
+          <label :for="office">{{ office }}</label>
+        </div>
+      </div>
       <div class="job-filter-recruitingCategory">
         <h6 v-for="item in blok.column"><span v-if="item.id == 'recruitingCategory'">{{ item.name }}</span></h6>
         <div v-for="recruitingCategory in categories">
@@ -15,13 +22,6 @@
           <label :for="schedule">{{ schedule }}</label>
         </div>
       </div>
-      <div class="job-filter-office">
-        <h6 v-for="item in blok.column"><span v-if="item.id == 'office'">{{ item.name }}</span></h6>
-        <div v-for="office in offices">
-          <input type="checkbox" :id="office" :value="office" v-model="filteredOffices" />
-          <label :for="office">{{ office }}</label>
-        </div>
-      </div>
     </section>
 
     <div class="jobs-table-wrapper">
@@ -29,7 +29,7 @@
       <thead>
         <tr>
           <th v-for="col in columns"  @click="sortTable(col)" :class="{'active': sortColumn == col}">
-              <span >{{ headings[col] }}</span>
+              <h6>{{ headings[col] }}</h6>
             </a>
           </th>
         </tr>
@@ -224,15 +224,18 @@
 @import '~/assets/styles.scss';
 .v-jobs {
   font-size: 1rem;
-  padding: $gutter;
+  .jobs-filter {
+    background-color: $lightGrey;
+    padding: 1em 2em;
+  }
   .jobs-filter {
     display: flex;
     flex-wrap: wrap;
     margin-top: 1rem;
     margin-bottom: 1rem;
     > div {
-      flex: 1 1 220px;
-      margin-right: 1rem;
+      flex: 1 1 200px;
+      margin: 1rem;
       text-align: left;
     }
     input + label {
@@ -243,9 +246,13 @@
     width: 100%;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    padding: $gutter;
     text-align: left;
     thead th {
       cursor: ns-resize;
+    }
+    tbody tr:nth-of-type(odd) {
+      background-color: $veryLightGrey;
     }
   }
   // responsive behavior (scroll)
