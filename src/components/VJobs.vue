@@ -2,15 +2,18 @@
   <div class="v-jobs">
     <!-- needs to pull through en/de data based on language (look at this last if needed) -->
     <section class="jobs-filter">
-      <ul class="job-filter-location" v-for="location in locations">
-        <li @click>{{ locations }}</li>
-      </ul>
-      <ul class="job-filter-category">
-        <li>{ job categories }</li>
-      </ul>
-      <ul class="job-filter-type">
-        <li>{ job types }</li>
-      </ul>
+      <div class="job-filter-location" v-for="location in locations">
+        <input type="checkbox" :id="location" :value="location" v-model="filteredLocations" />
+        <label :for="location">{{ location }}</label>
+      </div>
+      <div class="job-filter-category" v-for="category in categories">
+        <input type="checkbox" :id="category" :value="category" v-model="filteredCategories" />
+        <label :for="category">{{ category }}</label>
+      </div>
+      <div class="job-filter-type" v-for="type in types">
+        <input type="checkbox" :id="type" :value="type" v-model="filteredTypes" />
+        <label :for="type">{{ type }}</label>
+      </div>
     </section>
 
     <table class="jobs-table" v-if="rows.length > 0">
@@ -41,6 +44,9 @@
         height: '0px',
         jobs: [],
         rows: [],
+        filteredLocations: [],
+        filteredCategories: [],
+        filteredTypes: [],
         sortColumn: '',
         ascending: false,
       }
@@ -62,6 +68,7 @@
       .then(jobs => {
           this.jobs = jobs.map(item => {
             return {
+              id: item.id,
               position: item.name,
               title: `<a href="https://thinxnet-jobs.personio.de/job/${item.id}">${item.name}</a>`,
               location: item.office,
@@ -74,6 +81,17 @@
       }) 
     },
     methods: {
+      filterJobs() {
+        let locations = (this.filteredLocations.length == 0) ? this.jobs.map(item => item.id) : this.jobs.filter(item => this.filteredLocations.includes(item.location)).map(item => item.id);
+
+        let categories = (this.filteredCategories.length == 0) ? this.jobs.map(item => item.id) : this.rows.filter(item => this.filteredCategories.includes(item.category)).map(item => item.id);
+        let types = (this.filteredTypes.length == 0) ? this.jobs.map(item => item.id) : this.rows.filter(item => this.filteredTypes.includes(item.type)).map(item => item.id);
+
+        let one = locations.filter(element => categories.includes(element));
+        let filteredIds = one.filter(element => types.includes(element));
+
+        this.rows = this.jobs.filter(item => filteredIds.includes(item.id));  
+      },
       sortTable(col) {
         if(this.sortColumn == col) {
           this.ascending = !this.ascending;
@@ -155,7 +173,26 @@
       types() {
         return [...new Set(this.jobs.map(item => item.type))]; 
       }
-
+    },
+    watch: {
+      filteredLocations: {
+        deep: true,
+        handler(item, value) {
+          this.filterJobs()
+        }
+      },
+       filteredCategories: {
+        deep: true,
+        handler(item) {
+          this.filterJobs()
+        }
+      },
+      filteredTypes: {
+        deep: true,
+        handler(item) {
+          this.filterJobs()
+        }
+      }
     }
   }
 </script>
