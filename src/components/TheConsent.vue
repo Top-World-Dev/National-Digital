@@ -90,6 +90,7 @@ export default {
       
       localStorage.setItem(`consentsToMinimum`,true);
       for (const key of Object.keys(this.checks)) {
+        console.log(key)
         localStorage.setItem(key, false);
       }
     }
@@ -111,7 +112,7 @@ export default {
       }
     },
     showTable(value) {
-      this.tables[value] = !this.tables[value];
+     this.tables[value] = !this.tables[value];
     }
   },
   computed: {
@@ -122,12 +123,15 @@ export default {
       });
       this.checks = obj;
       return obj;
-    },
-    tableItems() {
-      let obj = {};
-      this.content.types.forEach(item => obj[item.variable] = false );
-      this.tables = obj;
-      return obj;
+    }
+  },
+  watch: {
+    consentSettings: function (oldVal, newVal) {
+      if(!newVal) {
+        let obj = {};
+        this.content.types.forEach(item => obj[item.variable] = false );
+        this.tables = obj;
+      }
     }
   }
 };
