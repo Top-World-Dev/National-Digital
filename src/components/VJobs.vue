@@ -2,17 +2,17 @@
   <div class="v-jobs">
     <!-- needs to pull through en/de data based on language (look at this last if needed) -->
     <section class="jobs-filter">
-      <div class="job-filter-location" v-for="location in locations">
-        <input type="checkbox" :id="location" :value="location" v-model="filteredLocations" />
-        <label :for="location">{{ location }}</label>
+      <div class="job-filter-office" v-for="office in offices">
+        <input type="checkbox" :id="office" :value="office" v-model="filteredOffices" />
+        <label :for="office">{{ office }}</label>
       </div>
-      <div class="job-filter-category" v-for="category in categories">
-        <input type="checkbox" :id="category" :value="category" v-model="filteredCategories" />
-        <label :for="category">{{ category }}</label>
+      <div class="job-filter-recruitingCategory" v-for="recruitingCategory in categories">
+        <input type="checkbox" :id="recruitingCategory" :value="recruitingCategory" v-model="filteredCategories" />
+        <label :for="recruitingCategory">{{ recruitingCategory }}</label>
       </div>
-      <div class="job-filter-type" v-for="type in types">
-        <input type="checkbox" :id="type" :value="type" v-model="filteredTypes" />
-        <label :for="type">{{ type }}</label>
+      <div class="job-filter-schedule" v-for="schedule in schedules">
+        <input type="checkbox" :id="schedule" :value="schedule" v-model="filteredSchedules" />
+        <label :for="schedule">{{ schedule }}</label>
       </div>
     </section>
 
@@ -20,7 +20,7 @@
       <thead>
         <tr> <!-- will define these terms in Storyblok -->
           <th v-for="col in columns"  @click="sortTable(col)" :class="{'active': sortColumn == col}">
-              <span v-if="col != 'position'">{{ col }}</span>
+              <span >{{ headings[col] }}</span>
             </a>
           </th>
         </tr>
@@ -28,8 +28,8 @@
       <tbody>
         <tr v-for="row in rows">
           <td v-for="col in columns">
-            <span v-if="col == 'title'" v-html="row[col]"></span>
-            <span v-else-if=" col != 'position'">{{ row[col] }}</span>
+            <span v-if="col == 'name'"><a :href="`https://thinxnet-jobs.personio.de/job/${row.id}`">{{ row[col] }}</a></span>
+            <span v-else>{{ row[col] }}</span>
           </td>
         </tr>
       </tbody>
@@ -44,9 +44,9 @@
         height: '0px',
         jobs: [],
         rows: [],
-        filteredLocations: [],
+        filteredOffices: [],
         filteredCategories: [],
-        filteredTypes: [],
+        filteredSchedules: [],
         sortColumn: '',
         ascending: false,
       }
@@ -69,11 +69,10 @@
           this.jobs = jobs.map(item => {
             return {
               id: item.id,
-              position: item.name,
-              title: `<a href="https://thinxnet-jobs.personio.de/job/${item.id}">${item.name}</a>`,
-              location: item.office,
-              category: item.recruitingCategory,
-              type: item.schedule
+              name: item.name,
+              office: item.office,
+              recruitingCategory: item.recruitingCategory,
+              schedule: item.schedule
             }
           })
           // build initial table 
@@ -84,16 +83,13 @@
       filterJobs() {
         let jobIds = this.jobs.map(item => item.id);
 
-        let locations = (this.filteredLocations.length == 0) ? jobIds : this.jobs.filter(item => this.filteredLocations.includes(item.location)).map(item => item.id);
+        let offices = (this.filteredOffices.length == 0) ? jobIds : this.jobs.filter(item => this.filteredOffices.includes(item.office)).map(item => item.id);
 
-        let categories = (this.filteredCategories.length == 0) ? jobIds : this.jobs.filter(item => this.filteredCategories.includes(item.category)).map(item => item.id);
+        let categories = (this.filteredCategories.length == 0) ? jobIds : this.jobs.filter(item => this.filteredCategories.includes(item.recruitingCategory)).map(item => item.id);
 
-        let types = (this.filteredTypes.length == 0) ? jobIds : this.jobs.filter(item => this.filteredTypes.includes(item.type)).map(item => item.id);
+        let schedules = (this.filteredSchedules.length == 0) ? jobIds : this.jobs.filter(item => this.filteredSchedules.includes(item.schedule)).map(item => item.id);
 
-        // let one = locations.filter(element => categories.includes(element));
-        let filteredIds = jobIds.filter(element => categories.includes(element) && types.includes(element) && locations.includes(element));
-
-        console.log(filteredIds)
+        let filteredIds = jobIds.filter(element => categories.includes(element) && schedules.includes(element) && offices.includes(element));
 
         this.rows = this.jobs.filter(item => filteredIds.includes(item.id));  
       },
@@ -166,21 +162,34 @@
       }
     },
     computed: {
+      headings() {
+        let headings = {
+          'id' : 'id',
+          'name': '',
+          'office': '',
+          'recruitingCategory' : '',
+          'schedule' : ''
+        }
+        this.blok.column.forEach((item) => {
+          headings[item.id] = item.name;
+        })  
+        return headings;      
+      },
       columns() {
         return Object.keys(this.rows[0])
       },
-      locations() {
-        return [...new Set(this.jobs.map(item => item.location))];
+      offices() {
+        return [...new Set(this.jobs.map(item => item.office))];
       },
       categories() {
-        return [...new Set(this.jobs.map(item => item.category))]; 
+        return [...new Set(this.jobs.map(item => item.recruitingCategory))]; 
       },
-      types() {
-        return [...new Set(this.jobs.map(item => item.type))]; 
+      schedules() {
+        return [...new Set(this.jobs.map(item => item.schedule))]; 
       }
     },
     watch: {
-      filteredLocations: {
+      filteredOffices: {
         deep: true,
         handler(item, value) {
           this.filterJobs()
@@ -192,7 +201,7 @@
           this.filterJobs()
         }
       },
-      filteredTypes: {
+      filteredSchedules: {
         deep: true,
         handler(item) {
           this.filterJobs()
