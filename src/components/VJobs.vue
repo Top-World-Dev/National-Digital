@@ -37,7 +37,7 @@
       <tbody>
         <tr v-for="row in rows">
           <td v-for="col in columns">
-            <span v-if="col == 'name'"><a :href="`https://thinxnet-jobs.personio.de/job/${row.id}`">{{ row[col] }}</a></span>
+            <span v-if="col == 'name'"><a :href="`https://thinxnet-jobs.personio.de/job/${row.id}`" target="_blank" rel="noopener">{{ row[col] }}</a></span>
             <span v-else>{{ row[col] }}</span>
           </td>
         </tr>
