@@ -1,7 +1,7 @@
 <template>
   <div class="v-jobs">
-    <!-- needs to pull through en/de data based on language (look at this last if needed) -->
     <section class="jobs-filter">
+      <h6 v-for="item in blok.column"><span v-if="item.id == 'office'">{{ item.name }}</span></h6>
       <div class="job-filter-office" v-for="office in offices">
         <input type="checkbox" :id="office" :value="office" v-model="filteredOffices" />
         <label :for="office">{{ office }}</label>
@@ -18,7 +18,7 @@
 
     <table class="jobs-table" v-if="rows.length > 0">
       <thead>
-        <tr> <!-- will define these terms in Storyblok -->
+        <tr>
           <th v-for="col in columns"  @click="sortTable(col)" :class="{'active': sortColumn == col}">
               <span >{{ headings[col] }}</span>
             </a>
