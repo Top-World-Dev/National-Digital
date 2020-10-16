@@ -1,6 +1,6 @@
 <template>
   <header>
-     <component :key="blok._uid" v-for="blok in blok.section.content.section" :blok="blok" :is="blok.component"></component> 
+<!--      <component :key="blok._uid" v-for="blok in blok.section.content.section" :blok="blok" :is="blok.component"></component>  -->
   </header>
 </template>
 

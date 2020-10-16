@@ -11,6 +11,7 @@
     "csvtojson": "^2.0.10",
     "fs": "0.0.1-security",
     "gridsome": "^0.7.21",
+    "gridsome-plugin-gtm": "^0.1.1",
     "gridsome-source-storyblok": "^1.0.2",
     "leaflet": "^1.7.1",
     "typeface-fira-sans": "0.0.75",
