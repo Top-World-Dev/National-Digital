@@ -1,21 +1,30 @@
 <template>
   <div class="v-jobs">
     <section class="jobs-filter">
-      <h6 v-for="item in blok.column"><span v-if="item.id == 'office'">{{ item.name }}</span></h6>
-      <div class="job-filter-office" v-for="office in offices">
-        <input type="checkbox" :id="office" :value="office" v-model="filteredOffices" />
-        <label :for="office">{{ office }}</label>
+      <div class="job-filter-recruitingCategory">
+        <h6 v-for="item in blok.column"><span v-if="item.id == 'recruitingCategory'">{{ item.name }}</span></h6>
+        <div v-for="recruitingCategory in categories">
+          <input type="checkbox" :id="recruitingCategory" :value="recruitingCategory" v-model="filteredCategories" />
+          <label :for="recruitingCategory">{{ recruitingCategory }}</label>
+        </div>
       </div>
-      <div class="job-filter-recruitingCategory" v-for="recruitingCategory in categories">
-        <input type="checkbox" :id="recruitingCategory" :value="recruitingCategory" v-model="filteredCategories" />
-        <label :for="recruitingCategory">{{ recruitingCategory }}</label>
+      <div class="job-filter-schedule">
+        <h6 v-for="item in blok.column"><span v-if="item.id == 'schedule'">{{ item.name }}</span></h6>
+        <div v-for="schedule in schedules">
+          <input type="checkbox" :id="schedule" :value="schedule" v-model="filteredSchedules" />
+          <label :for="schedule">{{ schedule }}</label>
+        </div>
       </div>
-      <div class="job-filter-schedule" v-for="schedule in schedules">
-        <input type="checkbox" :id="schedule" :value="schedule" v-model="filteredSchedules" />
-        <label :for="schedule">{{ schedule }}</label>
+      <div class="job-filter-office">
+        <h6 v-for="item in blok.column"><span v-if="item.id == 'office'">{{ item.name }}</span></h6>
+        <div v-for="office in offices">
+          <input type="checkbox" :id="office" :value="office" v-model="filteredOffices" />
+          <label :for="office">{{ office }}</label>
+        </div>
       </div>
     </section>
 
+    <div class="jobs-table-wrapper">
     <table class="jobs-table" v-if="rows.length > 0">
       <thead>
         <tr>
@@ -34,6 +43,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </template>
 <script>
@@ -213,8 +223,36 @@
 <style lang="scss">
 @import '~/assets/styles.scss';
 .v-jobs {
-  border: none;
-  width: 100%;
+  font-size: 1rem;
+  padding: $gutter;
+  .jobs-filter {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    > div {
+      flex: 1 1 220px;
+      margin-right: 1rem;
+      text-align: left;
+    }
+    input + label {
+      margin-left: 0.25rem;
+    }
+  }
+  .jobs-table {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    thead th {
+      cursor: ns-resize;
+    }
+  }
+  // responsive behavior (scroll)
+  .jobs-table-wrapper {
+    white-space: nowrap;
+    overflow-x: auto;
+  }
 }
 </style>  
 
