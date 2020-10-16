@@ -24,11 +24,20 @@ module.exports = {
         },
         downloadImages: true, // Optional. default false,
         imageDirectory: 'storyblok_images', // Optional. Folder to put the downloaded images
+      },
+    },
+    {
+      use: 'gridsome-plugin-gtm',
+      options: {
+        id: 'GTM-N9T3W2D',
+        enabled: true,
+        debug: true
       }
     }
   ],
   chainWebpack(config) {
     config.resolve.alias.set('@media', '@/storyblok_images')
+    config.mode('development')
     // Load variables for all vue-files
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
   }
