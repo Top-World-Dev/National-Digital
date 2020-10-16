@@ -1,57 +1,52 @@
 <template>
-<div class="v-map">
-  <div class="map-search">
-    <div class="map-search-form">
-      <div class="map-search-row">
-        <input type="text" name="search" placeholder="Search" class="map-search-input form-field" aria-label="search" v-model="searchValue" @keyup="search($event.target.value)" @keyup.enter="loadResults">
-        <a v-if="searchValue.length > 0" role="button" class="map-search-clear" tabindex="0" @click="clear" ></a>
-        <span class="map-search-icon"  v-else>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.931 28.932" width="14" height="14"><path fill="#787c87" d="M28.344 25.518l-6.114-6.115a12.177 12.177 0 002.303-7.137c0-3.275-1.275-6.355-3.594-8.672A12.183 12.183 0 0012.266 0a12.176 12.176 0 00-8.673 3.594 12.183 12.183 0 00-3.592 8.672c0 3.276 1.275 6.356 3.592 8.674a12.187 12.187 0 008.673 3.594c2.599 0 5.067-.813 7.136-2.303l6.114 6.115c.392.391.902.586 1.414.586a2 2 0 001.414-3.414zM6.422 18.111c-1.562-1.562-2.421-3.639-2.421-5.846s.859-4.282 2.421-5.844c1.561-1.562 3.636-2.422 5.844-2.422s4.284.86 5.845 2.422c1.562 1.562 2.422 3.638 2.422 5.845s-.859 4.283-2.422 5.846c-1.562 1.562-3.636 2.42-5.845 2.42s-4.285-.86-5.844-2.421z"/></svg>
-        </span>
-      </div>
-      <div class="map-search-results" v-if="searchResults.length > 0">
-        <div class="map-search-result" v-for="result in searchResults" @click="findResult(result)">
-          <p><strong>{{ result.brand }}</strong> {{ result.address }}</p>
+  <div class="v-map">
+    <div class="map-search">
+      <div class="map-search-form">
+        <div class="map-search-row">
+          <input type="text" name="search" placeholder="Search" class="map-search-input form-field" aria-label="search" v-model="searchValue" @keyup="search($event.target.value)" @keyup.enter="loadResults">
+          <a v-if="searchValue.length > 0" role="button" class="map-search-clear" tabindex="0" @click="clear" ></a>
+          <span class="map-search-icon"  v-else>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.931 28.932" width="14" height="14"><path fill="#787c87" d="M28.344 25.518l-6.114-6.115a12.177 12.177 0 002.303-7.137c0-3.275-1.275-6.355-3.594-8.672A12.183 12.183 0 0012.266 0a12.176 12.176 0 00-8.673 3.594 12.183 12.183 0 00-3.592 8.672c0 3.276 1.275 6.356 3.592 8.674a12.187 12.187 0 008.673 3.594c2.599 0 5.067-.813 7.136-2.303l6.114 6.115c.392.391.902.586 1.414.586a2 2 0 001.414-3.414zM6.422 18.111c-1.562-1.562-2.421-3.639-2.421-5.846s.859-4.282 2.421-5.844c1.561-1.562 3.636-2.422 5.844-2.422s4.284.86 5.845 2.422c1.562 1.562 2.422 3.638 2.422 5.845s-.859 4.283-2.422 5.846c-1.562 1.562-3.636 2.42-5.845 2.42s-4.285-.86-5.844-2.421z"/></svg>
+          </span>
+        </div>
+        <div class="map-search-results" v-if="searchResults.length > 0">
+          <div class="map-search-result" v-for="result in searchResults" @click="findResult(result)">
+            <p><strong>{{ result.brand }}</strong> {{ result.address }}</p>
+          </div>
         </div>
       </div>
-    </div>
-    <ClientOnly>
-    <l-map
-      v-if="showMap"
-      ref="map"
-      :zoom="zoom"
-      :center="center"
-      :options="mapOptions"
-      style="height: 500px; width: 100%"
-      @click="enableZoom"
-    >
-      <l-tile-layer
-        :url="url"
-        :attribution="attribution"
-      />
-      <l-marker
-        v-for="marker in markers"
-        :key="marker.id"
-        :lat-lng.sync="marker.position"
-        :icon="getIcon(marker)"
-        @click="goToMarker(marker)"
+      <ClientOnly>
+      <l-map
+        v-if="showMap"
+        ref="map"
+        :zoom="zoom"
+        :center="center"
+        :options="mapOptions"
+        style="height: 500px; width: 100%"
+        @click="enableZoom"
       >
-       <!--  <l-icon
-          :icon-size="dynamicSize"
-          :icon-anchor="dynamicAnchor"
-          icon-url="/mapping-icons/poi_default.png"
-        /> -->
-        <l-popup :content="marker.popup" />
-        
-      </l-marker>
-    </l-map>
-  </ClientOnly>
-</div>
-</div>
+        <l-tile-layer
+          :url="url"
+          :attribution="attribution"
+        />
+        <l-marker
+          v-for="marker in markers"
+          :key="marker.id"
+          :lat-lng.sync="marker.position"
+          :icon="getIcon(marker)"
+          @click="goToMarker(marker)"
+        >          
+          <l-popup :content="marker.popup" />
+          
+        </l-marker>
+      </l-map>
+    </ClientOnly>
+    </div>
+  </div>
 </template>
 
 <script>
-  import { LMap, LTileLayer, LMarker, LPopup, LIcon, LIconDefault } from 'vue2-leaflet';
+  import { LMap, LTileLayer, LMarker, LPopup, LIcon } from 'vue2-leaflet';
   import 'leaflet/dist/leaflet.css';
 
 
@@ -122,7 +117,7 @@ export default {
   data() {
     return {
       loading: false,
-      zoom: 13,
+      zoom: 6,
       scroll: false,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
