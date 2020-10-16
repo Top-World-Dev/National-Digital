@@ -39,9 +39,9 @@ import VImage from '~/components/VImage.vue'
 
 // mapping
 
-import Vue from 'vue';
-import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
-import 'leaflet/dist/leaflet.css';
+// import Vue from 'vue';
+// import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+// import 'leaflet/dist/leaflet.css';
 
 
 export default function (Vue, { router, head, isClient }) {
@@ -90,12 +90,12 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('v-image', VImage)
   Vue.component('v-richtext', VRichtext)
 
-  // mapping components
-  if (isClient) {
-    Vue.component('l-map', () => import ('vue2-leaflet').then(m => m.LMap).catch())
-    Vue.component('l-tile-layer', () => import ('vue2-leaflet').then(m => m.LTileLayer).catch())
-    Vue.component('l-marker', () => import ('vue2-leaflet').then(m => m.LMarker).catch())
-    Vue.component('l-tooltip', () => import ('vue2-leaflet').then(m => m.LTooltip).catch())
-  }
+  // // mapping components
+  // if (isClient) {
+  //   Vue.component('l-map', () => import ('vue2-leaflet').then(m => m.LMap).catch())
+  //   Vue.component('l-tile-layer', () => import ('vue2-leaflet').then(m => m.LTileLayer).catch())
+  //   Vue.component('l-marker', () => import ('vue2-leaflet').then(m => m.LMarker).catch())
+  //   Vue.component('l-tooltip', () => import ('vue2-leaflet').then(m => m.LTooltip).catch())
+  // }
 }
 

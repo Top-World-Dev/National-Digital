@@ -10,13 +10,13 @@
       }
     },
     mounted() {
-      window.addEventListener('message', (event) => {
-        this.height = `${event.data[1]}px`;
-      });
+      // window.addEventListener('message', (event) => {
+      //   this.height = `${event.data[1]}px`;
+      // });
     },
     destroyed() {
-      window.removeEventListener('message', (event) => {
-      });
+      // window.removeEventListener('message', (event) => {
+      // });
     },
   }
 </script>

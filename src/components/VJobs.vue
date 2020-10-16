@@ -61,10 +61,6 @@
         ascending: false,
       }
     },
-    destroyed() {
-      window.removeEventListener('resize', (event) => {
-      });
-    },
     mounted() {
       const getJobData = async() => {
         const response = await fetch('https://thinxnet-jobs.personio.de/xml');

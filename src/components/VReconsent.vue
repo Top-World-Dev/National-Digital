@@ -7,10 +7,10 @@
     props: ['blok'],
     methods: {
       resetConsent() {
-        if (process.isClient) {
-          localStorage.setItem('consentGiven',false);
-          EventBus.$emit('toggleModal');
-        }
+        // if (process.isClient) {
+        //   localStorage.setItem('consentGiven',false);
+        //   EventBus.$emit('toggleModal');
+        // }
       }
     }
   }
