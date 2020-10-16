@@ -122,7 +122,7 @@ export default {
   data() {
     return {
       loading: false,
-      zoom: 13,
+      zoom: 6,
       scroll: false,
       url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
@@ -157,14 +157,23 @@ export default {
       this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
     },
     getIcon(marker) {
+      let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
+      let imagePath = '';
+
+      try {
+        imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
+      } catch(err) {
+        imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
+      }
+
       let icon = new L.icon({
-        iconUrl: `/map-markers/poi_default.png`,
-        shadowUrl: `/map-markers/marker-shadow.png`,
-        iconSize: [32, 37],
-        iconAnchor: [16, 37],
-        popupAnchor: [0, -28],
-        shadowSize: [25, 41],
-        shadowAnchor: [7, 41]
+        iconUrl: imagePath,
+        shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src, 
+        iconSize: [18, 22],
+        iconAnchor: [18, 22],
+        popupAnchor: [-6, -22],
+        shadowSize: [18, 22],
+        shadowAnchor: [18, 22]
       })
       return icon;
     },
@@ -187,7 +196,7 @@ export default {
   computed: {
     center() {
       if (process.isClient) {
-        return latLng(52.520008, 13.404954)
+        return latLng(51.1657, 10.4515)
       }
     },
     dynamicSize() {
