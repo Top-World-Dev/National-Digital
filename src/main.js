@@ -19,8 +19,10 @@ import VButton from '~/components/VButton.vue'
 import VBlurbicon from '~/components/VBlurbicon.vue'
 import VGap from '~/components/VGap.vue'
 import VHeading from '~/components/VHeading.vue'
+import VIframe from '~/components/VIframe.vue'
 import VImageblock from '~/components/VImageblock.vue'
 import VImageoverlay from '~/components/VImageoverlay.vue'
+import VJobs from '~/components/VJobs.vue'
 import VLinklist from '~/components/VLinklist.vue'
 import VList from '~/components/VList.vue'
 import VReviewslider from '~/components/VReviewslider.vue'
@@ -62,8 +64,10 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VBlurbicon', VBlurbicon)
   Vue.component('VHeading', VHeading)
   Vue.component('VGap', VGap)
+  Vue.component('VIframe', VIframe)
   Vue.component('VImageblock', VImageblock)
   Vue.component('VImageoverlay', VImageoverlay)
+  Vue.component('VJobs', VJobs)
   Vue.component('VLinklist', VLinklist)
   Vue.component('VList', VList)
   Vue.component('VReviewslider', VReviewslider)
