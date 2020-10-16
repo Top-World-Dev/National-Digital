@@ -85,8 +85,8 @@
           popup: `
           <div class="map-popup">
             <div class="map-popup-wrapper">
-              <h2 class="map-popup-brand">${ location.brand }</h2>
-              <p class="map-popup-address">${location.street} ${location.houseNumber}, ${location.zip} ${location.city}</p>
+              <div class="map-popup-brand">${ location.brand }</div>
+              <div class="map-popup-address">${location.street} ${location.houseNumber}, ${location.zip} ${location.city}</div>
             </div>
           </div>
           `
