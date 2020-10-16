@@ -14,21 +14,20 @@ export default {
     "theconsent": TheConsent,
   },
   metaInfo() {
-      const data = this.blok.meta;
-      if(!data) {
-        return false
-      } 
-      else {
-        return {
-          title: data[0].title,
-          meta: [
-            { name: 'description', content: data.description },
-            { name: 'robots', content: (data.noindex) ? 'noindex' : 'index' }
-          ],
-          link: [
-            { rel: 'canonical', href: `${this.$route.fullPath}` },
-          ]
-        }
+    const data = this.blok.meta;
+    if(!data) {
+      return false
+    } 
+    else {
+      return {
+        title: data[0].title,
+        meta: [
+          { name: 'description', content: data.description },
+          { name: 'robots', content: (data.noindex) ? 'noindex' : 'index' }
+        ],
+        link: [
+          { rel: 'canonical', href: `${this.$route.fullPath}` },
+        ]
       }
     }
   }
