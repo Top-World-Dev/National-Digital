@@ -11,7 +11,8 @@
     "gridsome-plugin-gtm": "^0.1.1",
     "gridsome-source-storyblok": "^1.0.2",
     "typeface-fira-sans": "0.0.75",
-    "vue-slick-carousel": "^1.0.6"
+    "vue-slick-carousel": "^1.0.6",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "node-sass": "^4.14.1",
