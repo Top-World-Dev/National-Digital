@@ -152,6 +152,14 @@ export default {
       this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
     },
     getIcon(marker) {
+      let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
+      let imagePath = '';
+
+      try {
+        imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
+      } catch(err) {
+        imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
+      }
       let icon = new L.icon({
         iconUrl: `/mapping-icons/poi_default.png`,
         shadowUrl: `/mapping-icons/marker-shadow.png`,
