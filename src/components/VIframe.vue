@@ -15,9 +15,9 @@
       });
     },
     destroyed() {
-      window.removeEventListener('resize', (event) => {
+      window.removeEventListener('message', (event) => {
       });
-    }
+    },
   }
 </script>
 <style lang="scss">
@@ -25,8 +25,6 @@
 .v-iframe {
   border: none;
   width: 100%;
-  html > body * {
-    color: red !important;
-  }
 }
 </style>  
+
