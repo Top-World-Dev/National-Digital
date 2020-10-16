@@ -3,7 +3,7 @@
     <div class="map-search">
       <div class="map-search-form">
         <div class="map-search-row">
-          <input type="text" name="search" placeholder="Search" class="map-search-input form-field" aria-label="search" v-model="searchValue" @keyup="search($event.target.value)" @keyup.enter="loadResults">
+          <input type="text" name="search" placeholder="Search" autocomplete="off" class="map-search-input" aria-label="search" v-model="searchValue" @keyup="search($event.target.value)" @keyup.enter="loadResults">
           <a v-if="searchValue.length > 0" role="button" class="map-search-clear" tabindex="0" @click="clear" ></a>
           <span class="map-search-icon"  v-else>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.931 28.932" width="14" height="14"><path fill="#787c87" d="M28.344 25.518l-6.114-6.115a12.177 12.177 0 002.303-7.137c0-3.275-1.275-6.355-3.594-8.672A12.183 12.183 0 0012.266 0a12.176 12.176 0 00-8.673 3.594 12.183 12.183 0 00-3.592 8.672c0 3.276 1.275 6.356 3.592 8.674a12.187 12.187 0 008.673 3.594c2.599 0 5.067-.813 7.136-2.303l6.114 6.115c.392.391.902.586 1.414.586a2 2 0 001.414-3.414zM6.422 18.111c-1.562-1.562-2.421-3.639-2.421-5.846s.859-4.282 2.421-5.844c1.561-1.562 3.636-2.422 5.844-2.422s4.284.86 5.845 2.422c1.562 1.562 2.422 3.638 2.422 5.845s-.859 4.283-2.422 5.846c-1.562 1.562-3.636 2.42-5.845 2.42s-4.285-.86-5.844-2.421z"/></svg>
@@ -189,89 +189,111 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-}
-
-.map-search-results {
-  background-color: white;
-  border: 0.25px solid $lightGrey;
-}
-
-.map-search-result {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 0.25px solid $lightGrey;
-  &:hover {
-    cursor: pointer;
+  /* Search bar */
+  .map-search-results {
+    background-color: white;
+    border: 0.25px solid $lightGrey;
   }
-  p {
-    margin-left:12px;
-    
+  .map-search-result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.25px solid $lightGrey;
+    &:hover {
+      cursor: pointer;
+    }
+    p {
+      margin-left:12px;
+      
+    }
   }
-}
-.map-search-form {
-  position: absolute;
-  top: 3rem;
-  z-index: 999;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  width: 30vw;
-}
-.map-search-row {
-  position: relative;
-}
-.map-search-input {
-  width: 100%;
-}
-.form-field {
-  font-size: 0.9rem;
-  line-height: 2.5em;
-  background-color: $white;
-  border: 0.05em solid $lightGrey;
-  border-radius: 0.25rem 0.25rem 0 0;
-  box-shadow: 0px 0px 34px -13px rgba(120,124,135,1);
-  color: $darkGrey;
-  height: 50px;
-  line-height: 2em;
-  padding: 1em;
-  width: 100%;
-  &:focus {
-    outline: none;
-  }
-}
-.map-search-clear, .map-search-icon {
-  position: absolute;
-  right: 2rem;
-  top: 1rem;
-  width: 0.15rem;
-  height: 0.15rem;
-}
-.map-search-clear {
-  opacity: 0.7;
-  &:hover {
-    display: block;
-    opacity: 1;
-    border: none;
-  }
-  &:focus {
-    outline: none;
-  }
-  &:before, &:after {
+  .map-search-form {
     position: absolute;
-    left: 15px;
-    content: ' ';
-    height: 16px;
-    width: 2px;
-    background-color: $lightGrey;
+    top: 3rem;
+    z-index: 999;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 30vw;
+    min-width: 220px;
   }
-  &:before {
-    transform: rotate(45deg);
+  .map-search-row {
+    position: relative;
   }
-  &:after {
-    transform: rotate(-45deg);
+  .map-search-input {
+    width: 100%;
+    font-size: 0.9rem;
+    line-height: 2.5em;
+    background-color: $white;
+    border: 0.05em solid $lightGrey;
+    border-radius: 0.25rem 0.25rem 0 0;
+    box-shadow: 0px 0px 34px -13px rgba(120,124,135,1);
+    color: $darkGrey;
+    height: 50px;
+    line-height: 2em;
+    padding: 1em;
+    width: 100%;
+    &:focus {
+      outline: none;
+    }
+  }
+  .map-search-clear, .map-search-icon {
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+    width: 0.15rem;
+    height: 0.15rem;
+  }
+  .map-search-clear {
+    opacity: 0.7;
+    &:hover {
+      display: block;
+      opacity: 1;
+      border: none;
+    }
+    &:focus {
+      outline: none;
+    }
+    &:before, &:after {
+      position: absolute;
+      left: 15px;
+      content: ' ';
+      height: 16px;
+      width: 2px;
+      background-color: $lightGrey;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+    
+  /* Marker Tooltips */
+  .leaflet-popup-content-wrapper {
+    max-width: 200px;
+  }
+  .map-popup {
+    padding: 0.5em;
+    max-width: 160px;
+    display: flex;
+  }
+  
+  .map-popup-wrapper {
+    border-top: 0.05em solid $lightGrey;
+    border-bottom: 0.05em solid $lightGrey;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+  }
+  .map-popup-brand {
+    font-weight: 700;
+  }
+  .map-popup-address {
+    span {
+      display: inline-block;
+    }
   }
 }
-
 </style>
