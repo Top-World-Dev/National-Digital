@@ -51,10 +51,7 @@
 
   if (process.isClient) {
     Vue2Leaflet = require("vue2-leaflet");
-
-
-
-      icon = require('leaflet').Icon
+    icon = require('leaflet').Icon
     delete icon.Default.prototype._getIconUrl;
     icon.Default.mergeOptions({
       iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
@@ -62,7 +59,8 @@
       shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     })
     latLng =  require('leaflet').latLng
-    }
+  }
+
   export default {
     components: {
       // mapping components
@@ -86,7 +84,7 @@
           street: location.street,
           popup: `
           <div class="map-popup">
-            <div class="map-popup-content">
+            <div class="map-popup-wrapper">
               <h2 class="map-popup-brand">${ location.brand }</h2>
               <p class="map-popup-address">${location.street} ${location.houseNumber}, ${location.zip} ${location.city}</p>
             </div>
