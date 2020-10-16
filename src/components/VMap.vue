@@ -1,4 +1,4 @@
-  <template>
+<template>
   <div class="v-map">
     <div class="map-search">
       <div class="map-search-form">
@@ -35,8 +35,8 @@
           :lat-lng.sync="marker.position"
           :icon="getIcon(marker)"
           @click="goToMarker(marker)"
-        >
-        <l-popup :content="marker.popup" />
+        >          
+          <l-popup :content="marker.popup" />
           
         </l-marker>
       </l-map>
@@ -44,14 +44,13 @@
     </div>
   </div>
 </template>
-
 <script>
-  // import { LMap, LTileLayer, LMarker, LPopup, LIcon, LIconDefault } from 'vue2-leaflet';
+  let Vue2Leaflet = {};
+  let latLng,icon; 
   import 'leaflet/dist/leaflet.css';
 
-
-  let latLng,icon; 
   if (process.isClient) {
+    Vue2Leaflet = require("vue2-leaflet");
     icon = require('leaflet').Icon
     delete icon.Default.prototype._getIconUrl;
     icon.Default.mergeOptions({
@@ -62,162 +61,137 @@
     latLng =  require('leaflet').latLng
   }
 
-export default {
-  name: "ryd.de.one",
-  components: {
-    // mapping components
-    Lmap: () => import('vue2-leaflet')
-      .then((component) => component.LMap)
-      .catch(),
-    LTileLayer: () => import('vue2-leaflet')
-      .then((component) => component.LTileLayer)
-      .catch(),
-    LMarker: () => import('vue2-leaflet')
-      .then((component) => component.LMarker)
-      .catch(),
-    LPopup: () => import('vue2-leaflet')
-      .then((component) => component.LPopup)
-      .catch(),
-    LIcon: () => import('vue2-leaflet')
-      .then((component) => component.LIcon)
-      .catch(),
-    LIconDefault: () => import('vue2-leaflet')
-      .then((component) => component.LIconDefault)
-      .catch()
-  },
-  async mounted() {
-    this.loading = true;
-    const response = await fetch('/de.ryd.one-places.json');
-    const data = await response.json();
-    this.locations = data.map(location => {
-      return {
-        position: { lat: location.lat, lng: location.lon },
-        brand: location.brand,
-        address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
-        zip: location.zip,
-        city: location.city,
-        street: location.street,
-        popup: `
-        <div class="map-popup">
-          <div class="map-popup-wrapper">
-            <div class="map-popup-brand">${location.brand}</div>
-            <div class="map-popup-address"><span>${location.street}</span> <span>${location.houseNumber}</span>, <span>${location.zip}</span> <span>${location.city}</span></div>
+  export default {
+    components: {
+      // mapping components
+      'l-map': Vue2Leaflet.LMap,
+      'l-tile-layer': Vue2Leaflet.LTileLayer,
+      'l-marker': Vue2Leaflet.LMarker,
+      'l-popup': Vue2Leaflet.LPopup,
+      'l-icon': Vue2Leaflet.LIcon,
+    },
+    async mounted() {
+      this.loading = true;
+      const response = await fetch('/de.ryd.one-places.json');
+      const data = await response.json();
+      this.locations = data.map(location => {
+        return {
+          position: { lat: location.lat, lng: location.lon },
+          brand: location.brand,
+          address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
+          zip: location.zip,
+          city: location.city,
+          street: location.street,
+          popup: `
+          <div class="map-popup">
+            <div class="map-popup-wrapper">
+              <div class="map-popup-brand">${ location.brand }</div>
+              <div class="map-popup-address">${location.street} ${location.houseNumber}, ${location.zip} ${location.city}</div>
+            </div>
           </div>
-        </div>
-        `
-      }
-    });
-    // only load markers that are in view
-    this.markers = this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position))
-    this.loading = false;
+          `
+        }
+      });
+      // only load markers that are in view
+      this.markers = this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position))
+      this.loading = false;
 
-    // add markers when zooming
-    this.$refs.map.mapObject.on('zoomend', (e) => this.addMarkers() ) 
-  },
-  data() {
-    return {
-      loading: false,
-      zoom: 6,
-      scroll: false,
-      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-      attribution:
-        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      mapOptions: {
-        zoomSnap: 0.5,
-        scrollWheelZoom: false
+      // add markers when zooming
+      this.$refs.map.mapObject.on('zoomend', (e) => this.addMarkers() ) 
+    },
+    data() {
+      return {
+        loading: false,
+        zoom: 6,
+        scroll: false,
+        url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        attribution:
+          '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        mapOptions: {
+          zoomSnap: 0.5,
+          scrollWheelZoom: false
+        },
+        showMap: true,
+        locations: [],
+        markers: [],
+        visibleMarkers: [],
+        searchValue: '',
+        searchResults: [],
+      };
+    },
+    methods: {
+      addMarkers() {
+        this.markers = (this.searchValue.length == 0) ? this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position)) : this.markers.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position));
       },
-      showMap: true,
-      locations: [],
-      markers: [],
-      visibleMarkers: [],
-      searchValue: '',
-      searchResults: [],
-    };
-  },
-  methods: {
-    addMarkers() {
-      this.markers = (this.searchValue.length == 0) ? this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position)) : this.markers.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position));
-    },
-    clear() {
-      this.searchValue = '';
-      this.searchResults = [];
-    },
-    enableZoom() {
-      this.$refs.map.mapObject.scrollWheelZoom.enable();
-    },
-    findResult(result) {
-      this.searchResults = [];
-      this.markers = [];
-      this.markers.push(result);
-      this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
-    },
-    getIcon(marker) {
-      let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
-      let imagePath = '';
+      clear() {
+        this.searchValue = '';
+        this.searchResults = [];
+      },
+      enableZoom() {
+        this.$refs.map.mapObject.scrollWheelZoom.enable();
+      },
+      findResult(result) {
+        this.searchResults = [];
+        this.markers = [];
+        this.markers.push(result);
+        this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.5});
+      },
+      getIcon(marker) {
+        let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
+        let imagePath = '';
 
-      try {
-        imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
-      } catch(err) {
-        imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
+        try {
+          imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
+        } catch(err) {
+          imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
+        }
+        let icon = new L.icon({
+          iconUrl: imagePath,
+          shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src,
+          iconSize: [ 16, 18],
+          iconAnchor: [8, 18],
+          popupAnchor: [0, -14],
+          shadowSize: [12, 20],
+          shadowAnchor: [7, 20]
+        })
+        return icon;
+      },
+      goToMarker(marker) {
+        this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.5});
+      },
+      loadResults() {
+        if(this.searchValue.length == 0) {
+          return false
+        }
+        this.markers = [];
+        this.searchResults.forEach(result => this.markers.push(result));
+        this.searchResults = [];
+        this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
+      },
+      search(value) {
+        this.searchResults = (value.length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.indexOf(value) != -1);
+      },
+    },
+    computed: {
+      center() {
+        if (process.isClient) {
+          return latLng(52.520008, 13.404954)
+        }
       }
-
-      let icon = new L.icon({
-        iconUrl: imagePath,
-        shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src, 
-        iconSize: [18, 22],
-        iconAnchor: [18, 22],
-        popupAnchor: [-6, -22],
-        shadowSize: [18, 22],
-        shadowAnchor: [18, 22]
-      })
-      return icon;
-    },
-    goToMarker(marker) {
-      this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.5});
-    },
-    loadResults() {
-      if(this.searchValue.length == 0) {
-        return false
-      }
-      this.markers = [];
-      this.searchResults.forEach(result => this.markers.push(result));
-      this.searchResults = [];
-      this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
-    },
-    search(value) {
-      this.searchResults = (value.length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.indexOf(value) != -1);
-    },
-  },
-  computed: {
-    center() {
-      if (process.isClient) {
-        return latLng(51.1657, 10.4515)
-      }
-    },
-    dynamicSize() {
-      return [this.iconSize, this.iconSize * 1.15];
-    },
-    dynamicAnchor() {
-      return [this.iconSize / 2, this.iconSize * 1.15];
     }
   }
-};
 </script>
-
 <style lang="scss">
 @import '~/assets/styles.scss';
 .v-map {
-
   position: relative;
   width: 100%;
   overflow: hidden;
-
   /* Search bar */
   .map-search-results {
     background-color: white;
     border: 0.25px solid $lightGrey;
   }
-
   .map-search-result {
     display: flex;
     align-items: center;
@@ -262,7 +236,6 @@ export default {
       outline: none;
     }
   }
-
   .map-search-clear, .map-search-icon {
     position: absolute;
     right: 2rem;
@@ -297,11 +270,9 @@ export default {
   }
     
   /* Marker Tooltips */
-
   .leaflet-popup-content-wrapper {
     max-width: 200px;
   }
-
   .map-popup {
     padding: 0.5em;
     max-width: 160px;
@@ -314,17 +285,13 @@ export default {
     padding-top: 0.25em;
     padding-bottom: 0.25em;
   }
-
   .map-popup-brand {
     font-weight: 700;
   }
-
   .map-popup-address {
     span {
       display: inline-block;
     }
   }
-
 }
-
 </style>
