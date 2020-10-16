@@ -161,13 +161,13 @@ export default {
         imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
       }
       let icon = new L.icon({
-        iconUrl: `/mapping-icons/poi_default.png`,
-        shadowUrl: `/mapping-icons/marker-shadow.png`,
-        iconSize: [32, 37],
-        iconAnchor: [16, 37],
-        popupAnchor: [0, -28],
-        shadowSize: [25, 41],
-        shadowAnchor: [7, 41]
+        iconUrl: imagePath,
+        shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src, 
+        iconSize: [18, 22],
+        iconAnchor: [18, 22],
+        popupAnchor: [-6, -22],
+        shadowSize: [18, 22],
+        shadowAnchor: [18, 22]
       })
       return icon;
     },
