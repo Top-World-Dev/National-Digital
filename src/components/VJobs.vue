@@ -82,13 +82,18 @@
     },
     methods: {
       filterJobs() {
-        let locations = (this.filteredLocations.length == 0) ? this.jobs.map(item => item.id) : this.jobs.filter(item => this.filteredLocations.includes(item.location)).map(item => item.id);
+        let jobIds = this.jobs.map(item => item.id);
 
-        let categories = (this.filteredCategories.length == 0) ? this.jobs.map(item => item.id) : this.rows.filter(item => this.filteredCategories.includes(item.category)).map(item => item.id);
-        let types = (this.filteredTypes.length == 0) ? this.jobs.map(item => item.id) : this.rows.filter(item => this.filteredTypes.includes(item.type)).map(item => item.id);
+        let locations = (this.filteredLocations.length == 0) ? jobIds : this.jobs.filter(item => this.filteredLocations.includes(item.location)).map(item => item.id);
 
-        let one = locations.filter(element => categories.includes(element));
-        let filteredIds = one.filter(element => types.includes(element));
+        let categories = (this.filteredCategories.length == 0) ? jobIds : this.jobs.filter(item => this.filteredCategories.includes(item.category)).map(item => item.id);
+
+        let types = (this.filteredTypes.length == 0) ? jobIds : this.jobs.filter(item => this.filteredTypes.includes(item.type)).map(item => item.id);
+
+        // let one = locations.filter(element => categories.includes(element));
+        let filteredIds = jobIds.filter(element => categories.includes(element) && types.includes(element) && locations.includes(element));
+
+        console.log(filteredIds)
 
         this.rows = this.jobs.filter(item => filteredIds.includes(item.id));  
       },
