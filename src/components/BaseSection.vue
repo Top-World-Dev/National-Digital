@@ -1,7 +1,7 @@
 <template>
   <section :id="blok.name" class="xy-section" :style="backgroundStyle ? {backgroundImage: backgroundStyle} : ''" :class="blok.backgroundColor" v-editable="blok">
       <div class="section-inner section-container" :class="[blok.container,blok.align,(blok.reverse ? 'column-reverse' : '' ),(blok.mobile_fullwidth ? 'column-fullmobile' : '')]">
-        <component :key="blok._uid" v-for="blok in blok.columns" :blok="blok" :is="blok.component"></component>
+        <component :key="blok._uid" v-for="blok in blok.columns" :blok="blok" :is="blok.component" :class="`column-${countCols}`"></component>
       </div>
   </section>
 </template>
@@ -11,6 +11,11 @@
   export default {
     mixins: [backgroundImage],
     props: ['blok', 'viewPort'],
+    computed: {
+      countCols() {
+        return (this.blok.columns.length > 1 ? 'multi' : 'single')
+      }
+    }
   }
 </script>
 
