@@ -104,6 +104,10 @@ export default {
         this.checks[key] = true;
         localStorage.setItem(key, true);
       }
+      setTimeout(function(){ 
+        this.closeConsent() 
+      }.bind(this), 300);
+
     },
     closeConsent() {
       if (process.isClient) {
