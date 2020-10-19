@@ -211,15 +211,21 @@
   }
   .map-search-result {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 0.25px solid $lightGrey;
+    align-items: flex-start;
+    justify-content: flex-start;
     &:hover {
       cursor: pointer;
     }
     p {
-      margin-left:12px;
-      
+      margin-left: 1rem;
+      color: $black;
+      border-color: transparent;
+      border-bottom-width: 0.05em;
+      border-bottom-style: solid;
+      text-decoration: none;
+      &:hover {
+        border-color: $black;
+      }
     }
   }
   .map-search-form {
