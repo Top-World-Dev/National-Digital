@@ -167,9 +167,6 @@
       goToMarker(marker) {
         this.searchSuggestions = [];
         this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.9});
-        // this.$refs.marker.bindPopup(marker.popup).openPopup();
-
-        // this.$refs.map.mapObject.bindPopup(marker.id).openPopup();
       },
       loadResults() {
         if(this.searchValue.length == 0) {
@@ -186,7 +183,7 @@
         this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
       },
       search(value) {
-        this.searchSuggestions = (value.length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.indexOf(value) != -1);
+        this.searchSuggestions = (value.trim().length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.address.indexOf(value.trim()) != -1);
       },
     },
     computed: {
