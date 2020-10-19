@@ -28,14 +28,14 @@
     <table class="jobs-table" v-if="rows.length > 0">
       <thead>
         <tr>
-          <th v-for="col in columns" :key="col._uid" @click="sortTable(col)" :class="{'active': sortColumn == col}">
+          <th v-for="col in columns" :key="col._uid" @click="sortTable(col)" :class="{'active': sortColumn == col}" v-show="headings[col] != 'id'">
             <h6>{{ headings[col] }}</h6>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="row in rows" :key="row._uid">
-          <td v-for="col in columns" :key="col._uid">
+          <td v-for="col in columns" :key="col._uid" v-show="col != 'id'">
             <span v-if="col == 'name'"><a :href="`https://thinxnet-jobs.personio.de/job/${row.id}`" target="_blank" rel="noopener">{{ row[col] }}</a></span>
             <span v-else>{{ row[col] }}</span>
           </td>
