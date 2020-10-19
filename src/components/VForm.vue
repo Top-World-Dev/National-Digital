@@ -1,6 +1,6 @@
 <template>
   <form class="v-form" method="post" :action="blok.endpoint.url" v-editable="blok">
-    <div v-for="input in blok.input" :key="blok._uid" class="form-row">
+    <div v-for="input in blok.input" :key="input._uid" class="form-row">
       <input class="form-field" :type="input.type" :name="input.label" :placeholder="input.label" :aria-label="input.label" :autocomplete="input.autocomplete" :required="input.required" :aria-required="input.required" />
     </div>
     <div class="form-row">
