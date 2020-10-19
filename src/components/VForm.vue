@@ -20,6 +20,8 @@
 .v-form {
 
   width: 90%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
