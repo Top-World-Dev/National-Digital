@@ -147,7 +147,7 @@
         this.searchResults.push(result);
         this.markers.push(result);
         this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.9});
-
+        this.$refs.marker[result.id].mapObject.openPopup();
       },
       getIcon(marker) {
         let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
@@ -271,6 +271,8 @@
   .map-search-clear {
     opacity: 0.7;
     display: block;
+    width: 25px;
+    height: 25px;
     &:hover {
       display: block;
       opacity: 1;
