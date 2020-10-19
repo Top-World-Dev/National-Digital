@@ -32,12 +32,12 @@
         <l-marker
           v-for="marker in markers"
           :key="marker.id"
+          ref="marker"
           :lat-lng.sync="marker.position"
           :icon="getIcon(marker)"
           @click="goToMarker(marker)"
-        >          
-        <l-popup :content="marker.popup" />
-          
+        >       
+        <l-popup :content="marker.popup"></l-popup>       
         </l-marker>
       </l-map>
     </ClientOnly>
@@ -77,6 +77,7 @@
       const data = await response.json();
       this.locations = data.map(location => {
         return {
+          id: location.id,
           position: { lat: location.lat, lng: location.lon },
           brand: location.brand,
           address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
@@ -122,12 +123,13 @@
     },
     methods: {
       addMarkers() {
-        this.markers = (this.searchResults.length == 0) ? this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position)) : this.searchResults.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position));
+        this.markers = (this.searchResults.length == 0) ? this.locations.map(point => point) : this.searchResults.map(point => point) ; 
       },
       clear() {
         this.searchValue = '';
         this.searchResults = [];
         this.markers = [];
+        this.$refs.map.mapObject.closePopup();
         this.$refs.map.mapObject.setView(new L.LatLng(Number(this.blok.lat), Number(this.blok.lng)), Number(this.blok.zoom));
         this.addMarkers();
 
@@ -165,6 +167,9 @@
       goToMarker(marker) {
         this.searchSuggestions = [];
         this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.9});
+        // this.$refs.marker.bindPopup(marker.popup).openPopup();
+
+        // this.$refs.map.mapObject.bindPopup(marker.id).openPopup();
       },
       loadResults() {
         if(this.searchValue.length == 0) {
