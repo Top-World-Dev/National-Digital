@@ -249,6 +249,9 @@
     tbody tr:nth-of-type(odd) {
       background-color: $veryLightGrey;
     }
+    td {
+      padding: 1em 0.5em;
+    }
   }
   // responsive behavior (scroll)
   .jobs-table-wrapper {
