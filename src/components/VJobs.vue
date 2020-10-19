@@ -80,7 +80,8 @@
               recruitingCategory: item.recruitingCategory,
               schedule: item.schedule
             }
-          })
+          }).sort((a, b) => a.recruitingCategory.localeCompare(b.recruitingCategory)).sort((a, b) => a.office.localeCompare(b.office))
+
           // build initial table 
           this.rows = this.jobs;
       }) 
