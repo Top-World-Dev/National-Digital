@@ -45,7 +45,8 @@ module.exports = function (api) {
           path: '/',
           component: './src/templates/StoryblokEntry.vue',
           context: {
-            id: node.id
+            id: node.id,
+            language: node.language
           }
         })
       }
