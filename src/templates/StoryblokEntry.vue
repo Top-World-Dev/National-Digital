@@ -19,6 +19,12 @@ export default {
       size: "",
     };
   },
+  metaInfo() {
+    let language = this.$page.storyblokEntry.id.split('-').pop();
+    return {
+      htmlAttrs: { lang: (language) == 'default' ? 'de' :  language }
+    }
+  },
   mounted() {
     window.addEventListener("resize", this.handleResize(window.innerWidth));
     this.handleResize(window.innerWidth);
