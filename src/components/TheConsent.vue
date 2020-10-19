@@ -104,6 +104,10 @@ export default {
         this.checks[key] = true;
         localStorage.setItem(key, true);
       }
+      setTimeout(function(){ 
+        this.closeConsent() 
+      }.bind(this), 300);
+
     },
     closeConsent() {
       if (process.isClient) {
@@ -172,13 +176,22 @@ export default {
   }
   .consent-next {
     color: $accent;
+    &:hover {
+      border-color: $accent;
+    }
   }
   .consent-prev {
     font-size: 1.5rem;
     color: $accent;
+    &:hover {
+      border-color: $accent;
+    }
   }
   .consent-expand {
     color: $accent;
+    &:hover {
+      border-color: $accent;
+    }
   }
   .consent-center {
     text-align: center;
@@ -276,12 +289,10 @@ export default {
 
   .consent-linklist.v-linklist { // override defaults
     font-size: 0.75rem;
-    // li::before {
-    //   content: "";
-    // }
-    // li:not(:last-of-type)::after {
-    //   content: "   | ";
-    // }
+    color: $black;
+    a:hover {
+      border-color: $black;
+    }
   }
 }
 </style>

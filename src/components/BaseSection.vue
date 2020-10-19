@@ -1,6 +1,6 @@
 <template>
   <section :id="blok.name" class="xy-section" :style="backgroundStyle ? {backgroundImage: backgroundStyle} : ''" :class="blok.backgroundColor" v-editable="blok">
-      <div class="section-inner section-container" :class="[blok.container,blok.align,(blok.reverse ? 'column-reverse' : '' ),(blok.mobile_fullwidth ? 'column-fullmobile' : '')]">
+      <div class="section-inner section-container" :class="[blok.container,blok.align,`section-${countCols}`,(blok.reverse ? 'column-reverse' : '' ),(blok.mobile_fullwidth ? 'column-fullmobile' : '')]">
         <component :key="blok._uid" v-for="blok in blok.columns" :blok="blok" :is="blok.component"></component>
       </div>
   </section>
@@ -10,7 +10,12 @@
   import backgroundImage from '../mixins/backgroundImage'
   export default {
     mixins: [backgroundImage],
-    props: ['blok', 'viewPort']
+    props: ['blok', 'viewPort'],
+    computed: {
+      countCols() {
+        return (this.blok.columns.length > 1 ? 'multi' : 'single')
+      }
+    }
   }
 
 </script>
@@ -82,31 +87,31 @@
   // desktop options
   @media (min-width: $breakColumns) {
     .section-container-none {
-      // width: 100%;
-      // height: auto;
+      width: 100%;
+      height: auto;
     }
     .section-container-large {
       @include container($containerOuter);
-      > * {
+      &.section-multi > * {
         margin: 1rem;
       }
     }
     .section-container-normal {
       @include container($container);
-      > * {
+      &.section-multi > * {
         margin: 1rem;
       }
     }
     .section-container-small {
       @include container($containerInner);
-      > * {
+      &.section-multi > * {
         margin: 1rem;
       }
     }
   }
   /* Flex layouts - mobile */
   @media (max-width: $breakColumns - 1px) {
-    .section-inner {
+    .section-multi.section-inner {
       display: flex;
       flex-direction: column;
       &.column-reverse {
@@ -116,7 +121,7 @@
   }
   /* Flex layouts - desktop */
   @media (min-width: $breakColumns) {
-    .section-inner {
+    .section-multi.section-inner {
       display: flex;
       flex-direction: row;
       > * {
