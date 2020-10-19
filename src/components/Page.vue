@@ -14,16 +14,20 @@ export default {
     "theconsent": TheConsent,
   },
   metaInfo() {
-    const data = this.blok.meta;
+    const data = this.blok.meta[0];
     if(!data) {
       return false
     } 
     else {
+      let description = data.description ? this.$storyapi.richTextResolver.render(data.description) : '';
       return {
-        title: data[0].title,
+        title: data.title,
         meta: [
-          { name: 'description', content: data.description },
-          { name: 'robots', content: (data.noindex) ? 'noindex' : 'index' }
+          { name: 'description', content: description.replace('<p>', '').replace('</p>', '') },
+          { name: 'robots', content: (data.noindex) ? 'noindex' : 'index' },
+          { name: "twitter:card", content: "summary" },
+          { name: 'og:url', content: `${this.$route.fullPath}` },
+          { name: 'og:title', content: data.title },
         ],
         link: [
           { rel: 'canonical', href: `${this.$route.fullPath}` },
@@ -33,4 +37,3 @@ export default {
   }
 }
 </script>
-

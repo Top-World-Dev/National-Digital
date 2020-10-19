@@ -15,6 +15,21 @@ export default {
     "sidenav": SideNav,
     "topnav": Topnav
   },
+  metaInfo() {
+    const data = this.blok.meta[0];
+    if(!data) {
+      return false
+    } 
+    else {
+      return {
+        meta: [
+          { name: 'twitter:site', content: data.twitter },
+          { name: 'og:type', content: 'website' },
+          { name: 'og:description', content: 'description' },
+        ]
+      }
+    }
+  },
   data() {
     return {
       isActive: '7bf1391b-faf3-4647-b7ce-2f631781f55c'
