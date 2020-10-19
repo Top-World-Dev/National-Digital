@@ -61,8 +61,9 @@
       }
     },
     mounted() {
+      let language = (this.$page.storyblokEntry.id.split('-').pop() == 'default') ? 'de' :  this.$page.storyblokEntry.id.split('-').pop();
       const getJobData = async() => {
-        const response = await fetch('https://thinxnet-jobs.personio.de/xml');
+        const response = await fetch(`https://thinxnet-jobs.personio.de/xml?language=${language}`);
         const data = await response.text();
         return new DOMParser().parseFromString(data, 'text/xml');
       }
