@@ -1,9 +1,6 @@
 const csv = require('csvtojson');
 const fs = require('fs');
 
-
-
-
 const csvToJson = async() => {
   return json = await csv({
     colParser: {
@@ -13,7 +10,7 @@ const csvToJson = async() => {
       'houseNumber': 'number',
       'zip': 'number'
     }
-  }).fromFile('./static/de.ryd.one-gas-stations.csv');
+  }).fromFile('./src/data/gas-stations.csv');
 }
 
 csvToJson()
