@@ -2,22 +2,22 @@
   <div class="v-jobs">
     <section class="jobs-filter">
       <div class="job-filter-office">
-        <h6 v-for="item in blok.column"><span v-if="item.id == 'office'">{{ item.name }}</span></h6>
-        <div v-for="office in offices">
+        <h6 v-for="item in blok.column" :key="item._uid"><span v-if="item.id == 'office'">{{ item.name }}</span></h6>
+        <div v-for="office in offices" :key="office._uid">
           <input type="checkbox" :id="office" :value="office" v-model="filteredOffices" />
           <label :for="office">{{ office }}</label>
         </div>
       </div>
       <div class="job-filter-recruitingCategory">
-        <h6 v-for="item in blok.column"><span v-if="item.id == 'recruitingCategory'">{{ item.name }}</span></h6>
-        <div v-for="recruitingCategory in categories">
+        <h6 v-for="item in blok.column" :key="item._uid"><span v-if="item.id == 'recruitingCategory'">{{ item.name }}</span></h6>
+        <div v-for="recruitingCategory in categories" :key="recruitingCategory._uid">
           <input type="checkbox" :id="recruitingCategory" :value="recruitingCategory" v-model="filteredCategories" />
           <label :for="recruitingCategory">{{ recruitingCategory }}</label>
         </div>
       </div>
       <div class="job-filter-schedule">
-        <h6 v-for="item in blok.column"><span v-if="item.id == 'schedule'">{{ item.name }}</span></h6>
-        <div v-for="schedule in schedules">
+        <h6 v-for="item in blok.column" :key="item._uid"><span v-if="item.id == 'schedule'">{{ item.name }}</span></h6>
+        <div v-for="schedule in schedules" :key="schedule._uid">
           <input type="checkbox" :id="schedule" :value="schedule" v-model="filteredSchedules" />
           <label :for="schedule">{{ schedule }}</label>
         </div>
@@ -28,15 +28,14 @@
     <table class="jobs-table" v-if="rows.length > 0">
       <thead>
         <tr>
-          <th v-for="col in columns"  @click="sortTable(col)" :class="{'active': sortColumn == col}">
-              <h6>{{ headings[col] }}</h6>
-            </a>
+          <th v-for="col in columns" :key="col._uid" @click="sortTable(col)" :class="{'active': sortColumn == col}" v-show="headings[col] != 'id'">
+            <h6>{{ headings[col] }}</h6>
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="row in rows">
-          <td v-for="col in columns">
+        <tr v-for="row in rows" :key="row._uid">
+          <td v-for="col in columns" :key="col._uid" v-show="col != 'id'">
             <span v-if="col == 'name'"><a :href="`https://thinxnet-jobs.personio.de/job/${row.id}`" target="_blank" rel="noopener">{{ row[col] }}</a></span>
             <span v-else>{{ row[col] }}</span>
           </td>
@@ -62,8 +61,9 @@
       }
     },
     mounted() {
+      let language = (this.$page.storyblokEntry.id.split('-').pop() == 'default') ? 'de' :  this.$page.storyblokEntry.id.split('-').pop();
       const getJobData = async() => {
-        const response = await fetch('https://thinxnet-jobs.personio.de/xml');
+        const response = await fetch(`https://thinxnet-jobs.personio.de/xml?language=${language}`);
         const data = await response.text();
         return new DOMParser().parseFromString(data, 'text/xml');
       }
@@ -249,6 +249,9 @@
     }
     tbody tr:nth-of-type(odd) {
       background-color: $veryLightGrey;
+    }
+    td {
+      padding: 1em 0.5em;
     }
   }
   // responsive behavior (scroll)
