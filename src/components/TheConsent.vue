@@ -176,13 +176,22 @@ export default {
   }
   .consent-next {
     color: $accent;
+    &:hover {
+      border-color: $accent;
+    }
   }
   .consent-prev {
     font-size: 1.5rem;
     color: $accent;
+    &:hover {
+      border-color: $accent;
+    }
   }
   .consent-expand {
     color: $accent;
+    &:hover {
+      border-color: $accent;
+    }
   }
   .consent-center {
     text-align: center;
