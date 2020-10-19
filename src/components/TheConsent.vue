@@ -289,12 +289,10 @@ export default {
 
   .consent-linklist.v-linklist { // override defaults
     font-size: 0.75rem;
-    // li::before {
-    //   content: "";
-    // }
-    // li:not(:last-of-type)::after {
-    //   content: "   | ";
-    // }
+    color: $black;
+    a:hover {
+      border-color: $black;
+    }
   }
 }
 </style>
