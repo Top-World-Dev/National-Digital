@@ -36,8 +36,7 @@
           :lat-lng.sync="marker.position"
           :icon="getIcon(marker)"
           @click="goToMarker(marker)"
-        >       
-        <l-popup :content="marker.popup"></l-popup>       
+        >            
         </l-marker>
       </l-map>
     </ClientOnly>
@@ -106,6 +105,7 @@
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         loading: false, 
         locations: [],
+        activeMarker: null,
         markers: [],
         mapOptions: {
           zoomSnap: 0.5,
@@ -129,6 +129,7 @@
         this.searchValue = '';
         this.searchResults = [];
         this.markers = [];
+        this.activeMarker = null;
         this.$refs.map.mapObject.closePopup();
         this.$refs.map.mapObject.setView(new L.LatLng(Number(this.blok.lat), Number(this.blok.lng)), Number(this.blok.zoom));
         this.addMarkers();
@@ -146,8 +147,10 @@
         // add new search marker
         this.searchResults.push(result);
         this.markers.push(result);
+        this.activeMarker = result.id;
         this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.9});
-        this.$refs.marker[result.id].mapObject.openPopup();
+        this.$refs.marker[result.id].mapObject.bindPopup(result.popup).openPopup();
+        this.activeMarker = result.id;
       },
       getIcon(marker) {
         let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
@@ -165,8 +168,14 @@
         return icon;
       },
       goToMarker(marker) {
+        if(this.activeMarker == marker.id) {
+          return false;
+        }
+
+        this.activeMarker = marker.id;
         this.searchSuggestions = [];
         this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.9});
+        this.$refs.marker[marker.id].mapObject.bindPopup(marker.popup).openPopup();
       },
       loadResults() {
         if(this.searchValue.length == 0) {
@@ -177,6 +186,7 @@
         this.searchResults = this.searchSuggestions;
         this.searchSuggestions = [];
         this.markers = [];
+        this.activeMarker = null;
 
         // add new markers and search results
         this.searchResults.forEach(result => this.markers.push(result));
