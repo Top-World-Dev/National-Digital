@@ -4,6 +4,11 @@ This website is built using the modern site generator for Vue.js, [Gridsome](htt
 
 The site uses the [Storyblok](https://www.storyblok.com/) CMS.
 
+## Updating gas station map data
+
+1. Replace data file in `/src/data/gas-stations.csv`. **Note:** column headers must remain the same.
+2. Run `npm run generate` and commit the changes.
+
 ## Local component development
 
 1. Download the node modules
