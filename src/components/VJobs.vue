@@ -29,7 +29,7 @@
       <thead>
         <tr>
           <th v-for="col in columns" :key="col._uid" @click="sortTable(col)" :class="{'active': sortColumn == col}">
-              <h6>{{ headings[col] }}</h6>
+            <h6>{{ headings[col] }}</h6>
           </th>
         </tr>
       </thead>
