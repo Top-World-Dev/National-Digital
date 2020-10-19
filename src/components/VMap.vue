@@ -70,6 +70,7 @@
       'l-popup': Vue2Leaflet.LPopup,
       'l-icon': Vue2Leaflet.LIcon,
     },
+    props: ["blok"], 
     async mounted() {
       this.loading = true;
       const response = await fetch('/de.ryd.one-places.json');
@@ -117,7 +118,6 @@
         showMap: true,
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
         visibleMarkers: [],
-        zoom: 5,
       };
     },
     methods: {
@@ -128,7 +128,7 @@
         this.searchValue = '';
         this.searchResults = [];
         this.markers = [];
-        this.$refs.map.mapObject.setView(new L.LatLng(52.520008, 13.404954), 5);
+        this.$refs.map.mapObject.setView(new L.LatLng(Number(this.blok.lat), Number(this.blok.lng)), Number(this.blok.zoom));
         this.addMarkers();
 
       },
@@ -187,7 +187,12 @@
     computed: {
       center() {
         if (process.isClient) {
-          return latLng(52.520008, 13.404954)
+          return latLng(Number(this.blok.lat), Number(this.blok.lng))
+        }
+      },
+      zoom() {
+        if (process.isClient) {
+          return Number(this.blok.zoom)
         }
       }
     }
