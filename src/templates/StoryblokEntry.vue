@@ -30,7 +30,8 @@ export default {
       let language = this.$page.storyblokEntry.id.split('-').pop();
       let image = (data.feature.filename.length == 0) ? this.$static.metadata.fallbackImage : (typeof data.feature == 'object') ? require(`!!assets-loader!@media/${data.feature.filename.filename}`).src : require(`!!assets-loader!@media/${data.feature.filename}`).src;
       return {
-        title: `${this.$static.metadata.siteName} - ${data.title}`,
+        title: `${data.title}`,
+        titleTemplate: `%s - ${this.$static.metadata.siteName}`,
         htmlAttrs: { lang: (language) == 'default' ? 'de' :  language },
         meta: [
           { name:  'description', content: description.replace('<p>', '').replace('</p>', '')},
