@@ -20,22 +20,20 @@ export default {
     };
   },
   metaInfo() {
-    const data = this.$page.storyblokEntry.content.meta[0]
-    if(!data) {
+    let data = (this.$page.storyblokEntry.content.meta) ? this.$page.storyblokEntry.content.meta[0] : null;
+
+    if(data == null) {
       return false
     } 
     else {
       let description = data.description ? this.$storyapi.richTextResolver.render(data.description) : '';
       let language = this.$page.storyblokEntry.id.split('-').pop();
       let image = (data.feature.filename.length == 0) ? this.$static.metadata.fallbackImage : (typeof data.feature == 'object') ? require(`!!assets-loader!@media/${data.feature.filename.filename}`).src : require(`!!assets-loader!@media/${data.feature.filename}`).src;
-      console.log(description)
-      console.log(language)
-      console.log(image)
       return {
         title: `${this.$static.metadata.siteName} - ${data.title}`,
         htmlAttrs: { lang: (language) == 'default' ? 'de' :  language },
-         meta: [
-          { name: 'description', content: description.replace('<p>', '').replace('</p>', '')},
+        meta: [
+          { name:  'description', content: description.replace('<p>', '').replace('</p>', '')},
           { name: 'robots', content: (data.noindex) ? 'noindex' : 'index' },
           { name: "twitter:card", content: "summary" },
           { name: 'og:url', content: `${this.$static.metadata.siteUrl}${this.$route.fullPath}` },
