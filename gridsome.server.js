@@ -10,6 +10,14 @@ module.exports = function (api) {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
   })
 
+  api.loadSource(async store => {
+    store.addMetadata('siteName', 'ryd Germany')
+    store.addMetadata('siteTwitter', '@RYDofficialDE')
+    store.addMetadata('siteUrl', 'https://de.ryd.one' )
+    store.addMetadata('fallbackImage', '/assets/static/placeholder.png')
+    store.addMetadata('siteLogo', '/assets/static/placeholder.png')
+  })
+
   api.createPages(async ({ graphql, createPage }) => {
     // load data from Storyblok API
     const { data } = await graphql(`{
@@ -36,10 +44,11 @@ module.exports = function (api) {
         }
       }
     }`)
+
+
  
     // for each content found create a page
     data.allStoryblokEntry.edges.forEach(({ node }) => {
-      
       if (node.full_slug === 'home') {
         createPage({
           path: '/',

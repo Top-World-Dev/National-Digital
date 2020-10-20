@@ -20,9 +20,44 @@ export default {
     };
   },
   metaInfo() {
-    let language = this.$page.storyblokEntry.id.split('-').pop();
-    return {
-      htmlAttrs: { lang: (language) == 'default' ? 'de' :  language }
+    const data = this.$page.storyblokEntry.content.meta[0]
+    if(!data) {
+      return false
+    } 
+    else {
+      let description = data.description ? this.$storyapi.richTextResolver.render(data.description) : '';
+      let language = this.$page.storyblokEntry.id.split('-').pop();
+      let image = (data.feature.filename.length == 0) ? this.$static.metadata.fallbackImage : (typeof data.feature == 'object') ? require(`!!assets-loader!@media/${data.feature.filename.filename}`).src : require(`!!assets-loader!@media/${data.feature.filename}`).src;
+      console.log(description)
+      console.log(language)
+      console.log(image)
+      return {
+        title: `${this.$static.metadata.siteName} - ${data.title}`,
+        htmlAttrs: { lang: (language) == 'default' ? 'de' :  language },
+         meta: [
+          { name: 'description', content: description.replace('<p>', '').replace('</p>', '')},
+          { name: 'robots', content: (data.noindex) ? 'noindex' : 'index' },
+          { name: "twitter:card", content: "summary" },
+          { name: 'og:url', content: `${this.$static.metadata.siteUrl}${this.$route.fullPath}` },
+          { name: 'og:title', content: `${this.$static.metadata.siteName} - ${data.title}` },
+          { name: 'og:description', content: description.replace('<p>', '').replace('</p>', '') },
+          { name: 'og:image', content: image },
+        ],
+        link: [
+          { rel: 'canonical', href: `${this.$static.metadata.siteUrl}/${this.$route.fullPath}` },
+        ],
+        script: [
+          {
+            type: "application/ld+json",
+            json: {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "url": this.$static.metadata.siteUrl,
+              "logo": this.$static.metadata.siteLogo,
+            }
+          }
+        ]
+      }
     }
   },
   mounted() {
@@ -70,3 +105,14 @@ query StoryblokEntry ($id: ID) {
   }
 }
 </page-query>
+<static-query>
+query {
+  metadata {
+    fallbackImage
+    siteName
+    siteTwitter
+    siteUrl
+    siteLogo
+  }
+}
+</static-query>
