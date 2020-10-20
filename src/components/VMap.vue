@@ -32,12 +32,11 @@
         <l-marker
           v-for="marker in markers"
           :key="marker.id"
+          ref="marker"
           :lat-lng.sync="marker.position"
           :icon="getIcon(marker)"
           @click="goToMarker(marker)"
-        >          
-        <l-popup :content="marker.popup" />
-          
+        >            
         </l-marker>
       </l-map>
     </ClientOnly>
@@ -77,6 +76,7 @@
       const data = await response.json();
       this.locations = data.map(location => {
         return {
+          id: location.id,
           position: { lat: location.lat, lng: location.lon },
           brand: location.brand,
           address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
@@ -105,6 +105,7 @@
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         loading: false, 
         locations: [],
+        activeMarker: null,
         markers: [],
         mapOptions: {
           zoomSnap: 0.5,
@@ -122,12 +123,14 @@
     },
     methods: {
       addMarkers() {
-        this.markers = (this.searchResults.length == 0) ? this.locations.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position)) : this.searchResults.filter(point => this.$refs.map.mapObject.getBounds().contains(point.position));
+        this.markers = (this.searchResults.length == 0) ? this.locations.map(point => point) : this.searchResults.map(point => point) ; 
       },
       clear() {
         this.searchValue = '';
         this.searchResults = [];
         this.markers = [];
+        this.activeMarker = null;
+        this.$refs.map.mapObject.closePopup();
         this.$refs.map.mapObject.setView(new L.LatLng(Number(this.blok.lat), Number(this.blok.lng)), Number(this.blok.zoom));
         this.addMarkers();
 
@@ -144,8 +147,10 @@
         // add new search marker
         this.searchResults.push(result);
         this.markers.push(result);
+        this.activeMarker = result.id;
         this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.9});
-
+        this.$refs.marker[result.id].mapObject.bindPopup(result.popup).openPopup();
+        this.activeMarker = result.id;
       },
       getIcon(marker) {
         let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
@@ -163,8 +168,14 @@
         return icon;
       },
       goToMarker(marker) {
+        if(this.activeMarker == marker.id) {
+          return false;
+        }
+
+        this.activeMarker = marker.id;
         this.searchSuggestions = [];
         this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.9});
+        this.$refs.marker[marker.id].mapObject.bindPopup(marker.popup).openPopup();
       },
       loadResults() {
         if(this.searchValue.length == 0) {
@@ -175,13 +186,14 @@
         this.searchResults = this.searchSuggestions;
         this.searchSuggestions = [];
         this.markers = [];
+        this.activeMarker = null;
 
         // add new markers and search results
         this.searchResults.forEach(result => this.markers.push(result));
         this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
       },
       search(value) {
-        this.searchSuggestions = (value.length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.toLowerCase()) != -1 || item.address.indexOf(value) != -1);
+        this.searchSuggestions = (value.trim().length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.address.indexOf(value.trim()) != -1);
       },
     },
     computed: {
@@ -269,6 +281,8 @@
   .map-search-clear {
     opacity: 0.7;
     display: block;
+    width: 25px;
+    height: 25px;
     &:hover {
       display: block;
       opacity: 1;
