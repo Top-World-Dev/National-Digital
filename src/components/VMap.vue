@@ -30,7 +30,7 @@
           :attribution="attribution"
         />
 
-        <l-layer-group ref="features">
+      
           <l-marker
             v-for="marker in markers"
             :key="marker.id"
@@ -39,7 +39,7 @@
           
             @click="goToMarker(marker)"
           ></l-marker>
-          </l-layer-group>
+
       </l-map>
     </ClientOnly>
     </div>
@@ -69,7 +69,6 @@
       'l-map': Vue2Leaflet.LMap,
       'l-tile-layer': Vue2Leaflet.LTileLayer,
       'l-marker': Vue2Leaflet.LMarker,
-      'l-layer-group': Vue2Leaflet.LLayerGroup,
       'l-popup': Vue2Leaflet.LPopup,
       'l-icon': Vue2Leaflet.LIcon,
     },
@@ -197,6 +196,7 @@
         this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
       },
       search(value) {
+
         this.searchSuggestions = (value.trim().length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.address.indexOf(value.trim()) != -1);
       },
       triggerSearch:_.debounce(function(value) {
