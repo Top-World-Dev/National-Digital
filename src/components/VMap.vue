@@ -118,7 +118,6 @@
         searchResults: [],
         showMap: true,
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        visibleMarkers: [],
       };
     },
     methods: {
@@ -193,7 +192,7 @@
         this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
       },
       search(value) {
-        this.searchSuggestions = (value.trim().length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.address.indexOf(value.trim()) != -1);
+        this.searchSuggestions = (value.trim().length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().includes(value.trim().toLowerCase()) || item.city.toLowerCase().includes(value.trim().toLowerCase()) || item.street.toLowerCase().includes(value.trim().toLowerCase())  || item.zip.includes(value.trim()) != -1);
       },
     },
     computed: {
