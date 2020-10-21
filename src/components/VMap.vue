@@ -3,7 +3,7 @@
     <div class="map-search">
       <div class="map-search-form">
         <div class="map-search-row">
-          <input type="text" name="search" placeholder="Search" autocomplete="off" class="map-search-input" aria-label="search" v-model="searchValue" @keyup="search($event.target.value)" @keyup.enter="loadResults">
+          <input type="text" name="search" placeholder="Search" autocomplete="off" class="map-search-input" aria-label="search" v-model="searchValue" @keyup.enter="loadResults()">
           <a v-if="searchValue.length > 0" role="button" class="map-search-clear" tabindex="0" @click="clear" ></a>
           <span class="map-search-icon"  v-else>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.931 28.932" width="14" height="14"><path fill="#787c87" d="M28.344 25.518l-6.114-6.115a12.177 12.177 0 002.303-7.137c0-3.275-1.275-6.355-3.594-8.672A12.183 12.183 0 0012.266 0a12.176 12.176 0 00-8.673 3.594 12.183 12.183 0 00-3.592 8.672c0 3.276 1.275 6.356 3.592 8.674a12.187 12.187 0 008.673 3.594c2.599 0 5.067-.813 7.136-2.303l6.114 6.115c.392.391.902.586 1.414.586a2 2 0 001.414-3.414zM6.422 18.111c-1.562-1.562-2.421-3.639-2.421-5.846s.859-4.282 2.421-5.844c1.561-1.562 3.636-2.422 5.844-2.422s4.284.86 5.845 2.422c1.562 1.562 2.422 3.638 2.422 5.845s-.859 4.283-2.422 5.846c-1.562 1.562-3.636 2.42-5.845 2.42s-4.285-.86-5.844-2.421z"/></svg>
@@ -29,15 +29,17 @@
           :url="url"
           :attribution="attribution"
         />
-        <l-marker
-          v-for="marker in markers"
-          :key="marker.id"
-          ref="marker"
-          :lat-lng.sync="marker.position"
-          :icon="getIcon(marker)"
-          @click="goToMarker(marker)"
-        >            
-        </l-marker>
+
+      
+          <l-marker
+            v-for="marker in markers"
+            :key="marker.id"
+            ref="marker"
+            :lat-lng.sync="marker.position"
+          
+            @click="goToMarker(marker)"
+          ></l-marker>
+
       </l-map>
     </ClientOnly>
     </div>
@@ -47,14 +49,15 @@
   let Vue2Leaflet = {};
   let latLng,icon; 
   import 'leaflet/dist/leaflet.css';
+  import _ from 'lodash'
 
   if (process.isClient) {
     Vue2Leaflet = require("vue2-leaflet");
     icon = require('leaflet').Icon
     delete icon.Default.prototype._getIconUrl;
     icon.Default.mergeOptions({
-      iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-      iconUrl: require('leaflet/dist/images/marker-icon.png'),
+      iconRetinaUrl: require('!!assets-loader!@media/map-markers/marker-icon-alt-2x.png').src,
+      iconUrl: require('!!assets-loader!@media/map-markers/marker-icon-alt.png').src,
       shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     })
     latLng =  require('leaflet').latLng
@@ -118,7 +121,6 @@
         searchResults: [],
         showMap: true,
         url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-        visibleMarkers: [],
       };
     },
     methods: {
@@ -139,18 +141,18 @@
         this.$refs.map.mapObject.scrollWheelZoom.enable();
       },
       findResult(result) {
+        this.$refs.map.mapObject.closePopup();
+
         // clear old markers and search results
         this.searchResults = [];
         this.markers = [];
-        this.searchSuggestions = [];
 
         // add new search marker
         this.searchResults.push(result);
         this.markers.push(result);
-        this.activeMarker = result.id;
-        this.$refs.map.mapObject.flyTo(latLng(result.position.lat, result.position.lng),14, { animate: true, duration: 0.9});
-        this.$refs.marker[result.id].mapObject.bindPopup(result.popup).openPopup();
-        this.activeMarker = result.id;
+        
+        this.goToMarker(result);
+        
       },
       getIcon(marker) {
         let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
@@ -171,11 +173,12 @@
         if(this.activeMarker == marker.id) {
           return false;
         }
-
-        this.activeMarker = marker.id;
         this.searchSuggestions = [];
         this.$refs.map.mapObject.flyTo(latLng(marker.position.lat, marker.position.lng), 14, { animate: true, duration: 0.9});
-        this.$refs.marker[marker.id].mapObject.bindPopup(marker.popup).openPopup();
+
+        this.activeMarker = marker.id;
+        
+        
       },
       loadResults() {
         if(this.searchValue.length == 0) {
@@ -193,8 +196,12 @@
         this.$refs.map.mapObject.fitBounds(this.markers.map(m => [m.position.lat, m.position.lng]))
       },
       search(value) {
+
         this.searchSuggestions = (value.trim().length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.address.indexOf(value.trim()) != -1);
       },
+      triggerSearch:_.debounce(function(value) {
+        this.search(value);
+      }, 300),
     },
     computed: {
       center() {
@@ -207,6 +214,33 @@
           return Number(this.blok.zoom)
         }
       }
+    },
+    watch: {
+      searchValue: function (newSearch, oldSearch) {
+        if(newSearch.length == 0) {
+          this.searchSuggestions = [];
+        }
+        if(newSearch.length > 1) {
+          this.triggerSearch(newSearch);
+        }
+      },
+      activeMarker: {
+        async handler(newVal, oldVal) {
+          await this.$nextTick()  
+
+          // get marker position
+          if(newVal) {
+  
+            let marker = this.markers.filter(item => item.id == newVal);
+            let pos = this.markers.map(point => point.id ).indexOf(newVal);
+
+            this.$refs.marker[pos].mapObject.bindPopup(marker[0].popup).openPopup();
+          }
+          
+        },
+        immediate: true
+      },
+
     }
   }
 </script>
