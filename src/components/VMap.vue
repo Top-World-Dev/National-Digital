@@ -29,15 +29,17 @@
           :url="url"
           :attribution="attribution"
         />
-        <l-marker
-          v-for="marker in markers"
-          :key="marker.id"
-          ref="marker"
-          :lat-lng.sync="marker.position"
-          :icon="getIcon(marker)"
-          @click="goToMarker(marker)"
-        >            
-        </l-marker>
+
+        <l-layer-group ref="features">
+          <l-marker
+            v-for="marker in markers"
+            :key="marker.id"
+            ref="marker"
+            :lat-lng.sync="marker.position"
+          
+            @click="goToMarker(marker)"
+          ></l-marker>
+          </l-layer-group>
       </l-map>
     </ClientOnly>
     </div>
@@ -67,6 +69,7 @@
       'l-map': Vue2Leaflet.LMap,
       'l-tile-layer': Vue2Leaflet.LTileLayer,
       'l-marker': Vue2Leaflet.LMarker,
+      'l-layer-group': Vue2Leaflet.LLayerGroup,
       'l-popup': Vue2Leaflet.LPopup,
       'l-icon': Vue2Leaflet.LIcon,
     },
@@ -139,6 +142,7 @@
         this.$refs.map.mapObject.scrollWheelZoom.enable();
       },
       findResult(result) {
+        this.$refs.map.mapObject.closePopup();
 
         // clear old markers and search results
         this.searchResults = [];
