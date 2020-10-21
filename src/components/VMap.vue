@@ -56,8 +56,8 @@
     icon = require('leaflet').Icon
     delete icon.Default.prototype._getIconUrl;
     icon.Default.mergeOptions({
-      iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-      iconUrl: require('leaflet/dist/images/marker-icon.png'),
+      iconRetinaUrl: require('!!assets-loader!@media/map-markers/marker-icon-alt-2x.png').src,
+      iconUrl: require('!!assets-loader!@media/map-markers/marker-icon-alt.png').src,
       shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     })
     latLng =  require('leaflet').latLng
