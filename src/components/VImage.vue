@@ -20,7 +20,7 @@ export default {
         this.src = "img";
         return this.source.image.filename;
       } else {
-        let image = (typeof this.source.image.filename == 'object') ? require(`!!assets-loader!@media/${this.source.image.filename.filename}`) : require(`!!assets-loader!@media/${this.source.image.filename}`);
+        let image = (typeof this.source.image.filename == 'object') ? require(`!!assets-loader!@storyblok/${this.source.image.filename.filename}`) : require(`!!assets-loader!@storyblok/${this.source.image.filename}`);
 
         image.alt = this.source.title;
         image.size.height = parseInt(this.source.height);

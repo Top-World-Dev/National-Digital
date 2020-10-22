@@ -21,7 +21,7 @@ export default {
       }
     },
     getImage(asset) {
-      return (typeof asset  == 'object') ? require(`!!assets-loader!@media/${asset.filename}`).src : asset;
+      return (typeof asset  == 'object') ? require(`!!assets-loader!@storyblok/${asset.filename}`).src : asset;
     },
     handleResize(width) {
       this.windowWidth = width;

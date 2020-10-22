@@ -31,7 +31,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 0.5rem;
-    @media (min-width: $breakColumns) {
+    @storyblok (min-width: $breakColumns) {
       flex-direction: row;
       >* {
         flex: 0 1 100%;

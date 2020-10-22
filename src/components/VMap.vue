@@ -56,8 +56,8 @@
     icon = require('leaflet').Icon
     delete icon.Default.prototype._getIconUrl;
     icon.Default.mergeOptions({
-      iconRetinaUrl: require('!!assets-loader!@media/map-markers/marker-icon-alt-2x.png').src,
-      iconUrl: require('!!assets-loader!@media/map-markers/marker-icon-alt.png').src,
+      iconRetinaUrl: require('!!assets-loader!@storyblok/map-markers/marker-icon-alt-2x.png').src,
+      iconUrl: require('!!assets-loader!@storyblok/map-markers/marker-icon-alt.png').src,
       shadowUrl: require('leaflet/dist/images/marker-shadow.png')
     })
     latLng =  require('leaflet').latLng
@@ -159,13 +159,13 @@
       //   let imagePath = '';
 
       //   try {
-      //     imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
+      //     imagePath = require(`!!assets-loader!@storyblok/map-markers/poi_${imageName}.png`).src
       //   } catch(err) {
-      //     imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
+      //     imagePath = require(`!!assets-loader!@storyblok/map-markers/poi_default.png`).src
       //   }
       //   let icon = new L.icon({
       //     iconUrl: imagePath,
-      //     shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src,
+      //     shadowUrl: require(`!!assets-loader!@storyblok/map-markers/marker-shadow.png`).src,
       //   })
       //   return icon;
       // },

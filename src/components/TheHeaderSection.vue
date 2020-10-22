@@ -32,12 +32,12 @@ export default {
 @import "~/assets/styles.scss";
 
 /* Nav display logic */
-@media (max-width: $breakColumns - 1px) {
+@storyblok (max-width: $breakColumns - 1px) {
   .header-topnav {
     display: none !important;
   }
 }
-@media (min-width: $breakColumns) {
+@storyblok (min-width: $breakColumns) {
   .header-sidenav {
     display: none !important;
   }

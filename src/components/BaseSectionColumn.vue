@@ -18,7 +18,7 @@ export default {
 @import "~/assets/styles.scss";
 .xy-column {
   /* Layouts */
-  @media (min-width: $breakColumns) {
+  @storyblok (min-width: $breakColumns) {
     /* Vertical alignment (desktop) */
     &.column-valign-top {
       align-self: flex-start;
@@ -58,7 +58,7 @@ export default {
     }
   }
   /* Text alignment */
-  @media (max-width: $breakColumns - 1px) {
+  @storyblok (max-width: $breakColumns - 1px) {
     .column-mobile-align-left {
       text-align: left;
     }
@@ -72,7 +72,7 @@ export default {
       text-align: justify;
     }
   }
-  @media (min-width: $breakColumns) {
+  @storyblok (min-width: $breakColumns) {
     .column-desktop-align-left {
       text-align: left;
     }
