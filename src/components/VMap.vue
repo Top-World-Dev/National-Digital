@@ -154,21 +154,21 @@
         this.goToMarker(result);
         
       },
-      getIcon(marker) {
-        let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
-        let imagePath = '';
+      // getIcon(marker) {
+      //   let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
+      //   let imagePath = '';
 
-        try {
-          imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
-        } catch(err) {
-          imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
-        }
-        let icon = new L.icon({
-          iconUrl: imagePath,
-          shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src,
-        })
-        return icon;
-      },
+      //   try {
+      //     imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
+      //   } catch(err) {
+      //     imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
+      //   }
+      //   let icon = new L.icon({
+      //     iconUrl: imagePath,
+      //     shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src,
+      //   })
+      //   return icon;
+      // },
       goToMarker(marker) {
         if(this.activeMarker == marker.id) {
           return false;
