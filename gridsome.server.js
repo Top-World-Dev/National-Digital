@@ -5,17 +5,20 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
+
+const countryData = require('./metaData.json');
+
 module.exports = function (api) {
   api.loadSource(({ addCollection }) => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
   })
 
   api.loadSource(async store => {
-    store.addMetadata('siteName', 'ryd Germany')
-    store.addMetadata('siteTwitter', '@RYDofficialDE')
-    store.addMetadata('siteUrl', 'https://de.ryd.one' )
-    store.addMetadata('fallbackImage', '/assets/static/placeholder.png')
-    store.addMetadata('siteLogo', '/assets/static/placeholder.png')
+    store.addMetadata('siteName', countryData.siteName[process.env.npm_config_country] )
+    store.addMetadata('siteTwitter', countryData.siteTwitter[process.env.npm_config_country] )
+    store.addMetadata('siteUrl', countryData.siteUrl[process.env.npm_config_country] )
+    store.addMetadata('fallbackImage', countryData.fallbackImage[process.env.npm_config_country] )
+    store.addMetadata('siteLogo', countryData.siteLogo[process.env.npm_config_country] )
   })
 
   api.createPages(async ({ graphql, createPage }) => {

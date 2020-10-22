@@ -3,7 +3,8 @@
 
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
-const path = require('path')
+const path = require('path');
+const spaces = require('./spaces.json');
 
 module.exports = {
   siteName: 'de.ryd.one',
@@ -12,7 +13,7 @@ module.exports = {
       use: 'gridsome-source-storyblok',
       options: {
         client: {
-          accessToken: 'xBrVBUizNcw9o7tmRIQclAtt' // you must be replace with your token
+          accessToken: spaces.accessToken[process.env.npm_config_country] // you must be replace with your token
         },
         types: {
           story: {
@@ -29,7 +30,7 @@ module.exports = {
     {
       use: 'gridsome-plugin-gtm',
       options: {
-        id: 'GTM-N9T3W2D',
+        id: spaces.gtm[process.env.npm_config_country],
         enabled: true,
         debug: true
       }
