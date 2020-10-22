@@ -1,8 +1,10 @@
 *.log
 .cache
 .DS_Store
-src/.temp
-node_modules
-dist
 .env
 .env.*
+dist
+node_modules
+static/mapdata.json
+src/.temp
+src/media-storyblok

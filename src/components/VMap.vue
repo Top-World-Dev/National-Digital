@@ -56,9 +56,9 @@
     icon = require('leaflet').Icon
     delete icon.Default.prototype._getIconUrl;
     icon.Default.mergeOptions({
-      iconRetinaUrl: require('!!assets-loader!@media/map-markers/marker-icon-alt-2x.png').src,
-      iconUrl: require('!!assets-loader!@media/map-markers/marker-icon-alt.png').src,
-      shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+      iconRetinaUrl: require('!!assets-loader!@media/marker-icon-alt-2x.png').src,
+      iconUrl: require('!!assets-loader!@media/marker-icon-alt.png').src,
+      shadowUrl: require('!!assets-loader!@media/marker-shadow.png').src
     })
     latLng =  require('leaflet').latLng
   }
@@ -75,7 +75,7 @@
     props: ["blok"], 
     async mounted() {
       this.loading = true;
-      const response = await fetch('/de.ryd.one-places.json');
+      const response = await fetch('/mapdata.json');
       const data = await response.json();
       this.locations = data.map(location => {
         return {
@@ -154,21 +154,21 @@
         this.goToMarker(result);
         
       },
-      getIcon(marker) {
-        let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
-        let imagePath = '';
+      // getIcon(marker) {
+      //   let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
+      //   let imagePath = '';
 
-        try {
-          imagePath = require(`!!assets-loader!@media/map-markers/poi_${imageName}.png`).src
-        } catch(err) {
-          imagePath = require(`!!assets-loader!@media/map-markers/poi_default.png`).src
-        }
-        let icon = new L.icon({
-          iconUrl: imagePath,
-          shadowUrl: require(`!!assets-loader!@media/map-markers/marker-shadow.png`).src,
-        })
-        return icon;
-      },
+      //   try {
+      //     imagePath = require(`!!assets-loader!@storyblok/map-markers/poi_${imageName}.png`).src
+      //   } catch(err) {
+      //     imagePath = require(`!!assets-loader!@storyblok/map-markers/poi_default.png`).src
+      //   }
+      //   let icon = new L.icon({
+      //     iconUrl: imagePath,
+      //     shadowUrl: require(`!!assets-loader!@storyblok/map-markers/marker-shadow.png`).src,
+      //   })
+      //   return icon;
+      // },
       goToMarker(marker) {
         if(this.activeMarker == marker.id) {
           return false;

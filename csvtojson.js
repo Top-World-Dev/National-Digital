@@ -10,13 +10,13 @@ const csvToJson = async() => {
       'houseNumber': 'number',
       'zip': 'number'
     }
-  }).fromFile('./src/data/gas-stations.csv');
+  }).fromFile('./ryd-locations.csv');
 }
 
 csvToJson()
 .then(places => {
  
-  const filepath = `./static/de.ryd.one-places.json`;
+  const filepath = `./static/mapdata.json`;
 
   fs.writeFile(filepath, JSON.stringify(places), (err) => {
     if (err) throw err;

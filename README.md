@@ -6,19 +6,20 @@ The site uses the [Storyblok](https://www.storyblok.com/) CMS.
 
 ## Updating gas station map data
 
-1. Replace data file in `/src/data/gas-stations.csv`. **Note:** column headers must remain the same.
-2. Run `npm run generate` and commit the changes.
+To update the gas station map data, simply replace the file `/ryd-locations.csv` and re-generate the site. **Note:** column headers must remain the same.
 
 ## Local component development
 
 1. Download the node modules
-   `npm install`
-2. Run the project
-   `npm run develop`
+   `npm ci`
+2. Run the project and specify site config
+   `npm run develop --site=staging`
 
 You can develop Storyblok components using their interface or the CLI. Please see the Storyblok docs for more info.
 
 ## Deploying changes
+
+**Information in this section will soon be replaced with multi-site deploy steps**
 
 Storyblok is connected to the `staging` branch and content updates are automatically deployed to https://staging.dlf3y81nu0i2t.amplifyapp.com/.
 
@@ -28,7 +29,7 @@ While we are actively working on this project, we will update the `master` branc
 
 To simplify the testing and approval process, new branches are automatically deployed with the branch name as the subdomain, e.g. the `docs` branch is deployed to https://docs.dlf3y81nu0i2t.amplifyapp.com/.
 
-Deployment can take up to 7 minutes. If the branch does not deploy, check that you can run the build command locally, i.e. `npm run build`.
+Deployment can take up to 7 minutes. If the branch does not deploy, check that you can run the build command locally, i.e. `npm run build --site=xxxx`.
 
 ## Methodlogies and styles
 

@@ -28,7 +28,7 @@ export default {
     else {
       let description = data.description ? this.$storyapi.richTextResolver.render(data.description) : '';
       let language = this.$page.storyblokEntry.id.split('-').pop();
-      let image = (data.feature.filename.length == 0) ? this.$static.metadata.fallbackImage : (typeof data.feature == 'object') ? require(`!!assets-loader!@media/${data.feature.filename.filename}`).src : require(`!!assets-loader!@media/${data.feature.filename}`).src;
+      let image = (data.feature.filename.length == 0) ? this.$static.metadata.fallbackImage : (typeof data.feature == 'object') ? require(`!!assets-loader!@storyblok/${data.feature.filename.filename}`).src : require(`!!assets-loader!@storyblok/${data.feature.filename}`).src;
       return {
         title: `${data.title}`,
         titleTemplate: `%s - ${this.$static.metadata.siteName}`,

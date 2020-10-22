@@ -1,0 +1,22 @@
+{
+   "siteName":{
+      "main": "ryd Germany",
+      "staging": "ryd Germany"
+   },
+   "siteTwitter":{
+      "main": "@RYDofficialDE",
+      "staging": "@RYDofficialdeploy"
+   },
+   "siteUrl":{
+      "main": "https://de.ryd.one",
+      "staging": "https://de.ryd.one"
+   },
+   "fallbackImage":{
+      "main": "/assets/static/placeholder.png",
+      "staging": "/assets/static/placeholder.png"
+   },
+   "siteLogo":{
+      "main": "/assets/static/placeholder.png",
+      "staging": "/assets/static/placeholder.png"
+   }
+}

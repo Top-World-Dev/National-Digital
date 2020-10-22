@@ -1,11 +1,11 @@
 {
-  "name": "de.ryd.one",
+  "name": "ryd.one",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "gridsome build",
-    "develop": "gridsome develop",
-    "explore": "gridsome explore",
-    "generate": "node csv_json.js"
+    "build": "node csvtojson.js && gridsome build",
+    "develop": "node csvtojson.js && gridsome develop",
+    "explore": "gridsome explore"
   },
   "dependencies": {
     "csvtojson": "^2.0.10",
