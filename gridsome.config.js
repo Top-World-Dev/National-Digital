@@ -24,7 +24,7 @@ module.exports = {
           }
         },
         downloadImages: true, // Optional. default false,
-        imageDirectory: 'storyblok_images', // Optional. Folder to put the downloaded images
+        imageDirectory: 'storyblok_media', // Optional. Folder to put the downloaded images
       },
     },
     {
@@ -37,7 +37,7 @@ module.exports = {
     }
   ],
   chainWebpack(config) {
-    config.resolve.alias.set('@media', '@/storyblok_images')
+    config.resolve.alias.set('@media', '@/storyblok_media')
     config.mode('development')
     // Load variables for all vue-files
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
