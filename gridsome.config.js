@@ -24,7 +24,7 @@ module.exports = {
           }
         },
         downloadImages: true, // Optional. default false,
-        imageDirectory: 'storyblok_media', // Optional. Folder to put the downloaded images
+        imageDirectory: 'media-storyblok', // Optional. Folder to put the downloaded images
       },
     },
     {
