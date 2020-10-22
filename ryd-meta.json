@@ -1,22 +1,22 @@
 {
    "siteName":{
-      "de":"ryd Germany",
-      "deploy":"ryd Germany"
+      "main": "ryd Germany",
+      "staging": "ryd Germany"
    },
    "siteTwitter":{
-      "de":"@RYDofficialDE",
-      "deploy":"@RYDofficialdeploy"
+      "main": "@RYDofficialDE",
+      "staging": "@RYDofficialdeploy"
    },
    "siteUrl":{
-      "de":"https://de.ryd.one",
-      "deploy":"https://de.ryd.one"
+      "main": "https://de.ryd.one",
+      "staging": "https://de.ryd.one"
    },
    "fallbackImage":{
-      "de":"/assets/static/placeholder.png",
-      "deploy":"/assets/static/placeholder.png"
+      "main": "/assets/static/placeholder.png",
+      "staging": "/assets/static/placeholder.png"
    },
    "siteLogo":{
-      "de":"/assets/static/placeholder.png",
-      "deploy":"/assets/static/placeholder.png"
+      "main": "/assets/static/placeholder.png",
+      "staging": "/assets/static/placeholder.png"
    }
 }
