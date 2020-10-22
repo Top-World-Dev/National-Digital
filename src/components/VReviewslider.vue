@@ -97,7 +97,7 @@
     pointer-events: none;
     background: transparent;
     z-index:10;
-    @storyblok (min-width: 1024px) {
+    @media (min-width: 1024px) {
       position: absolute;
       top: 0;
       bottom: 0;
@@ -115,10 +115,10 @@
     width: auto;
     margin-left: auto;
     margin-right: auto;
-    @storyblok (min-width: $breakColumns ) {
+    @media (min-width: $breakColumns ) {
       width: 75vw;
     }
-    @storyblok (min-width: $breakColumns ) {
+    @media (min-width: $breakColumns ) {
       width: 98vw;
     }
   }
@@ -134,7 +134,7 @@
     flex-direction: column;
     position: relative;
     padding: 0.5em 1em 1em 1em;
-    @storyblok (min-width: $breakColumns ) {
+    @media (min-width: $breakColumns ) {
       margin: 0 2rem 3rem 2rem;
 
     }

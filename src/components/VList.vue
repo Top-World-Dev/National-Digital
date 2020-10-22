@@ -25,7 +25,7 @@
   }
   .list-icon svg {
     margin-top: 0.55rem;
-    @storyblok (min-width: $breakColumns) {
+    @media (min-width: $breakColumns) {
       margin-top: 0.675rem;
     }
     width: 1rem;

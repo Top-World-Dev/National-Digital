@@ -79,13 +79,13 @@
   }
   /* Container Options */
   // mobile default
-  @storyblok (max-width: $breakColumns - 1px) { 
+  @media (max-width: $breakColumns - 1px) { 
     .section-container:not(.column-fullmobile) { 
       @include container($breakColumns);
     }
   }
   // desktop options
-  @storyblok (min-width: $breakColumns) {
+  @media (min-width: $breakColumns) {
     .section-container-none {
       width: 100%;
       height: auto;
@@ -110,7 +110,7 @@
     }
   }
   /* Flex layouts - mobile */
-  @storyblok (max-width: $breakColumns - 1px) {
+  @media (max-width: $breakColumns - 1px) {
     .section-multi.section-inner {
       display: flex;
       flex-direction: column;
@@ -120,7 +120,7 @@
     }
   }
   /* Flex layouts - desktop */
-  @storyblok (min-width: $breakColumns) {
+  @media (min-width: $breakColumns) {
     .section-multi.section-inner {
       display: flex;
       flex-direction: row;

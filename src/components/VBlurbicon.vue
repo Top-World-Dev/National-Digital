@@ -30,7 +30,7 @@ export default {
     }
   }
   &.blurbicon-horizontal {
-    @storyblok(min-width: $breakColumns) {
+    @media(min-width: $breakColumns) {
       .blurbicon-item {
         flex: 0 0 620px;
         margin: 1.5rem;
