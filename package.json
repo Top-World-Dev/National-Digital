@@ -1,5 +1,6 @@
 {
-  "name": "de.ryd.one",
+  "name": "ryd.one",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "build": "gridsome build",
