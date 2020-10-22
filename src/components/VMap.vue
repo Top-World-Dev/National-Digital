@@ -58,7 +58,7 @@
     icon.Default.mergeOptions({
       iconRetinaUrl: require('!!assets-loader!@storyblok/map-markers/marker-icon-alt-2x.png').src,
       iconUrl: require('!!assets-loader!@storyblok/map-markers/marker-icon-alt.png').src,
-      shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+      shadowUrl: require('!!assets-loader!@storyblok/map-markers/marker-shadow.png').src
     })
     latLng =  require('leaflet').latLng
   }

@@ -6,4 +6,4 @@
 dist
 node_modules
 src/.temp
-src/storyblok_media
+src/media-storyblok

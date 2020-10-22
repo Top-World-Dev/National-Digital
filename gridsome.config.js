@@ -37,7 +37,8 @@ module.exports = {
     }
   ],
   chainWebpack(config) {
-    config.resolve.alias.set('@storyblok', '@/storyblok_media')
+    config.resolve.alias.set('@media', '@/media-global')
+    config.resolve.alias.set('@storyblok', '@/media-storyblok')
     config.mode('development')
     // Load variables for all vue-files
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal']
