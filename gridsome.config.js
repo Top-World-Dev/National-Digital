@@ -13,7 +13,7 @@ module.exports = {
       use: 'gridsome-source-storyblok',
       options: {
         client: {
-          accessToken: spaces.accessToken[process.env.npm_config_country] // you must be replace with your token
+          accessToken: spaces.accessToken[process.env.npm_config_site] // you must be replace with your token
         },
         types: {
           story: {
@@ -30,7 +30,7 @@ module.exports = {
     {
       use: 'gridsome-plugin-gtm',
       options: {
-        id: spaces.gtm[process.env.npm_config_country],
+        id: spaces.gtm[process.env.npm_config_site],
         enabled: true,
         debug: true
       }

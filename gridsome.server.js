@@ -6,7 +6,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 
-const countryData = require('./metaData.json');
+const siteData = require('./metaData.json');
 
 module.exports = function (api) {
   api.loadSource(({ addCollection }) => {
@@ -14,11 +14,11 @@ module.exports = function (api) {
   })
 
   api.loadSource(async store => {
-    store.addMetadata('siteName', countryData.siteName[process.env.npm_config_country] )
-    store.addMetadata('siteTwitter', countryData.siteTwitter[process.env.npm_config_country] )
-    store.addMetadata('siteUrl', countryData.siteUrl[process.env.npm_config_country] )
-    store.addMetadata('fallbackImage', countryData.fallbackImage[process.env.npm_config_country] )
-    store.addMetadata('siteLogo', countryData.siteLogo[process.env.npm_config_country] )
+    store.addMetadata('siteName', siteData.siteName[process.env.npm_config_site] )
+    store.addMetadata('siteTwitter', siteData.siteTwitter[process.env.npm_config_site] )
+    store.addMetadata('siteUrl', siteData.siteUrl[process.env.npm_config_site] )
+    store.addMetadata('fallbackImage', siteData.fallbackImage[process.env.npm_config_site] )
+    store.addMetadata('siteLogo', siteData.siteLogo[process.env.npm_config_site] )
   })
 
   api.createPages(async ({ graphql, createPage }) => {
