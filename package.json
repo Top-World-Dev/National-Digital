@@ -5,7 +5,7 @@
     "build": "gridsome build",
     "develop": "gridsome develop",
     "explore": "gridsome explore",
-    "generate": "node csv_json.js"
+    "generate": "node csvtojson.js"
   },
   "dependencies": {
     "csvtojson": "^2.0.10",
