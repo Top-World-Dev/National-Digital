@@ -1,8 +1,10 @@
 {
    "accessToken":{
-      "de":"xBrVBUizNcw9o7tmRIQclAtt"
+      "de":"xBrVBUizNcw9o7tmRIQclAtt",
+      "deploy":"xBrVBUizNcw9o7tmRIQclAtt"
    },
    "gtm":{
-      "de":"GTM-N9T3W2D"
+      "de":"GTM-N9T3W2D",
+      "deploy": "NULL"
    }
 }
