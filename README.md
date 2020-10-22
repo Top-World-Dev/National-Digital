@@ -6,7 +6,7 @@ The site uses the [Storyblok](https://www.storyblok.com/) CMS.
 
 ## Updating gas station map data
 
-1. Replace data file in `/src/data/gas-stations.csv`. **Note:** column headers must remain the same.
+1. Replace data file in `/ryd-locations.csv`. **Note:** column headers must remain the same.
 2. Run `npm run generate` and commit the changes.
 
 ## Local component development

@@ -4,7 +4,7 @@
 // Changes here require a server restart.
 // To restart press CTRL + C in terminal and run `gridsome develop`
 const path = require('path');
-const spaces = require('./spaces.json');
+const spaces = require('./ryd-config.json');
 
 module.exports = {
   siteName: 'de.ryd.one',

@@ -75,7 +75,7 @@
     props: ["blok"], 
     async mounted() {
       this.loading = true;
-      const response = await fetch('/de.ryd.one-places.json');
+      const response = await fetch('/mapdata.json');
       const data = await response.json();
       this.locations = data.map(location => {
         return {

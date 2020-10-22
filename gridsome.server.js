@@ -6,7 +6,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 
-const siteData = require('./metaData.json');
+const siteData = require('./ryd-meta.json');
 
 module.exports = function (api) {
   api.loadSource(({ addCollection }) => {
