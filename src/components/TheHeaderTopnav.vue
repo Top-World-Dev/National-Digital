@@ -34,6 +34,9 @@ export default {
       isActive: '7432fc6d-7637-4628-9978-9c90b4abe6b0'
     }
   },
+  mounted() {
+    this.isActive = (!document.querySelector('.active--exact.active').closest('ul')) ? '7432fc6d-7637-4628-9978-9c90b4abe6b0' :  document.querySelector('.active--exact.active').closest('ul').dataset.name;
+  },
   methods: {
     selectTab(item) {
       this.isActive = item._uid
