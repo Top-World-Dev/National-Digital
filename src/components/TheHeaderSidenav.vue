@@ -39,7 +39,10 @@ export default {
     }
   },
   mounted() {
-    this.active.push(document.querySelector('.active--exact.active').closest('ul').dataset.name);
+    if(document.querySelector('.active--exact.active').closest('ul')) {
+      this.active.push(document.querySelector('.active--exact.active').closest('ul').dataset.name);
+    }
+    
   },
   methods: {
     selectTab(item) {
