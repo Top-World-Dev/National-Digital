@@ -90,7 +90,6 @@ export default {
       
       localStorage.setItem(`consentsToMinimum`,true);
       for (const key of Object.keys(this.checks)) {
-        console.log(key)
         localStorage.setItem(key, false);
       }
     }

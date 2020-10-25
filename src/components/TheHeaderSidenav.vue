@@ -38,6 +38,12 @@ export default {
       active: []
     }
   },
+  mounted() {
+    if(document.querySelector('.active--exact.active').closest('ul')) {
+      this.active.push(document.querySelector('.active--exact.active').closest('ul').dataset.name);
+    }
+    
+  },
   methods: {
     selectTab(item) {
       this.isActive = item._uid
