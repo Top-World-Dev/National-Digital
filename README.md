@@ -30,6 +30,8 @@ For example, to build the 'de' site, use the build command: `npm run build --sit
 
 The build command will output the site to: `dist`
 
+You can build directly from the repository's `master` branch, or you may wish for each site to have an individual 'master' branch. The build command remains the same.
+
 ## Development
 
 ### New site setup
@@ -39,7 +41,7 @@ Before starting, please make sure you have:
 - Created a new Storyblok space, noting the space ID
 - Created a new GTM container, if desired, noting the container ID
 
-Please refer to the [site setup](#site-setup) deployment information above, which sets out what configuration files must be populated to build a new site.
+Please refer to the [site setup](#site-setup) deployment information above, which sets out what configuration files must be populated to build a new site. All other site-specific information is modified within Storyblok.
 
 ### Updating map data
 
@@ -49,9 +51,9 @@ This file is re-processed at build.
 
 ### Working locally
 
-To work locally:
+To work locally, fetch the latest changes and:
 
-1. Download the node modules:
+1. Install the project node modules:
 
 `npm ci`
 
@@ -59,7 +61,15 @@ To work locally:
 
 `npm run develop --site=_SITENAME_`
 
-### Methodologies &amp; Styles
+### Working with the repository
+
+New features should be developed on their own branch.
+
+Before creating a PR, please make sure your feature branch is not behind the `master` branch.
+
+Please then create a PR into the `staging` branch.
+
+### Methodologies and styles
 
 Vue components that are used once per page should be prefixed with _The_, e.g. `TheHeader`. Sub components take on the parent name, i.e. `TheHeaderSidenav`.
 
