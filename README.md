@@ -12,10 +12,10 @@ The websites are generated using the modern site generator for Vue.js, [Gridsome
 
 ### Site setup
 
-Each ryd.one website requires an entry in the `ryd-config.json` and `ryd-meta.json` files. The 'site' can be called anything, but best practice is to use the branch OR final subdomain name (e.g. 'staging' or 'de', etc.)
+Each ryd.one website requires an entry in the json configuration files. The site can be called anything, but best practice is to use the branch OR final subdomain name (e.g. 'staging' or 'de')
 
-- the `ryd-config.json` file contains (1) the Storyblok Access Token for the relevant Storyblok space and (2) the site's Google Tag Manager container ID (e.g. GTM-XXXXX).
-- the `ryd-meta.json` file contains site-specific global meta data such as the website url, website name, logo path and default open graph feature image.
+- `ryd-config.json` contains (1) the Storyblok Access Token for the relevant Storyblok space and (2) the site's Google Tag Manager container ID (e.g. GTM-XXXXX).
+- `ryd-meta.json` contains site-specific global meta data such as the website url, website name, logo path and default open graph feature image.
 
 ### Deploy steps
 
@@ -23,12 +23,12 @@ You can build any site that has been defined above as follows:
 
 ```bash
 npm ci
-npm run build --site=_SITENAME_
+npm run build --site=SITENAME
 ```
 
-For example, to build the 'de' site, the build command would be `npm run build --site=de`
+For example, to build the 'de' site, use the build command: `npm run build --site=de`
 
-The output directory is `dist`
+The build command will output the site to: `dist`
 
 ## Development
 
