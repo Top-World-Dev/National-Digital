@@ -6,7 +6,7 @@
 
 This repository contains the source code for all of the ryd.one websites.
 
-The websites are generated using the modern site generator for Vue.js, [Gridsome](<[https://gridsome.org/](https://gridsome.org/)>) and their content is managed using [Storyblok](https://www.storyblok.com/) CMS.
+The websites are generated using the modern site generator for Vue.js, [Gridsome](https://gridsome.org/) and their content is managed using [Storyblok](https://www.storyblok.com/) CMS.
 
 ## Deployment
 
