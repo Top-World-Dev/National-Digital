@@ -1,37 +1,66 @@
-# ryd.one development
+# ryd.one
 
-This website is built using the modern site generator for Vue.js, [Gridsome](https://gridsome.org/).
+[Deployment](#deployment) | [Development](#development) | [Content Management](#content-management)
 
-The site uses the [Storyblok](https://www.storyblok.com/) CMS.
+---
 
-## Updating gas station map data
+This repository contains the source code for all of the ryd.one websites.
 
-To update the gas station map data, simply replace the file `/ryd-locations.csv` and re-generate the site. **Note:** column headers must remain the same.
+The websites are generated using the modern site generator for Vue.js, [Gridsome](<[https://gridsome.org/](https://gridsome.org/)>) and their content is managed using [Storyblok](https://www.storyblok.com/) CMS.
 
-## Local component development
+## Deployment
 
-1. Download the node modules
-   `npm ci`
-2. Run the project and specify site config
-   `npm run develop --site=staging`
+### Site setup
 
-You can develop Storyblok components using their interface or the CLI. Please see the Storyblok docs for more info.
+Each ryd.one website requires an entry in the `ryd-config.json` and `ryd-meta.json` files. The 'site' can be called anything, but best practice is to use the branch OR final subdomain name (e.g. 'staging', 'de', etc.)
 
-## Deploying changes
+`ryd-config.json`: this file contains (1) the Storyblok Access Token for the relevant Storyblok space and (2) the site's Google Tag Manager container ID (e.g. GTM-XXXXX).
 
-**Information in this section will soon be replaced with multi-site deploy steps**
+`ryd-meta.json`: this file contains site-specific global meta data such as the website url, website name, logo path and default open graph feature image.
 
-Storyblok is connected to the `staging` branch and content updates are automatically deployed to https://staging.dlf3y81nu0i2t.amplifyapp.com/.
+### Deploy steps
 
-Please do all development on new branches and create a PR to merge them into the `staging` branch once tested. Our preference is for you to have another developer approve the merge (not us) but it's up to ryd whether they wish for this to occur or not.
+You can build any site that has been defined above as follows:
 
-While we are actively working on this project, we will update the `master` branch from any new changes that are published into `staging`. This process will likely change once we hand over the project to ryd.
+```bash
+npm ci
+npm run build --site=_SITENAME_
+```
 
-To simplify the testing and approval process, new branches are automatically deployed with the branch name as the subdomain, e.g. the `docs` branch is deployed to https://docs.dlf3y81nu0i2t.amplifyapp.com/.
+For example, to build the 'de' site, the build command would be `npm run build --site=de`
 
-Deployment can take up to 7 minutes. If the branch does not deploy, check that you can run the build command locally, i.e. `npm run build --site=xxxx`.
+The output directory is `dist`
 
-## Methodlogies and styles
+## Development
+
+### New site setup
+
+Before starting, please make sure you have:
+
+- Created a new Storyblok space, noting the space ID
+- Created a new GTM container, if desired, noting the container ID
+
+Please refer to the [site setup](#site-setup) deployment information above, which sets out what configuration files must be populated to build a new site.
+
+### Updating map data
+
+To update the gas station map data, simply replace the file `ryd-locations.csv` in the root direction, and re-generate the site. Please note that column headers must remain the same.
+
+This file is re-processed at build.
+
+### Working locally
+
+To work locally:
+
+1. Download the node modules:
+
+`npm ci`
+
+2. Run the project and specify which site variables you wish to load:
+
+`npm run develop --site=_SITENAME_`
+
+### Methodologies &amp; Styles
 
 Vue components that are used once per page should be prefixed with _The_, e.g. `TheHeader`. Sub components take on the parent name, i.e. `TheHeaderSidenav`.
 
@@ -44,3 +73,11 @@ Styles for reusable components should be prefixed with _v-_, e.g. `v-button`. Al
 We use the same naming convention for Vue components in Storyblok.
 
 We use the scss language for stylesheets. Please include the global `styles.scss`. Top level base styles exist in the `Default.vue` and should target elements directly, i.e. `h1` or `a` etc.
+
+## Content Management
+
+Each site is configured to use a specific Storyblok space ID. See the [site setup](#site-setup) above for technical background.
+
+Content is managed within the relevant Storyblok space, and each time the site 'build' command is run, the website will fetch all _Published_ changes.
+
+Storyblok can be configured to re-trigger the 'build' process when new content changes are published. Please refer to the [Storyblok webhooks documentation](https://www.storyblok.com/docs/Guides/using-storyblok-webhooks) for more information.
