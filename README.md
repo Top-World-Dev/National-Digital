@@ -59,15 +59,17 @@ To work locally, fetch the latest changes and:
 
 2. Run the project and specify which site variables you wish to load:
 
-`npm run develop --site=_SITENAME_`
+`npm run develop --site=SITENAME`
 
-### Working with the repository
+### Working with this repository
 
 New features should be developed on their own branch.
 
-Before creating a PR, please make sure your feature branch is not behind the `master` branch.
+Once features and tested and ready to be merged, please create a PR to the `staging` branch.
 
-Please then create a PR into the `staging` branch.
+Before creating a PR, please make sure that your feature branch is not behind the `master` branch.
+
+The `staging` branch will be routinely merged into `master` once all features have been tested and approved.
 
 ### Methodologies and styles
 
