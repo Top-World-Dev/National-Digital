@@ -45,7 +45,7 @@ Please refer to the [site setup](#site-setup) deployment information above, whic
 
 ### Updating map data
 
-To update the gas station map data, simply replace the file `ryd-locations.csv` in the root direction, and re-generate the site. Please note that column headers must remain the same.
+To update the map location data, simply replace the file `ryd-locations.csv` in the repository's root directory, and re-generate the site. Please note that column headers must remain the same.
 
 This file is re-processed at build.
 
