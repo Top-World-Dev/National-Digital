@@ -6,6 +6,7 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 
+const spaces = require('./ryd-config.json');
 const siteData = require('./ryd-meta.json');
 
 module.exports = function (api) {
@@ -19,6 +20,7 @@ module.exports = function (api) {
     store.addMetadata('siteUrl', siteData.siteUrl[process.env.npm_config_site] )
     store.addMetadata('fallbackImage', siteData.fallbackImage[process.env.npm_config_site] )
     store.addMetadata('siteLogo', siteData.siteLogo[process.env.npm_config_site] )
+    store.addMetadata('translations', spaces.translations[process.env.npm_config_site] )
   })
 
   api.createPages(async ({ graphql, createPage }) => {
@@ -52,13 +54,13 @@ module.exports = function (api) {
  
     // for each content found create a page
     data.allStoryblokEntry.edges.forEach(({ node }) => {
-      if (node.full_slug === 'home') {
+      if (node.id === spaces.homepage[process.env.npm_config_site]) {
         createPage({
           path: '/',
           component: './src/templates/StoryblokEntry.vue',
           context: {
             id: node.id,
-            language: node.language
+            title: node.name
           }
         })
       }
@@ -66,7 +68,8 @@ module.exports = function (api) {
         path: `/${node.full_slug}`,
         component: './src/templates/StoryblokEntry.vue',
         context: {
-          id: node.id
+          id: node.id,
+          title: node.name
         }
       })
     })

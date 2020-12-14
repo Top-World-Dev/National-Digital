@@ -1,6 +1,6 @@
 <template>
   <div class="v-button" v-editable="blok" :class="blok.style">
-    <g-link v-if="blok.link.linktype == 'story'" :to="blok.link.url">{{ blok.text }}</g-link>
+    <g-link v-if="blok.link.linktype == 'story'" :to="blok.link.cached_url">{{ blok.text }}</g-link>
     <a v-else :href="blok.link.url" rel="noopener noreferrer">{{ blok.text }}</a>
   </div>
 </template>
@@ -32,7 +32,7 @@
   cursor: pointer;
   font-weight: 600;
   border-style: solid;
-  border-width: 0.05em;    
+  border-width: 0.1em;    
   border-radius: 2rem;
   transition: all 0.2s;
   &.button-primary {

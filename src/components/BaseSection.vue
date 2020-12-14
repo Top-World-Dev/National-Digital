@@ -1,27 +1,46 @@
 <template>
-  <section :id="blok.name" class="xy-section" :style="backgroundStyle ? {backgroundImage: backgroundStyle} : ''" :class="blok.backgroundColor" v-editable="blok">
-      <div class="section-inner section-container" :class="[blok.container,blok.align,`section-${countCols}`,(blok.reverse ? 'column-reverse' : '' ),(blok.mobile_fullwidth ? 'column-fullmobile' : '')]">
-        <component :key="blok._uid" v-for="blok in blok.columns" :blok="blok" :is="blok.component"></component>
-      </div>
+  <section
+    :id="blok.name"
+    class="xy-section"
+    :style="backgroundStyle ? { backgroundImage: backgroundStyle } : ''"
+    :class="blok.backgroundColor"
+    v-editable="blok"
+  >
+    <div
+      class="section-inner section-container"
+      :class="[
+        blok.container,
+        blok.align,
+        `section-${countCols}`,
+        blok.reverse ? 'column-reverse' : '',
+        blok.mobile_fullwidth ? 'column-fullmobile' : '',
+      ]"
+    >
+      <component
+        :key="blok._uid"
+        v-for="blok in blok.columns"
+        :blok="blok"
+        :is="blok.component"
+      ></component>
+    </div>
   </section>
 </template>
 
 <script>
-  import backgroundImage from '../mixins/backgroundImage'
-  export default {
-    mixins: [backgroundImage],
-    props: ['blok', 'viewPort'],
-    computed: {
-      countCols() {
-        return (this.blok.columns.length > 1 ? 'multi' : 'single')
-      }
-    }
-  }
-
+import backgroundImage from "../mixins/backgroundImage";
+export default {
+  mixins: [backgroundImage],
+  props: ["blok", "viewPort"],
+  computed: {
+    countCols() {
+      return this.blok.columns.length > 1 ? "multi" : "single";
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-@import '~/assets/styles.scss';
+@import "~/assets/styles.scss";
 .xy-section {
   /* Background and Text Colors  */
   &.section-background-brandblock {
@@ -60,8 +79,8 @@
     a {
       color: $accent;
       &:hover {
-          transition: 0.1s all;
-          border-color: $accent;
+        transition: 0.1s all;
+        border-color: $accent;
       }
     }
   }
@@ -72,15 +91,27 @@
     a {
       color: $accent;
       &:hover {
-          transition: 0.1s all;
-          border-color: $accent;
+        transition: 0.1s all;
+        border-color: $accent;
+      }
+    }
+  }
+  &.section-background-grey {
+    color: $veryDarkGrey;
+    border-color: $white;
+    background-color: $veryLightGrey;
+    a {
+      color: $accent;
+      &:hover {
+        transition: 0.1s all;
+        border-color: $accent;
       }
     }
   }
   /* Container Options */
   // mobile default
-  @media (max-width: $breakColumns - 1px) { 
-    .section-container:not(.column-fullmobile) { 
+  @media (max-width: $breakColumns - 1px) {
+    .section-container:not(.column-fullmobile) {
       @include container($breakColumns);
     }
   }
@@ -92,20 +123,20 @@
     }
     .section-container-large {
       @include container($containerOuter);
-      &.section-multi > * {
-        margin: 1rem;
+      &.section-multi > *:not(:last-child) {
+        margin-right: 1rem;
       }
     }
     .section-container-normal {
       @include container($container);
-      &.section-multi > * {
-        margin: 1rem;
+      &.section-multi > *:not(:last-child) {
+        margin-right: 1rem;
       }
     }
     .section-container-small {
       @include container($containerInner);
-      &.section-multi > * {
-        margin: 1rem;
+      &.section-multi > *:not(:last-child) {
+        margin-right: 1rem;
       }
     }
   }

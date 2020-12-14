@@ -1,8 +1,8 @@
 <template>
-  <div class="v-slider" :class="blok.style" v-editable="blok" :id="blok._uid">
-    <div class="slider-wrapper">
-      <div class="slider-overlay"></div>
-      <VueSlickCarousel v-bind="carouselSettings" ref="carousel">
+  <div class="v-inlineSlider">
+    <div class="inlineSlider-content" :class="blok.style" v-editable="blok" :id="blok._uid">
+      
+      <VueSlickCarousel v-bind="carouselSettings">
         <div v-for="slide in blok.slide" :key="blok._uid" @click="goTo($event)">
           <component
             :key="blok._uid"
@@ -12,6 +12,8 @@
           ></component>
         </div>
       </VueSlickCarousel>
+
+      <div class="inlineSlider-overlay"></div>
     </div>
   </div>
 </template>
@@ -23,21 +25,17 @@ export default {
   props: ["blok"],
   components: {
     VueSlickCarousel: () =>
-    import("vue-slick-carousel")
-      .then((component) => component)
-      .catch(), 
+      import("vue-slick-carousel")
+        .then((component) => component)
+        .catch(), 
   },
   mounted() {
     this.carouselSettings.autoplaySpeed = Number(this.blok.duration) * 1000;
 
-    if (process.isClient) {
-      window.addEventListener('scroll', (event) => {
-        if (document.getElementById(this.blok._uid) && this.isInViewport(document.getElementById(this.blok._uid))) {
-          this.carouselSettings.autoplay = true;
-        } else {
-           this.carouselSettings.autoplay = false;
-        }
-      }, false);
+    if (this.blok.autoplay) {
+      this.carouselSettings.autoplay = true;
+    } else {
+      this.carouselSettings.autoplay = false;
     }
   },
   data() {
@@ -45,7 +43,7 @@ export default {
       carouselSettings: {
         accessibility: true,
         adaptiveHeight: false,
-        arrows: true,
+        arrows: false,
         asNavFor: null,
         autoplay: false,
         autoplaySpeed: 2000,
@@ -69,12 +67,12 @@ export default {
         rtl: false,
         slidesPerRow: 1,
         slidesToScroll: 1,
-        slidesToShow: 5,
+        slidesToShow: 1,
         speed: 500,
         swipe: true,
         swipeToSlide: true,
         touchMove: true,
-        touchThreshold: 5,
+        touchThreshold: 1,
         useCSS: true,
         useTransform: true,
         variableWidth: false,
@@ -91,8 +89,8 @@ export default {
           {
             breakpoint: 1024,
             settings: {
-              slidesToShow: 3,
-              slidesToScroll: 2,
+              slidesToShow: 1,
+              slidesToScroll: 1,
             },
           },
         ],
@@ -101,11 +99,11 @@ export default {
   },
   methods: {
     goTo(e) {
-
       this.$refs.carousel.goTo(e.currentTarget.parentNode.parentNode.dataset.index)
     },
     isInViewport(elem) {
       let distance = elem.getBoundingClientRect();
+      
       return (
         (distance.top >= -elem.offsetHeight) ||  (distance.top >= 0) &&
         distance.bottom <= (window.innerHeight || document.documentElement.clientHeight)
@@ -117,98 +115,81 @@ export default {
 </script>
 <style lang="scss">
 @import "~/assets/styles.scss";
-.v-slider {
-  overflow: hidden;
-  padding-bottom: 2em;
-  width: auto;
+.v-inlineSlider{
+  width: 212px;
   position: relative;
-  .slider-wrapper {
-    @media (min-width: 1024px) {
-      margin-left: -12%;
-      margin-right: -10%;
+  margin: 0 auto;
+
+  .inlineSlider-content {
+    overflow-x: hidden;
+    height:460px;
+
+    .slick-slider.slick-initialized{
+      height:440px;
       overflow: hidden;
     }
-  }
-  .slider-overlay {
-    pointer-events: none;
-    background: transparent;
-    z-index: 10;
-    @media (min-width: 1024px) {
+
+    .inlineSlider-overlay{
+      width: 212px;
+      height: 415px;
+      background: url("../assets/ryd_payment_mockup.svg") no-repeat center;
       position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(
-        circle,
-        rgba(219, 220, 230, 0) 26%,
-        rgba(255, 255, 255, 0.5) 45%,
-        rgba(255, 255, 255, 0.9) 80%
-      );
+      top:0;
     }
-  }
-  .slick-arrow {
-    &::before {
-      color: $accent;
+
+    .slick-list{
+      margin-top: 12px;
+      margin-left: 13px;
+      height: 391px;
+      background: #2e3283;
+      width: 185px;
+      margin-bottom: 12px;
     }
-    &.slick-prev {
-      display: none;
-      @media (max-width: 769px) {
-        left: 12%;
+
+    img{
+      height: 391px!important;
+      width: 185px!important;
+
+    }
+
+    .slick-arrow {
+      &::before {
+        color: $accent;
+      }
+      &.slick-prev {
+        left: 7rem;
+        z-index: 10;
+      }
+      &.slick-next {
+        right: 5rem;
         z-index: 10;
       }
     }
-    &.slick-next {
-      display: none;
-      @media (max-width: 769px) {
-        right: 10%;
-        z-index: 10;
-      }
-    }
-  }
-  .slick-slide {
-    div {
-      outline-color: transparent !important;
-      outline-style: none !important;
-      outline-width: 0px !important;
-      border: 0;
-      border-color: transparent;
-      margin-left: 1rem;
-      margin-right: 1rem;
-      &:focus {
-        outline-color: transparent !important;
-        outline-style: none !important;
-        outline-width: 0px !important;
-        border: 0;
-        border-color: transparent;
-      }
-    }
-  }
-  .slick-slide>div>div {
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .slick-dots {
-    bottom: 0 !important;
-    li {
-      z-index: 11;
-      &.slick-active {
+
+    .slick-dots {
+      bottom: 0 !important;
+      position: relative;
+      li {
+        z-index: 11;
+        position: relative;
+        margin: 0 2px!important;
+        &.slick-active {
+          button:before {
+            color: $accent;
+          }
+        }
         button:before {
-          color: $accent;
+          font-size: 0.5rem;
         }
       }
-      button:before {
-        font-size: 0.5rem;
+    }
+    a {
+      outline: 0px solid transparent !important;
+      &:focus {
+        outline: 0px solid transparent !important;
       }
     }
   }
-  a {
-    outline: 0px solid transparent !important;
-    &:focus {
-      outline: 0px solid transparent !important;
-    }
-  }
+
 }
 </style>

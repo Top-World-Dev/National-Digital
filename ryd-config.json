@@ -1,12 +1,28 @@
 {
-   "accessToken":{
+   "accessToken": {
+      "master": "xBrVBUizNcw9o7tmRIQclAtt",
       "de": "xBrVBUizNcw9o7tmRIQclAtt",
-      "main": "xBrVBUizNcw9o7tmRIQclAtt",
       "staging": "xBrVBUizNcw9o7tmRIQclAtt"
    },
-   "gtm":{
+   "gtm": {
+      "master": "NULL",
       "de": "GTM-N9T3W2D",
-      "main": "NULL",
       "staging": "NULL"
+   },
+   "homepage": {
+      "master": "story-24653722-default",
+      "de": "story-24653722-default",
+      "staging": "story-24653722-default"
+   },
+   "translations": {
+      "master": {
+         "default": "de-DE"
+      },
+      "de": {
+         "default": "de-DE"
+      },
+      "staging": {
+         "default": "de-DE"
+      }
    }
 }

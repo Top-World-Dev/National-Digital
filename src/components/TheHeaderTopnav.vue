@@ -3,12 +3,20 @@
     <div class="topnav-tabs">
       <div class="topnav-tabs-container">
         <ul class="topnav-tabs-links">
-          <li v-for="tab in content" :class="{ 'is-active': isActive == tab._uid }"><a @click="selectTab(tab)">{{ tab.title }}</a></li>
+          <li v-for="tab in content" 
+            :class="{ 'is-active': isActive == tab._uid }" 
+            :data-name="tab._uid"
+            @mouseover="showNav(tab._uid)"
+            @mouseleave="hideNav(tab.uid)"
+
+          ><g-link :to="tab.self.cached_url" @click="selectTab(tab)">{{ tab.title }}</g-link></li>
         </ul>
       </div>
     </div>
     <div class="topnav-menu">
-      <div class="topnav-menu-container">
+      <div class="topnav-menu-container" 
+        @mouseover="showParent()"
+        @mouseleave="hideParent()">
         <div class="topnav-logo"><g-link to="/"><v-image :source="logo"></v-image></g-link></div>
           <ul class="topnav-menu-links" v-if="isActive == nav._uid" v-for="nav in content">
             <li v-for="item in nav.item">
@@ -27,19 +35,51 @@
   </section>
 </template>
 <script>
+import EventBus from '../eventbus';
 export default {
   props: ['content', 'logo'],
   data() {
     return {
-      isActive: '7432fc6d-7637-4628-9978-9c90b4abe6b0'
+      isActive: '',
+      isChild: false,
+      hovered: '',
+    }
+  },
+  methods: {
+    showNav(id) {
+      if(!this.isChild) {
+        this.isActive = id;
+        this.hovered = id;
+      } 
+    },
+    hideNav(id) {
+      if(!this.isChild) {
+        this.isActive = '';
+      } 
+    },
+    showParent(id) {
+      if(this.hovered.length > 0) {
+        this.isActive = this.hovered;
+      } 
+    },
+    hideParent(id) {
+      if(!this.isChild) {
+        this.isActive = '';
+        this.hovered = '';
+      } 
     }
   },
   mounted() {
-    this.isActive = (!document.querySelector('.active--exact.active').closest('ul')) ? '7432fc6d-7637-4628-9978-9c90b4abe6b0' :  document.querySelector('.active--exact.active').closest('ul').dataset.name;
-  },
-  methods: {
-    selectTab(item) {
-      this.isActive = item._uid
+    if (this.$route.path.length == 1 || this.$route.path.split('/').includes('ryd-pay')) {
+      this.isChild = true;
+      this.isActive = '7432fc6d-7637-4628-9978-9c90b4abe6b0';
+    } else if(this.$route.path.split('/').includes('ryd-box')) {
+      this.isActive =  '7bf1391b-faf3-4647-b7ce-2f631781f55c';
+      this.isChild = true;
+
+    } else {
+      this.isActive = '';
+      this.isChild = false;
     }
   }
 };
@@ -47,6 +87,7 @@ export default {
 <style lang="scss">
 @import "~/assets/styles.scss";
 .xy-topnav {
+  position: relative;
 
   .topnav-tabs-container,
   .topnav-menu-container {
@@ -56,24 +97,25 @@ export default {
   // topnav layout
   .topnav-tabs-container {
     display: grid;
-    grid-template-columns: 1fr 240px 1fr;
+    grid-template-columns: 1fr auto auto;
     grid-template-rows: 32px;
     grid-template-areas: "topnav_tabs . .";
     align-items: end;
   }
   .topnav-menu-container {
     display: grid;
-    grid-template-columns: 1fr 240px 1fr;
-    grid-template-rows: 60px;
-    grid-template-areas: "topnav_menu topnav_logo .";
     align-items: center;
+    grid-template-columns: 1fr auto 240px;
+    grid-template-rows: 60px;
+    grid-template-areas: "topnav_menu . topnav_logo";
   }
   .topnav-logo {
     grid-area: topnav_logo;
     div {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end; // logo right
+      margin-right: 1rem;
     }
   }
   .topnav-tabs-links {
@@ -121,7 +163,6 @@ export default {
 
   .topnav-menu {
     background-color: $brand;
-    box-shadow: 0 0.025em 0.05em 0 rgba($darkBlue, 0.5);
   }
 
   // tabs

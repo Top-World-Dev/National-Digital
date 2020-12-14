@@ -3,7 +3,7 @@
     <div class="map-search">
       <div class="map-search-form">
         <div class="map-search-row">
-          <input type="text" name="search" placeholder="Search" autocomplete="off" class="map-search-input" aria-label="search" v-model="searchValue" @keyup.enter="loadResults()">
+          <input type="text" name="search" :placeholder="this.blok.search_label" autocomplete="off" class="map-search-input" aria-label="search" v-model="searchValue" @keyup.enter="loadResults()">
           <a v-if="searchValue.length > 0" role="button" class="map-search-clear" tabindex="0" @click="clear" ></a>
           <span class="map-search-icon"  v-else>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.931 28.932" width="14" height="14"><path fill="#787c87" d="M28.344 25.518l-6.114-6.115a12.177 12.177 0 002.303-7.137c0-3.275-1.275-6.355-3.594-8.672A12.183 12.183 0 0012.266 0a12.176 12.176 0 00-8.673 3.594 12.183 12.183 0 00-3.592 8.672c0 3.276 1.275 6.356 3.592 8.674a12.187 12.187 0 008.673 3.594c2.599 0 5.067-.813 7.136-2.303l6.114 6.115c.392.391.902.586 1.414.586a2 2 0 001.414-3.414zM6.422 18.111c-1.562-1.562-2.421-3.639-2.421-5.846s.859-4.282 2.421-5.844c1.561-1.562 3.636-2.422 5.844-2.422s4.284.86 5.845 2.422c1.562 1.562 2.422 3.638 2.422 5.845s-.859 4.283-2.422 5.846c-1.562 1.562-3.636 2.42-5.845 2.42s-4.285-.86-5.844-2.421z"/></svg>
@@ -29,16 +29,20 @@
           :url="url"
           :attribution="attribution"
         />
-
-      
+        <l-marker-cluster 
+        :options="clusterOptions" 
+        >
           <l-marker
-            v-for="marker in markers"
-            :key="marker.id"
-            ref="marker"
-            :lat-lng.sync="marker.position"
-          
-            @click="goToMarker(marker)"
-          ></l-marker>
+          v-for="marker in markers"
+          :key="marker.id"
+          ref="marker"
+          :lat-lng.sync="marker.position"
+        
+          @click="goToMarker(marker)"
+        ></l-marker>
+      </l-marker-cluster>
+      
+        
 
       </l-map>
     </ClientOnly>
@@ -47,13 +51,16 @@
 </template>
 <script>
   let Vue2Leaflet = {};
+  let Vue2LeafletMarkercluster = {};
   let latLng,icon; 
-  import 'leaflet/dist/leaflet.css';
-  import _ from 'lodash'
+  
+  import debounce from 'lodash/debounce';
 
   if (process.isClient) {
     Vue2Leaflet = require("vue2-leaflet");
+    Vue2LeafletMarkercluster = require('vue2-leaflet-markercluster')
     icon = require('leaflet').Icon
+    
     delete icon.Default.prototype._getIconUrl;
     icon.Default.mergeOptions({
       iconRetinaUrl: require('!!assets-loader!@media/marker-icon-alt-2x.png').src,
@@ -71,44 +78,37 @@
       'l-marker': Vue2Leaflet.LMarker,
       'l-popup': Vue2Leaflet.LPopup,
       'l-icon': Vue2Leaflet.LIcon,
+
+      'l-icondefault': Vue2Leaflet.LIconDefault,
+      'l-marker-cluster': Vue2LeafletMarkercluster
     },
     props: ["blok"], 
     async mounted() {
       this.loading = true;
       const response = await fetch('/mapdata.json');
       const data = await response.json();
-      this.locations = data.map(location => {
-        return {
-          id: location.id,
-          position: { lat: location.lat, lng: location.lon },
-          brand: location.brand,
-          address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
-          zip: location.zip,
-          city: location.city,
-          street: location.street,
-          popup: `
-          <div class="map-popup">
-            <div class="map-popup-wrapper">
-              <div class="map-popup-brand">${ location.brand }</div>
-              <div class="map-popup-address">${location.street} ${location.houseNumber}<br />  ${location.zip} ${location.city}</div>
-            </div>
-          </div>
-          `
-        }
-      });
+
+      this.locations = (this.blok.filter) ? this.generateLocations(data.filter(location => location[this.blok.filter].toLowerCase() === this.blok.filter_value.toLowerCase() )) : this.generateLocations(data);     
 
       this.$refs.map.mapObject.on('load', this.addMarkers());
      
       this.loading = false;
+
+      setTimeout(() => {
+        this.$nextTick(() =>{
+          this.clusterOptions = { disableClusteringAtZoom: 11 }
+        });
+      }, 5000);
 
     },
     data() {
       return {
         attribution:
           '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        loading: false, 
-        locations: [],
         activeMarker: null,
+        clusterOptions: {},
+        loading: false, 
+        locations: [], 
         markers: [],
         mapOptions: {
           zoomSnap: 0.5,
@@ -153,6 +153,27 @@
         
         this.goToMarker(result);
         
+      },
+      generateLocations(data) {
+        return data.map(location => {
+          return {
+            id: location.id,
+            position: { lat: location.lat, lng: location.lon },
+            brand: location.brand,
+            address: `${location.street} ${location.houseNumber}, ${location.zip} ${location.city}`,
+            zip: location.zip,
+            city: location.city,
+            street: location.street,
+            popup: `
+            <div class="map-popup">
+              <div class="map-popup-wrapper">
+                <div class="map-popup-brand">${ location.brand }</div>
+                <div class="map-popup-address">${location.street} ${location.houseNumber}<br />  ${location.zip} ${location.city}</div>
+              </div>
+            </div>
+            `
+          }
+        });
       },
       // getIcon(marker) {
       //   let imageName = (marker.brand) ? marker.brand.replace(/\s+/g, '-').toLowerCase() : 'default';
@@ -199,7 +220,7 @@
 
         this.searchSuggestions = (value.trim().length == 0) ? this.locations : this.locations.filter(item => item.brand.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.city.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.street.toLowerCase().indexOf(value.trim().toLowerCase()) != -1 || item.address.indexOf(value.trim()) != -1);
       },
-      triggerSearch:_.debounce(function(value) {
+      triggerSearch: debounce(function(value) {
         this.search(value);
       }, 300),
     },
@@ -226,16 +247,17 @@
       },
       activeMarker: {
         async handler(newVal, oldVal) {
-          await this.$nextTick()  
+          await this.$nextTick(() =>{ 
 
-          // get marker position
-          if(newVal) {
-  
-            let marker = this.markers.filter(item => item.id == newVal);
-            let pos = this.markers.map(point => point.id ).indexOf(newVal);
+            // get marker position
+            if(newVal) {
+    
+              let marker = this.markers.filter(item => item.id == newVal);
+              let pos = this.markers.map(point => point.id ).indexOf(newVal);
 
-            this.$refs.marker[pos].mapObject.bindPopup(marker[0].popup).openPopup();
-          }
+              this.$refs.marker[pos].mapObject.bindPopup(marker[0].popup).openPopup();
+            }
+          });
           
         },
         immediate: true
@@ -245,12 +267,18 @@
   }
 </script>
 <style lang="scss">
+
+@import "~leaflet/dist/leaflet.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.css";
+@import "~leaflet.markercluster/dist/MarkerCluster.Default.css";
+
 @import '~/assets/styles.scss';
 .v-map {
   position: relative;
   width: 100%;
   overflow: hidden;
-  /* Search bar */
+  z-index: 0;
+   /* Search bar */
   .map-search-results {
     background-color: white;
     border: 0.25px solid $lightGrey;
@@ -266,7 +294,7 @@
       margin-left: 1rem;
       color: $black;
       border-color: transparent;
-      border-bottom-width: 0.05em;
+      border-bottom-width: 0.1em;
       border-bottom-style: solid;
       text-decoration: none;
       &:hover {
@@ -293,7 +321,7 @@
     font-size: 0.9rem;
     line-height: 2.5em;
     background-color: $white;
-    border: 0.05em solid $lightGrey;
+    border: 0.1em solid $lightGrey;
     border-radius: 0.25rem 0.25rem 0 0;
     box-shadow: 0px 0px 34px -13px rgba(120,124,135,1);
     color: $darkGrey;
@@ -352,8 +380,8 @@
   }
   
   .map-popup-wrapper {
-    border-top: 0.05em solid $lightGrey;
-    border-bottom: 0.05em solid $lightGrey;
+    border-top: 0.1em solid $lightGrey;
+    border-bottom: 0.1em solid $lightGrey;
     padding-top: 0.25em;
     padding-bottom: 0.25em;
   }
@@ -365,6 +393,32 @@
       display: inline-block;
     }
   }
+
+  /* Marker cluster colors */
+  .marker-cluster-small {
+    background-color: rgba($purple, 0.6);
+    color: $white;
+  }
+  .marker-cluster-small div {
+    background-color: rgba($purple, 0.6);
+    color: $white;
+  }
+  .marker-cluster-medium {
+    background-color: rgba($purple, 0.6);
+    color: $white;
+  }
+  .marker-cluster-medium div {
+    background-color: rgba($purple, 0.6);
+    color: $white;
+  }
+  .marker-cluster-large {
+    background-color: rgba($purple, 0.6);
+    color: $white;
+  }
+  .marker-cluster-large div {
+    background-color: rgba($purple, 0.6);
+    color: $white;
+  } 
 
 }
 </style>

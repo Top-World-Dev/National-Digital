@@ -1,6 +1,6 @@
 # ryd.one
 
-[Deployment](#deployment) | [Development](#development) | [Content Management](#content-management)
+[Deployment](#markdown-header-deployment) | [Development](#markdown-header-development) | [Content Management](#markdown-header-content-management)
 
 ---
 
@@ -41,7 +41,7 @@ Before starting, please make sure you have:
 - Created a new Storyblok space, noting the space ID
 - Created a new GTM container, if desired, noting the container ID
 
-Please refer to the [site setup](#site-setup) deployment information above, which sets out what configuration files must be populated to build a new site. All other site-specific information is modified within Storyblok.
+Please refer to the [site setup](#markdown-header-site-setup) deployment information above, which sets out what configuration files must be populated to build a new site. All other site-specific information is modified within Storyblok.
 
 ### Updating map data
 
@@ -51,15 +51,12 @@ This file is re-processed at build.
 
 ### Working locally
 
-To work locally, fetch the latest changes and:
+You can work locally using content from any site. Simply fetch the latest changes and run:
 
-1. Install the project node modules:
-
-`npm ci`
-
-2. Run the project and specify which site variables you wish to load:
-
-`npm run develop --site=SITENAME`
+```bash
+npm ci
+npm run build --site=SITENAME
+```
 
 ### Working with this repository
 
@@ -87,7 +84,7 @@ We use the scss language for stylesheets. Please include the global `styles.scss
 
 ## Content Management
 
-Each site is configured to use a specific Storyblok space ID. See the [site setup](#site-setup) above for technical background.
+Each site is configured to use a specific Storyblok space ID. See the [site setup](#markdown-header-site-setup) above for technical background.
 
 Content is managed within the relevant Storyblok space, and each time the site 'build' command is run, the website will fetch all _Published_ changes.
 

@@ -4,18 +4,19 @@
       v-if="story.content.component"
       :key="story.content._uid"
       :blok="story.content"
-      :size="size"
       :is="story.content.component"
-      :class="size"
+      :class="[size, showNavigation]"
     />
   </Layout>
 </template>
 
 <script>
+import EventBus from '../eventbus';
 export default {
   name: "StoryblokEntryTemplate",
   data() {
     return {
+      showNavigation: false,
       size: "",
     };
   },
@@ -27,14 +28,25 @@ export default {
     } 
     else {
       let description = data.description ? this.$storyapi.richTextResolver.render(data.description) : '';
-      let language = this.$page.storyblokEntry.id.split('-').pop();
       let image = (data.feature.filename.length == 0) ? this.$static.metadata.fallbackImage : (typeof data.feature == 'object') ? require(`!!assets-loader!@storyblok/${data.feature.filename.filename}`).src : require(`!!assets-loader!@storyblok/${data.feature.filename}`).src;
+
+      let links = [];
+
+      links.push({ rel: 'canonical', href: `${this.$static.metadata.siteUrl}${this.$route.fullPath}` });
+      links.push({ rel: 'alternate', href: `${this.$static.metadata.siteUrl}${this.$route.fullPath}`, hreflang: `${this.$static.metadata.translations.default}`});
+      if(this.$static.metadata.translations.languages) {
+        this.$static.metadata.translations.languages.forEach(lang => {
+          links.push({ rel: 'alternate', href: `${this.$static.metadata.siteUrl}/${lang}${this.$route.fullPath}`, hreflang: `${lang}`})
+        })
+      }
+
+
       return {
-        title: `${data.title}`,
-        titleTemplate: `%s - ${this.$static.metadata.siteName}`,
-        htmlAttrs: { lang: (language) == 'default' ? 'de' :  language },
+        title: `${this.$context.title}`,
+        titleTemplate: `%s | ${this.$static.metadata.siteName}`,
+        htmlAttrs: { lang: this.$static.metadata.translations.default },
         meta: [
-          { name:  'description', content: description.replace('<p>', '').replace('</p>', '')},
+          { name: 'description', content: description.replace('<p>', '').replace('</p>', '')},
           { name: 'robots', content: (data.noindex) ? 'noindex' : 'index' },
           { name: "twitter:card", content: "summary" },
           { name: 'og:url', content: `${this.$static.metadata.siteUrl}${this.$route.fullPath}` },
@@ -42,9 +54,7 @@ export default {
           { name: 'og:description', content: description.replace('<p>', '').replace('</p>', '') },
           { name: 'og:image', content: image },
         ],
-        link: [
-          { rel: 'canonical', href: `${this.$static.metadata.siteUrl}/${this.$route.fullPath}` },
-        ],
+        link: links,
         script: [
           {
             type: "application/ld+json",
@@ -54,7 +64,7 @@ export default {
               "url": this.$static.metadata.siteUrl,
               "logo": this.$static.metadata.siteLogo,
             }
-          }
+          },
         ]
       }
     }
@@ -62,6 +72,9 @@ export default {
   mounted() {
     window.addEventListener("resize", this.handleResize(window.innerWidth));
     this.handleResize(window.innerWidth);
+    EventBus.$on('showNavigation', (action) => {
+      this.showNavigation = action
+    });
   },
   destroyed() {
     window.removeEventListener("resize", this.handleResize(window.innerWidth));
@@ -91,7 +104,7 @@ export default {
     story() {
       return this.$page.storyblokEntry;
     },
-  },
+  }
 };
 </script>
 
@@ -111,7 +124,9 @@ query {
     siteName
     siteTwitter
     siteUrl
-    siteLogo
+    translations {
+      default
+    }
   }
 }
 </static-query>

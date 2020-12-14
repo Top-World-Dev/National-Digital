@@ -4,6 +4,7 @@
       <div class="consent-container">
         <div class="consent-wrapper">
           <div v-if="!consentSettings && showModal">
+
             <h5>{{ content.main_title }}</h5>
             <v-richtext :text="content.main_blurb"></v-richtext>
             <div class="consent-form">
@@ -19,10 +20,11 @@
                 <a class="consent-next" role="button" tabindex="0" @click="consentSettings = !consentSettings">{{ content.button_expand }}</a>
               </div>
             </div>
+            <v-richtext :text="content.footer_blurb"></v-richtext>
             <ul class="consent-center consent-linklist v-linklist" :class="content.links[0].style">
-              <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
+              <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid" @click="checkRoute(item.link.cached_url)">
                 <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
-                <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
+                <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
                 <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
               </li>
             </ul>
@@ -54,7 +56,7 @@
             <ul class="consent-linklist v-linklist" :class="content.links[0].style">
               <li class="linklist-item" v-for="item in content.links[0].item" :key="item._uid">
                 <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
-                <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
+                <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
                 <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
               </li>
             </ul>
@@ -72,45 +74,57 @@ export default {
   data() {
     return {
       consentSettings: false,
-      tables: {},
-      checks: {},  
-      showModal: false   
+      tables: {}, 
+      showModal: false,
+      ignoreConsent: false,   
     }
   },
   mounted() {
-    EventBus.$on('toggleModal', () => {
-      this.showModal = !this.showModal
+    EventBus.$on('toggleModal', (action = !this.showModal) => {
+      this.showModal = action;
     });
     if (process.isClient) {
       setTimeout(() => {
-      if (!localStorage.getItem('consentGiven')) {
-        this.showModal = true;
-      };
-      }, 120);
-      
-      localStorage.setItem(`consentsToMinimum`,true);
-      for (const key of Object.keys(this.checks)) {
-        localStorage.setItem(key, false);
-      }
+        if(JSON.parse(localStorage.getItem('consentGiven')) == null && this.ignoreConsent) {
+          localStorage.setItem(`consentsToMinimum`, JSON.stringify(false));
+        } else {
+          // if the modal hasn't ever displayed then set the defaults
+          if (!JSON.parse(localStorage.getItem('consentGiven')) && !this.ignoreConsent) {
+            this.showModal = true;
+            for (const key of Object.keys(this.checks)) {
+              localStorage.setItem(key, JSON.stringify(false));
+            }
+            localStorage.setItem(`consentsToMinimum`, JSON.stringify(true));
+          };
+        }
+      }, 200);
     }
   },
   methods: {
     addLocalStorage(event, value) {
-      localStorage.setItem(value, event.target.checked);
+      localStorage.setItem(value, JSON.stringify(event.target.checked));
     },
     consentAll() {
-      for (const key of Object.keys(this.checkedItems)) {
+      for (const key of Object.keys(this.checks)) {
         this.checks[key] = true;
-        localStorage.setItem(key, true);
+        localStorage.setItem(key, JSON.stringify(true));
       }
       setTimeout(function(){ 
         this.closeConsent() 
       }.bind(this), 300);
 
     },
+    checkRoute(page) {
+      if(this.$route.path.replace('/', '') == page) {
+        if(this.$page.storyblokEntry.content.meta[0].exconsent) {
+          this.ignoreConsent = true;
+          this.showModal = false;
+        }
+      }
+    },
     closeConsent() {
       if (process.isClient) {
-        localStorage.setItem('consentGiven',true);
+        localStorage.setItem('consentGiven', JSON.stringify(true));
         this.showModal = !this.showModal
       }
     },
@@ -119,13 +133,22 @@ export default {
     }
   },
   computed: {
-    checkedItems() {
+    checks() {
       let obj = {};
-      this.content.types.forEach(item => {
-        (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
-      });
-      this.checks = obj;
-      return obj;
+      if(localStorage && Object.keys(localStorage).some(x => x.startsWith('consent'))) {
+        Object.keys(localStorage).forEach(item => {
+          if(item.startsWith('consent')) {
+            obj[item] = JSON.parse(localStorage.getItem(item));
+          }
+        })
+      }
+      else {
+        this.content.types.forEach(item => {
+          (item.variable == 'consentsToMinimum') ? obj[item.variable] = true : obj[item.variable] = false;
+        });
+      }
+
+      return obj;  
     }
   },
   watch: {
@@ -135,6 +158,14 @@ export default {
         this.content.types.forEach(item => obj[item.variable] = false );
         this.tables = obj;
       }
+    },
+    '$route': {
+      handler(newVal, oldVal) {
+        if(this.$page.storyblokEntry.content.meta[0].exconsent) {
+          this.ignoreConsent = true;
+        }
+      },
+      immediate: true
     }
   }
 };
@@ -153,7 +184,7 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba($black,0.8);
-  z-index: 100;
+  z-index: 999999;
   &.is-hidden {
     display: none;
   }
@@ -206,7 +237,7 @@ export default {
     }
   }
   .consent-opt {
-    border-bottom: 0.05em solid $grey;
+    border-bottom: 0.1em solid $grey;
   }
   .consent-optcheck {
     label {
@@ -226,7 +257,7 @@ export default {
       display: flex;
     }
     tr {
-      border-top: 0.05em solid $lightGrey;
+      border-top: 0.1em solid $lightGrey;
     }
     td {
       flex: 0 0 50%;

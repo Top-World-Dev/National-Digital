@@ -1,7 +1,10 @@
 // This is the main.js file. Import global CSS and scripts here.
 // The Client API can be used here. Learn more: gridsome.org/docs/client-api
 
-require('typeface-fira-sans');
+import firaSans400 from "typeface-fira-sans/files/fira-sans-latin-400.woff2"
+import firaSans600 from "typeface-fira-sans/files/fira-sans-latin-600.woff2"
+import firaSans700 from "typeface-fira-sans/files/fira-sans-latin-700.woff2"
+
 import 'normalize.css/normalize.css'
 
 import DefaultLayout from '~/layouts/Default.vue'
@@ -33,11 +36,13 @@ import VSlider from '~/components/VSlider.vue'
 import VTestimonial from '~/components/VTestimonial.vue'
 import VText from '~/components/VText.vue'
 import VForm from '~/components/VForm.vue'
-
+import VVideo from '~/components/VVideo.vue'
 import VRichtext from '~/components/VRichtext.vue'
 import VImage from '~/components/VImage.vue'
+import VPricing from '~/components/VPricing.vue'
+import VAccordion from '~/components/VAccordion.vue'
+import VInlineSlider from '~/components/VInlineSlider.vue'
 
-// mapping
 
 // import Vue from 'vue';
 
@@ -80,9 +85,21 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('VTestimonial', VTestimonial)
   Vue.component('VText', VText)
   Vue.component('VForm', VForm)
+  Vue.component('VVideo', VVideo)
+  Vue.component('VAccordion', VAccordion)
+  Vue.component('VPricing', VPricing)
+  Vue.component('VInlineSlider', VInlineSlider)
 
   // global components
   Vue.component('v-image', VImage)
   Vue.component('v-richtext', VRichtext)
+
+
+  head.link.push( { rel: "preload", href: firaSans400, as: "font" } )
+  head.link.push( { rel: "preload", href: firaSans600, as: "font" } )
+  head.link.push( { rel: "preload", href: firaSans700, as: "font" } )
+
+  head.script.push({ src: "https://static.zdassets.com/ekr/snippet.js?key=fc8cd222-ab2d-4b9b-8bdf-5ac260a1ace1", id: "ze-snippet", async: true, defer: true })
+
 }
 

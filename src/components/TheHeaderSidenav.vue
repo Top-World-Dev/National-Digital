@@ -6,8 +6,8 @@
       <div class="sidenav-toggle-close"><span class="sidenav-toggle" @click="toggleNav(false)" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><g fill="none" fill-rule="evenodd"><path d="M-5-5h24v24H-5z"/><path fill="#fff" fill-rule="nonzero" d="M14 1.41L12.59 0 7 5.59 1.41 0 0 1.41 5.59 7 0 12.59 1.41 14 7 8.41 12.59 14 14 12.59 8.41 7z"/></g></svg></span></div>
     </div>
     <div class="sidenav-menu">
-      <ul class="sidenav-menu-alpha" v-for="tab in content" :key="tab._uid"  :class="{'is-expanded' : active.includes(tab._uid)}">
-        <li><a @click="accordion(tab)" :class="tab.title">{{ tab.title }}</a>
+      <ul class="sidenav-menu-alpha" v-for="tab in content" :key="tab._uid" :data-name="tab._uid" :class="{'is-expanded' : active.includes(tab._uid)}">
+        <li><g-link :to="tab.self.cached_url" :class="tab.title">{{ tab.title }}</g-link>
           <ul class="sidenav-menu-beta" :data-name="tab._uid">
             <span @click="accordion(tab)" class="sidenav-menu-toggle" role="button" tabindex="0"><span class="sidenav-menu-arrow" :class="{'is-expanded' : active.includes(tab._uid)}"></span></span>
             <li v-for="item in tab.item">
@@ -28,8 +28,7 @@
   </section>
 </template>
 <script>
-  
-
+import EventBus from '../eventbus';
 export default {
   props: ['content', 'logo'],
   data() {
@@ -39,26 +38,42 @@ export default {
     }
   },
   mounted() {
-    if(document.querySelector('.active--exact.active').closest('ul')) {
-      this.active.push(document.querySelector('.active--exact.active').closest('ul').dataset.name);
+    if(this.$route.path.length == 1 || this.$route.path.split('/').includes('ryd-pay')) {
+      this.active.push('7432fc6d-7637-4628-9978-9c90b4abe6b0')
+    } else if(this.$route.path.split('/').includes('ryd-box')) {
+      this.active.push('7bf1391b-faf3-4647-b7ce-2f631781f55c');
+    } else {
+      this.active = [];
     }
-    
+      
+    if (process.isClient) {
+      document.addEventListener('touchmove', (e) => true, { passive:true });
+      document.body.style.overflowY = "auto";
+      document.body.style.position = "initial";    
+    }
   },
   methods: {
-    selectTab(item) {
-      this.isActive = item._uid
-    },
     toggleNav(action) {
       this.showNavigation = action;
+      EventBus.$emit('showNavigation', action);
     },
     accordion(tab) {
       (this.active.includes(tab._uid)) ? this.active = this.active.filter(item => item !== tab._uid) : this.active.push(tab._uid);
     }
   },
   watch: {
-    // whenever question changes, this function will run
     showNavigation: function (newValue, oldValue) {
-      (newValue) ? this.active.push(document.querySelector('.active--exact.active').closest('ul').dataset.name) : this.active = [];
+      if(newValue == true) {
+        document.addEventListener('ontouchend', (e) => e.preventDefault(), { passive:false });
+        document.body.style.position = "fixed";    
+      } else {
+        document.addEventListener('touchmove', (e) => true, { passive:true });
+        document.body.style.position = "initial";    
+      }
+    },
+    $route(to, from) {
+      this.showNavigation = false;
+      EventBus.$emit('showNavigation', false);
     }
   }
 };
@@ -180,7 +195,6 @@ export default {
 
   .sidenav-navbar {
     background-color: $brand;
-    box-shadow: 0 0.05em 0.1em 0 rgba($darkBlue, 0.5);
   }
 
   .sidenav-toggle {
@@ -207,6 +221,8 @@ export default {
     position: absolute;
     right: 1.5rem;
     top: 0.5rem;
+    padding-left: 3rem;
+    padding-right: 0.25rem;
   }
 
   .sidenav-menu-beta {
@@ -236,20 +252,21 @@ export default {
   }
 
   .sidenav-menu-alpha > li {
+    background-color: $brand;
     > a {
       color: $white;
-      background-color: $brand;
       font-size: 1.125rem;
       padding: .5em 0 .5em 1em;
+      width: 75%;
     }
   }
   .sidenav-menu-beta > li {
+    background-color: $white;
     &.is-active a {
       background-color: $accent;
     }
     > a {
       color: $brand;
-      background-color: $white;
       font-size: 1rem;
       padding: 0.5em 0 0.5em 2em;
       &.active {
@@ -258,9 +275,9 @@ export default {
     }
   }
   .sidenav-menu-gamma > li {
+    background-color: $white;
     > a {
       color: $brand;
-      background-color: $white;
       font-size: 0.875rem;
       padding: 0.25em 0 0.25em 3em;
       // &.active {

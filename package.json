@@ -17,7 +17,8 @@
     "lodash": "^4.17.20",
     "typeface-fira-sans": "0.0.75",
     "vue-slick-carousel": "^1.0.6",
-    "vue2-leaflet": "^2.5.2"
+    "vue2-leaflet": "^2.5.2",
+    "vue2-leaflet-markercluster": "^3.1.0"
   },
   "devDependencies": {
     "node-sass": "^4.14.1",

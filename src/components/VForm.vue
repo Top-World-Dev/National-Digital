@@ -47,7 +47,7 @@
     font-size: 0.9rem;
     line-height: 2.5em;
     background-color: transparent;
-    border: 0.05em solid $lightGrey;
+    border: 0.1em solid $lightGrey;
     border-radius: 2rem;
     color: $darkGrey;
     height: 50px;

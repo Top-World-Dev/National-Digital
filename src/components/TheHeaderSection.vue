@@ -15,31 +15,26 @@ export default {
     "sidenav": SideNav,
     "topnav": Topnav
   },
-  data() {
-    return {
-      isActive: '7bf1391b-faf3-4647-b7ce-2f631781f55c'
-    }
-  },
-  methods: {
-    selectTab(item) {
-      this.isActive = item._uid
-    }
-  }
 };
 </script>
 
 <style lang="scss">
 @import "~/assets/styles.scss";
-
 /* Nav display logic */
-@media (max-width: $breakColumns - 1px) {
+@media (max-width: $breakNav - 1px) {
   .header-topnav {
     display: none !important;
   }
 }
-@media (min-width: $breakColumns) {
+@media (min-width: $breakNav) {
   .header-sidenav {
     display: none !important;
   }
+}
+
+.xy-header {
+  z-index: 10;
+  position: relative;
+  box-shadow:  0 0.01em 1em 0.05em rgba($black,0.4);
 }
 </style>

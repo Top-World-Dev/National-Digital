@@ -3,6 +3,73 @@
     <slot />
   </div>
 </template>
+<script>
+import TheFooter from '~/components/TheFooter.vue'
+import TheHeader from '~/components/TheHeader.vue'
+import TheHeaderSection from '~/components/TheHeaderSection.vue'
+
+import BaseSection from '~/components/BaseSection.vue'
+import BaseSectionColumn from '~/components/BaseSectionColumn.vue'
+
+import VButton from '~/components/VButton.vue'
+import VBlurbicon from '~/components/VBlurbicon.vue'
+import VGap from '~/components/VGap.vue'
+import VHeading from '~/components/VHeading.vue'
+import VIframe from '~/components/VIframe.vue'
+import VImageblock from '~/components/VImageblock.vue'
+import VImageoverlay from '~/components/VImageoverlay.vue'
+import VJobs from '~/components/VJobs.vue'
+import VLinklist from '~/components/VLinklist.vue'
+import VList from '~/components/VList.vue'
+import VMap from '~/components/VMap.vue'
+import VReviewslider from '~/components/VReviewslider.vue'
+import VReconsent from '~/components/VReconsent.vue'
+import VRule from '~/components/VRule.vue'
+import VSlider from '~/components/VSlider.vue'
+import VTestimonial from '~/components/VTestimonial.vue'
+import VText from '~/components/VText.vue'
+import VForm from '~/components/VForm.vue'
+import VVideo from '~/components/VVideo.vue'
+import VRichtext from '~/components/VRichtext.vue'
+import VImage from '~/components/VImage.vue'
+import VPricing from '~/components/VPricing.vue'
+import VAccordion from '~/components/VAccordion.vue'
+import VInlineSlider from '~/components/VInlineSlider.vue'
+
+export default {
+  components: {
+    TheFooter,
+    TheHeader,
+    TheHeaderSection,
+    BaseSection,
+    BaseSectionColumn,
+    VButton,
+    VBlurbicon,
+    VHeading,
+    VGap,
+    VIframe,
+    VImageblock,
+    VImageoverlay,
+    VJobs,
+    VLinklist,
+    VList,
+    VMap,
+    VReconsent,
+    VReviewslider,
+    VRule,
+    VSlider,
+    VTestimonial,
+    VText,
+    VVideo,
+    VAccordion,
+    VPricing,
+    VInlineSlider,
+    VImage,
+    VRichtext
+  }
+}
+</script>
+
 
 <style lang="scss">
 @import "~/assets/styles.scss";
@@ -52,18 +119,17 @@ a, button, [role="button"] {
 a {
   color: inherit;
   border-color: transparent;
-  border-bottom-width: 0.05em;
+  border-bottom-width: 0.1em;
   border-bottom-style: solid;
   text-decoration: none;
 }
 
-button, [type="button"], [type="reset"], [type="submit"] {
-  border: 0;
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-  color: inherit;
+:focus {
+  outline-color: transparent !important;
+  outline-style: none !important;
+  outline-width: 0px !important;
 }
+
 
 
 /* Font sizes */
@@ -123,5 +189,6 @@ h6 {
     font-size: 1.25rem;
   }
 }
+
 
 </style>

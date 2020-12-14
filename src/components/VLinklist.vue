@@ -2,8 +2,9 @@
   <ul class="v-linklist" v-editable="blok" :class="[blok.style]">
     <li class="linklist-item" v-for="item in blok.item" :key="item._uid">
       <v-image v-if="item.image['0']" class="linklist-icon" :source="item.image['0']"></v-image>
-      <g-link v-if="item.link.linktype == 'story'" :to="item.link.url">{{ item.title }}</g-link>
-      <a v-else :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+      <g-link v-if="item.link.linktype == 'story'" :to="item.link.cached_url">{{ item.title }}</g-link>
+      <a v-else-if="item.link.url.length > 0" :href="item.link.url" rel="noopener noreferrer">{{ item.title }}</a>
+      <a v-else :href="item.link.url.url" target="_blank">{{ item.title }}</a>    
     </li>
   </ul>
 </template>
