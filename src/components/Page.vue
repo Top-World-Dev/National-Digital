@@ -6,12 +6,12 @@
 </template>
 
 <script>
-import TheConsent from "./TheConsent"; 
+  import TheConsent from "./TheConsent"; 
 
 export default {
   props: ['blok'],
   components: {
-    "theconsent": TheConsent,
+    "theconsent": TheConsent
   }
 }
 </script>
