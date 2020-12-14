@@ -1,5 +1,5 @@
 <template>
-  <section :id="blok.name" class="xy-column" :class="[blok.valign, blok.container]">
+  <section v-if="loaded" :id="blok.name" class="xy-column" :class="[blok.valign, blok.container]">
     <div class="column-inner column-container" :class="[blok.align_mobile, blok.align_desktop]">
       <component :key="blok._uid" v-for="blok in blok.block" :blok="blok" :is="blok.component"></component>
     </div>
@@ -7,10 +7,23 @@
 </template>
 
 <script>
+
 import backgroundImage from "../mixins/backgroundImage";
 export default {
   mixins: [backgroundImage],
   props: ["blok"],
+  data() {
+    return {
+      loaded: false
+    }
+  },
+  mounted() {
+    let components = this.blok.block.map(item => item.component);
+    for(let component of components) {
+      this.$options.components[`${component}`] = require(`./${component}`).default
+    }
+    this.loaded = true;
+  }
 };
 </script>
 

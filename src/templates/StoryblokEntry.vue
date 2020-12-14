@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <component
-      v-if="story.content.component"
+      v-if="story.content.component && loaded"
       :key="story.content._uid"
       :blok="story.content"
       :is="story.content.component"
@@ -18,6 +18,7 @@ export default {
     return {
       showNavigation: false,
       size: "",
+      loaded: false
     };
   },
   metaInfo() {
@@ -75,6 +76,28 @@ export default {
     EventBus.$on('showNavigation', (action) => {
       this.showNavigation = action
     });
+
+    // let components = this.blok.block.map(item => item.component);
+    const components = this.$page.storyblokEntry.content.body.map(item => item.columns).flat().map(item => {
+      if(item) {
+        return item.block
+      }
+    }).flat().map(item => {
+      if(item) {
+        return item.component
+      }
+    }).map(item => {
+      if(item) {
+        return item
+      }
+    }).filter(item => item)
+
+    let uniqueComponents = [...new Set(components)];
+
+    for(let component of components) {
+      this.$options.components[`${component}`] = require(`../components/${component}`).default
+    }
+    this.loaded = true;
   },
   destroyed() {
     window.removeEventListener("resize", this.handleResize(window.innerWidth));
